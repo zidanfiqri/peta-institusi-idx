@@ -29,8 +29,8 @@
                     <i class="fa-solid fa-chart-pie text-2xl mr-3 text-indigo-400"></i>
                     <span class="font-bold text-xl tracking-tight">Peta Kepemilikan Institusi IDX</span>
                 </div>
-                <div class="text-sm text-indigo-200">
-                    <i class="fa-solid fa-clock mr-1"></i> Data Terintegrasi KSEI
+                <div class="text-sm text-indigo-200 font-medium">
+                    <i class="fa-solid fa-clock mr-1"></i> Data KSEI (Update Terakhir: April 2026)
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <h2 class="text-lg font-semibold mb-4 border-b pb-2 text-indigo-900">
                 <i class="fa-solid fa-sliders text-indigo-500 mr-2"></i>Parameter Analisis &amp; Konversi Satuan
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-end">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Emiten (Kode Saham):</label>
                     <select id="emiten-select" class="w-full">
@@ -50,9 +50,14 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Bulan Berjalan:</label>
-                    <select id="month-select" class="w-full border border-gray-300 rounded-md p-2 h-[42px] bg-white focus:ring-indigo-500 focus:border-indigo-500">
-                    </select>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Rentang Periode Analisis:</label>
+                    <div class="flex items-center gap-2">
+                        <select id="start-month-select" class="w-full border border-gray-300 rounded-md p-2 h-[42px] bg-white focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                        </select>
+                        <span class="text-gray-400 font-bold text-sm px-1">s/d</span>
+                        <select id="end-month-select" class="w-full border border-gray-300 rounded-md p-2 h-[42px] bg-white focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Satuan Tampilan Data:</label>
@@ -69,12 +74,10 @@
                 <div class="card bg-gradient-to-br from-indigo-600 to-indigo-800 text-white shadow-md">
                     <h3 class="text-indigo-100 text-sm font-medium">Total Saham Genggaman Institusi</h3>
                     <p class="text-3xl font-bold mt-2" id="stat-total-saham">-</p>
-                    <span class="text-xs text-indigo-200 block mt-1" id="lbl-unit-stat1">Satuan: Lembar</span>
                 </div>
                 <div class="card bg-gradient-to-br from-emerald-600 to-emerald-800 text-white shadow-md">
                     <h3 class="text-emerald-100 text-sm font-medium">Net Foreign Flow Kategori</h3>
                     <p class="text-3xl font-bold mt-2" id="stat-net-flow">-</p>
-                    <span class="text-xs text-emerald-200 block mt-1" id="lbl-unit-stat2">Satuan: Lembar</span>
                 </div>
                 <div class="card bg-white border-l-4 border-amber-500 shadow-sm">
                     <h3 class="text-gray-500 text-sm font-medium">Komposisi Domisili Investor</h3>
@@ -126,8 +129,8 @@
                         <thead class="bg-gray-100 text-gray-700 font-semibold">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md">Kategori Institusi</th>
-                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-prev-month">Bulan Lalu</th>
-                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-curr-month">Bulan Terpilih</th>
+                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-prev-month">Bulan Awal</th>
+                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-curr-month">Bulan Akhir</th>
                                 <th scope="col" class="px-6 py-3 text-right tracking-wider">Perubahan Mutasi</th>
                                 <th scope="col" class="px-6 py-3 text-center tracking-wider rounded-r-md">Aksi Posisi</th>
                             </tr>
@@ -159,7 +162,7 @@
         <div id="welcome-message" class="text-center py-24">
             <i class="fa-solid fa-magnifying-glass-chart text-7xl text-gray-300 mb-4 animate-pulse"></i>
             <h2 class="text-2xl font-bold text-gray-600">Sistem Siap Mengeksekusi Proyek</h2>
-            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Silakan ketik atau pilih salah satu kode emiten saham di atas untuk mengaktifkan pemetaan kepemilikan saham.</p>
+            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Silakan ketik atau pilih salah satu kode emiten saham di atas untuk mengaktifkan pemetaan kepemilikan saham berdasarkan rentang periode custom.</p>
         </div>
 
     </div>
@@ -192,20 +195,21 @@
         let allData = {};
         let propChart = null;
         let topChart = null;
-        let currentUnit = 'lembar'; // 'lembar' atau 'lot'
+        let currentUnit = 'lembar'; 
         let currentEmitenGlobal = '';
-        let currentMonthGlobal = '';
-        let globalRawChanges = []; // Menyimpan data kalkulasi mentah untuk kebutuhan filter/sorting dinamis
+        let currentStartMonthGlobal = '';
+        let currentEndMonthGlobal = '';
+        let globalRawChanges = []; 
 
         const formatNumber = (num) => {
             return new Intl.NumberFormat('id-ID').format(Math.round(num));
         };
 
+        // FORMATTER BERSIH TANPA EMBEL-EMBEL TEKS UNIT AKHIRAN
         const formatShortNumber = (num) => {
-            const labelSuffix = currentUnit === 'lot' ? ' Lot' : ' Lbr';
-            if(Math.abs(num) >= 1e9) return (num/1e9).toFixed(2) + ' M' + labelSuffix;
-            if(Math.abs(num) >= 1e6) return (num/1e6).toFixed(2) + ' Jt' + labelSuffix;
-            return formatNumber(num) + labelSuffix;
+            if(Math.abs(num) >= 1e9) return (num/1e9).toFixed(2) + ' Miliar';
+            if(Math.abs(num) >= 1e6) return (num/1e6).toFixed(2) + ' Juta';
+            return formatNumber(num);
         };
 
         function setUnit(unit) {
@@ -213,14 +217,12 @@
             if (unit === 'lembar') {
                 $('#unit-lembar').addClass('bg-indigo-600 text-white shadow-sm').removeClass('text-gray-600');
                 $('#unit-lot').removeClass('bg-indigo-600 text-white shadow-sm').addClass('text-gray-600');
-                $('#lbl-unit-stat1, #lbl-unit-stat2').text('Satuan: Lembar');
             } else {
                 $('#unit-lot').addClass('bg-indigo-600 text-white shadow-sm').removeClass('text-gray-600');
                 $('#unit-lembar').removeClass('bg-indigo-600 text-white shadow-sm').addClass('text-gray-600');
-                $('#lbl-unit-stat1, #lbl-unit-stat2').text('Satuan: Lot (1 Lot = 100 Lembar)');
             }
             if(currentEmitenGlobal) {
-                updateDashboard(currentEmitenGlobal, currentMonthGlobal);
+                updateDashboard(currentEmitenGlobal, currentStartMonthGlobal, currentEndMonthGlobal);
             }
         }
 
@@ -240,7 +242,7 @@
                 })
                 .catch(err => {
                     console.error("Gagal memuat struktur berkas data.json:", err);
-                    $('#welcome-message').html('<div class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-5xl mb-4"></i><br/>Gagal memuat berkas database harian data.json. Pastikan file berada di direktori publik yang sama.</div>');
+                    $('#welcome-message').html('<div class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-5xl mb-4"></i><br/>Gagal memuat berkas database harian data.json.</div>');
                 });
 
             $('#emiten-select').on('change', function() {
@@ -252,42 +254,56 @@
                     return;
                 }
                 currentEmitenGlobal = emiten;
-                updateDashboard(emiten, null);
+                updateDashboard(emiten, null, null);
             });
 
-            $('#month-select').on('change', function() {
-                if(currentEmitenGlobal) updateDashboard(currentEmitenGlobal, $(this).val());
+            // TRIGGER PERUBAHAN RENTANG SELEKTOR SECARA KEDUA-DUANYA
+            $('#start-month-select, #end-month-select').on('change', function() {
+                if(currentEmitenGlobal) {
+                    updateDashboard(currentEmitenGlobal, $('#start-month-select').val(), $('#end-month-select').val());
+                }
             });
         });
 
-        function updateDashboard(emiten, targetMonth = null) {
+        function updateDashboard(emiten, startMonth = null, endMonth = null) {
             $('#welcome-message').addClass('hidden');
             $('#dashboard-content').removeClass('hidden');
 
             const records = allData[emiten];
             if(!records || records.length === 0) return;
 
-            if(!targetMonth) {
-                const mSelect = $('#month-select');
-                mSelect.empty();
+            // Inisialisasi awal dropdown ganda jika emiten baru dipilih
+            if(!startMonth || !endMonth) {
+                const sSelect = $('#start-month-select');
+                const eSelect = $('#end-month-select');
+                sSelect.empty();
+                eSelect.empty();
+                
                 records.forEach((r, idx) => {
-                    mSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1));
+                    sSelect.append(new Option(r.Date, r.Date, false, idx === Math.max(0, records.length - 2)));
+                    eSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1));
                 });
-                targetMonth = records[records.length - 1].Date;
+                
+                startMonth = records[Math.max(0, records.length - 2)].Date;
+                endMonth = records[records.length - 1].Date;
             }
 
-            currentMonthGlobal = targetMonth;
-            const currentIndex = records.findIndex(r => r.Date === targetMonth);
-            const currentData = records[currentIndex];
-            const prevData = currentIndex > 0 ? records[currentIndex - 1] : null;
+            currentStartMonthGlobal = startMonth;
+            currentEndMonthGlobal = endMonth;
 
-            $('#table-period').text(`Periode: ${targetMonth} (vs ${prevData ? prevData.Date : 'Basis Awal'})`);
-            $('#th-prev-month').text(prevData ? `Posisi ${prevData.Date}` : 'Posisi Awal');
-            $('#th-curr-month').text(`Posisi ${targetMonth}`);
+            const startIndex = records.findIndex(r => r.Date === startMonth);
+            const endIndex = records.findIndex(r => r.Date === endMonth);
+            
+            const prevData = records[startIndex];
+            const currentData = records[endIndex];
+
+            // Update Label Teks Header Komparasi Rentang
+            $('#table-period').text(`Rentang Analisis: ${startMonth} s/d ${endMonth}`);
+            $('#th-prev-month').text(`Posisi ${startMonth}`);
+            $('#th-curr-month').text(`Posisi ${endMonth}`);
 
             const divisor = currentUnit === 'lot' ? 100 : 1;
 
-            // Membangun kalkulasi mentah harian
             let totalLocalShares = 0, totalForeignShares = 0;
             let totalLocalPrevShares = 0, totalForeignPrevShares = 0;
             let totalSahamMurni = 0;
@@ -295,8 +311,8 @@
             globalRawChanges = [];
 
             Object.keys(INSTITUTION_MAP).forEach(key => {
-                const currVal = currentData[key] || 0;
-                const prevVal = prevData ? (prevData[key] || 0) : currVal;
+                const currVal = currentData ? (currentData[key] || 0) : 0;
+                const prevVal = prevData ? (prevData[key] || 0) : 0;
                 const diff = currVal - prevVal;
                 
                 totalSahamMurni += currVal;
@@ -313,50 +329,45 @@
                 });
             });
 
-            // Sinkronisasi data ke ringkasan widget panel atas
+            // Sinkronisasi data widget ringkasan
             $('#stat-total-saham').text(formatShortNumber(totalSahamMurni / divisor));
             
             const netForeignFlow = (totalForeignShares - totalForeignPrevShares) / divisor;
             const flowSign = netForeignFlow > 0 ? '+' : '';
             const flowClass = netForeignFlow > 0 ? 'text-emerald-100' : (netForeignFlow < 0 ? 'text-red-200' : 'text-white');
-            $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span> <span class="text-xs font-normal text-white/60 block mt-0.5">(Net Foreign Flow Bulan Ini)</span>`);
+            $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span> <span class="text-xs font-normal text-white/60 block mt-0.5">(Net Foreign Arus Rentang)</span>`);
 
             let pctLocal = ((totalLocalShares / totalSahamMurni) * 100).toFixed(2);
             let pctForeign = ((totalForeignShares / totalSahamMurni) * 100).toFixed(2);
             $('#stat-prop-lokal').text(`${pctLocal}%`);
             $('#stat-prop-asing').text(`${pctForeign}%`);
 
-            // Eksekusi pemrosesan data tabel & pembaruan grafik
             processTableData();
             updateCharts(records);
         }
 
-        // Fungsi khusus pengolah filter dinamis dan pengurutan (Alphabet / Arus Dana)
         function processTableData() {
             const originFilter = $('#filter-origin').val();
             const sortFilter = $('#filter-sort').val();
             const tbody = $('#flow-table-body');
             tbody.empty();
 
-            // 1. Jalankan Filter Domisili
             let workingData = globalRawChanges.filter(item => {
                 if (originFilter === 'local') return item.isLocal;
                 if (originFilter === 'foreign') return !item.isLocal;
                 return true;
             });
 
-            // 2. Jalankan Aturan Sorting
             if (sortFilter === 'alphabet-asc') {
                 workingData.sort((a, b) => a.name.localeCompare(b.name));
             } else if (sortFilter === 'alphabet-desc') {
                 workingData.sort((a, b) => b.name.localeCompare(a.name));
             } else if (sortFilter === 'size-desc') {
                 workingData.sort((a, b) => b.curr - a.curr);
-            } else { // default: diff-desc (pergerakan mutasi absolut terbesar)
+            } else { 
                 workingData.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
             }
 
-            // 3. Render Baris ke Struktur Dom HTML Tabel
             if(workingData.length === 0) {
                 tbody.append(`<tr><td colspan="5" class="px-6 py-4 text-center text-gray-400">Tidak ada data klasifikasi yang cocok</td></tr>`);
                 return;
@@ -389,7 +400,6 @@
             const dataLokal = records.map(r => LOCAL_KEYS.reduce((sum, key) => sum + (r[key] || 0), 0) / divisor);
             const dataAsing = records.map(r => FOREIGN_KEYS.reduce((sum, key) => sum + (r[key] || 0), 0) / divisor);
 
-            // --- GRAFIK HISTORIS PROPORSI ---
             if(propChart) propChart.destroy();
             const ctxProp = document.getElementById('chart-proporsi').getContext('2d');
             propChart = new Chart(ctxProp, {
@@ -414,15 +424,11 @@
                 }
             });
 
-            // --- GRAFIK TOP 5 PEMEGANG SAHAM (HORIZONTAL & GAP ADAPTIVE) ---
-            // Mengambil 5 entitas pemegang saham terbesar dari kondisi bulan berjalan saat ini
+            // PENYEMPURNAAN STRUKTUR GRAFIK DETEKSI GAP DAN TOOLTIP PREVIEW MIKRO
             const topHolders = [...globalRawChanges].sort((a, b) => b.curr - a.curr).slice(0, 5);
             
-            // Logika Evaluasi Tingkat Kesenjangan Nilai Data (Gap-check)
             const maxVal = topHolders[0] ? topHolders[0].curr : 0;
             const minVal = topHolders[topHolders.length - 1] ? topHolders[topHolders.length - 1].curr : 0;
-            
-            // Jika gap rasio melampaui batas ekstrim (misal pemegang ke-1 berbanding pemegang ke-5 di atas 1000x lipat), gunakan skala Logaritmik agar data kecil tetap tampak di layar.
             const useLogarithmicScale = (minVal > 0 && (maxVal / minVal) > 1000);
 
             if(topChart) topChart.destroy();
@@ -433,7 +439,7 @@
                 data: {
                     labels: topHolders.map(t => t.name),
                     datasets: [{
-                        label: `Jumlah Posisi (${currentUnit.toUpperCase()})`,
+                        label: `Jumlah Posisi`,
                         data: topHolders.map(t => t.curr),
                         backgroundColor: ['#4f46e5', '#6366f1', '#818cf8', '#93c5fd', '#bfdbfe'],
                         borderRadius: 5,
@@ -441,7 +447,7 @@
                     }]
                 },
                 options: {
-                    indexAxis: 'y', // MENGUBAH MENJADI HORIZONTAL AGAR GAP EKSTRIM TIDAK MERUSAK ANTARMUKA PREVIEW
+                    indexAxis: 'y', 
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: { 
@@ -449,13 +455,12 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ` Total: ${formatNumber(context.raw)} ${currentUnit}`;
+                                    return ` Total: ${formatNumber(context.raw)}`;
                                 }
                             }
                         }
                     },
-                    // Mengoptimalkan interaksi hover kursor untuk membaca data-gap mikro
-                    interaction: { mode: 'index', intersect: true },
+                    interaction: { mode: 'index', intersect: false }, // Mengizinkan hover area di sekitar bar agar deteksi angka kecil sensitif
                     scales: {
                         x: {
                             type: useLogarithmicScale ? 'logarithmic' : 'linear',
