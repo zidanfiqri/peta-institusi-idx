@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peta Kepemilikan Institusi IDX</title>
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Select2 for searchable dropdown -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f3f4f6; }
         .card { background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 1.5rem; }
-        .positive { color: #10b981; } /* emerald-500 */
-        .negative { color: #ef4444; } /* red-500 */
         .select2-container--default .select2-selection--single {
             height: 42px; border-color: #d1d5db; border-radius: 0.375rem; padding: 6px 12px;
         }
@@ -36,7 +30,7 @@
                     <span class="font-bold text-xl tracking-tight">Peta Kepemilikan Institusi IDX</span>
                 </div>
                 <div class="text-sm text-indigo-200">
-                    <i class="fa-solid fa-clock mr-1"></i> Data KSEI (Update Terakhir: April 2026)
+                    <i class="fa-solid fa-clock mr-1"></i> Data Terintegrasi KSEI
                 </div>
             </div>
         </div>
@@ -44,98 +38,129 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Control Panel -->
         <div class="card mb-6">
-            <h2 class="text-lg font-semibold mb-4 border-b pb-2"><i class="fa-solid fa-filter text-gray-500 mr-2"></i>Panel Pencarian Emiten</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 class="text-lg font-semibold mb-4 border-b pb-2 text-indigo-900">
+                <i class="fa-solid fa-sliders text-indigo-500 mr-2"></i>Parameter Analisis &amp; Konversi Satuan
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Emiten (Kode Saham):</label>
-                    <select id="emiten-select" class="w-full" style="width: 100%;">
+                    <select id="emiten-select" class="w-full">
                         <option value="">-- Pilih Emiten --</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Bulan (Untuk Analisa Arus Dana):</label>
-                    <select id="month-select" class="w-full border border-gray-300 rounded-md p-2 h-[42px] focus:ring-indigo-500 focus:border-indigo-500 bg-white">
-                        <!-- Options generated dynamically -->
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Bulan Berjalan:</label>
+                    <select id="month-select" class="w-full border border-gray-300 rounded-md p-2 h-[42px] bg-white focus:ring-indigo-500 focus:border-indigo-500">
                     </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Satuan Tampilan Data:</label>
+                    <div class="grid grid-cols-2 gap-2 bg-gray-100 p-1 rounded-md h-[42px]">
+                        <button id="unit-lembar" class="rounded bg-indigo-600 text-white font-medium text-sm transition-all shadow-sm" onclick="setUnit('lembar')">Lembar</button>
+                        <button id="unit-lot" class="rounded text-gray-600 font-medium text-sm transition-all" onclick="setUnit('lot')">Lot</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="dashboard-content" class="hidden">
-            <!-- Summary Stats -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div class="card bg-gradient-to-br from-indigo-500 to-indigo-700 text-white">
-                    <h3 class="text-indigo-100 text-sm font-medium">Total Saham Tercatat (Di Bulan Terpilih)</h3>
+                <div class="card bg-gradient-to-br from-indigo-600 to-indigo-800 text-white shadow-md">
+                    <h3 class="text-indigo-100 text-sm font-medium">Total Saham Genggaman Institusi</h3>
                     <p class="text-3xl font-bold mt-2" id="stat-total-saham">-</p>
+                    <span class="text-xs text-indigo-200 block mt-1" id="lbl-unit-stat1">Satuan: Lembar</span>
                 </div>
-                <div class="card bg-gradient-to-br from-emerald-500 to-emerald-700 text-white">
-                    <h3 class="text-emerald-100 text-sm font-medium">Net Inflow / Outflow Total</h3>
+                <div class="card bg-gradient-to-br from-emerald-600 to-emerald-800 text-white shadow-md">
+                    <h3 class="text-emerald-100 text-sm font-medium">Net Foreign Flow Kategori</h3>
                     <p class="text-3xl font-bold mt-2" id="stat-net-flow">-</p>
+                    <span class="text-xs text-emerald-200 block mt-1" id="lbl-unit-stat2">Satuan: Lembar</span>
                 </div>
-                <div class="card bg-white border-l-4 border-amber-500">
-                    <h3 class="text-gray-500 text-sm font-medium">Proporsi Lokal vs Asing (Bulan Terpilih)</h3>
-                    <div class="mt-2 flex items-center justify-between">
+                <div class="card bg-white border-l-4 border-amber-500 shadow-sm">
+                    <h3 class="text-gray-500 text-sm font-medium">Komposisi Domisili Investor</h3>
+                    <div class="mt-3 flex items-center justify-between">
                         <div>
-                            <span class="text-sm text-gray-400 block">Lokal</span>
-                            <span class="text-xl font-bold text-blue-600" id="stat-prop-lokal">-</span>
+                            <span class="text-xs text-gray-400 block font-semibold uppercase">Lokal</span>
+                            <span class="text-2xl font-bold text-blue-600" id="stat-prop-lokal">-</span>
                         </div>
+                        <div class="border-r border-gray-200 h-10"></div>
                         <div>
-                            <span class="text-sm text-gray-400 block text-right">Asing</span>
-                            <span class="text-xl font-bold text-red-600" id="stat-prop-asing">-</span>
+                            <span class="text-xs text-gray-400 block text-right font-semibold uppercase">Asing</span>
+                            <span class="text-2xl font-bold text-red-600" id="stat-prop-asing">-</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Inflow Outflow Table -->
             <div class="card mb-6">
-                <div class="flex justify-between items-center mb-4 border-b pb-2">
-                    <h2 class="text-lg font-semibold"><i class="fa-solid fa-money-bill-transfer text-emerald-500 mr-2"></i>Pergerakan Institusi (Keluar / Masuk)</h2>
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-indigo-200" id="table-period">Periode: -</span>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-3">
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900"><i class="fa-solid fa-money-bill-transfer text-emerald-500 mr-2"></i>Matriks Perubahan Posisi Kepemilikan</h2>
+                        <p class="text-xs text-gray-500 mt-0.5">Analisis komparatif arus dana masuk <span class="text-emerald-600 font-bold">(Akumulasi)</span> dan keluar <span class="text-red-600 font-bold">(Distribusi)</span>.</p>
+                    </div>
+                    <span class="self-start bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded border border-indigo-200" id="table-period">Periode: -</span>
                 </div>
-                <p class="text-sm text-gray-500 mb-4">Melihat perubahan jumlah lembar saham yang dipegang oleh setiap kategori institusi dibandingkan bulan sebelumnya. <br/><b>Hijau (Masuk/Beli)</b>, <b>Merah (Keluar/Jual)</b>.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Filter Kategori:</label>
+                        <select id="filter-origin" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData()">
+                            <option value="all">Semua Jenis Institusi (Lokal &amp; Asing)</option>
+                            <option value="local">Hanya Institusi Lokal</option>
+                            <option value="foreign">Hanya Institusi Asing</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Urutan (Sorting):</label>
+                        <select id="filter-sort" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData()">
+                            <option value="diff-desc">Pergerakan Terbesar (Inflow/Outflow)</option>
+                            <option value="alphabet-asc">Abjad Kategori (A $\rightarrow$ Z)</option>
+                            <option value="alphabet-desc">Abjad Kategori (Z $\rightarrow$ A)</option>
+                            <option value="size-desc">Kepemilikan Terbesar</option>
+                        </select>
+                    </div>
+                </div>
                 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-100 text-gray-700 font-semibold">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Kategori Institusi</th>
-                                <th scope="col" class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Bulan Sebelumnya</th>
-                                <th scope="col" class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Bulan Terpilih</th>
-                                <th scope="col" class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Perubahan (Lembar)</th>
-                                <th scope="col" class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md">Kategori Institusi</th>
+                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-prev-month">Bulan Lalu</th>
+                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-curr-month">Bulan Terpilih</th>
+                                <th scope="col" class="px-6 py-3 text-right tracking-wider">Perubahan Mutasi</th>
+                                <th scope="col" class="px-6 py-3 text-center tracking-wider rounded-r-md">Aksi Posisi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200" id="flow-table-body">
-                            <!-- Rows -->
+                        <tbody class="bg-white divide-y divide-gray-200 font-medium" id="flow-table-body">
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Charts -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="card">
-                    <h2 class="text-lg font-semibold mb-4 border-b pb-2">Tren Proporsi Lokal vs Asing (Historis)</h2>
-                    <div class="relative h-64 w-full">
+                    <h2 class="text-lg font-semibold mb-3 border-b pb-2 text-gray-900">Histori Perimbangan Kekuatan Domisili vs Asing</h2>
+                    <div class="relative h-72 w-full">
                         <canvas id="chart-proporsi"></canvas>
                     </div>
                 </div>
                 <div class="card">
-                    <h2 class="text-lg font-semibold mb-4 border-b pb-2">Top 5 Pemegang Saham (Kategori)</h2>
-                    <div class="relative h-64 w-full">
+                    <div class="flex justify-between items-center mb-3 border-b pb-2">
+                        <h2 class="text-lg font-semibold text-gray-900">Top 5 Pemegang Mayoritas Saham</h2>
+                        <span class="text-xs text-gray-400 font-medium">*Skala adaptif otomatis jika gap besar</span>
+                    </div>
+                    <div class="relative h-72 w-full">
                         <canvas id="chart-top5"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="welcome-message" class="text-center py-20">
-            <i class="fa-solid fa-magnifying-glass-chart text-6xl text-gray-300 mb-4"></i>
-            <h2 class="text-2xl font-bold text-gray-600">Silakan pilih Emiten</h2>
-            <p class="text-gray-500 mt-2">Pilih kode saham pada panel di atas untuk mulai melihat pergerakan kepemilikan institusi.</p>
+        <div id="welcome-message" class="text-center py-24">
+            <i class="fa-solid fa-magnifying-glass-chart text-7xl text-gray-300 mb-4 animate-pulse"></i>
+            <h2 class="text-2xl font-bold text-gray-600">Sistem Siap Mengeksekusi Proyek</h2>
+            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Silakan ketik atau pilih salah satu kode emiten saham di atas untuk mengaktifkan pemetaan kepemilikan saham.</p>
         </div>
 
     </div>
@@ -168,55 +193,71 @@
         let allData = {};
         let propChart = null;
         let topChart = null;
+        let currentUnit = 'lembar'; // 'lembar' atau 'lot'
+        let currentEmitenGlobal = '';
+        let currentMonthGlobal = '';
+        let globalRawChanges = []; // Menyimpan data kalkulasi mentah untuk kebutuhan filter/sorting dinamis
 
-        // Number formatter
         const formatNumber = (num) => {
             return new Intl.NumberFormat('id-ID').format(Math.round(num));
         };
 
         const formatShortNumber = (num) => {
-            if(Math.abs(num) >= 1e9) return (num/1e9).toFixed(2) + ' Miliar';
-            if(Math.abs(num) >= 1e6) return (num/1e6).toFixed(2) + ' Juta';
-            return formatNumber(num);
+            const labelSuffix = currentUnit === 'lot' ? ' Lot' : ' Lbr';
+            if(Math.abs(num) >= 1e9) return (num/1e9).toFixed(2) + ' M' + labelSuffix;
+            if(Math.abs(num) >= 1e6) return (num/1e6).toFixed(2) + ' Jt' + labelSuffix;
+            return formatNumber(num) + labelSuffix;
         };
 
+        function setUnit(unit) {
+            currentUnit = unit;
+            if (unit === 'lembar') {
+                $('#unit-lembar').addClass('bg-indigo-600 text-white shadow-sm').removeClass('text-gray-600');
+                $('#unit-lot').removeClass('bg-indigo-600 text-white shadow-sm').addClass('text-gray-600');
+                $('#lbl-unit-stat1, #lbl-unit-stat2').text('Satuan: Lembar');
+            } else {
+                $('#unit-lot').addClass('bg-indigo-600 text-white shadow-sm').removeClass('text-gray-600');
+                $('#unit-lembar').removeClass('bg-indigo-600 text-white shadow-sm').addClass('text-gray-600');
+                $('#lbl-unit-stat1, #lbl-unit-stat2').text('Satuan: Lot (1 Lot = 100 Lembar)');
+            }
+            if(currentEmitenGlobal) {
+                updateDashboard(currentEmitenGlobal, currentMonthGlobal);
+            }
+        }
+
         $(document).ready(function() {
-            // Load data
             fetch('data.json')
                 .then(response => response.json())
                 .then(data => {
                     allData = data;
                     const emitens = Object.keys(data).sort();
-                    
                     const select = $('#emiten-select');
-                    emitens.forEach(e => {
-                        select.append(new Option(e, e));
-                    });
+                    emitens.forEach(e => { select.append(new Option(e, e)); });
                     
                     select.select2({
-                        placeholder: "Ketik kode saham (misal: BBCA)",
+                        placeholder: "Masukkan kode emiten (Contoh: BBRI, GOTO, RAJA)",
                         allowClear: true
                     });
                 })
                 .catch(err => {
-                    console.error("Error loading data:", err);
-                    $('#welcome-message').html('<div class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-4xl mb-4"></i><br/>Gagal memuat data.json. Pastikan file berada di folder yang sama.</div>');
+                    console.error("Gagal memuat struktur berkas data.json:", err);
+                    $('#welcome-message').html('<div class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-5xl mb-4"></i><br/>Gagal memuat berkas database harian data.json. Pastikan file berada di direktori publik yang sama.</div>');
                 });
 
-            // Listeners
             $('#emiten-select').on('change', function() {
                 const emiten = $(this).val();
                 if(!emiten) {
                     $('#dashboard-content').addClass('hidden');
                     $('#welcome-message').removeClass('hidden');
+                    currentEmitenGlobal = '';
                     return;
                 }
-                updateDashboard(emiten);
+                currentEmitenGlobal = emiten;
+                updateDashboard(emiten, null);
             });
 
             $('#month-select').on('change', function() {
-                const emiten = $('#emiten-select').val();
-                if(emiten) updateDashboard(emiten, $(this).val());
+                if(currentEmitenGlobal) updateDashboard(currentEmitenGlobal, $(this).val());
             });
         });
 
@@ -227,102 +268,129 @@
             const records = allData[emiten];
             if(!records || records.length === 0) return;
 
-            // Populate months if not done or if emiten changed
             if(!targetMonth) {
                 const mSelect = $('#month-select');
                 mSelect.empty();
                 records.forEach((r, idx) => {
-                    mSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1)); // default select last month
+                    mSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1));
                 });
                 targetMonth = records[records.length - 1].Date;
             }
 
+            currentMonthGlobal = targetMonth;
             const currentIndex = records.findIndex(r => r.Date === targetMonth);
             const currentData = records[currentIndex];
             const prevData = currentIndex > 0 ? records[currentIndex - 1] : null;
 
-            // Update Period Label
-            $('#table-period').text(`Periode: ${targetMonth} (vs ${prevData ? prevData.Date : '-'})`);
+            $('#table-period').text(`Periode: ${targetMonth} (vs ${prevData ? prevData.Date : 'Basis Awal'})`);
+            $('#th-prev-month').text(prevData ? `Posisi ${prevData.Date}` : 'Posisi Awal');
+            $('#th-curr-month').text(`Posisi ${targetMonth}`);
 
-            // 1. Inflow/Outflow Table
-            const tbody = $('#flow-table-body');
-            tbody.empty();
+            const divisor = currentUnit === 'lot' ? 100 : 1;
 
-            let totalLocal = 0, totalForeign = 0;
-            let totalLocalPrev = 0, totalForeignPrev = 0;
-            let netFlow = 0;
-            let totalSaham = 0;
-
-            const changes = [];
+            // Membangun kalkulasi mentah harian
+            let totalLocalShares = 0, totalForeignShares = 0;
+            let totalLocalPrevShares = 0, totalForeignPrevShares = 0;
+            let totalSahamMurni = 0;
+            
+            globalRawChanges = [];
 
             Object.keys(INSTITUTION_MAP).forEach(key => {
                 const currVal = currentData[key] || 0;
-                const prevVal = prevData ? (prevData[key] || 0) : currVal; // if no prev data, change is 0
+                const prevVal = prevData ? (prevData[key] || 0) : currVal;
                 const diff = currVal - prevVal;
                 
-                totalSaham += currVal;
-                if(LOCAL_KEYS.includes(key)) { totalLocal += currVal; totalLocalPrev += prevVal; }
-                if(FOREIGN_KEYS.includes(key)) { totalForeign += currVal; totalForeignPrev += prevVal; }
+                totalSahamMurni += currVal;
+                if(LOCAL_KEYS.includes(key)) { totalLocalShares += currVal; totalLocalPrevShares += prevVal; }
+                if(FOREIGN_KEYS.includes(key)) { totalForeignShares += currVal; totalForeignPrevShares += prevVal; }
 
-                if(diff !== 0 || currVal > 0) {
-                    changes.push({
-                        key: key,
-                        name: INSTITUTION_MAP[key],
-                        prev: prevVal,
-                        curr: currVal,
-                        diff: diff
-                    });
-                }
+                globalRawChanges.push({
+                    key: key,
+                    name: INSTITUTION_MAP[key],
+                    isLocal: LOCAL_KEYS.includes(key),
+                    prev: prevVal / divisor,
+                    curr: currVal / divisor,
+                    diff: diff / divisor
+                });
             });
 
-            // Sort changes by absolute difference (biggest movers first)
-            changes.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
+            // Sinkronisasi data ke ringkasan widget panel atas
+            $('#stat-total-saham').text(formatShortNumber(totalSahamMurni / divisor));
+            
+            const netForeignFlow = (totalForeignShares - totalForeignPrevShares) / divisor;
+            const flowSign = netForeignFlow > 0 ? '+' : '';
+            const flowClass = netForeignFlow > 0 ? 'text-emerald-100' : (netForeignFlow < 0 ? 'text-red-200' : 'text-white');
+            $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span> <span class="text-xs font-normal text-white/60 block mt-0.5">(Net Foreign Flow Bulan Ini)</span>`);
 
-            changes.forEach(c => {
+            let pctLocal = ((totalLocalShares / totalSahamMurni) * 100).toFixed(2);
+            let pctForeign = ((totalForeignShares / totalSahamMurni) * 100).toFixed(2);
+            $('#stat-prop-lokal').text(`${pctLocal}%`);
+            $('#stat-prop-asing').text(`${pctForeign}%`);
+
+            // Eksekusi pemrosesan data tabel & pembaruan grafik
+            processTableData();
+            updateCharts(records);
+        }
+
+        // Fungsi khusus pengolah filter dinamis dan pengurutan (Alphabet / Arus Dana)
+        function processTableData() {
+            const originFilter = $('#filter-origin').val();
+            const sortFilter = $('#filter-sort').val();
+            const tbody = $('#flow-table-body');
+            tbody.empty();
+
+            // 1. Jalankan Filter Domisili
+            let workingData = globalRawChanges.filter(item => {
+                if (originFilter === 'local') return item.isLocal;
+                if (originFilter === 'foreign') return !item.isLocal;
+                return true;
+            });
+
+            // 2. Jalankan Aturan Sorting
+            if (sortFilter === 'alphabet-asc') {
+                workingData.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortFilter === 'alphabet-desc') {
+                workingData.sort((a, b) => b.name.localeCompare(a.name));
+            } else if (sortFilter === 'size-desc') {
+                workingData.sort((a, b) => b.curr - a.curr);
+            } else { // default: diff-desc (pergerakan mutasi absolut terbesar)
+                workingData.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
+            }
+
+            // 3. Render Baris ke Struktur Dom HTML Tabel
+            if(workingData.length === 0) {
+                tbody.append(`<tr><td colspan="5" class="px-6 py-4 text-center text-gray-400">Tidak ada data klasifikasi yang cocok</td></tr>`);
+                return;
+            }
+
+            workingData.forEach(c => {
                 let diffClass = c.diff > 0 ? 'text-emerald-600' : (c.diff < 0 ? 'text-red-600' : 'text-gray-500');
-                let diffIcon = c.diff > 0 ? '<i class="fa-solid fa-arrow-trend-up mr-1"></i>' : (c.diff < 0 ? '<i class="fa-solid fa-arrow-trend-down mr-1"></i>' : '-');
+                let diffIcon = c.diff > 0 ? '<i class="fa-solid fa-square-plus mr-1"></i>' : (c.diff < 0 ? '<i class="fa-solid fa-square-minus mr-1"></i>' : '-');
                 let statusBadge = c.diff > 0 
-                    ? '<span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded">Masuk</span>' 
-                    : (c.diff < 0 ? '<span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Keluar</span>' : '<span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Tetap</span>');
+                    ? '<span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Inflow</span>' 
+                    : (c.diff < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Outflow</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Muted</span>');
                 
                 let sign = c.diff > 0 ? '+' : '';
 
                 tbody.append(`
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${c.name}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-gray-500">${formatNumber(c.prev)}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right font-medium text-gray-900">${formatNumber(c.curr)}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right font-bold ${diffClass}">${diffIcon} ${sign}${formatNumber(c.diff)}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right">${statusBadge}</td>
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-3.5 font-semibold text-gray-900">${c.name}</td>
+                        <td class="px-6 py-3.5 text-right text-gray-500 font-mono">${formatNumber(c.prev)}</td>
+                        <td class="px-6 py-3.5 text-right font-bold text-gray-900 font-mono">${formatNumber(c.curr)}</td>
+                        <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono">${diffIcon}${sign}${formatNumber(c.diff)}</td>
+                        <td class="px-6 py-3.5 text-center">${statusBadge}</td>
                     </tr>
                 `);
             });
-
-            // 2. Summary Stats
-            $('#stat-total-saham').text(formatShortNumber(totalSaham));
-            
-            // Calculate Net flow (total saham changed? usually shares outstanding stays same unless rights issue, but individuals/reksadana shift)
-            // Let's show Net Foreign Flow as the primary indicator, since that's highly tracked
-            const netForeignFlow = totalForeign - totalForeignPrev;
-            const flowSign = netForeignFlow > 0 ? '+' : '';
-            const flowClass = netForeignFlow > 0 ? 'text-emerald-100' : (netForeignFlow < 0 ? 'text-red-200' : 'text-white');
-            $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span> <span class="text-sm font-normal text-white/70 block mt-1">(Net Foreign Flow)</span>`);
-
-            let pctLocal = ((totalLocal / totalSaham) * 100).toFixed(2);
-            let pctForeign = ((totalForeign / totalSaham) * 100).toFixed(2);
-            $('#stat-prop-lokal').text(`${pctLocal}%`);
-            $('#stat-prop-asing').text(`${pctForeign}%`);
-
-            // 3. Charts
-            updateCharts(records, changes);
         }
 
-        function updateCharts(records, changes) {
+        function updateCharts(records) {
+            const divisor = currentUnit === 'lot' ? 100 : 1;
             const labels = records.map(r => r.Date);
-            const dataLokal = records.map(r => LOCAL_KEYS.reduce((sum, key) => sum + (r[key] || 0), 0));
-            const dataAsing = records.map(r => FOREIGN_KEYS.reduce((sum, key) => sum + (r[key] || 0), 0));
+            const dataLokal = records.map(r => LOCAL_KEYS.reduce((sum, key) => sum + (r[key] || 0), 0) / divisor);
+            const dataAsing = records.map(r => FOREIGN_KEYS.reduce((sum, key) => sum + (r[key] || 0), 0) / divisor);
 
-            // Proporsi Chart
+            // --- GRAFIK HISTORIS PROPORSI ---
             if(propChart) propChart.destroy();
             const ctxProp = document.getElementById('chart-proporsi').getContext('2d');
             propChart = new Chart(ctxProp, {
@@ -330,62 +398,73 @@
                 data: {
                     labels: labels,
                     datasets: [
-                        {
-                            label: 'Lokal',
-                            data: dataLokal,
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Asing',
-                            data: dataAsing,
-                            borderColor: '#ef4444',
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        }
+                        { label: 'Domestik / Lokal', data: dataLokal, borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.3, borderWidth: 2.5 },
+                        { label: 'Asing / Foreign', data: dataAsing, borderColor: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', fill: true, tension: 0.3, borderWidth: 2.5 }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { tooltip: { mode: 'index', intersect: false } },
-                    interaction: { mode: 'nearest', axis: 'x', intersect: false },
+                    plugins: { 
+                        legend: { position: 'top', labels: { boxWidth: 12, font: { weight: 'bold', size: 11 } } },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
                     scales: {
-                        y: { 
-                            stacked: true,
-                            ticks: { callback: function(value) { return formatShortNumber(value); } }
-                        }
+                        y: { ticks: { callback: function(value) { return formatShortNumber(value); }, font: { size: 10 } } }
                     }
                 }
             });
 
-            // Top 5 Chart
-            // Filter out 'Individual' if you just want institutions, but ID is included.
-            // Let's sort current month by holding size
-            const topHolders = [...changes].sort((a, b) => b.curr - a.curr).slice(0, 5);
+            // --- GRAFIK TOP 5 PEMEGANG SAHAM (HORIZONTAL & GAP ADAPTIVE) ---
+            // Mengambil 5 entitas pemegang saham terbesar dari kondisi bulan berjalan saat ini
+            const topHolders = [...globalRawChanges].sort((a, b) => b.curr - a.curr).slice(0, 5);
             
+            // Logika Evaluasi Tingkat Kesenjangan Nilai Data (Gap-check)
+            const maxVal = topHolders[0] ? topHolders[0].curr : 0;
+            const minVal = topHolders[topHolders.length - 1] ? topHolders[topHolders.length - 1].curr : 0;
+            
+            // Jika gap rasio melampaui batas ekstrim (misal pemegang ke-1 berbanding pemegang ke-5 di atas 1000x lipat), gunakan skala Logaritmik agar data kecil tetap tampak di layar.
+            const useLogarithmicScale = (minVal > 0 && (maxVal / minVal) > 1000);
+
             if(topChart) topChart.destroy();
             const ctxTop = document.getElementById('chart-top5').getContext('2d');
+            
             topChart = new Chart(ctxTop, {
                 type: 'bar',
                 data: {
                     labels: topHolders.map(t => t.name),
                     datasets: [{
-                        label: 'Lembar Saham',
+                        label: `Jumlah Posisi (${currentUnit.toUpperCase()})`,
                         data: topHolders.map(t => t.curr),
-                        backgroundColor: '#6366f1',
-                        borderRadius: 4
+                        backgroundColor: ['#4f46e5', '#6366f1', '#818cf8', '#93c5fd', '#bfdbfe'],
+                        borderRadius: 5,
+                        barThickness: 24
                     }]
                 },
                 options: {
+                    indexAxis: 'y', // MENGUBAH MENJADI HORIZONTAL AGAR GAP EKSTRIM TIDAK MERUSAK ANTARMUKA PREVIEW
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` Total: ${formatNumber(context.raw)} ${currentUnit}`;
+                                }
+                            }
+                        }
+                    },
+                    // Mengoptimalkan interaksi hover kursor untuk membaca data-gap mikro
+                    interaction: { mode: 'index', intersect: true },
                     scales: {
-                        y: { ticks: { callback: function(value) { return formatShortNumber(value); } } }
+                        x: {
+                            type: useLogarithmicScale ? 'logarithmic' : 'linear',
+                            ticks: { callback: function(value) { return formatShortNumber(value); }, font: { size: 10 } }
+                        },
+                        y: {
+                            ticks: { font: { weight: 'bold', size: 11 } }
+                        }
                     }
                 }
             });
