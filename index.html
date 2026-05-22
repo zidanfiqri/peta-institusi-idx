@@ -80,7 +80,7 @@
                     <p class="text-3xl font-bold mt-2" id="stat-net-flow">-</p>
                 </div>
                 <div class="card bg-white border-l-4 border-amber-500 shadow-sm">
-                    <h3 class="text-gray-500 text-sm font-medium">Komposisi Domisili Investor</h3>
+                    <h3 class="text-gray-500 text-sm font-medium">Komposisi Lokal vs Asing</h3>
                     <div class="mt-3 flex items-center justify-between">
                         <div>
                             <span class="text-xs text-gray-400 block font-semibold uppercase">Lokal</span>
@@ -99,7 +99,7 @@
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-3">
                     <div>
                         <h2 class="text-lg font-semibold text-gray-900"><i class="fa-solid fa-money-bill-transfer text-emerald-500 mr-2"></i>Matriks Perubahan Posisi Kepemilikan</h2>
-                        <p class="text-xs text-gray-500 mt-0.5">Analisis komparatif arus dana masuk <span class="text-emerald-600 font-bold">(Akumulasi)</span> dan keluar <span class="text-red-600 font-bold">(Distribusi)</span>.</p>
+                        <p class="text-xs text-gray-500 mt-0.5">Analisis komparatif pergerakan saham <span class="text-emerald-600 font-bold">(Masuk)</span> dan <span class="text-red-600 font-bold">(Keluar)</span>.</p>
                     </div>
                     <span class="self-start bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded border border-indigo-200" id="table-period">Periode: -</span>
                 </div>
@@ -116,9 +116,9 @@
                     <div>
                         <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Urutan (Sorting):</label>
                         <select id="filter-sort" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData()">
-                            <option value="diff-desc">Pergerakan Terbesar (Inflow/Outflow)</option>
-                            <option value="alphabet-asc">Abjad Kategori (A $\rightarrow$ Z)</option>
-                            <option value="alphabet-desc">Abjad Kategori (Z $\rightarrow$ A)</option>
+                            <option value="diff-desc">Pergerakan Terbesar</option>
+                            <option value="alphabet-asc">Abjad Kategori (A &rarr; Z)</option>
+                            <option value="alphabet-desc">Abjad Kategori (Z &rarr; A)</option>
                             <option value="size-desc">Kepemilikan Terbesar</option>
                         </select>
                     </div>
@@ -126,14 +126,7 @@
                 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
-                        <thead class="bg-gray-100 text-gray-700 font-semibold">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md">Kategori Institusi</th>
-                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-prev-month">Bulan Awal</th>
-                                <th scope="col" class="px-6 py-3 text-right tracking-wider" id="th-curr-month">Bulan Akhir</th>
-                                <th scope="col" class="px-6 py-3 text-right tracking-wider">Perubahan Mutasi</th>
-                                <th scope="col" class="px-6 py-3 text-center tracking-wider rounded-r-md">Aksi Posisi</th>
-                            </tr>
+                        <thead id="tbl-head" class="bg-gray-100 text-gray-700 font-semibold">
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 font-medium" id="flow-table-body">
                         </tbody>
@@ -143,7 +136,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="card">
-                    <h2 class="text-lg font-semibold mb-3 border-b pb-2 text-gray-900">Histori Perimbangan Kekuatan Domisili vs Asing</h2>
+                    <h2 class="text-lg font-semibold mb-3 border-b pb-2 text-gray-900">Histori Proporsi Lokal vs Asing</h2>
                     <div class="relative h-72 w-full">
                         <canvas id="chart-proporsi"></canvas>
                     </div>
@@ -162,7 +155,7 @@
         <div id="welcome-message" class="text-center py-24">
             <i class="fa-solid fa-magnifying-glass-chart text-7xl text-gray-300 mb-4 animate-pulse"></i>
             <h2 class="text-2xl font-bold text-gray-600">Sistem Siap Mengeksekusi Proyek</h2>
-            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Silakan ketik atau pilih salah satu kode emiten saham di atas untuk mengaktifkan pemetaan kepemilikan saham berdasarkan rentang periode custom.</p>
+            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Silakan ketik atau pilih salah satu kode emiten saham di atas untuk mengaktifkan pemetaan kepemilikan saham.</p>
         </div>
 
     </div>
@@ -199,13 +192,14 @@
         let currentEmitenGlobal = '';
         let currentStartMonthGlobal = '';
         let currentEndMonthGlobal = '';
+        
         let globalRawChanges = []; 
+        let globalSelectedMonths = []; // Menyimpan deret bulan yang akan ditampilkan
 
         const formatNumber = (num) => {
             return new Intl.NumberFormat('id-ID').format(Math.round(num));
         };
 
-        // FORMATTER BERSIH TANPA EMBEL-EMBEL TEKS UNIT AKHIRAN
         const formatShortNumber = (num) => {
             if(Math.abs(num) >= 1e9) return (num/1e9).toFixed(2) + ' Miliar';
             if(Math.abs(num) >= 1e6) return (num/1e6).toFixed(2) + ' Juta';
@@ -257,7 +251,6 @@
                 updateDashboard(emiten, null, null);
             });
 
-            // TRIGGER PERUBAHAN RENTANG SELEKTOR SECARA KEDUA-DUANYA
             $('#start-month-select, #end-month-select').on('change', function() {
                 if(currentEmitenGlobal) {
                     updateDashboard(currentEmitenGlobal, $('#start-month-select').val(), $('#end-month-select').val());
@@ -272,7 +265,6 @@
             const records = allData[emiten];
             if(!records || records.length === 0) return;
 
-            // Inisialisasi awal dropdown ganda jika emiten baru dipilih
             if(!startMonth || !endMonth) {
                 const sSelect = $('#start-month-select');
                 const eSelect = $('#end-month-select');
@@ -288,51 +280,71 @@
                 endMonth = records[records.length - 1].Date;
             }
 
+            let startIndex = records.findIndex(r => r.Date === startMonth);
+            let endIndex = records.findIndex(r => r.Date === endMonth);
+
+            // Jika user memilih bulan awal yang lebih maju daripada bulan akhir, otomatis tukar posisinya
+            if (startIndex > endIndex) {
+                let temp = startIndex;
+                startIndex = endIndex;
+                endIndex = temp;
+                startMonth = records[startIndex].Date;
+                endMonth = records[endIndex].Date;
+                $('#start-month-select').val(startMonth);
+                $('#end-month-select').val(endMonth);
+            }
+
             currentStartMonthGlobal = startMonth;
             currentEndMonthGlobal = endMonth;
 
-            const startIndex = records.findIndex(r => r.Date === startMonth);
-            const endIndex = records.findIndex(r => r.Date === endMonth);
-            
-            const prevData = records[startIndex];
-            const currentData = records[endIndex];
+            // Ekstrak semua bulan yang berada di antara rentang terpilih
+            const rangeRecords = records.slice(startIndex, endIndex + 1);
+            globalSelectedMonths = rangeRecords.map(r => r.Date);
 
-            // Update Label Teks Header Komparasi Rentang
             $('#table-period').text(`Rentang Analisis: ${startMonth} s/d ${endMonth}`);
-            $('#th-prev-month').text(`Posisi ${startMonth}`);
-            $('#th-curr-month').text(`Posisi ${endMonth}`);
 
             const divisor = currentUnit === 'lot' ? 100 : 1;
 
-            let totalLocalShares = 0, totalForeignShares = 0;
-            let totalLocalPrevShares = 0, totalForeignPrevShares = 0;
             let totalSahamMurni = 0;
+            let totalLocalShares = 0;
+            let totalForeignShares = 0;
+            let totalForeignPrevShares = 0;
             
             globalRawChanges = [];
 
             Object.keys(INSTITUTION_MAP).forEach(key => {
-                const currVal = currentData ? (currentData[key] || 0) : 0;
-                const prevVal = prevData ? (prevData[key] || 0) : 0;
-                const diff = currVal - prevVal;
+                let values = [];
+                // Looping untuk mendapatkan nilai per bulan pada rentang tersebut
+                rangeRecords.forEach(r => {
+                    values.push((r[key] || 0) / divisor);
+                });
+
+                let firstVal = values[0];
+                let lastVal = values[values.length - 1];
+                let diff = lastVal - firstVal;
                 
-                totalSahamMurni += currVal;
-                if(LOCAL_KEYS.includes(key)) { totalLocalShares += currVal; totalLocalPrevShares += prevVal; }
-                if(FOREIGN_KEYS.includes(key)) { totalForeignShares += currVal; totalForeignPrevShares += prevVal; }
+                totalSahamMurni += lastVal;
+                if(LOCAL_KEYS.includes(key)) { 
+                    totalLocalShares += lastVal; 
+                }
+                if(FOREIGN_KEYS.includes(key)) { 
+                    totalForeignPrevShares += firstVal;
+                    totalForeignShares += lastVal; 
+                }
 
                 globalRawChanges.push({
                     key: key,
                     name: INSTITUTION_MAP[key],
                     isLocal: LOCAL_KEYS.includes(key),
-                    prev: prevVal / divisor,
-                    curr: currVal / divisor,
-                    diff: diff / divisor
+                    values: values,
+                    last: lastVal, // Disimpan untuk logika sorting size
+                    diff: diff
                 });
             });
 
-            // Sinkronisasi data widget ringkasan
-            $('#stat-total-saham').text(formatShortNumber(totalSahamMurni / divisor));
+            $('#stat-total-saham').text(formatShortNumber(totalSahamMurni));
             
-            const netForeignFlow = (totalForeignShares - totalForeignPrevShares) / divisor;
+            const netForeignFlow = totalForeignShares - totalForeignPrevShares;
             const flowSign = netForeignFlow > 0 ? '+' : '';
             const flowClass = netForeignFlow > 0 ? 'text-emerald-100' : (netForeignFlow < 0 ? 'text-red-200' : 'text-white');
             $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span> <span class="text-xs font-normal text-white/60 block mt-0.5">(Net Foreign Arus Rentang)</span>`);
@@ -349,6 +361,21 @@
         function processTableData() {
             const originFilter = $('#filter-origin').val();
             const sortFilter = $('#filter-sort').val();
+            
+            // 1. GENERATE DINAMIS HEADER TABEL 
+            const thead = $('#tbl-head');
+            let thHtml = `<tr>
+                <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md whitespace-nowrap">Kategori Institusi</th>`;
+            globalSelectedMonths.forEach(m => {
+                thHtml += `<th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">${m}</th>`;
+            });
+            thHtml += `
+                <th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">Perubahan Mutasi</th>
+                <th scope="col" class="px-6 py-3 text-center tracking-wider rounded-r-md whitespace-nowrap">Status</th>
+            </tr>`;
+            thead.html(thHtml);
+
+            // 2. SORTING & FILTERING
             const tbody = $('#flow-table-body');
             tbody.empty();
 
@@ -363,34 +390,40 @@
             } else if (sortFilter === 'alphabet-desc') {
                 workingData.sort((a, b) => b.name.localeCompare(a.name));
             } else if (sortFilter === 'size-desc') {
-                workingData.sort((a, b) => b.curr - a.curr);
+                workingData.sort((a, b) => b.last - a.last);
             } else { 
                 workingData.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
             }
 
             if(workingData.length === 0) {
-                tbody.append(`<tr><td colspan="5" class="px-6 py-4 text-center text-gray-400">Tidak ada data klasifikasi yang cocok</td></tr>`);
+                tbody.append(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-6 py-4 text-center text-gray-400">Tidak ada data klasifikasi yang cocok</td></tr>`);
                 return;
             }
 
+            // 3. RENDER BARIS BODY
             workingData.forEach(c => {
                 let diffClass = c.diff > 0 ? 'text-emerald-600' : (c.diff < 0 ? 'text-red-600' : 'text-gray-500');
                 let diffIcon = c.diff > 0 ? '<i class="fa-solid fa-square-plus mr-1"></i>' : (c.diff < 0 ? '<i class="fa-solid fa-square-minus mr-1"></i>' : '-');
                 let statusBadge = c.diff > 0 
-                    ? '<span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Inflow</span>' 
-                    : (c.diff < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Outflow</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Muted</span>');
+                    ? '<span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Masuk</span>' 
+                    : (c.diff < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Keluar</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Tetap</span>');
                 
                 let sign = c.diff > 0 ? '+' : '';
 
-                tbody.append(`
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-3.5 font-semibold text-gray-900">${c.name}</td>
-                        <td class="px-6 py-3.5 text-right text-gray-500 font-mono">${formatNumber(c.prev)}</td>
-                        <td class="px-6 py-3.5 text-right font-bold text-gray-900 font-mono">${formatNumber(c.curr)}</td>
-                        <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono">${diffIcon}${sign}${formatNumber(c.diff)}</td>
-                        <td class="px-6 py-3.5 text-center">${statusBadge}</td>
-                    </tr>
-                `);
+                let trHtml = `<tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-3.5 font-semibold text-gray-900 whitespace-nowrap">${c.name}</td>`;
+                
+                // Masukkan nilai untuk setiap bulan dalam rentang yang dipilih
+                c.values.forEach(v => {
+                    trHtml += `<td class="px-6 py-3.5 text-right text-gray-500 font-mono whitespace-nowrap">${formatNumber(v)}</td>`;
+                });
+
+                trHtml += `
+                        <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono whitespace-nowrap">${diffIcon}${sign}${formatNumber(c.diff)}</td>
+                        <td class="px-6 py-3.5 text-center whitespace-nowrap">${statusBadge}</td>
+                    </tr>`;
+                
+                tbody.append(trHtml);
             });
         }
 
@@ -407,8 +440,8 @@
                 data: {
                     labels: labels,
                     datasets: [
-                        { label: 'Domestik / Lokal', data: dataLokal, borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.3, borderWidth: 2.5 },
-                        { label: 'Asing / Foreign', data: dataAsing, borderColor: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', fill: true, tension: 0.3, borderWidth: 2.5 }
+                        { label: 'Lokal', data: dataLokal, borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.3, borderWidth: 2.5 },
+                        { label: 'Asing', data: dataAsing, borderColor: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', fill: true, tension: 0.3, borderWidth: 2.5 }
                     ]
                 },
                 options: {
@@ -424,11 +457,11 @@
                 }
             });
 
-            // PENYEMPURNAAN STRUKTUR GRAFIK DETEKSI GAP DAN TOOLTIP PREVIEW MIKRO
-            const topHolders = [...globalRawChanges].sort((a, b) => b.curr - a.curr).slice(0, 5);
+            // Grafik Top 5 menggunakan data terakhir (last) dari rentang yang dipilih
+            const topHolders = [...globalRawChanges].sort((a, b) => b.last - a.last).slice(0, 5);
             
-            const maxVal = topHolders[0] ? topHolders[0].curr : 0;
-            const minVal = topHolders[topHolders.length - 1] ? topHolders[topHolders.length - 1].curr : 0;
+            const maxVal = topHolders[0] ? topHolders[0].last : 0;
+            const minVal = topHolders[topHolders.length - 1] ? topHolders[topHolders.length - 1].last : 0;
             const useLogarithmicScale = (minVal > 0 && (maxVal / minVal) > 1000);
 
             if(topChart) topChart.destroy();
@@ -440,7 +473,7 @@
                     labels: topHolders.map(t => t.name),
                     datasets: [{
                         label: `Jumlah Posisi`,
-                        data: topHolders.map(t => t.curr),
+                        data: topHolders.map(t => t.last),
                         backgroundColor: ['#4f46e5', '#6366f1', '#818cf8', '#93c5fd', '#bfdbfe'],
                         borderRadius: 5,
                         barThickness: 24
@@ -460,7 +493,7 @@
                             }
                         }
                     },
-                    interaction: { mode: 'index', intersect: false }, // Mengizinkan hover area di sekitar bar agar deteksi angka kecil sensitif
+                    interaction: { mode: 'index', intersect: false }, 
                     scales: {
                         x: {
                             type: useLogarithmicScale ? 'logarithmic' : 'linear',
