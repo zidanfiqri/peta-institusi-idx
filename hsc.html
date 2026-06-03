@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holding Share Composition - KSEI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .card { background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.025); border: 1px solid #e2e8f0; padding: 1.5rem; }
+        .select2-container--default .select2-selection--single { height: 42px; border-color: #cbd5e1; border-radius: 0.5rem; padding: 6px 12px; }
+        .select2-container--default .select2-selection--single .select2-selection__arrow { top: 8px; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-chart-pie text-2xl mr-3 text-indigo-400"></i>
+                        <span class="font-bold text-xl tracking-tight hidden md:block">Peta Institusi IDX</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="index.html" class="hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Pergerakan Institusi</a>
+                        <a href="smart_money_tracker.html" class="hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Smart Money Radar</a>
+                        <a href="hsc.html" class="bg-indigo-700 px-3 py-2 rounded-md text-sm font-bold border border-indigo-500">Holding Composition (HSC)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="w-full md:w-1/3">
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Pilih Emiten</label>
+                <select id="emiten-select" class="w-full"></select>
+            </div>
+            <div class="w-full md:w-1/4">
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Periode Posisi</label>
+                <select id="month-select" class="w-full border border-slate-300 rounded-lg p-2 h-[42px] bg-white text-sm focus:ring-indigo-500 focus:border-indigo-500"></select>
+            </div>
+            <div class="w-full md:w-auto">
+                <div class="bg-slate-100 p-1 rounded-lg inline-flex">
+                    <button id="unit-lembar" class="px-4 py-1.5 rounded bg-white text-indigo-700 font-bold text-sm shadow border border-slate-200" onclick="setUnit('lembar')">Lembar</button>
+                    <button id="unit-lot" class="px-4 py-1.5 rounded text-slate-500 font-medium text-sm hover:text-slate-700 transition-colors" onclick="setUnit('lot')">Lot</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="dashboard-content" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="card flex flex-col justify-center items-center text-center bg-gradient-to-b from-white to-slate-50 border-t-4 border-indigo-500">
+                    <h3 class="text-slate-500 font-semibold text-sm uppercase tracking-wider">Total Saham Tercatat (Scripless)</h3>
+                    <p class="text-4xl font-extrabold text-slate-800 mt-3" id="total-saham">-</p>
+                    <span class="text-xs text-slate-400 mt-2 font-medium bg-slate-100 px-2 py-1 rounded" id="lbl-unit">Satuan: Lembar</span>
+                </div>
+                
+                <div class="card lg:col-span-2 flex items-center justify-between">
+                    <div class="w-1/2 pr-4 border-r border-slate-100">
+                        <div class="mb-4">
+                            <p class="text-xs font-bold text-slate-400 uppercase">Investor Lokal</p>
+                            <p class="text-2xl font-bold text-blue-600" id="val-lokal">-</p>
+                            <p class="text-sm font-semibold text-blue-800/60" id="pct-lokal">-</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Investor Asing</p>
+                            <p class="text-2xl font-bold text-red-500" id="val-asing">-</p>
+                            <p class="text-sm font-semibold text-red-800/60" id="pct-asing">-</p>
+                        </div>
+                    </div>
+                    <div class="w-1/2 relative h-48">
+                        <canvas id="chart-donut-main"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6 border-l-4 border-sky-500">
+                <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-timeline text-sky-500 mr-2"></i>Tren Historis Kepemilikan (Lokal vs Asing)</h2>
+                <div class="relative h-64 w-full">
+                    <canvas id="chart-trend-history"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="card border-t-4 border-blue-500">
+                    <h2 class="text-md font-bold text-slate-800 mb-4">Struktur Kepemilikan Lokal</h2>
+                    <div class="relative h-64 w-full">
+                        <canvas id="chart-bar-lokal"></canvas>
+                    </div>
+                </div>
+                <div class="card border-t-4 border-red-500">
+                    <h2 class="text-md font-bold text-slate-800 mb-4">Struktur Kepemilikan Asing</h2>
+                    <div class="relative h-64 w-full">
+                        <canvas id="chart-bar-asing"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6">
+                <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3">
+                    <h2 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-users-viewfinder text-indigo-500 mr-2"></i>Daftar Identitas Pemegang Saham Mayoritas (>1% & >5%)</h2>
+                    <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-bold border border-amber-200">Data PDF Extractor</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50 text-slate-600 font-semibold text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="px-4 py-3 text-left">Nama Pemegang Saham</th>
+                                <th class="px-4 py-3 text-center">Tipe Identitas</th>
+                                <th class="px-4 py-3 text-right">Jumlah Saham (Lbr)</th>
+                                <th class="px-4 py-3 text-right">Persentase (%)</th>
+                                <th class="px-4 py-3 text-center">Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-specific-holders" class="bg-white divide-y divide-slate-200 font-medium">
+                            <tr>
+                                <td colspan="5" class="text-center py-8 text-slate-400">
+                                    <i class="fa-regular fa-folder-open text-3xl mb-2 block"></i>
+                                    Menunggu sinkronisasi data dari file PDF KSEI (hsc_investors.json)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="welcome-message" class="text-center py-24">
+            <i class="fa-solid fa-layer-group text-6xl text-slate-300 mb-4 animate-pulse"></i>
+            <h2 class="text-2xl font-bold text-slate-600">Holding Share Composition</h2>
+            <p class="text-slate-500 mt-2 max-w-md mx-auto text-sm">Pilih kode emiten untuk membedah komposisi dan struktur kepemilikan saham.</p>
+        </div>
+        
+        <div class="mt-12 pt-6 border-t border-slate-200 text-center">
+            <p class="text-xs text-slate-400 font-medium tracking-wide">
+                <i class="fa-solid fa-chart-line text-indigo-400 mr-1"></i> Created by Zidan Fikri - Trimegah Sekuritas
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const INSTITUTION_MAP = {
+            'Local IS': 'Asuransi', 'Local CP': 'Korporat', 'Local PF': 'Dana Pensiun', 'Local IB': 'Bank', 'Local ID': 'Individual', 'Local MF': 'Reksadana', 'Local SC': 'Sekuritas', 'Local FD': 'Yayasan', 'Local OT': 'Lainnya',
+            'Foreign IS': 'Asuransi', 'Foreign CP': 'Korporat', 'Foreign PF': 'Dana Pensiun', 'Foreign IB': 'Bank', 'Foreign ID': 'Individual', 'Foreign MF': 'Reksadana', 'Foreign SC': 'Sekuritas', 'Foreign FD': 'Yayasan', 'Foreign OT': 'Lainnya'
+        };
+
+        const LOCAL_KEYS = ['Local IS', 'Local CP', 'Local PF', 'Local IB', 'Local ID', 'Local MF', 'Local SC', 'Local FD', 'Local OT'];
+        const FOREIGN_KEYS = ['Foreign IS', 'Foreign CP', 'Foreign PF', 'Foreign IB', 'Foreign ID', 'Foreign MF', 'Foreign SC', 'Foreign FD', 'Foreign OT'];
+        
+        let allData = {};
+        let currentUnit = 'lembar'; 
+        let currentEmiten = '';
+        let donutChart, lineChart, barLokalChart, barAsingChart;
+
+        const formatNum = (num) => new Intl.NumberFormat('id-ID').format(Math.round(num));
+
+        function setUnit(unit) {
+            currentUnit = unit;
+            if (unit === 'lembar') {
+                $('#unit-lembar').addClass('bg-white text-indigo-700 shadow border-slate-200').removeClass('text-slate-500 hover:text-slate-700 bg-transparent');
+                $('#unit-lot').removeClass('bg-white text-indigo-700 shadow border-slate-200').addClass('text-slate-500 hover:text-slate-700 bg-transparent');
+                $('#lbl-unit').text('Satuan: Lembar');
+            } else {
+                $('#unit-lot').addClass('bg-white text-indigo-700 shadow border-slate-200').removeClass('text-slate-500 hover:text-slate-700 bg-transparent');
+                $('#unit-lembar').removeClass('bg-white text-indigo-700 shadow border-slate-200').addClass('text-slate-500 hover:text-slate-700 bg-transparent');
+                $('#lbl-unit').text('Satuan: Lot (1 Lot = 100 Lbr)');
+            }
+            if(currentEmiten) renderDashboard();
+        }
+
+        $(document).ready(function() {
+            fetch('data.json')
+                .then(res => res.json())
+                .then(data => {
+                    allData = data;
+                    const select = $('#emiten-select');
+                    Object.keys(data).sort().forEach(e => select.append(new Option(e, e)));
+                    select.select2({ placeholder: "Cari Emiten...", allowClear: true });
+                });
+
+            $('#emiten-select').on('change', function() {
+                currentEmiten = $(this).val();
+                if(!currentEmiten) {
+                    $('#dashboard-content').addClass('hidden');
+                    $('#welcome-message').removeClass('hidden');
+                    return;
+                }
+                populateMonths();
+                renderDashboard();
+            });
+
+            $('#month-select').on('change', renderDashboard);
+        });
+
+        function populateMonths() {
+            const records = allData[currentEmiten];
+            const mSelect = $('#month-select');
+            mSelect.empty();
+            records.forEach((r, idx) => mSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1)));
+        }
+
+        function renderDashboard() {
+            $('#welcome-message').addClass('hidden');
+            $('#dashboard-content').removeClass('hidden');
+
+            const targetMonth = $('#month-select').val();
+            const records = allData[currentEmiten];
+            const currentData = records.find(r => r.Date === targetMonth);
+            const divisor = currentUnit === 'lot' ? 100 : 1;
+
+            let locTotal = 0, forTotal = 0;
+            let locDataArr = [], forDataArr = [];
+
+            LOCAL_KEYS.forEach(k => {
+                let val = (currentData[k] || 0) / divisor;
+                locTotal += val;
+                locDataArr.push({label: INSTITUTION_MAP[k], value: val});
+            });
+
+            FOREIGN_KEYS.forEach(k => {
+                let val = (currentData[k] || 0) / divisor;
+                forTotal += val;
+                forDataArr.push({label: INSTITUTION_MAP[k], value: val});
+            });
+
+            const grandTotal = locTotal + forTotal;
+            $('#total-saham').text(formatNum(grandTotal));
+            
+            let pLoc = grandTotal > 0 ? ((locTotal/grandTotal)*100).toFixed(2) : 0;
+            let pFor = grandTotal > 0 ? ((forTotal/grandTotal)*100).toFixed(2) : 0;
+
+            $('#val-lokal').text(formatNum(locTotal));
+            $('#pct-lokal').text(`${pLoc}%`);
+            $('#val-asing').text(formatNum(forTotal));
+            $('#pct-asing').text(`${pFor}%`);
+
+            renderCharts(locTotal, forTotal, locDataArr, forDataArr, records, divisor);
+        }
+
+        function renderCharts(locTotal, forTotal, locArr, forArr, records, divisor) {
+            Chart.defaults.font.family = 'Inter';
+            
+            // 1. DONUT
+            if(donutChart) donutChart.destroy();
+            donutChart = new Chart(document.getElementById('chart-donut-main'), {
+                type: 'doughnut',
+                data: { labels: ['Lokal', 'Asing'], datasets: [{ data: [locTotal, forTotal], backgroundColor: ['#2563eb', '#ef4444'], borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: {usePointStyle: true, boxWidth: 8} } }, cutout: '75%' }
+            });
+
+            // 2. LINE CHART (HISTORIS %)
+            const labels = records.map(r => r.Date);
+            const dLoc = records.map(r => {
+                let l = LOCAL_KEYS.reduce((s, k) => s + (r[k]||0), 0);
+                let f = FOREIGN_KEYS.reduce((s, k) => s + (r[k]||0), 0);
+                return (l+f) > 0 ? (l/(l+f)*100).toFixed(2) : 0;
+            });
+            const dFor = records.map(r => {
+                let l = LOCAL_KEYS.reduce((s, k) => s + (r[k]||0), 0);
+                let f = FOREIGN_KEYS.reduce((s, k) => s + (r[k]||0), 0);
+                return (l+f) > 0 ? (f/(l+f)*100).toFixed(2) : 0;
+            });
+
+            if(lineChart) lineChart.destroy();
+            lineChart = new Chart(document.getElementById('chart-trend-history'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Proporsi Lokal (%)', data: dLoc, borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.1)', fill: true, tension: 0.4 },
+                        { label: 'Proporsi Asing (%)', data: dFor, borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', fill: true, tension: 0.4 }
+                    ]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { tooltip: { mode: 'index', intersect: false } } }
+            });
+
+            // 3. BAR LOKAL (Sort by Size)
+            locArr.sort((a,b) => b.value - a.value);
+            if(barLokalChart) barLokalChart.destroy();
+            barLokalChart = new Chart(document.getElementById('chart-bar-lokal'), {
+                type: 'bar',
+                data: { labels: locArr.map(d=>d.label), datasets: [{ label: 'Lokal', data: locArr.map(d=>d.value), backgroundColor: '#3b82f6', borderRadius: 4 }] },
+                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { callback: v => formatNum(v) } } } }
+            });
+
+            // 4. BAR ASING (Sort by Size)
+            forArr.sort((a,b) => b.value - a.value);
+            if(barAsingChart) barAsingChart.destroy();
+            barAsingChart = new Chart(document.getElementById('chart-bar-asing'), {
+                type: 'bar',
+                data: { labels: forArr.map(d=>d.label), datasets: [{ label: 'Asing', data: forArr.map(d=>d.value), backgroundColor: '#f87171', borderRadius: 4 }] },
+                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { callback: v => formatNum(v) } } } }
+            });
+        }
+    </script>
+</body>
+</html>
