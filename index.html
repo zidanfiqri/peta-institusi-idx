@@ -69,16 +69,23 @@
             </div>
         </div>
 
-        <div class="card mb-6 border-l-4 border-emerald-500 shadow-md" id="radar-section">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-2">
+<!-- FITUR BARU: RADAR MASSIVE INFLOW (DENGAN TOGGLE MINIMIZE) -->
+        <div class="card mb-6 border-l-4 border-emerald-500 shadow-md transition-all" id="radar-section">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-3 cursor-pointer group" onclick="toggleRadar()">
                 <div>
-                    <h2 class="text-lg font-semibold text-gray-900"><i class="fa-solid fa-satellite-dish text-emerald-500 mr-2 animate-pulse"></i>Radar Massive Inflow Asing</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors"><i class="fa-solid fa-satellite-dish text-emerald-500 mr-2 animate-pulse"></i>Radar Massive Inflow Asing</h2>
                     <p class="text-xs text-gray-500 mt-1">Sistem otomatis menyeleksi 10 emiten dengan akumulasi dana asing terbesar.</p>
                 </div>
-                <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded border border-emerald-200" id="radar-period">Periode: -</span>
+                <div class="flex items-center gap-4 self-end md:self-auto">
+                    <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded border border-emerald-200" id="radar-period">Periode: -</span>
+                    <div class="bg-gray-100 hover:bg-emerald-100 p-2 rounded-full transition-colors">
+                        <i id="radar-toggle-icon" class="fa-solid fa-chevron-up text-gray-500"></i>
+                    </div>
+                </div>
             </div>
             
-            <div class="overflow-x-auto">
+            <!-- Konten tabel dibungkus dalam div khusus agar bisa di-slide -->
+            <div id="radar-content" class="overflow-x-auto transition-all duration-300">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50 text-gray-700 font-semibold">
                         <tr>
@@ -613,6 +620,19 @@
                 }
             });
         }
+        // Fungsi untuk Toggle Minimize/Maximize Radar
+        window.toggleRadar = function() {
+            const content = $('#radar-content');
+            const icon = $('#radar-toggle-icon');
+            
+            if (content.is(':visible')) {
+                content.slideUp(300);
+                icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            } else {
+                content.slideDown(300);
+                icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            }
+        };
     </script>
 </body>
 </html>
