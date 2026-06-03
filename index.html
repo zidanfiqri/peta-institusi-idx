@@ -38,19 +38,13 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <div class="card mb-6">
+        <div class="card mb-6 border-b-4 border-indigo-500">
             <h2 class="text-lg font-semibold mb-4 border-b pb-2 text-indigo-900">
-                <i class="fa-solid fa-sliders text-indigo-500 mr-2"></i>Parameter Analisis &amp; Konversi Satuan
+                <i class="fa-solid fa-sliders text-indigo-500 mr-2"></i>Parameter Analisis Global
             </h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-end">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Emiten (Kode Saham):</label>
-                    <select id="emiten-select" class="w-full">
-                        <option value="">-- Pilih Emiten --</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Rentang Periode Analisis:</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Rentang Periode:</label>
                     <div class="flex items-center gap-2">
                         <select id="start-month-select" class="w-full border border-gray-300 rounded-md p-2 h-[42px] bg-white focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         </select>
@@ -66,6 +60,38 @@
                         <button id="unit-lot" class="rounded text-gray-600 font-medium text-sm transition-all" onclick="setUnit('lot')">Lot</button>
                     </div>
                 </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Emiten (Analisis Detail):</label>
+                    <select id="emiten-select" class="w-full">
+                        <option value="">-- Ketik/Pilih Emiten --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-6 border-l-4 border-emerald-500 shadow-md" id="radar-section">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-2">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900"><i class="fa-solid fa-satellite-dish text-emerald-500 mr-2 animate-pulse"></i>Radar Massive Inflow Asing</h2>
+                    <p class="text-xs text-gray-500 mt-1">Sistem otomatis menyeleksi 10 emiten dengan akumulasi dana asing terbesar.</p>
+                </div>
+                <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded border border-emerald-200" id="radar-period">Periode: -</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
+                    <thead class="bg-gray-50 text-gray-700 font-semibold">
+                        <tr>
+                            <th class="px-4 py-3 text-center w-16">Rank</th>
+                            <th class="px-4 py-3 text-left">Kode Emiten</th>
+                            <th class="px-4 py-3 text-right">Net Foreign Inflow</th>
+                            <th class="px-4 py-3 text-center w-32">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="radar-table-body" class="bg-white divide-y divide-gray-200">
+                        <tr><td colspan="4" class="text-center py-6 text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Memindai data seluruh emiten...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -76,7 +102,7 @@
                     <p class="text-3xl font-bold mt-2" id="stat-total-saham">-</p>
                 </div>
                 <div class="card bg-gradient-to-br from-emerald-600 to-emerald-800 text-white shadow-md">
-                    <h3 class="text-emerald-100 text-sm font-medium">Net Foreign Flow Kategori</h3>
+                    <h3 class="text-emerald-100 text-sm font-medium">Net Foreign Flow Total</h3>
                     <p class="text-3xl font-bold mt-2" id="stat-net-flow">-</p>
                 </div>
                 <div class="card bg-white border-l-4 border-amber-500 shadow-sm">
@@ -99,7 +125,7 @@
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-3">
                     <div>
                         <h2 class="text-lg font-semibold text-gray-900"><i class="fa-solid fa-money-bill-transfer text-emerald-500 mr-2"></i>Matriks Perubahan Posisi Kepemilikan</h2>
-                        <p class="text-xs text-gray-500 mt-0.5">Analisis komparatif pergerakan saham <span class="text-emerald-600 font-bold">(Masuk)</span> dan <span class="text-red-600 font-bold">(Keluar)</span>.</p>
+                        <p class="text-xs text-gray-500 mt-0.5">Analisis komparatif detail pergerakan kategori institusi.</p>
                     </div>
                     <span class="self-start bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded border border-indigo-200" id="table-period">Periode: -</span>
                 </div>
@@ -152,10 +178,10 @@
             </div>
         </div>
 
-<div id="welcome-message" class="text-center py-24">
-            <i class="fa-solid fa-magnifying-glass-chart text-7xl text-gray-300 mb-4 animate-pulse"></i>
-            <h2 class="text-2xl font-bold text-gray-600">Sistem Siap Mengeksekusi Proyek</h2>
-            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Silakan ketik atau pilih salah satu kode emiten saham di atas untuk mengaktifkan pemetaan kepemilikan saham.</p>
+        <div id="welcome-message" class="text-center py-16">
+            <i class="fa-solid fa-magnifying-glass-chart text-6xl text-gray-300 mb-4 animate-pulse"></i>
+            <h2 class="text-xl font-bold text-gray-600">Pilih Emiten untuk Analisis Mendalam</h2>
+            <p class="text-gray-500 mt-2 max-w-md mx-auto text-sm">Klik tombol <b>Analisis</b> pada tabel Radar di atas, atau cari secara manual melalui menu dropdown.</p>
         </div>
 
         <div class="mt-12 pt-6 border-t border-gray-200 text-center">
@@ -192,15 +218,14 @@
         const FOREIGN_KEYS = ['Foreign IS', 'Foreign CP', 'Foreign PF', 'Foreign IB', 'Foreign ID', 'Foreign MF', 'Foreign SC', 'Foreign FD', 'Foreign OT'];
         
         let allData = {};
+        let allAvailableMonths = [];
         let propChart = null;
         let topChart = null;
         let currentUnit = 'lembar'; 
         let currentEmitenGlobal = '';
-        let currentStartMonthGlobal = '';
-        let currentEndMonthGlobal = '';
         
         let globalRawChanges = []; 
-        let globalSelectedMonths = []; // Menyimpan deret bulan yang akan ditampilkan
+        let globalSelectedMonths = []; 
 
         const formatNumber = (num) => {
             return new Intl.NumberFormat('id-ID').format(Math.round(num));
@@ -221,8 +246,9 @@
                 $('#unit-lot').addClass('bg-indigo-600 text-white shadow-sm').removeClass('text-gray-600');
                 $('#unit-lembar').removeClass('bg-indigo-600 text-white shadow-sm').addClass('text-gray-600');
             }
+            updateRadar();
             if(currentEmitenGlobal) {
-                updateDashboard(currentEmitenGlobal, currentStartMonthGlobal, currentEndMonthGlobal);
+                updateDashboard(currentEmitenGlobal);
             }
         }
 
@@ -231,18 +257,37 @@
                 .then(response => response.json())
                 .then(data => {
                     allData = data;
+                    
+                    // Ekstraksi bulan yang tersedia secara global
+                    const monthSet = new Set();
+                    Object.values(data).forEach(records => records.forEach(r => monthSet.add(r.Date)));
+                    allAvailableMonths = Array.from(monthSet).sort();
+
+                    // Inisialisasi dropdown bulan secara otomatis dengan jarak default 3 bulan (misal: Maret ke Mei)
+                    const sSelect = $('#start-month-select');
+                    const eSelect = $('#end-month-select');
+                    
+                    allAvailableMonths.forEach((m, idx) => {
+                        sSelect.append(new Option(m, m, false, idx === Math.max(0, allAvailableMonths.length - 3))); 
+                        eSelect.append(new Option(m, m, false, idx === allAvailableMonths.length - 1));
+                    });
+
+                    // Inisialisasi dropdown Emiten
                     const emitens = Object.keys(data).sort();
                     const select = $('#emiten-select');
                     emitens.forEach(e => { select.append(new Option(e, e)); });
                     
                     select.select2({
-                        placeholder: "Masukkan kode emiten (Contoh: BBRI, GOTO, RAJA)",
+                        placeholder: "Masukkan kode emiten",
                         allowClear: true
                     });
+
+                    // Trigger Radar pertama kali
+                    updateRadar();
                 })
                 .catch(err => {
-                    console.error("Gagal memuat struktur berkas data.json:", err);
-                    $('#welcome-message').html('<div class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-5xl mb-4"></i><br/>Gagal memuat berkas database harian data.json.</div>');
+                    console.error("Gagal memuat:", err);
+                    $('#radar-table-body').html('<tr><td colspan="4" class="text-center py-4 text-red-500">Gagal memuat database JSON.</td></tr>');
                 });
 
             $('#emiten-select').on('change', function() {
@@ -254,60 +299,122 @@
                     return;
                 }
                 currentEmitenGlobal = emiten;
-                updateDashboard(emiten, null, null);
+                updateDashboard(emiten);
             });
 
+            // Trigger Radar dan Dashboard jika bulan dirubah
             $('#start-month-select, #end-month-select').on('change', function() {
+                updateRadar();
                 if(currentEmitenGlobal) {
-                    updateDashboard(currentEmitenGlobal, $('#start-month-select').val(), $('#end-month-select').val());
+                    updateDashboard(currentEmitenGlobal);
                 }
             });
         });
 
-        function updateDashboard(emiten, startMonth = null, endMonth = null) {
-            $('#welcome-message').addClass('hidden');
-            $('#dashboard-content').removeClass('hidden');
+        // 📡 LOGIKA RADAR MASSIVE INFLOW 
+        function updateRadar() {
+            let startMonth = $('#start-month-select').val();
+            let endMonth = $('#end-month-select').val();
+            if (!startMonth || !endMonth) return;
 
-            const records = allData[emiten];
-            if(!records || records.length === 0) return;
-
-            if(!startMonth || !endMonth) {
-                const sSelect = $('#start-month-select');
-                const eSelect = $('#end-month-select');
-                sSelect.empty();
-                eSelect.empty();
-                
-                records.forEach((r, idx) => {
-                    sSelect.append(new Option(r.Date, r.Date, false, idx === Math.max(0, records.length - 2)));
-                    eSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1));
-                });
-                
-                startMonth = records[Math.max(0, records.length - 2)].Date;
-                endMonth = records[records.length - 1].Date;
-            }
-
-            let startIndex = records.findIndex(r => r.Date === startMonth);
-            let endIndex = records.findIndex(r => r.Date === endMonth);
-
-            // Jika user memilih bulan awal yang lebih maju daripada bulan akhir, otomatis tukar posisinya
-            if (startIndex > endIndex) {
-                let temp = startIndex;
-                startIndex = endIndex;
-                endIndex = temp;
-                startMonth = records[startIndex].Date;
-                endMonth = records[endIndex].Date;
+            // Proteksi agar startMonth selalu di awal waktu
+            if(allAvailableMonths.indexOf(startMonth) > allAvailableMonths.indexOf(endMonth)) {
+                let temp = startMonth;
+                startMonth = endMonth;
+                endMonth = temp;
                 $('#start-month-select').val(startMonth);
                 $('#end-month-select').val(endMonth);
             }
 
-            currentStartMonthGlobal = startMonth;
-            currentEndMonthGlobal = endMonth;
+            $('#radar-period').text(`Rentang: ${startMonth} s/d ${endMonth}`);
 
-            // Ekstrak semua bulan yang berada di antara rentang terpilih
+            const divisor = currentUnit === 'lot' ? 100 : 1;
+            let radarData = [];
+
+            // Pindai (Scan) ke seluruh 1000+ emiten
+            for (const [emiten, records] of Object.entries(allData)) {
+                const startRec = records.find(r => r.Date === startMonth);
+                const endRec = records.find(r => r.Date === endMonth);
+                
+                if (startRec && endRec) {
+                    let startForeign = 0;
+                    let endForeign = 0;
+                    
+                    FOREIGN_KEYS.forEach(k => {
+                        startForeign += (startRec[k] || 0);
+                        endForeign += (endRec[k] || 0);
+                    });
+                    
+                    const netFlow = (endForeign - startForeign) / divisor;
+                    
+                    // Hanya tangkap yang mengalami INFLOW (Masuk)
+                    if (netFlow > 0) { 
+                        radarData.push({ emiten, netFlow });
+                    }
+                }
+            }
+
+            // Urutkan dari yang terbesar ke terkecil
+            radarData.sort((a, b) => b.netFlow - a.netFlow);
+            const top10 = radarData.slice(0, 10);
+
+            const tbody = $('#radar-table-body');
+            tbody.empty();
+
+            if(top10.length === 0) {
+                tbody.append('<tr><td colspan="4" class="text-center py-6 text-gray-500 font-medium">Tidak ada pergerakan inflow asing signifikan pada periode ini.</td></tr>');
+                return;
+            }
+
+            top10.forEach((item, index) => {
+                let rankClass = index < 3 ? 'text-emerald-600 font-extrabold text-lg' : 'text-gray-500 font-bold';
+                let rowBg = index < 3 ? 'bg-emerald-50/30' : '';
+                
+                tbody.append(`
+                    <tr class="hover:bg-indigo-50 transition-colors ${rowBg}">
+                        <td class="px-4 py-3 text-center ${rankClass}">${index + 1}</td>
+                        <td class="px-4 py-3 font-extrabold text-indigo-800 text-base">${item.emiten}</td>
+                        <td class="px-4 py-3 text-right font-mono text-emerald-600 font-bold">+${formatNumber(item.netFlow)}</td>
+                        <td class="px-4 py-3 text-center">
+                            <button onclick="jumpToEmiten('${item.emiten}')" class="bg-white border border-indigo-200 text-indigo-700 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-indigo-600 hover:text-white transition-all shadow-sm">
+                                <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> Analisis
+                            </button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        // Fungsi Pintasan Tombol Radar
+        window.jumpToEmiten = function(emiten) {
+            $('#emiten-select').val(emiten).trigger('change');
+            document.getElementById('dashboard-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function updateDashboard(emiten) {
+            $('#welcome-message').addClass('hidden');
+            $('#dashboard-content').removeClass('hidden');
+
+            const startMonth = $('#start-month-select').val();
+            const endMonth = $('#end-month-select').val();
+
+            const records = allData[emiten];
+            if(!records || records.length === 0) return;
+
+            let startIndex = records.findIndex(r => r.Date === startMonth);
+            let endIndex = records.findIndex(r => r.Date === endMonth);
+
+            // Fallback jika emiten baru IPO dan tidak punya data di bulan awal
+            if (startIndex === -1) startIndex = 0; 
+            if (endIndex === -1) endIndex = records.length - 1; 
+
             const rangeRecords = records.slice(startIndex, endIndex + 1);
             globalSelectedMonths = rangeRecords.map(r => r.Date);
 
-            $('#table-period').text(`Rentang Analisis: ${startMonth} s/d ${endMonth}`);
+            // Jika range kosong atau rusak
+            if (globalSelectedMonths.length === 0) return;
+
+            $('#table-period').text(`Rentang Analisis: ${globalSelectedMonths[0]} s/d ${globalSelectedMonths[globalSelectedMonths.length-1]}`);
 
             const divisor = currentUnit === 'lot' ? 100 : 1;
 
@@ -320,7 +427,6 @@
 
             Object.keys(INSTITUTION_MAP).forEach(key => {
                 let values = [];
-                // Looping untuk mendapatkan nilai per bulan pada rentang tersebut
                 rangeRecords.forEach(r => {
                     values.push((r[key] || 0) / divisor);
                 });
@@ -343,7 +449,7 @@
                     name: INSTITUTION_MAP[key],
                     isLocal: LOCAL_KEYS.includes(key),
                     values: values,
-                    last: lastVal, // Disimpan untuk logika sorting size
+                    last: lastVal, 
                     diff: diff
                 });
             });
@@ -353,7 +459,7 @@
             const netForeignFlow = totalForeignShares - totalForeignPrevShares;
             const flowSign = netForeignFlow > 0 ? '+' : '';
             const flowClass = netForeignFlow > 0 ? 'text-emerald-100' : (netForeignFlow < 0 ? 'text-red-200' : 'text-white');
-            $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span> <span class="text-xs font-normal text-white/60 block mt-0.5">(Net Foreign Arus Rentang)</span>`);
+            $('#stat-net-flow').html(`<span class="${flowClass}">${flowSign}${formatShortNumber(netForeignFlow)}</span>`);
 
             let pctLocal = ((totalLocalShares / totalSahamMurni) * 100).toFixed(2);
             let pctForeign = ((totalForeignShares / totalSahamMurni) * 100).toFixed(2);
@@ -368,7 +474,6 @@
             const originFilter = $('#filter-origin').val();
             const sortFilter = $('#filter-sort').val();
             
-            // 1. GENERATE DINAMIS HEADER TABEL 
             const thead = $('#tbl-head');
             let thHtml = `<tr>
                 <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md whitespace-nowrap">Kategori Institusi</th>`;
@@ -381,7 +486,6 @@
             </tr>`;
             thead.html(thHtml);
 
-            // 2. SORTING & FILTERING
             const tbody = $('#flow-table-body');
             tbody.empty();
 
@@ -406,7 +510,6 @@
                 return;
             }
 
-            // 3. RENDER BARIS BODY
             workingData.forEach(c => {
                 let diffClass = c.diff > 0 ? 'text-emerald-600' : (c.diff < 0 ? 'text-red-600' : 'text-gray-500');
                 let diffIcon = c.diff > 0 ? '<i class="fa-solid fa-square-plus mr-1"></i>' : (c.diff < 0 ? '<i class="fa-solid fa-square-minus mr-1"></i>' : '-');
@@ -419,7 +522,6 @@
                 let trHtml = `<tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-3.5 font-semibold text-gray-900 whitespace-nowrap">${c.name}</td>`;
                 
-                // Masukkan nilai untuk setiap bulan dalam rentang yang dipilih
                 c.values.forEach(v => {
                     trHtml += `<td class="px-6 py-3.5 text-right text-gray-500 font-mono whitespace-nowrap">${formatNumber(v)}</td>`;
                 });
@@ -463,7 +565,6 @@
                 }
             });
 
-            // Grafik Top 5 menggunakan data terakhir (last) dari rentang yang dipilih
             const topHolders = [...globalRawChanges].sort((a, b) => b.last - a.last).slice(0, 5);
             
             const maxVal = topHolders[0] ? topHolders[0].last : 0;
