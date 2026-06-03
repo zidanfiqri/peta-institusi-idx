@@ -6,13 +6,13 @@
     <title>1% Ownership - IDX</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Vue.js untuk reaktivitas UI -->
+    <!-- Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- PapaParse untuk CSV -->
+    <!-- PapaParse -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <!-- Vis.js untuk Network Graph -->
+    <!-- Vis.js -->
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-    <!-- Phosphor Icons (Sesuai di video) -->
+    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -21,9 +21,13 @@
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #E5E7EB; border-radius: 20px; }
-        
-        /* Vis Network Container */
         #network-graph { width: 100%; height: 100%; outline: none; }
+        
+        /* Modal Animation */
+        .modal-enter-active, .modal-leave-active { transition: opacity 0.3s ease; }
+        .modal-enter-from, .modal-leave-to { opacity: 0; }
+        .modal-content-enter-active { transition: all 0.3s ease; }
+        .modal-content-enter-from { opacity: 0; transform: translateY(-20px) scale(0.95); }
     </style>
 </head>
 <body>
@@ -35,23 +39,18 @@
                     <span class="bg-gray-800 text-white text-xs px-1.5 py-0.5 rounded">ID</span> IDX
                     <span class="text-gray-400 font-normal ml-1">· 1% Ownership</span>
                 </div>
-                <button class="flex items-center gap-1 px-2 py-1 text-sm border border-gray-200 rounded text-gray-600 hover:bg-gray-50">
+                <button @click="showGuide = true" class="flex items-center gap-1 px-3 py-1.5 text-sm border border-gray-200 rounded text-gray-600 hover:bg-gray-50 transition-colors font-medium">
                     <i class="ph ph-book-open"></i> Guide
                 </button>
             </div>
             
-            <div class="flex items-center gap-2 text-xs font-medium text-gray-500">
-                <img src="https://ui-avatars.com/api/?name=Zidan+Fikri&background=0D8ABC&color=fff&size=24" class="rounded-full" alt="User">
-                <span class="text-gray-400">kangritel · <span class="text-emerald-500">Klinik Penyesalan</span></span>
-            </div>
-
-            <div class="flex items-center gap-4 text-xs text-gray-400 font-medium">
+            <div class="flex items-center gap-4 text-xs text-gray-500 font-medium tracking-wide">
                 <span>Per 03 Jun 2026</span>
                 <span>·</span>
                 <span>Sumber: KSEI</span>
-                <div class="flex gap-2">
-                    <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><i class="ph ph-question"></i></button>
-                    <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><i class="ph ph-moon"></i></button>
+                <div class="flex gap-2 ml-2">
+                    <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><i class="ph ph-question text-base"></i></button>
+                    <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><i class="ph ph-moon text-base"></i></button>
                 </div>
             </div>
         </header>
@@ -81,38 +80,36 @@
         <main class="flex-1 flex overflow-hidden bg-white">
             
             <!-- LEFT PANEL (LIST SAHAM) -->
-            <div class="w-[450px] border-r border-gray-200 flex flex-col shrink-0">
-                <!-- Search & Filters -->
-                <div class="p-3 border-b border-gray-200 bg-gray-50/50">
+            <div class="w-[400px] border-r border-gray-200 flex flex-col shrink-0 bg-white">
+                <div class="p-3 border-b border-gray-200">
                     <div class="relative">
-                        <i class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
+                        <i class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-lg"></i>
                         <input type="text" v-model="searchQuery" placeholder="Cari saham, emiten, atau pemegang saham..." 
-                               class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                               class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-emerald-500 bg-gray-50">
                     </div>
                 </div>
 
-                <!-- List Items -->
                 <div class="flex-1 overflow-y-auto custom-scrollbar p-2">
                     <div v-if="isLoading" class="text-center py-10 text-sm text-gray-400">Menganalisis Data KSEI...</div>
                     
                     <div v-for="stock in filteredStocks" :key="stock.kode" 
                          @click="selectStock(stock)"
-                         :class="['p-3 rounded-lg cursor-pointer border mb-2 transition-all', 
-                                  selectedStock?.kode === stock.kode ? 'border-emerald-500 bg-emerald-50/30 shadow-sm' : 'border-transparent hover:border-gray-200 hover:bg-gray-50']">
+                         :class="['p-3 cursor-pointer border-b transition-all', 
+                                  selectedStock?.kode === stock.kode ? 'bg-emerald-50/30' : 'hover:bg-gray-50 border-gray-100']">
                         <div class="flex justify-between items-start mb-2">
-                            <div class="flex items-center gap-2">
-                                <span class="bg-emerald-600 text-white text-xs font-bold px-1.5 py-0.5 rounded">{{ stock.kode }}</span>
-                                <span class="text-sm font-semibold text-gray-800 line-clamp-1">{{ stock.nama }}</span>
+                            <div class="flex items-center gap-2 flex-1 mr-2">
+                                <span class="bg-emerald-600 text-white text-xs font-bold px-1.5 py-0.5 rounded tracking-wide">{{ stock.kode }}</span>
+                                <span class="text-sm font-semibold text-gray-800 line-clamp-1" :title="stock.nama">{{ stock.nama }}</span>
                             </div>
-                            <!-- Status Kepemilikan (Mayoritas, Oligopoli, dll) -->
-                            <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide" 
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shrink-0" 
                                   :class="getStatusColor(stock.status)">
                                 {{ stock.status }} {{ stock.totalPersen.toFixed(2) }}%
                             </span>
                         </div>
-                        <div class="flex items-center gap-3 text-xs text-gray-500">
-                            <span class="bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 font-medium">CCS {{ stock.ccs }}</span>
-                            <span>{{ stock.sektor }}</span>
+                        <div class="flex items-center gap-2 text-[11px] text-gray-500">
+                            <span>CCS {{ stock.ccs }}</span>
+                            <span>·</span>
+                            <span class="truncate">{{ stock.sektor }}</span>
                             <span>·</span>
                             <span>{{ stock.holders.length }} pemegang saham</span>
                         </div>
@@ -121,51 +118,54 @@
             </div>
 
             <!-- RIGHT PANEL (DETAIL & GRAFIK) -->
-            <div class="flex-1 flex flex-col overflow-hidden bg-gray-50/30 relative">
-                <div v-if="!selectedStock" class="absolute inset-0 flex items-center justify-center">
-                    <i class="ph ph-chart-network text-9xl text-gray-100"></i>
+            <div class="flex-1 flex flex-col overflow-hidden bg-white relative">
+                <div v-if="!selectedStock" class="absolute inset-0 flex flex-col items-center justify-center text-gray-300">
+                    <i class="ph ph-chart-network text-9xl mb-4"></i>
+                    <p class="text-gray-400 text-sm">Pilih emiten untuk melihat detail kepemilikan dan jaringan relasi.</p>
                 </div>
 
                 <template v-else>
-                    <!-- Header Data Detail -->
-                    <div class="p-4 border-b border-gray-200 bg-white shrink-0 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold text-emerald-600">{{ selectedStock.kode }}</span>
+                    <!-- Header Detail -->
+                    <div class="p-6 border-b border-gray-200 bg-white shrink-0 flex justify-between items-start">
+                        <div class="flex items-center gap-4">
+                            <span class="text-4xl font-extrabold text-emerald-600 tracking-tight">{{ selectedStock.kode }}</span>
                             <div>
-                                <h2 class="text-lg font-semibold text-gray-800 leading-tight">{{ selectedStock.nama }}</h2>
-                                <p class="text-xs text-gray-500">{{ selectedStock.sektor }} · {{ selectedStock.industri }}</p>
+                                <h2 class="text-xl font-bold text-gray-900 leading-tight">{{ selectedStock.nama }}</h2>
+                                <p class="text-sm text-gray-500 mt-1">{{ selectedStock.sektor }} · {{ selectedStock.industri }}</p>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-xs text-gray-500 mb-1">Composite Concentration Score (CCS)</div>
-                            <div class="text-2xl font-bold" :class="getCCSColor(selectedStock.ccs)">{{ selectedStock.ccs }} / 100</div>
+                        <div class="text-right flex flex-col items-end">
+                            <div class="text-xs text-gray-500 font-medium mb-1">Composite Concentration Score (CCS)</div>
+                            <div class="text-3xl font-black" :class="getCCSColor(selectedStock.ccs)">{{ selectedStock.ccs }} <span class="text-lg text-gray-400">/ 100</span></div>
                         </div>
                     </div>
 
-                    <!-- Split View: Table & Graph -->
+                    <!-- Table & Graph Split -->
                     <div class="flex-1 flex overflow-hidden">
-                        <!-- Table -->
                         <div class="w-1/2 flex flex-col border-r border-gray-200 bg-white">
-                            <div class="flex text-xs font-semibold text-gray-400 border-b border-gray-200 p-3 uppercase tracking-wider bg-gray-50">
+                            <div class="flex text-[11px] font-bold text-gray-400 border-b border-gray-100 p-4 uppercase tracking-widest">
                                 <div class="w-5/12">Investor</div>
                                 <div class="w-2/12 text-center">Tipe</div>
                                 <div class="w-2/12 text-center">Asal</div>
                                 <div class="w-3/12 text-right">Persentase</div>
                             </div>
                             <div class="flex-1 overflow-y-auto custom-scrollbar">
-                                <div v-for="holder in selectedStock.holders" :key="holder.nama" class="flex items-center p-3 border-b border-gray-100 hover:bg-gray-50 text-sm">
-                                    <div class="w-5/12 font-medium text-gray-800 line-clamp-2 pr-2">{{ holder.nama }}</div>
-                                    <div class="w-2/12 text-center text-xs text-emerald-600 bg-emerald-50 py-1 rounded">{{ holder.tipe }}</div>
-                                    <div class="w-2/12 text-center text-xs" :class="holder.asal === 'Lokal' ? 'text-blue-600' : 'text-orange-600'">{{ holder.asal }}</div>
-                                    <div class="w-3/12 text-right font-semibold text-gray-800">{{ holder.persen.toFixed(2) }}%</div>
+                                <div v-for="holder in selectedStock.holders" :key="holder.nama" class="flex items-center p-4 border-b border-gray-50 hover:bg-gray-50 text-sm">
+                                    <div class="w-5/12 font-medium text-gray-700 pr-2 uppercase text-xs">{{ holder.nama }}</div>
+                                    <div class="w-2/12 flex justify-center">
+                                        <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 font-semibold">{{ holder.tipe }}</span>
+                                    </div>
+                                    <div class="w-2/12 text-center text-xs font-medium" :class="holder.asal === 'Lokal' ? 'text-blue-500' : 'text-purple-500'">
+                                        {{ holder.asal }}
+                                    </div>
+                                    <div class="w-3/12 text-right font-bold text-gray-800">{{ holder.persen.toFixed(2) }}%</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Network Graph -->
-                        <div class="w-1/2 relative">
-                            <div class="absolute top-2 left-2 z-10 bg-white/80 backdrop-blur px-2 py-1 rounded text-xs font-semibold text-gray-500 border border-gray-200 shadow-sm flex items-center gap-1">
-                                <i class="ph ph-share-network"></i> Jaringan Relasi
+                        <div class="w-1/2 relative bg-white">
+                            <div class="absolute top-4 left-4 z-10 bg-white px-3 py-1.5 rounded-md text-xs font-semibold text-gray-600 border border-gray-200 shadow-sm flex items-center gap-1.5">
+                                <i class="ph ph-share-network text-emerald-600 text-sm"></i> Jaringan Relasi
                             </div>
                             <div id="network-graph"></div>
                         </div>
@@ -173,6 +173,162 @@
                 </template>
             </div>
         </main>
+
+        <!-- GUIDE MODAL -->
+        <Transition name="modal">
+            <div v-if="showGuide" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/40 backdrop-blur-sm" @click.self="showGuide = false">
+                <Transition name="modal-content">
+                    <div v-if="showGuide" class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+                        
+                        <!-- Modal Header -->
+                        <div class="flex items-center justify-between p-5 border-b border-gray-100 shrink-0">
+                            <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                                <i class="ph ph-book-open text-2xl"></i> Panduan Penggunaan
+                            </h2>
+                            <button @click="showGuide = false" class="text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 p-1.5 rounded-md">
+                                <i class="ph ph-x text-lg"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="flex-1 overflow-y-auto p-6 custom-scrollbar text-sm text-gray-600 space-y-8">
+                            
+                            <!-- OVERVIEW -->
+                            <section>
+                                <h3 class="text-emerald-600 font-bold tracking-wide uppercase mb-3 flex items-center gap-2 text-sm">
+                                    <i class="ph ph-info text-lg"></i> Overview
+                                </h3>
+                                <p class="mb-4">Dashboard ini nge-track semua <strong>pemegang saham dengan kepemilikan 1% ke atas</strong> di seluruh emiten yang listed di Bursa Efek Indonesia (IDX). Data bersumber dari laporan resmi KSEI.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Cek Major Shareholders</h4>
+                                        <p class="text-xs">Lihat siapa aja yang hold ≥1% di setiap emiten</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Track Across Stocks</h4>
+                                        <p class="text-xs">Satu investor, berapa saham yang dia pegang?</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Network Graph</h4>
+                                        <p class="text-xs">Explore connection antara investor & saham secara visual</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Compare Side-by-Side</h4>
+                                        <p class="text-xs">Bandingkan up to 6 saham, spot overlapping investors</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Konglo & PEP Mapping</h4>
+                                        <p class="text-xs">Deep dive ownership patterns konglomerat & politisi</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Changelog & Tracking</h4>
+                                        <p class="text-xs">Track perubahan data antar periode — saham baru, investor keluar/masuk</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- CARA BACA DATANYA -->
+                            <section>
+                                <h3 class="text-emerald-600 font-bold tracking-wide uppercase mb-3 flex items-center gap-2 text-sm">
+                                    <i class="ph ph-book text-lg"></i> Cara Baca Datanya
+                                </h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Kepemilikan (%)</h4>
+                                        <p class="text-xs">Percentage of total listed shares. Misal 5,25% = investor hold 5,25% dari seluruh saham yang beredar.</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Total Saham</h4>
+                                        <p class="text-xs">Jumlah lembar saham (in shares, bukan lot). Raw number dari report KSEI.</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Lokal vs Asing</h4>
+                                        <p class="text-xs">Classification KSEI. Lokal = domestic investor, Asing = foreign.</p>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-lg">
+                                        <h4 class="font-bold text-gray-900 mb-1">Tipe Investor</h4>
+                                        <p class="text-xs">Kategori entity: Corporate, Bank, Individual, Mutual Fund, Pension Fund, Securities, Foundation, dll.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-emerald-50/50 border-l-4 border-emerald-500 p-4 rounded-r-lg text-sm">
+                                    <strong>Free Float</strong> — 100% minus total kepemilikan semua investor 1%+. Bukan "true" free float, tapi indikator seberapa terkonsentrasi ownership. Makin rendah, makin concentrated ke few big holders.
+                                </div>
+                            </section>
+
+                            <!-- CCS & METRIK -->
+                            <section>
+                                <h3 class="text-emerald-600 font-bold tracking-wide uppercase mb-3 text-sm">CCS & Metrik Konsentrasi</h3>
+                                <p class="mb-4 text-sm">Dashboard menampilkan <strong>Composite Concentration Score (CCS)</strong> — skor 0–100 yang menggabungkan beberapa metrik untuk mengukur konsentrasi kepemilikan secara menyeluruh.</p>
+                                
+                                <div class="bg-gray-800 text-white p-4 rounded-lg mb-4 font-mono text-sm shadow-inner">
+                                    CCS = (HHI × 0,45) + (CR3 × 0,35) + (Holder × 0,20)
+                                </div>
+
+                                <ul class="space-y-2 text-sm mb-6 list-disc pl-5">
+                                    <li><strong>HHI (45%)</strong>: Herfindahl-Hirschman Index — jumlah kuadrat persentase setiap holder. Sensitif ke holder yang sangat dominan.</li>
+                                    <li><strong>CR3 (35%)</strong>: Concentration Ratio top 3 — berapa % total yang dikuasai 3 holder terbesar. Indikator oligopoli.</li>
+                                    <li><strong>Jumlah Holder (20%)</strong>: Inverse holder count — makin sedikit holder, makin terkonsentrasi. 1 holder = skor maks, 20+ = minimal.</li>
+                                </ul>
+
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
+                                    <div class="bg-red-50 p-3 rounded border border-red-100 text-center">
+                                        <div class="font-bold text-red-700 text-sm">Mayoritas</div>
+                                        <div class="text-[10px] text-red-600 mt-1">CR1 ≥ 50%</div>
+                                    </div>
+                                    <div class="bg-orange-50 p-3 rounded border border-orange-100 text-center">
+                                        <div class="font-bold text-orange-700 text-sm">Oligopoli</div>
+                                        <div class="text-[10px] text-orange-600 mt-1">CR3 ≥ 60%</div>
+                                    </div>
+                                    <div class="bg-amber-50 p-3 rounded border border-amber-100 text-center">
+                                        <div class="font-bold text-amber-700 text-sm">Terkonsentrasi</div>
+                                        <div class="text-[10px] text-amber-600 mt-1">Total ≥ 70%</div>
+                                    </div>
+                                    <div class="bg-blue-50 p-3 rounded border border-blue-100 text-center">
+                                        <div class="font-bold text-blue-700 text-sm">Tersebar</div>
+                                        <div class="text-[10px] text-blue-600 mt-1">Total ≤ 40%</div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- TABS INFO -->
+                            <section class="space-y-6">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 border-b pb-1 mb-2">Tab: Ringkasan Saham</h4>
+                                    <p class="text-xs mb-2">Landing page utama. Semua emiten ditampilkan as cards, masing-masing dengan list pemegang saham 1%+.</p>
+                                    <ul class="text-xs space-y-1 list-disc pl-4">
+                                        <li><strong>Search</strong> — Ketik ticker atau nama emiten. Shortcut: <code>/</code></li>
+                                        <li><strong>Compare mode</strong> — Pilih 2–6 saham untuk side-by-side comparison.</li>
+                                        <li><strong>Network graph</strong> — Interactive force-directed graph per emiten.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 border-b pb-1 mb-2">Tab: Per Investor & Konglo Stocks</h4>
+                                    <ul class="text-xs space-y-1 list-disc pl-4">
+                                        <li><strong>Reverse view</strong> — per-investor. Setiap investor yang hold ≥1% di minimal satu emiten.</li>
+                                        <li><strong>Grouping Konglo</strong> — Grouping saham by konglomerat besar Indonesia (Main, Small/Micro, Investor Sharing).</li>
+                                    </ul>
+                                </div>
+                            </section>
+
+                            <!-- FOOTER / SUMBER -->
+                            <section class="mt-8 pt-6 border-t border-gray-100 text-xs text-gray-500 flex flex-col md:flex-row justify-between gap-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-700 mb-1">Sumber Data</h4>
+                                    <p>KSEI (Kustodian Sentral Efek Indonesia). Official site: www.ksei.co.id<br>
+                                    Periode data: Per 12 Maret 2026 · Dibandingkan dengan: 3 Maret 2026</p>
+                                </div>
+                                <div class="md:text-right">
+                                    <h4 class="font-bold text-gray-700 mb-1">Support & Feedback</h4>
+                                    <p>Community project — free and open.<br>
+                                    Telegram: 085775991269 | IG: @zidanfikrii</p>
+                                </div>
+                            </section>
+
+                        </div>
+                    </div>
+                </Transition>
+            </div>
+        </Transition>
     </div>
 
     <script>
@@ -182,7 +338,7 @@
             data() {
                 return {
                     isLoading: true,
-                    rawData: [],
+                    showGuide: false,
                     stocks: [],
                     searchQuery: '',
                     selectedStock: null,
@@ -200,18 +356,15 @@
                 }
             },
             methods: {
-                // Parsing format persentase "40,03" ke float
                 parsePersen(str) {
                     if(!str) return 0;
                     return parseFloat(str.toString().replace(',', '.'));
                 },
 
-                // LOGIKA FORMULA CCS SESUAI PERMINTAAN ANDA
                 calculateMetrics(holders) {
                     let totalPersen = 0;
                     let hhi_raw = 0;
                     
-                    // Urutkan dari terbesar ke terkecil
                     let sorted = holders.map(h => this.parsePersen(h.Persentase)).sort((a,b) => b-a);
                     
                     sorted.forEach(p => {
@@ -219,22 +372,17 @@
                         hhi_raw += Math.pow(p, 2);
                     });
 
-                    // 1. HHI (Dinormalisasi ke 0-1) - Max HHI adalah 10000 (100^2)
                     let hhi_norm = hhi_raw / 10000;
 
-                    // 2. CR3 (Concentration Ratio top 3)
                     let cr3 = 0;
                     for(let i=0; i<Math.min(3, sorted.length); i++) cr3 += sorted[i];
                     let cr3_norm = cr3 / 100;
 
-                    // 3. Inverse Holder (1 = skor 100%, >=20 = skor 0%)
                     let holder_count = sorted.length;
                     let holder_score = holder_count === 1 ? 1 : (holder_count >= 20 ? 0 : (20 - holder_count) / 19);
 
-                    // 4. Formula CCS Gabungan
                     let ccs = Math.round(((hhi_norm * 0.45) + (cr3_norm * 0.35) + (holder_score * 0.20)) * 100);
 
-                    // 5. Penentuan Tipe Kepemilikan (Status)
                     let cr1 = sorted.length > 0 ? sorted[0] : 0;
                     let status = "Moderat";
                     
@@ -252,19 +400,18 @@
                         'Oligopoli': 'bg-orange-100 text-orange-700',
                         'Terkonsentrasi': 'bg-amber-100 text-amber-700',
                         'Moderat': 'bg-blue-100 text-blue-700',
-                        'Tersebar': 'bg-emerald-100 text-emerald-700'
+                        'Tersebar': 'bg-gray-100 text-gray-700'
                     };
                     return colors[status] || 'bg-gray-100 text-gray-700';
                 },
 
                 getCCSColor(ccs) {
-                    if (ccs >= 56) return 'text-red-600'; // Tinggi
-                    if (ccs >= 26) return 'text-amber-500'; // Sedang
-                    return 'text-emerald-500'; // Rendah
+                    if (ccs >= 56) return 'text-red-600'; 
+                    if (ccs >= 26) return 'text-amber-500';
+                    return 'text-emerald-500';
                 },
 
                 processData(data) {
-                    // Group data berdasarkan Kode Emiten
                     const grouped = {};
                     data.forEach(row => {
                         if(!row.Kode) return;
@@ -280,13 +427,11 @@
                         grouped[row.Kode].rawHolders.push(row);
                     });
 
-                    // Hitung metrik CCS untuk masing-masing Emiten
                     const result = [];
                     for (const key in grouped) {
                         const stock = grouped[key];
                         const metrics = this.calculateMetrics(stock.rawHolders);
                         
-                        // Format array holder untuk UI
                         const formattedHolders = stock.rawHolders.map(h => ({
                             nama: h.Investor,
                             tipe: h.Tipe,
@@ -306,14 +451,12 @@
                         });
                     }
 
-                    // Urutkan default berdasarkan CCS tertinggi
                     this.stocks = result.sort((a,b) => b.ccs - a.ccs);
                     this.isLoading = false;
                 },
 
                 selectStock(stock) {
                     this.selectedStock = stock;
-                    // Beri waktu sedikit untuk render DOM container sebelum menggambar Node
                     setTimeout(() => {
                         this.drawNetworkGraph(stock);
                     }, 50);
@@ -323,36 +466,32 @@
                     const container = document.getElementById('network-graph');
                     if (!container) return;
 
-                    // Node Emiten di tengah
                     const nodes = new vis.DataSet([
-                        { id: 'pusat', label: stock.kode, shape: 'circle', color: '#10B981', font: { color: 'white', bold: true }, size: 30 }
+                        { id: 'pusat', label: stock.kode, shape: 'circle', color: '#10B981', font: { color: 'white', bold: true }, size: 35 }
                     ]);
                     
                     const edges = new vis.DataSet([]);
 
-                    // Tambahkan node Investor mengelilingi emiten
                     stock.holders.forEach((h, index) => {
-                        let size = 10 + (h.persen * 0.5); // Ukuran membesar tergantung persen
-                        if(size > 40) size = 40;
+                        let size = 15 + (h.persen * 0.4); 
+                        if(size > 45) size = 45;
                         
-                        // Warna berdasarkan asal usul
-                        let bgColor = h.asal === 'Lokal' ? '#60A5FA' : '#F87171';
+                        let bgColor = h.asal === 'Lokal' ? '#3B82F6' : '#8B5CF6'; // Blue for local, Purple for foreign
                         
                         nodes.add({
                             id: index,
                             label: h.nama,
                             shape: 'dot',
                             size: size,
-                            color: { background: bgColor, border: 'white' },
-                            font: { size: 10, color: '#374151' },
-                            title: `${h.persen.toFixed(2)}%` // Tooltip saat dihover
+                            color: { background: bgColor, border: 'white', borderWidth: 2 },
+                            font: { size: 10, color: '#4B5563', vadjust: -35 }, 
+                            title: `${h.persen.toFixed(2)}%`
                         });
 
-                        // Garis penghubung
                         edges.add({
                             from: index,
                             to: 'pusat',
-                            width: (h.persen / 10) + 1,
+                            width: 1 + (h.persen / 15),
                             color: { color: '#E5E7EB', highlight: '#10B981' }
                         });
                     });
@@ -360,11 +499,11 @@
                     const data = { nodes: nodes, edges: edges };
                     const options = {
                         physics: {
-                            forceAtlas2Based: { gravitationalConstant: -50, centralGravity: 0.01, springLength: 100 },
+                            forceAtlas2Based: { gravitationalConstant: -60, centralGravity: 0.005, springLength: 150 },
                             minVelocity: 0.75,
                             solver: "forceAtlas2Based"
                         },
-                        interaction: { hover: true, tooltipDelay: 200 }
+                        interaction: { hover: true, tooltipDelay: 200, zoomView: true }
                     };
 
                     if(this.network) this.network.destroy();
@@ -372,7 +511,6 @@
                 }
             },
             mounted() {
-                // Membaca CSV menggunakan PapaParse
                 Papa.parse('ksei_saham_20260603.csv', {
                     download: true,
                     header: true,
@@ -383,7 +521,13 @@
                     error: (err) => {
                         console.error(err);
                         this.isLoading = false;
-                        alert("Gagal membaca file ksei_saham_20260603.csv. Pastikan file berada di folder yang sama.");
+                    }
+                });
+
+                // Keyboard Shortcuts
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.showGuide = false;
                     }
                 });
             }
