@@ -3,343 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holding Share Composition - KSEI</title>
+    <title>Holding Share Composition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .card { background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.025); border: 1px solid #e2e8f0; padding: 1.5rem; }
-        .select2-container--default .select2-selection--single { height: 42px; border-color: #cbd5e1; border-radius: 0.5rem; padding: 6px 12px; }
-        .select2-container--default .select2-selection--single .select2-selection__arrow { top: 8px; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #ffffff; color: #111827; }
+        /* Kustomisasi Select2 agar flat dan minimalis */
+        .select2-container--default .select2-selection--single { 
+            height: 38px; border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; font-size: 14px; box-shadow: none; outline: none;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow { top: 6px; }
+        .select2-dropdown { border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        /* Tabel Minimalis */
+        th { border-bottom: 2px solid #111827; padding-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; color: #4b5563; }
+        td { border-bottom: 1px solid #f3f4f6; padding: 12px 0; font-size: 13px; color: #374151; }
+        tr:hover td { background-color: #f9fafb; }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="antialiased">
 
-    <nav class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-6">
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-chart-pie text-2xl mr-3 text-indigo-400"></i>
-                        <span class="font-bold text-xl tracking-tight hidden md:block">Peta Institusi IDX</span>
+    <nav class="border-b border-gray-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-14 items-center">
+                <div class="flex space-x-6 items-center">
+                    <span class="font-semibold text-gray-900 tracking-tight text-lg">Holding Composition</span>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="index.html" class="text-gray-500 hover:text-gray-900 text-sm transition-colors">Pergerakan Institusi</a>
+                        <a href="smart_money_tracker.html" class="text-gray-500 hover:text-gray-900 text-sm transition-colors">Radar Inflow</a>
                     </div>
-                    <div class="flex space-x-2">
-                        <a href="index.html" class="hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Pergerakan Institusi</a>
-                        <a href="smart_money_tracker.html" class="hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Smart Money Radar</a>
-                        <a href="hsc.html" class="bg-indigo-700 px-3 py-2 rounded-md text-sm font-bold border border-indigo-500">Holding Composition (HSC)</a>
-                    </div>
+                </div>
+                <div class="text-xs text-gray-400 font-medium tracking-wide">
+                    KSEI DATA SOURCE
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-            <div class="w-full md:w-1/3">
-                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Pilih Emiten</label>
+        <div class="flex flex-col md:flex-row gap-6 mb-10 items-end">
+            <div class="w-full md:w-64">
+                <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wider">Cari Emiten</label>
                 <select id="emiten-select" class="w-full"></select>
             </div>
-            <div class="w-full md:w-1/4">
-                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Periode Posisi</label>
-                <select id="month-select" class="w-full border border-slate-300 rounded-lg p-2 h-[42px] bg-white text-sm focus:ring-indigo-500 focus:border-indigo-500"></select>
-            </div>
-            <div class="w-full md:w-auto">
-                <div class="bg-slate-100 p-1 rounded-lg inline-flex">
-                    <button id="unit-lembar" class="px-4 py-1.5 rounded bg-white text-indigo-700 font-bold text-sm shadow border border-slate-200" onclick="setUnit('lembar')">Lembar</button>
-                    <button id="unit-lot" class="px-4 py-1.5 rounded text-slate-500 font-medium text-sm hover:text-slate-700 transition-colors" onclick="setUnit('lot')">Lot</button>
-                </div>
+            <div class="flex-1" id="emiten-title-area" style="display: none;">
+                <h1 class="text-3xl font-bold text-gray-900 tracking-tight leading-none" id="lbl-emiten-kode">-</h1>
+                <p class="text-sm text-gray-500 mt-1" id="lbl-emiten-nama">-</p>
             </div>
         </div>
 
-        <div id="dashboard-content" class="hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                <div class="card flex flex-col justify-center items-center text-center bg-gradient-to-b from-white to-slate-50 border-t-4 border-indigo-500">
-                    <h3 class="text-slate-500 font-semibold text-sm uppercase tracking-wider">Total Saham Tercatat (Scripless)</h3>
-                    <p class="text-4xl font-extrabold text-slate-800 mt-3" id="total-saham">-</p>
-                    <span class="text-xs text-slate-400 mt-2 font-medium bg-slate-100 px-2 py-1 rounded" id="lbl-unit">Satuan: Lembar</span>
+        <div id="loading-indicator" class="text-center py-20 text-gray-400 text-sm">
+            Memuat dataset KSEI (CSV)...
+        </div>
+
+        <div id="dashboard-content" style="display: none;">
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Grup Konglomerasi</p>
+                    <p class="font-semibold text-gray-900" id="info-konglo">-</p>
                 </div>
-                
-                <div class="card lg:col-span-2 flex items-center justify-between">
-                    <div class="w-1/2 pr-4 border-r border-slate-100">
-                        <div class="mb-4">
-                            <p class="text-xs font-bold text-slate-400 uppercase">Investor Lokal</p>
-                            <p class="text-2xl font-bold text-blue-600" id="val-lokal">-</p>
-                            <p class="text-sm font-semibold text-blue-800/60" id="pct-lokal">-</p>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-400 uppercase">Investor Asing</p>
-                            <p class="text-2xl font-bold text-red-500" id="val-asing">-</p>
-                            <p class="text-sm font-semibold text-red-800/60" id="pct-asing">-</p>
-                        </div>
+                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Sektor</p>
+                    <p class="font-semibold text-gray-900 truncate" id="info-sektor">-</p>
+                </div>
+                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Industri</p>
+                    <p class="font-semibold text-gray-900 truncate" id="info-industri">-</p>
+                </div>
+                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Indeks HHI (Konsentrasi)</p>
+                    <p class="font-semibold text-gray-900" id="info-hhi">-</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">Komposisi Lokal vs Asing</h2>
+                    <div class="relative h-64 w-full flex justify-center">
+                        <canvas id="chart-lokal-asing"></canvas>
                     </div>
-                    <div class="w-1/2 relative h-48">
-                        <canvas id="chart-donut-main"></canvas>
+                </div>
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">Distribusi Tipe Investor</h2>
+                    <div class="relative h-64 w-full flex justify-center">
+                        <canvas id="chart-tipe"></canvas>
                     </div>
                 </div>
             </div>
 
-            <div class="card mb-6 border-l-4 border-sky-500">
-                <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-timeline text-sky-500 mr-2"></i>Tren Historis Kepemilikan (Lokal vs Asing)</h2>
-                <div class="relative h-64 w-full">
-                    <canvas id="chart-trend-history"></canvas>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <div class="card border-t-4 border-blue-500">
-                    <h2 class="text-md font-bold text-slate-800 mb-4">Struktur Kepemilikan Lokal</h2>
-                    <div class="relative h-64 w-full">
-                        <canvas id="chart-bar-lokal"></canvas>
-                    </div>
-                </div>
-                <div class="card border-t-4 border-red-500">
-                    <h2 class="text-md font-bold text-slate-800 mb-4">Struktur Kepemilikan Asing</h2>
-                    <div class="relative h-64 w-full">
-                        <canvas id="chart-bar-asing"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-6">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3">
-                    <h2 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-users-viewfinder text-indigo-500 mr-2"></i>Daftar Identitas Pemegang Saham Mayoritas (>1% & >5%)</h2>
-                    <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-bold border border-amber-200">Data PDF Extractor</span>
+            <div class="mt-8">
+                <div class="flex justify-between items-end mb-4 border-b-2 border-gray-800 pb-2">
+                    <h2 class="text-lg font-bold text-gray-900 tracking-tight">Daftar Pemegang Saham Mayoritas</h2>
+                    <span class="text-xs text-gray-500">Sumber: KSEI (>5% & >1%)</span>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-200 text-sm">
-                        <thead class="bg-slate-50 text-slate-600 font-semibold text-xs uppercase tracking-wider">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
                             <tr>
-                                <th class="px-4 py-3 text-left">Nama Pemegang Saham</th>
-                                <th class="px-4 py-3 text-center">Tipe Identitas</th>
-                                <th class="px-4 py-3 text-right">Jumlah Saham (Lbr)</th>
-                                <th class="px-4 py-3 text-right">Persentase (%)</th>
-                                <th class="px-4 py-3 text-center">Kategori</th>
+                                <th class="w-1/3">Nama Investor</th>
+                                <th>Kategori</th>
+                                <th>Asal</th>
+                                <th>Negara</th>
+                                <th class="text-right">Jumlah Saham (Lbr)</th>
+                                <th class="text-right">Persentase (%)</th>
                             </tr>
                         </thead>
-                        <tbody id="table-specific-holders" class="bg-white divide-y divide-slate-200 font-medium">
-                            <tr>
-                                <td colspan="5" class="text-center py-8 text-slate-400">
-                                    <i class="fa-regular fa-folder-open text-3xl mb-2 block"></i>
-                                    Menunggu sinkronisasi data dari file PDF KSEI (hsc_investors.json)
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="table-investors">
+                            </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-
-        <div id="welcome-message" class="text-center py-24">
-            <i class="fa-solid fa-layer-group text-6xl text-slate-300 mb-4 animate-pulse"></i>
-            <h2 class="text-2xl font-bold text-slate-600">Holding Share Composition</h2>
-            <p class="text-slate-500 mt-2 max-w-md mx-auto text-sm">Pilih kode emiten untuk membedah komposisi dan struktur kepemilikan saham.</p>
-        </div>
-        
-        <div class="mt-12 pt-6 border-t border-slate-200 text-center">
-            <p class="text-xs text-slate-400 font-medium tracking-wide">
-                <i class="fa-solid fa-chart-line text-indigo-400 mr-1"></i> Created by Zidan Fikri - Trimegah Sekuritas
-            </p>
+            
         </div>
     </div>
 
-   <script>
-        const INSTITUTION_MAP = {
-            'Local IS': 'Asuransi', 'Local CP': 'Korporat', 'Local PF': 'Dana Pensiun', 'Local IB': 'Bank', 'Local ID': 'Individual', 'Local MF': 'Reksadana', 'Local SC': 'Sekuritas', 'Local FD': 'Yayasan', 'Local OT': 'Lainnya',
-            'Foreign IS': 'Asuransi', 'Foreign CP': 'Korporat', 'Foreign PF': 'Dana Pensiun', 'Foreign IB': 'Bank', 'Foreign ID': 'Individual', 'Foreign MF': 'Reksadana', 'Foreign SC': 'Sekuritas', 'Foreign FD': 'Yayasan', 'Foreign OT': 'Lainnya'
-        };
+    <script>
+        // Variabel global untuk menyimpan data dari CSV
+        let dataSaham = [];
+        let dataKonglo = [];
+        let chartLokalAsing = null;
+        let chartTipe = null;
 
-        const LOCAL_KEYS = ['Local IS', 'Local CP', 'Local PF', 'Local IB', 'Local ID', 'Local MF', 'Local SC', 'Local FD', 'Local OT'];
-        const FOREIGN_KEYS = ['Foreign IS', 'Foreign CP', 'Foreign PF', 'Foreign IB', 'Foreign ID', 'Foreign MF', 'Foreign SC', 'Foreign FD', 'Foreign OT'];
-        
-        let allData = {};
-        let pdfData = {}; // Variabel penampung data dari PDF
-        let currentUnit = 'lembar'; 
-        let currentEmiten = '';
-        let donutChart, lineChart, barLokalChart, barAsingChart;
+        // Palet warna estetik (Monochrome, Sage Green, Mustard)
+        const colorPalette = ['#8BA888', '#E2B96F', '#4B5563', '#9CA3AF', '#D1D5DB', '#374151'];
 
+        // Format angka ke format ribuan Indonesia
         const formatNum = (num) => new Intl.NumberFormat('id-ID').format(Math.round(num));
-
-        function setUnit(unit) {
-            currentUnit = unit;
-            if (unit === 'lembar') {
-                $('#unit-lembar').addClass('bg-white text-indigo-700 shadow border-slate-200').removeClass('text-slate-500 hover:text-slate-700 bg-transparent');
-                $('#unit-lot').removeClass('bg-white text-indigo-700 shadow border-slate-200').addClass('text-slate-500 hover:text-slate-700 bg-transparent');
-                $('#lbl-unit').text('Satuan: Lembar');
-            } else {
-                $('#unit-lot').addClass('bg-white text-indigo-700 shadow border-slate-200').removeClass('text-slate-500 hover:text-slate-700 bg-transparent');
-                $('#unit-lembar').removeClass('bg-white text-indigo-700 shadow border-slate-200').addClass('text-slate-500 hover:text-slate-700 bg-transparent');
-                $('#lbl-unit').text('Satuan: Lot (1 Lot = 100 Lbr)');
-            }
-            if(currentEmiten) renderDashboard();
-        }
+        // Parse string persentase ber-koma (contoh: "40,03") menjadi float
+        const parsePersen = (str) => parseFloat((str || "0").toString().replace(',', '.'));
 
         $(document).ready(function() {
-            // 1. Tarik data KSEI Harian (Grafik Agregat)
-            fetch('data.json')
-                .then(res => res.json())
-                .then(data => {
-                    allData = data;
-                    const select = $('#emiten-select');
-                    Object.keys(data).sort().forEach(e => select.append(new Option(e, e)));
-                    select.select2({ placeholder: "Cari Emiten...", allowClear: true });
-                });
+            // Load CSVs secara paralel menggunakan Promise
+            Promise.all([
+                fetchCSV('ksei_saham_20260603.csv'),
+                fetchCSV('ksei_konglo_20260603.csv')
+            ]).then(([sahamData, kongloData]) => {
+                dataSaham = sahamData;
+                dataKonglo = kongloData;
 
-            // 2. Tarik data dari PDF Extractor (Tabel Bawah)
-            fetch('hsc_investors.json')
-                .then(res => res.json())
-                .then(data => {
-                    pdfData = data;
-                })
-                .catch(err => console.log("File PDF belum di-generate atau hsc_investors.json tidak ditemukan."));
+                initDropdown();
+                $('#loading-indicator').hide();
+            }).catch(err => {
+                console.error(err);
+                $('#loading-indicator').html('<span class="text-red-500">Gagal memuat file CSV. Pastikan file ksei_saham_20260603.csv dan ksei_konglo_20260603.csv berada di folder yang sama.</span>');
+            });
 
             $('#emiten-select').on('change', function() {
-                currentEmiten = $(this).val();
-                if(!currentEmiten) {
-                    $('#dashboard-content').addClass('hidden');
-                    $('#welcome-message').removeClass('hidden');
-                    return;
+                const kode = $(this).val();
+                if(kode) {
+                    renderDashboard(kode);
+                } else {
+                    $('#dashboard-content').hide();
+                    $('#emiten-title-area').hide();
                 }
-                populateMonths();
-                renderDashboard();
             });
-
-            $('#month-select').on('change', renderDashboard);
         });
 
-        function populateMonths() {
-            const records = allData[currentEmiten];
-            const mSelect = $('#month-select');
-            mSelect.empty();
-            records.forEach((r, idx) => mSelect.append(new Option(r.Date, r.Date, false, idx === records.length - 1)));
-        }
-
-        function renderDashboard() {
-            $('#welcome-message').addClass('hidden');
-            $('#dashboard-content').removeClass('hidden');
-
-            const targetMonth = $('#month-select').val();
-            const records = allData[currentEmiten];
-            const currentData = records.find(r => r.Date === targetMonth);
-            const divisor = currentUnit === 'lot' ? 100 : 1;
-
-            let locTotal = 0, forTotal = 0;
-            let locDataArr = [], forDataArr = [];
-
-            LOCAL_KEYS.forEach(k => {
-                let val = (currentData[k] || 0) / divisor;
-                locTotal += val;
-                locDataArr.push({label: INSTITUTION_MAP[k], value: val});
-            });
-
-            FOREIGN_KEYS.forEach(k => {
-                let val = (currentData[k] || 0) / divisor;
-                forTotal += val;
-                forDataArr.push({label: INSTITUTION_MAP[k], value: val});
-            });
-
-            const grandTotal = locTotal + forTotal;
-            $('#total-saham').text(formatNum(grandTotal));
-            
-            let pLoc = grandTotal > 0 ? ((locTotal/grandTotal)*100).toFixed(2) : 0;
-            let pFor = grandTotal > 0 ? ((forTotal/grandTotal)*100).toFixed(2) : 0;
-
-            $('#val-lokal').text(formatNum(locTotal));
-            $('#pct-lokal').text(`${pLoc}%`);
-            $('#val-asing').text(formatNum(forTotal));
-            $('#pct-asing').text(`${pFor}%`);
-
-            renderCharts(locTotal, forTotal, locDataArr, forDataArr, records, divisor);
-            
-            // JALANKAN FUNGSI RENDER TABEL PDF
-            renderSpecificHolders(currentEmiten); 
-        }
-
-        function renderCharts(locTotal, forTotal, locArr, forArr, records, divisor) {
-            Chart.defaults.font.family = 'Inter';
-            
-            // 1. DONUT
-            if(donutChart) donutChart.destroy();
-            donutChart = new Chart(document.getElementById('chart-donut-main'), {
-                type: 'doughnut',
-                data: { labels: ['Lokal', 'Asing'], datasets: [{ data: [locTotal, forTotal], backgroundColor: ['#2563eb', '#ef4444'], borderWidth: 0 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: {usePointStyle: true, boxWidth: 8} } }, cutout: '75%' }
-            });
-
-            // 2. LINE CHART (HISTORIS %)
-            const labels = records.map(r => r.Date);
-            const dLoc = records.map(r => {
-                let l = LOCAL_KEYS.reduce((s, k) => s + (r[k]||0), 0);
-                let f = FOREIGN_KEYS.reduce((s, k) => s + (r[k]||0), 0);
-                return (l+f) > 0 ? (l/(l+f)*100).toFixed(2) : 0;
-            });
-            const dFor = records.map(r => {
-                let l = LOCAL_KEYS.reduce((s, k) => s + (r[k]||0), 0);
-                let f = FOREIGN_KEYS.reduce((s, k) => s + (r[k]||0), 0);
-                return (l+f) > 0 ? (f/(l+f)*100).toFixed(2) : 0;
-            });
-
-            if(lineChart) lineChart.destroy();
-            lineChart = new Chart(document.getElementById('chart-trend-history'), {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        { label: 'Proporsi Lokal (%)', data: dLoc, borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.1)', fill: true, tension: 0.4 },
-                        { label: 'Proporsi Asing (%)', data: dFor, borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', fill: true, tension: 0.4 }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { tooltip: { mode: 'index', intersect: false } } }
-            });
-
-            // 3. BAR LOKAL (Sort by Size)
-            locArr.sort((a,b) => b.value - a.value);
-            if(barLokalChart) barLokalChart.destroy();
-            barLokalChart = new Chart(document.getElementById('chart-bar-lokal'), {
-                type: 'bar',
-                data: { labels: locArr.map(d=>d.label), datasets: [{ label: 'Lokal', data: locArr.map(d=>d.value), backgroundColor: '#3b82f6', borderRadius: 4 }] },
-                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { callback: v => formatNum(v) } } } }
-            });
-
-            // 4. BAR ASING (Sort by Size)
-            forArr.sort((a,b) => b.value - a.value);
-            if(barAsingChart) barAsingChart.destroy();
-            barAsingChart = new Chart(document.getElementById('chart-bar-asing'), {
-                type: 'bar',
-                data: { labels: forArr.map(d=>d.label), datasets: [{ label: 'Asing', data: forArr.map(d=>d.value), backgroundColor: '#f87171', borderRadius: 4 }] },
-                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { callback: v => formatNum(v) } } } }
+        // Helper fungsi membaca dan parsing CSV menggunakan PapaParse
+        function fetchCSV(filename) {
+            return new Promise((resolve, reject) => {
+                Papa.parse(filename, {
+                    download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        resolve(results.data);
+                    },
+                    error: function(err) {
+                        reject(err);
+                    }
+                });
             });
         }
 
-        // FUNGSI BARU UNTUK MERENDER TABEL IDENTITAS INVESTOR
-        function renderSpecificHolders(emiten) {
-            const tbody = $('#table-specific-holders');
-            tbody.empty();
+        function initDropdown() {
+            // Ambil daftar kode unik dari data saham
+            const uniqueKodes = [...new Set(dataSaham.map(item => item.Kode).filter(Boolean))].sort();
             
-            if(!pdfData || !pdfData[emiten] || pdfData[emiten].length === 0) {
-                tbody.append('<tr><td colspan="5" class="text-center py-8 text-slate-400"><i class="fa-solid fa-user-slash text-3xl mb-2 block"></i>Tidak ditemukan pemegang saham >1% atau >5% pada emiten ini.</td></tr>');
-                return;
+            const select = $('#emiten-select');
+            select.append(new Option('', '')); // Placeholder kosong
+            uniqueKodes.forEach(kode => {
+                select.append(new Option(kode, kode));
+            });
+            
+            select.select2({ 
+                placeholder: "Ketik Kode Saham...", 
+                allowClear: true 
+            });
+        }
+
+        function renderDashboard(kode) {
+            $('#dashboard-content').fadeIn();
+            $('#emiten-title-area').fadeIn();
+            
+            // Filter data investor untuk emiten yang dipilih
+            let filteredData = dataSaham.filter(d => d.Kode === kode);
+            if(filteredData.length === 0) return;
+
+            // Info Emiten Umum (ambil dari baris pertama)
+            const info = filteredData[0];
+            $('#lbl-emiten-kode').text(info.Kode);
+            $('#lbl-emiten-nama').text(info.Emiten);
+            $('#info-sektor').text(info.Sektor || '-');
+            $('#info-industri').text(info.Industri || '-');
+            $('#info-hhi').text(info.HHI || '-');
+
+            // Info Konglomerasi (Cari dari dataKonglo)
+            const kongloInfo = dataKonglo.find(k => k.Ticker === kode);
+            if(kongloInfo && kongloInfo['Grup Konglo']) {
+                $('#info-konglo').text(kongloInfo['Grup Konglo']);
+            } else {
+                $('#info-konglo').html('<span class="text-gray-400">Non-Konglomerasi / Independen</span>');
             }
-            
-            const holders = pdfData[emiten];
-            // Urutkan berdasarkan persentase kepemilikan saham terbesar
-            holders.sort((a,b) => b.persen - a.persen);
 
-            holders.forEach(h => {
-                let badgeClass = h.kategori === '>5%' ? 'bg-red-100 text-red-700 border-red-200' : 'bg-emerald-100 text-emerald-700 border-emerald-200';
+            // Agregasi Data untuk Grafik
+            let sumLokalAsing = {};
+            let sumTipe = {};
+
+            filteredData.forEach(row => {
+                const pct = parsePersen(row.Persentase);
+                const la = row['Lokal/Asing'] || 'Unknown';
+                const tipe = row.Tipe || 'Unknown';
+
+                sumLokalAsing[la] = (sumLokalAsing[la] || 0) + pct;
+                sumTipe[tipe] = (sumTipe[tipe] || 0) + pct;
+            });
+
+            renderCharts(sumLokalAsing, sumTipe);
+            renderTable(filteredData);
+        }
+
+        function renderCharts(sumLokalAsing, sumTipe) {
+            Chart.defaults.font.family = 'Inter';
+            Chart.defaults.color = '#6b7280';
+
+            // 1. Chart Lokal vs Asing
+            const labelsLA = Object.keys(sumLokalAsing);
+            const dataLA = Object.values(sumLokalAsing);
+            
+            if(chartLokalAsing) chartLokalAsing.destroy();
+            chartLokalAsing = new Chart(document.getElementById('chart-lokal-asing'), {
+                type: 'doughnut',
+                data: {
+                    labels: labelsLA,
+                    datasets: [{
+                        data: dataLA,
+                        backgroundColor: [colorPalette[0], colorPalette[2]], // Sage Green & Dark Gray
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 6, font: {size: 11} } },
+                        tooltip: { callbacks: { label: function(c) { return ' ' + c.label + ': ' + c.raw.toFixed(2) + '%'; } } }
+                    }
+                }
+            });
+
+            // 2. Chart Tipe Investor
+            const labelsTipe = Object.keys(sumTipe).sort((a,b) => sumTipe[b] - sumTipe[a]); // Sort terbesar
+            const dataTipe = labelsTipe.map(l => sumTipe[l]);
+
+            if(chartTipe) chartTipe.destroy();
+            chartTipe = new Chart(document.getElementById('chart-tipe'), {
+                type: 'doughnut',
+                data: {
+                    labels: labelsTipe,
+                    datasets: [{
+                        data: dataTipe,
+                        backgroundColor: colorPalette,
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 6, font: {size: 11} } },
+                        tooltip: { callbacks: { label: function(c) { return ' ' + c.label + ': ' + c.raw.toFixed(2) + '%'; } } }
+                    }
+                }
+            });
+        }
+
+        function renderTable(investorsData) {
+            const tbody = $('#table-investors');
+            tbody.empty();
+
+            // Urutkan berdasarkan persentase (Descending)
+            investorsData.sort((a, b) => parsePersen(b.Persentase) - parsePersen(a.Persentase));
+
+            investorsData.forEach(inv => {
+                const lembar = parseInt(inv['Lembar Saham'] || 0);
+                const persen = parsePersen(inv.Persentase);
                 
                 tbody.append(`
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="px-4 py-3 font-semibold text-slate-800">${h.nama}</td>
-                        <td class="px-4 py-3 text-center"><span class="bg-slate-100 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">${h.tipe}</span></td>
-                        <td class="px-4 py-3 text-right font-mono text-slate-600">${formatNum(h.jumlah)}</td>
-                        <td class="px-4 py-3 text-right font-bold text-indigo-600">${h.persen.toFixed(2)}%</td>
-                        <td class="px-4 py-3 text-center"><span class="${badgeClass} font-bold px-2.5 py-1 rounded-md text-xs border">${h.kategori}</span></td>
+                    <tr>
+                        <td class="font-medium text-gray-900 pr-4">${inv.Investor}</td>
+                        <td>${inv.Tipe}</td>
+                        <td>${inv['Lokal/Asing']}</td>
+                        <td class="text-gray-500">${inv.Nasionalitas || '-'}</td>
+                        <td class="text-right font-mono text-gray-600">${formatNum(lembar)}</td>
+                        <td class="text-right font-medium text-gray-900">${persen.toFixed(2)}%</td>
                     </tr>
                 `);
             });
