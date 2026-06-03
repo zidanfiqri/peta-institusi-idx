@@ -1,0 +1,7463 @@
+{
+    "Kode Efek": [
+        {
+            "nama": "Nama Emiten",
+            "tipe": "Lokal",
+            "jumlah": 0,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AADI": [
+        {
+            "nama": "ADARO ANDALAN INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4110,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ABBA": [
+        {
+            "nama": "MAHAKA MEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4047,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ABDA": [
+        {
+            "nama": "ASURANSI BINA DANA ARTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8675,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ABMM": [
+        {
+            "nama": "ABM INVESTAMA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 5356,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ACES": [
+        {
+            "nama": "ASPIRASI HIDUP INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ACRO": [
+        {
+            "nama": "SAMCRO HYOSUNG ADILESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7840,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ACST": [
+        {
+            "nama": "ACSET INDONUSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9117,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ADES": [
+        {
+            "nama": "AKASHA WIRA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9135,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ADMF": [
+        {
+            "nama": "ADIRA DINAMIKA MULTI FINANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7450,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ADMG": [
+        {
+            "nama": "PT. POLYCHEM INDONESIA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 2556,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ADMR": [
+        {
+            "nama": "ALAMTRI MINERALS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8545,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ADRO": [
+        {
+            "nama": "ALAMTRI RESOURCES INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4779,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AEGS": [
+        {
+            "nama": "ANUGERAH SPAREPARTS SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5523,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AGAR": [
+        {
+            "nama": "ASIA SEJAHTERA MINA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2999,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AGII": [
+        {
+            "nama": "SAMATOR INDO GAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AGRO": [
+        {
+            "nama": "BANK RAYA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8585,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AGRS": [
+        {
+            "nama": "BANK IBK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 982,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AHAP": [
+        {
+            "nama": "ASURANSI HARTA AMAN PRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1157,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AIMS": [
+        {
+            "nama": "PT. ARTHA MAHIYA INVESTAMA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 3113,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AISA": [
+        {
+            "nama": "FKS FOOD SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5854,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AKKU": [
+        {
+            "nama": "ANUGERAH KAGUM KARYA UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1118,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AKPI": [
+        {
+            "nama": "ARGHA KARYA PRIMA INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 604,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AKRA": [
+        {
+            "nama": "AKR CORPORINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1641,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ALDO": [
+        {
+            "nama": "ALKINDO NARATAMA Tbk, PT.",
+            "tipe": "Lokal",
+            "jumlah": 6704,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ALII": [
+        {
+            "nama": "ANCARA LOGISTICS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3287,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ALTO": [
+        {
+            "nama": "TRI BANYAN TIRTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1625,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMAG": [
+        {
+            "nama": "ASURANSI MULTI ARTHA GUNA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 776,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMAR": [
+        {
+            "nama": "BANK AMAR INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 659,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMIN": [
+        {
+            "nama": "ATELIERS MECANIQUES D`INDONESIE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1011,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMMN": [
+        {
+            "nama": "AMMAN MINERAL INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2092,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMMS": [
+        {
+            "nama": "AGUNG MENJANGAN MAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2410,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMOR": [
+        {
+            "nama": "ASHMORE ASSET MANAGEMENT INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1305,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AMRT": [
+        {
+            "nama": "SUMBER ALFARIA TRIJAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1404,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ANDI": [
+        {
+            "nama": "ANDIRA AGRO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 749,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ANJT": [
+        {
+            "nama": "PT. AUSTINDO NUSANTARA JAYA, Tbk",
+            "tipe": "Lokal",
+            "jumlah": 9592,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "APEX": [
+        {
+            "nama": "APEXINDO PRATAMA DUTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3176,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "APIC": [
+        {
+            "nama": "PACIFIC STRATEGIC FINANCIAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2781,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "APLI": [
+        {
+            "nama": "ASIAPLAST INDUSTRIES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1477,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "APLN": [
+        {
+            "nama": "AGUNG PODOMORO LAND Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8272,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "APOL": [
+        {
+            "nama": "ARPENI PRATAMA OCEAN LINE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1147,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARCI": [
+        {
+            "nama": "ARCHI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6580,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARGO": [
+        {
+            "nama": "ARGO PANTES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1166,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARII": [
+        {
+            "nama": "ATLAS RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2242,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARKA": [
+        {
+            "nama": "ARKHA JAYANTI PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4462,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARKO": [
+        {
+            "nama": "ARKORA HYDRO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3889,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARMY": [
+        {
+            "nama": "ARMIDIAN KARYATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 720,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARNA": [
+        {
+            "nama": "ARWANA CITRAMULIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1489,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARTA": [
+        {
+            "nama": "ARTHAVEST Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8213,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARTI": [
+        {
+            "nama": "RATU PRABU ENERGI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3306,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ARTO": [
+        {
+            "nama": "BANK JAGO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2140,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASBI": [
+        {
+            "nama": "ASURANSI BINTANG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2506,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASDM": [
+        {
+            "nama": "ASURANSI DAYIN MITRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 601,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASHA": [
+        {
+            "nama": "CILACAP SAMUDERA FISHING INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASIA": [
+        {
+            "nama": "ASIA NATURAL RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2688,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASJT": [
+        {
+            "nama": "ASURANSI JASA TANIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7739,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASLI": [
+        {
+            "nama": "ASRI KARYA LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1172,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASMI": [
+        {
+            "nama": "ASURANSI MAXIMUS GRAHA PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2996,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASPI": [
+        {
+            "nama": "ANDALAN SAKTI PRIMAINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5118,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASRI": [
+        {
+            "nama": "ALAM SUTERA REALTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1054,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASRM": [
+        {
+            "nama": "ASURANSI RAMAYANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1057,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ASSA": [
+        {
+            "nama": "ADI SARANA ARMADA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 2308,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ATIC": [
+        {
+            "nama": "ANABATIC TECHNOLOGIES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2343,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ATLA": [
+        {
+            "nama": "ATLANTIS SUBSEA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1693,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ATPK": [
+        {
+            "nama": "BARA JAYA INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 556,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AVIA": [
+        {
+            "nama": "AVIA AVIAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3249,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AWAN": [
+        {
+            "nama": "ERA DIGITAL MEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7662,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AXIO": [
+        {
+            "nama": "TERA DATA INDONUSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 858,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AYAM": [
+        {
+            "nama": "JANU PUTRA SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7655,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "AYLS": [
+        {
+            "nama": "AGRO YASA LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6969,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BABP": [
+        {
+            "nama": "BANK MNC INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 682,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BABY": [
+        {
+            "nama": "MULTITREND INDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9235,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BACA": [
+        {
+            "nama": "BANK CAPITAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4966,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BALI": [
+        {
+            "nama": "BALI TOWERINDO SENTRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5970,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BANK": [
+        {
+            "nama": "BANK ALADIN SYARIAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4982,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BAPA": [
+        {
+            "nama": "BEKASI ASRI PEMULA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3094,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BAPI": [
+        {
+            "nama": "BHAKTI AGUNG PROPERTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1723,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BATA": [
+        {
+            "nama": "SEPATU BATA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 548,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BATR": [
+        {
+            "nama": "BENTENG API TECHNIC Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1411,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BAUT": [
+        {
+            "nama": "MITRA ANGKASA SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1562,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BAYU": [
+        {
+            "nama": "BAYU BUANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2808,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBHI": [
+        {
+            "nama": "ALLO BANK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1149,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBKP": [
+        {
+            "nama": "BANK KB INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1698,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBLD": [
+        {
+            "nama": "BUANA FINANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6760,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBRM": [
+        {
+            "nama": "PT. PELAYARAN NASIONAL BINA BUANA RAYA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 7073,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBSI": [
+        {
+            "nama": "KROM BANK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBSS": [
+        {
+            "nama": "BUMI BENOWO SUKSES SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1660,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BBYB": [
+        {
+            "nama": "BANK NEO COMMERCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 994,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BCAP": [
+        {
+            "nama": "MNC KAPITAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4725,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BCIC": [
+        {
+            "nama": "BANK JTRUST INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1867,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BCIP": [
+        {
+            "nama": "BUMI CITRA PERMAI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3764,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BDKR": [
+        {
+            "nama": "BERDIKARI PONDASI PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 597,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BDMN": [
+        {
+            "nama": "BANK DANAMON INDONESIA Tbk , PT",
+            "tipe": "Lokal",
+            "jumlah": 9147,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BEBS": [
+        {
+            "nama": "BERKAH BETON SADAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3139,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BEEF": [
+        {
+            "nama": "ESTIKA TATA TIARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7059,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BEER": [
+        {
+            "nama": "JOBUBU JARUM MINAHASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7619,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BELL": [
+        {
+            "nama": "TRISULA TEXTILE INDUSTRIES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7811,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BESS": [
+        {
+            "nama": "BATULICIN NUSANTARA MARITIM Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 607,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BEST": [
+        {
+            "nama": "PT. BEKASI FAJAR INDUSTRIAL ESTATE, Tbk",
+            "tipe": "Lokal",
+            "jumlah": 4813,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BFIN": [
+        {
+            "nama": "BFI FINANCE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5112,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BGTG": [
+        {
+            "nama": "BANK GANESHA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2393,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BHAT": [
+        {
+            "nama": "BHAKTI MULTI ARTHA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2510,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BHIT": [
+        {
+            "nama": "MNC ASIA HOLDING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 611,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BIKA": [
+        {
+            "nama": "BINAKARYA JAYA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 508,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BIKE": [
+        {
+            "nama": "SEPEDA BERSAMA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7490,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BINA": [
+        {
+            "nama": "BANK INA PERDANA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 1184,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BINO": [
+        {
+            "nama": "PERMA PLASINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 765,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BIPI": [
+        {
+            "nama": "ASTRINDO NUSANTARA INFRASTRUKTUR Tbk , PT",
+            "tipe": "Lokal",
+            "jumlah": 706,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BIPP": [
+        {
+            "nama": "BHUWANATALA INDAH PERMAI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1140,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BIRD": [
+        {
+            "nama": "BLUE BIRD Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1031,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BISI": [
+        {
+            "nama": "BISI INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 509,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BKDP": [
+        {
+            "nama": "BUKIT DARMO PROPERTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3276,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BKSL": [
+        {
+            "nama": "SENTUL CITY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1300,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BKSW": [
+        {
+            "nama": "BANK QNB INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9157,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BLES": [
+        {
+            "nama": "SUPERIOR PRIMA SUKSES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 855,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BLOG": [
+        {
+            "nama": "TRIMITRA TRANS PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2917,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BLTA": [
+        {
+            "nama": "BERLIAN LAJU TANKER Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1741,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BLTZ": [
+        {
+            "nama": "GRAHA LAYAR PRIMA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 4000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BLUE": [
+        {
+            "nama": "BERKAH PRIMA PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2822,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BMAS": [
+        {
+            "nama": "BANK MASPION INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8603,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BMBL": [
+        {
+            "nama": "LAVENDER BINA CENDIKIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2512,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BMHS": [
+        {
+            "nama": "BUNDAMEDIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5737,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BMRI": [
+        {
+            "nama": "BANK MANDIRI (PERSERO) Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 800,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BMSR": [
+        {
+            "nama": "BINTANG MITRA SEMESTARAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5911,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BMTR": [
+        {
+            "nama": "GLOBAL MEDIACOM Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3432,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BNBA": [
+        {
+            "nama": "BANK BUMI ARTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3345,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BNBR": [
+        {
+            "nama": "BAKRIE & BROTHERS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1378,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BNGA": [
+        {
+            "nama": "BANK CIMB NIAGA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9145,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BNII": [
+        {
+            "nama": "BANK MAYBANK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 873,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BNLI": [
+        {
+            "nama": "BANK PERMATA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8912,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BOAT": [
+        {
+            "nama": "NEWPORT MARINE SERVICES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2143,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BOBA": [
+        {
+            "nama": "FORMOSA INGREDIENT FACTORY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2371,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BOGA": [
+        {
+            "nama": "APOLLO GLOBAL INTERACTIVE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2950,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BOLA": [
+        {
+            "nama": "BALI BINTANG SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 508,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BOLT": [
+        {
+            "nama": "GARUDA METALINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 623,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BORN": [
+        {
+            "nama": "BORNEO LUMBUNG ENERGI & METAL TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 5950,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BOSS": [
+        {
+            "nama": "BORNEO OLAH SARANA SUKSES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1358,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BPFI": [
+        {
+            "nama": "WOORI FINANCE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 778,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BPII": [
+        {
+            "nama": "BATAVIA PROSPERINDO INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8986,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BPTR": [
+        {
+            "nama": "BATAVIA PROSPERINDO TRANS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1048,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BRAM": [
+        {
+            "nama": "INDO KORDSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 561,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BREN": [
+        {
+            "nama": "BARITO RENEWABLES ENERGY Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 2267,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BRIS": [
+        {
+            "nama": "BANK SYARIAH INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5068,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BRMS": [
+        {
+            "nama": "BUMI RESOURCES MINERALS TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 761,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BRNA": [
+        {
+            "nama": "BERLINA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5457,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BRPT": [
+        {
+            "nama": "BARITO PACIFIC Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7137,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BRRC": [
+        {
+            "nama": "RAJA ROTI CEMERLANG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 609,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BSBK": [
+        {
+            "nama": "WULANDARI BANGUN LAKSANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 523,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BSDE": [
+        {
+            "nama": "BUMI SERPONG DAMAI, PT",
+            "tipe": "Lokal",
+            "jumlah": 1811,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BSIM": [
+        {
+            "nama": "BANK SINARMAS Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 5999,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BSML": [
+        {
+            "nama": "BINTANG SAMUDERA MANDIRI LINES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 502,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BSSR": [
+        {
+            "nama": "PT. BARAMULTI SUKSESSARANA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BTEK": [
+        {
+            "nama": "BUMI TEKNOKULTURA UNGGUL TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 4159,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BTEL": [
+        {
+            "nama": "BAKRIE TELECOM Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 717,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BTON": [
+        {
+            "nama": "BETONJAYA MANUNGGAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 515,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BTPN": [
+        {
+            "nama": "BANK SMBC INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9105,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BTPS": [
+        {
+            "nama": "BANK BTPN SYARIAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6900,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BUAH": [
+        {
+            "nama": "SEGAR KUMALA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 559,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BUDI": [
+        {
+            "nama": "BUDI STARCH & SWEETENER Tbk",
+            "tipe": "Lokal",
+            "jumlah": 2670,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BUKA": [
+        {
+            "nama": "BUKALAPAK.COM Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1099,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BUKK": [
+        {
+            "nama": "BUKAKA TEKNIK UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1537,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BULL": [
+        {
+            "nama": "BUANA LINTAS LAUTAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1453,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BUMI": [
+        {
+            "nama": "BUMI RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4578,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BUVA": [
+        {
+            "nama": "BUKIT ULUWATU VILLA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6107,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BVIC": [
+        {
+            "nama": "BANK VICTORIA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4007,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BWPT": [
+        {
+            "nama": "EAGLE HIGH PLANTATIONS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3770,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "BYAN": [
+        {
+            "nama": "BAYAN RESOURCES Tbk",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CAKK": [
+        {
+            "nama": "CAHAYAPUTRA ASA KERAMIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8864,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CAMP": [
+        {
+            "nama": "CAMPINA ICE CREAM INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 506,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CANI": [
+        {
+            "nama": "CAPITOL NUSANTARA INDONESIA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 3900,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CARE": [
+        {
+            "nama": "METRO HEALTHCARE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3759,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CARS": [
+        {
+            "nama": "INDUSTRI DAN PERDAGANGAN BINTRACO DHARMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 501,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CASA": [
+        {
+            "nama": "CAPITAL FINANCIAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4606,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CASH": [
+        {
+            "nama": "CASHLEZ WORLDWIDE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 641,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CASS": [
+        {
+            "nama": "CAHAYA AERO SERVICES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6100,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CBMF": [
+        {
+            "nama": "CAHAYA BINTANG MEDAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 827,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CBRE": [
+        {
+            "nama": "CAKRA BUANA RESOURCES ENERGI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1130,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CBUT": [
+        {
+            "nama": "CITRA BORNEO UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5262,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CCSI": [
+        {
+            "nama": "COMMUNICATION CABLE SYSTEMS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1835,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CDIA": [
+        {
+            "nama": "CHANDRA DAYA INVESTASI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 900,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CEKA": [
+        {
+            "nama": "WILMAR CAHAYA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8601,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CENT": [
+        {
+            "nama": "CENTRATAMA TELEKOMUNIKASI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9217,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CFIN": [
+        {
+            "nama": "CLIPAN FINANCE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5148,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CHIP": [
+        {
+            "nama": "PELITA TEKNOLOGI GLOBAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5961,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CINT": [
+        {
+            "nama": "PT. CHITOSE INTERNASIONAL Tbk",
+            "tipe": "Lokal",
+            "jumlah": 602,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CITA": [
+        {
+            "nama": "CITA MINERAL INVESTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1854,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CKRA": [
+        {
+            "nama": "CAKRA MINERALTbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7404,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CLPI": [
+        {
+            "nama": "COLORPAK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5100,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CMNP": [
+        {
+            "nama": "CITRA MARGA NUSAPHALA PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5935,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CMNT": [
+        {
+            "nama": "CEMINDO GEMILANG TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 8737,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CMPP": [
+        {
+            "nama": "AIRASIA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4616,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CMRY": [
+        {
+            "nama": "CISARUA MOUNTAIN DAIRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 564,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CNKO": [
+        {
+            "nama": "EXPLOITASI ENERGI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4559,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CNMA": [
+        {
+            "nama": "NUSANTARA SEJAHTERA RAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1377,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CNTX": [
+        {
+            "nama": "CENTURY TEXTILE INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3420,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "COAL": [
+        {
+            "nama": "BLACK DIAMOND RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 600,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "COCO": [
+        {
+            "nama": "WAHANA INTERFOOD NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5132,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "COIN": [
+        {
+            "nama": "INDOKRIPTO KOIN SEMESTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2398,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "COWL": [
+        {
+            "nama": "COWELL DEVELOPMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7112,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CPGT": [
+        {
+            "nama": "CITRA MAHARLIKA NUSANTARA CORPORA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2912,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CPIN": [
+        {
+            "nama": "CHAROEN POKPHAND INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 598,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CPRO": [
+        {
+            "nama": "CENTRAL PROTEINAPRIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4515,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CSAP": [
+        {
+            "nama": "CATUR SENTOSA ADIPRANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CSIS": [
+        {
+            "nama": "CAHAYASAKTI INVESTINDO SUKSES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6521,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CSRA": [
+        {
+            "nama": "CISADANE SAWIT RAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3800,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CTBN": [
+        {
+            "nama": "CITRA TUBINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 697,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CTRA": [
+        {
+            "nama": "CIPUTRA DEVELOPMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2094,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CTTH": [
+        {
+            "nama": "CITATAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 526,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "CYBR": [
+        {
+            "nama": "ITSEC ASIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3871,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DADA": [
+        {
+            "nama": "DIAMOND CITRA PROPERTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2153,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DAJK": [
+        {
+            "nama": "DWI ANEKA JAYA KEMASINDO Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 5049,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DART": [
+        {
+            "nama": "DUTA ANGGADA REALTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4431,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DATA": [
+        {
+            "nama": "REMALA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DAVO": [
+        {
+            "nama": "DAVOMAS ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 603,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DAYA": [
+        {
+            "nama": "DUTA INTIDAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1743,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DCII": [
+        {
+            "nama": "DCI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1112,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DEAL": [
+        {
+            "nama": "DEWATA FREIGHT INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 614,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DEFI": [
+        {
+            "nama": "DANASUPRA ERAPACIFIC Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2357,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DEPO": [
+        {
+            "nama": "CATURKARDA DEPO BANGUNAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2200,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DEWA": [
+        {
+            "nama": "PT. DARMA HENWA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 621,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DEWI": [
+        {
+            "nama": "DEWI SHRI FARMINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 508,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DFAM": [
+        {
+            "nama": "DAFAM PROPERTY INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5343,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DGIK": [
+        {
+            "nama": "NUSA KONSTRUKSI ENJINIRING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5230,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DGWG": [
+        {
+            "nama": "DELTA GIRI WACANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3009,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DIGI": [
+        {
+            "nama": "ARKADIA DIGITAL MEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3599,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DILD": [
+        {
+            "nama": "INTILAND DEVELOPMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1128,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DIVA": [
+        {
+            "nama": "DISTRIBUSI VOUCHER NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2220,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DKFT": [
+        {
+            "nama": "CENTRAL OMEGA RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6379,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DMMX": [
+        {
+            "nama": "DIGITAL MEDIATAMA MAXIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1881,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DMND": [
+        {
+            "nama": "DIAMOND FOOD INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1999,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DNAR": [
+        {
+            "nama": "BANK OKE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2915,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DNET": [
+        {
+            "nama": "PT. INDORITEL MAKMUR INTERNASIONAL Tbk",
+            "tipe": "Lokal",
+            "jumlah": 2013,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DOID": [
+        {
+            "nama": "BUMA INTERNASIONAL GRUP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 565,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DOOH": [
+        {
+            "nama": "ERA MEDIA SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6609,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DOSS": [
+        {
+            "nama": "GLOBAL SUKSES DIGITAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 724,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DPNS": [
+        {
+            "nama": "DUTA PERTIWI NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3126,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DPUM": [
+        {
+            "nama": "DUA PUTRA UTAMA MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5924,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DRMA": [
+        {
+            "nama": "DHARMA POLIMETAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1416,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DSFI": [
+        {
+            "nama": "DHARMA SAMUDERA FISHING INDUSTRIES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6960,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DSNG": [
+        {
+            "nama": "DHARMA SATYA NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2839,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DSSA": [
+        {
+            "nama": "PT DIAN SWASTATIKA SENTOSA Tbk.",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 1968,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DUCK": [
+        {
+            "nama": "JAYA BERSAMA INDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 640,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DUTI": [
+        {
+            "nama": "DUTA PERTIWI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1410,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DVLA": [
+        {
+            "nama": "DARYA-VARIA LABORATORIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9212,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DWGL": [
+        {
+            "nama": "DWI GUNA LAKSANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 972,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "DYAN": [
+        {
+            "nama": "DYANDRA MEDIA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5147,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ECII": [
+        {
+            "nama": "ELECTRONIC CITY INDONESIA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 895,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EDGE": [
+        {
+            "nama": "INDOINTERNET Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3300,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EDJSA": [
+        {
+            "nama": "EKA DHARMA JAYA SAKTI, PT",
+            "tipe": "Lokal",
+            "jumlah": 3200,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EDJSB": [
+        {
+            "nama": "EKA DHARMA JAYA SAKTI, PT",
+            "tipe": "Lokal",
+            "jumlah": 2995,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EKAD": [
+        {
+            "nama": "EKADHARMA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8226,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ELIT": [
+        {
+            "nama": "DATA SINERGITAMA JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1508,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ELSA": [
+        {
+            "nama": "ELNUSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5110,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ELTY": [
+        {
+            "nama": "BAKRIELAND DEVELOPMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 535,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EMAS": [
+        {
+            "nama": "MERDEKA GOLD RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6333,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EMDE": [
+        {
+            "nama": "MEGAPOLITAN DEVELOPMENTS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 690,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EMTK": [
+        {
+            "nama": "ELANG MAHKOTA TEKNOLOGI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 604,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ENAK": [
+        {
+            "nama": "CHAMP RESTO INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 754,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ENRG": [
+        {
+            "nama": "ENERGI MEGA PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1769,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ENVY": [
+        {
+            "nama": "ENVY TECHNOLOGIES INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 601,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ENZO": [
+        {
+            "nama": "MORENZO ABADI PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2081,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EPAC": [
+        {
+            "nama": "MEGALESTARI EPACK SENTOSARAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2422,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EPMT": [
+        {
+            "nama": "ENSEVAL PUTERA MEGATRADING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9198,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ERAA": [
+        {
+            "nama": "ERAJAYA SWASEMBADA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 1633,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ERTX": [
+        {
+            "nama": "PT ERATEX DJAJA Tbk",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 9219,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ESIP": [
+        {
+            "nama": "SINERGI INTI PLASTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2875,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ESSA": [
+        {
+            "nama": "ESSA INDUSTRIES INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 784,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ESTA": [
+        {
+            "nama": "ESTA MULTI USAHA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6261,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ESTI": [
+        {
+            "nama": "EVER SHINE TEX Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4694,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ETWA": [
+        {
+            "nama": "ETERINDO WAHANATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7926,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EURO": [
+        {
+            "nama": "ESTEE GOLD FEET Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 506,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "EXCL": [
+        {
+            "nama": "XLSMART TELECOM SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1443,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FAPA": [
+        {
+            "nama": "FAP AGRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1157,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FAST": [
+        {
+            "nama": "FAST FOOD INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3751,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FASW": [
+        {
+            "nama": "FAJAR SURYA WISESA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5985,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FILM": [
+        {
+            "nama": "MD ENTERTAINMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1043,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FIMP": [
+        {
+            "nama": "FIMPERKASA UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1382,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FINN": [
+        {
+            "nama": "FIRST INDO AMERICAN LEASING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2913,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FIRE": [
+        {
+            "nama": "ALFA ENERGI INVESTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3600,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FISH": [
+        {
+            "nama": "FKS MULTI AGRO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7906,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FITT": [
+        {
+            "nama": "HOTEL FITRA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7916,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FLMC": [
+        {
+            "nama": "FALMACO NONWOVEN INDUSTRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3949,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FMII": [
+        {
+            "nama": "FORTUNE MATE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4667,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FOLK": [
+        {
+            "nama": "MULTI GARAM UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2077,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FORE": [
+        {
+            "nama": "FORE KOPI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 529,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FORU": [
+        {
+            "nama": "FORTUNE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1155,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FORZ": [
+        {
+            "nama": "FORZA LAND INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1231,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FUJI": [
+        {
+            "nama": "FUJI FINANCE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 526,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FUTR": [
+        {
+            "nama": "FUTURA ENERGI GLOBAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "FWCT": [
+        {
+            "nama": "WIJAYA CAHAYA TIMBER Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5808,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GAMA": [
+        {
+            "nama": "PT. AKSARA GLOBAL DEVELOPMENT Tbk",
+            "tipe": "Lokal",
+            "jumlah": 2400,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GDWU": [
+        {
+            "nama": "KASOGI INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 566,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GEMA": [
+        {
+            "nama": "GEMA GRAHA SARANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1774,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GEMS": [
+        {
+            "nama": "PT. GOLDEN ENERGY MINES Tbk",
+            "tipe": "Lokal",
+            "jumlah": 5100,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GGRP": [
+        {
+            "nama": "GUNUNG RAJA PAKSI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2353,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GHON": [
+        {
+            "nama": "GIHON TELEKOMUNIKASI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5043,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GJTL": [
+        {
+            "nama": "GAJAH TUNGGAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GLOB": [
+        {
+            "nama": "GLOBE KITA TERANG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8969,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GMCW": [
+        {
+            "nama": "GRAHAMAS CITRAWISATA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1817,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GMFI": [
+        {
+            "nama": "GARUDA MAINTENANCE FACILITY AERO ASIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6577,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GOLD": [
+        {
+            "nama": "VISI TELEKOMUNIKASI INFRASTRUKTUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 847,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GOLL": [
+        {
+            "nama": "GOLDEN PLANTATION Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7642,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GOOD": [
+        {
+            "nama": "GARUDAFOOD PUTRA PUTRI JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3017,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GOTO": [
+        {
+            "nama": "GOTO GOJEK TOKOPEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 743,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GPRA": [
+        {
+            "nama": "PERDANA GAPURAPRIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 519,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GPSO": [
+        {
+            "nama": "GEOPRIMA SOLUSI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3695,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GREN": [
+        {
+            "nama": "EVERGREEN INVESCO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 622,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GRIA": [
+        {
+            "nama": "INGRIA PRATAMA CAPITALINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4727,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GRPH": [
+        {
+            "nama": "GRIPTHA PUTRA PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7024,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GRPM": [
+        {
+            "nama": "GRAHA PRIMA MENTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7049,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GSMF": [
+        {
+            "nama": "EQUITY DEVELOPMENT INVESTMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6828,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GTBO": [
+        {
+            "nama": "GARDA TUJUH BUANA Tbk, PT.",
+            "tipe": "Lokal",
+            "jumlah": 2621,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GTSI": [
+        {
+            "nama": "GTS INTERNASIONAL TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 8480,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GULA": [
+        {
+            "nama": "AMAN AGRINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5165,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GUNA": [
+        {
+            "nama": "GUNANUSA ERAMANDIRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1600,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "GZCO": [
+        {
+            "nama": "GOZCO PLANTATIONS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2837,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HADE": [
+        {
+            "nama": "HIMALAYA ENERGI PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 943,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HAIS": [
+        {
+            "nama": "HASNUR INTERNASIONAL SHIPPING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 560,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HAJJ": [
+        {
+            "nama": "ARSY BUANA TRAVELINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6495,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HALO": [
+        {
+            "nama": "HALONI JANE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 528,
+            "persen": 200.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HATM": [
+        {
+            "nama": "HABCO TRANS MARITIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2011,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HBAT": [
+        {
+            "nama": "MINAHASA MEMBANGUN HEBAT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4494,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HDFA": [
+        {
+            "nama": "RADANA BHASKARA FINANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3715,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HDIT": [
+        {
+            "nama": "HENSEL DAVEST INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5225,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HDTX": [
+        {
+            "nama": "PANASIA INDO RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1035,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HEAL": [
+        {
+            "nama": "MEDIKALOKA HERMINA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 723,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HELI": [
+        {
+            "nama": "JAYA TRISHINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1600,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HERO": [
+        {
+            "nama": "DFI RETAIL NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 826,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HEXA": [
+        {
+            "nama": "HEXINDO ADIPERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 507,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HGII": [
+        {
+            "nama": "HERO GLOBAL INVESTMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HILL": [
+        {
+            "nama": "HILLCON Tbk, PT",
+            "tipe": "Asing",
+            "jumlah": 3712,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HITS": [
+        {
+            "nama": "HUMPUSS INTERMODA TRANSPORTASI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5057,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HOKI": [
+        {
+            "nama": "BUYUNG POETRA SEMBADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 598,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HOME": [
+        {
+            "nama": "HOTEL MANDARINE REGENCY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2467,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HOMI": [
+        {
+            "nama": "GRAND HOUSE MULIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5200,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HOPE": [
+        {
+            "nama": "HARAPAN DUTA PERTIWI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HOTL": [
+        {
+            "nama": "SARASWATI GRIYA LESTARI TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 5132,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HRME": [
+        {
+            "nama": "MENTENG HERITAGE REALTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8539,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HRTA": [
+        {
+            "nama": "HARTADINATA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7100,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HRUM": [
+        {
+            "nama": "HARUM ENERGY Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 1516,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HUMI": [
+        {
+            "nama": "HUMPUSS MARITIM INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7643,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "HYGN": [
+        {
+            "nama": "ECOCARE INDO PASIFIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4752,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IATA": [
+        {
+            "nama": "PT. MNC ENERGY INVESTMENTS TBK",
+            "tipe": "Lokal",
+            "jumlah": 4879,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IBFN": [
+        {
+            "nama": "INTAN BARU PRANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5507,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IBOS": [
+        {
+            "nama": "INDO BOGA SUKSES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4260,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ICON": [
+        {
+            "nama": "ISLAND CONCEPTS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 788,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IDEA": [
+        {
+            "nama": "IDEA INDONESIA AKADEMI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2866,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IFII": [
+        {
+            "nama": "INDONESIA FIBREBOARD INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IFSH": [
+        {
+            "nama": "IFISHDECO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 949,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IGAR": [
+        {
+            "nama": "CHAMPION PACIFIC INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 566,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IIKP": [
+        {
+            "nama": "INTI AGRI RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 630,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IKAN": [
+        {
+            "nama": "ERA MANDIRI CEMERLANG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3352,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IKPM": [
+        {
+            "nama": "IKAPHARMINDO PUTRAMAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7811,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IMAS": [
+        {
+            "nama": "INDOMOBIL SUKSES INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 627,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IMJS": [
+        {
+            "nama": "INDOMOBIL MULTI JASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9197,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IMPC": [
+        {
+            "nama": "IMPACK PRATAMA INDUSTRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1989,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INAF": [
+        {
+            "nama": "INDOFARMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1374,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INAI": [
+        {
+            "nama": "INDAL ALUMINIUM INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 627,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INCF": [
+        {
+            "nama": "INDO KOMODITI KORPORA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INCI": [
+        {
+            "nama": "INTAN WIJAYA INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1535,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INCO": [
+        {
+            "nama": "VALE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3400,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INDO": [
+        {
+            "nama": "ROYALINDO INVESTA WIJAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 682,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INDS": [
+        {
+            "nama": "INDOSPRING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8811,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INDX": [
+        {
+            "nama": "PT. TANAH LAUT Tbk",
+            "tipe": "Lokal",
+            "jumlah": 2323,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INDY": [
+        {
+            "nama": "INDIKA ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2808,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INET": [
+        {
+            "nama": "SINERGI INTI ANDALAN PRIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5977,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INKP": [
+        {
+            "nama": "PT INDAH KIAT PULP & PAPER Tbk",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 1726,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INOV": [
+        {
+            "nama": "INOCYCLE TECHNOLOGY GROUP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6638,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INPP": [
+        {
+            "nama": "INDONESIAN PARADISE PROPERTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INPS": [
+        {
+            "nama": "INDAH PRAKASA SENTOSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8748,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INRU": [
+        {
+            "nama": "TOBA PULP LESTARI TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 9254,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INTA": [
+        {
+            "nama": "PT INTRACO PENTA TBK",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 973,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INTD": [
+        {
+            "nama": "INTER DELTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5474,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INTP": [
+        {
+            "nama": "INDOCEMENT TUNGGAL PRAKARSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 660,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "INVS": [
+        {
+            "nama": "INOVISI INFRACOM Tbk, PT.",
+            "tipe": "Lokal",
+            "jumlah": 789,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IOTF": [
+        {
+            "nama": "SUMBER SINERGI MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1867,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IPAC": [
+        {
+            "nama": "ERA GRAHAREALTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9060,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IPCC": [
+        {
+            "nama": "INDONESIA KENDARAAN TERMINAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 554,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IPCM": [
+        {
+            "nama": "JASA ARMADA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1078,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IPOL": [
+        {
+            "nama": "INDOPOLY SWAKARSA INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 513,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IPPE": [
+        {
+            "nama": "INDO PURECO PRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3522,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IPTV": [
+        {
+            "nama": "MNC VISION NETWORKS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6277,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IRRA": [
+        {
+            "nama": "ITAMA RANORAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7878,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "IRSX": [
+        {
+            "nama": "FOLAGO GLOBAL NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6395,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ISAP": [
+        {
+            "nama": "ISRA PRESISI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5039,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ISAT": [
+        {
+            "nama": "INDOSAT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 833,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ISSP": [
+        {
+            "nama": "STEEL PIPE INDUSTRY OF INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 679,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ITMA": [
+        {
+            "nama": "PT SUMBER ENERGI ANDALAN Tbk",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 1352,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ITTG": [
+        {
+            "nama": "LEO INVESTMENTS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7545,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JAKA": [
+        {
+            "nama": "JAKA INTI REALTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6508,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JASS": [
+        {
+            "nama": "PT. JASA ANGKASA SEMESTA TBK",
+            "tipe": "Lokal",
+            "jumlah": 4979,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JAST": [
+        {
+            "nama": "JASNITA TELEKOMINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2032,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JAWA": [
+        {
+            "nama": "JAYA AGRA WATTIE Tbk",
+            "tipe": "Lokal",
+            "jumlah": 9250,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JAYA": [
+        {
+            "nama": "ARMADA BERJAYA TRANS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5308,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JECC": [
+        {
+            "nama": "JEMBO CABLE COMPANY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6077,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JGLE": [
+        {
+            "nama": "GRAHA ANDRASENTRA PROPERTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3876,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JIHD": [
+        {
+            "nama": "JAKARTA INTERNATIONAL HOTELS & DEVELOPMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2263,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JKON": [
+        {
+            "nama": "JAYA KONSTRUKSI MANGGALA PRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6089,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JKSW": [
+        {
+            "nama": "JAKARTA KYOEI STEEL WORKS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 957,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JMAS": [
+        {
+            "nama": "ASURANSI JIWA SYARIAH JASA MITRA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 830,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JPFA": [
+        {
+            "nama": "JAPFA COMFEED INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5543,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JRPT": [
+        {
+            "nama": "JAYA REAL PROPERTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4153,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JSKY": [
+        {
+            "nama": "SKY ENERGY INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2034,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JSPT": [
+        {
+            "nama": "JAKARTA SETIABUDI INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5095,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "JTPE": [
+        {
+            "nama": "JASUINDO TIGA PERKASA Tbk , PT",
+            "tipe": "Lokal",
+            "jumlah": 4567,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KAQI": [
+        {
+            "nama": "JANTRA GRUPO INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7832,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KARK": [
+        {
+            "nama": "DAYAINDO RESOURCES INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 738,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KARW": [
+        {
+            "nama": "PT. MERATUS JASA PRIMA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 7703,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KAYU": [
+        {
+            "nama": "DARMI BERSAUDARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3746,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KBAG": [
+        {
+            "nama": "KARYA BERSAMA ANUGERAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5547,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KBLI": [
+        {
+            "nama": "KMI WIRE AND CABLE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4947,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KBLM": [
+        {
+            "nama": "KABELINDO MURNI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4027,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KBLV": [
+        {
+            "nama": "FIRST MEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3376,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KBRI": [
+        {
+            "nama": "KERTAS BASUKI RACHMAT INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7525,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KDSI": [
+        {
+            "nama": "KEDAWUNG SETIA INDUSTRIAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7852,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KDTN": [
+        {
+            "nama": "PURI SENTUL PERMAI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 604,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KEEN": [
+        {
+            "nama": "KENCANA ENERGI LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3030,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KEJU": [
+        {
+            "nama": "MULIA BOGA RAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2250,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KETR": [
+        {
+            "nama": "KETROSDEN TRIASMITRA, PT",
+            "tipe": "Lokal",
+            "jumlah": 1230,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KIJA": [
+        {
+            "nama": "KAWASAN INDUSTRI JABABEKA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1153,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KING": [
+        {
+            "nama": "HOFFMEN CLEANINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 549,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KINO": [
+        {
+            "nama": "KINO INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7905,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KIOS": [
+        {
+            "nama": "KIOSON KOMERSIAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 775,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KJEN": [
+        {
+            "nama": "KRIDA JARINGAN NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 592,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KKES": [
+        {
+            "nama": "KUSUMA KEMINDO SENTOSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1067,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KKGI": [
+        {
+            "nama": "RESOURCE ALAM INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2783,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KLBF": [
+        {
+            "nama": "KALBE FARMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1008,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KLIN": [
+        {
+            "nama": "KLINKO KARYA IMAJI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 548,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KMDS": [
+        {
+            "nama": "KURNIAMITRA DUTA SENTOSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1976,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KMTR": [
+        {
+            "nama": "KIRANA MEGATARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KOBX": [
+        {
+            "nama": "PT. KOBEXINDO TRACTORS Tbk",
+            "tipe": "Lokal",
+            "jumlah": 8945,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KOKA": [
+        {
+            "nama": "KOKA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 560,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KONI": [
+        {
+            "nama": "PERDANA BANGUN PUSAKA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1812,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KOPI": [
+        {
+            "nama": "MITRA ENERGI PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 703,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KOTA": [
+        {
+            "nama": "DMS PROPERTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4811,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KPAL": [
+        {
+            "nama": "STEADFAST MARINE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1991,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KPAS": [
+        {
+            "nama": "COTTONINDO ARIESTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1503,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KPIG": [
+        {
+            "nama": "MNC TOURISM INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1870,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KRAH": [
+        {
+            "nama": "GRAND KARTECH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 504,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KREN": [
+        {
+            "nama": "QUANTUM CLOVERA INVESTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 513,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KRYA": [
+        {
+            "nama": "BANGUN KARYA PERKASA JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 975,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "KSIX": [
+        {
+            "nama": "KENTANIX SUPRA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1067,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LABA": [
+        {
+            "nama": "GREEN POWER GROUP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1180,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LAPD": [
+        {
+            "nama": "LEYAND INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5100,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LCGP": [
+        {
+            "nama": "EUREKA PRIMA JAKARTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 657,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LCKM": [
+        {
+            "nama": "LCK GLOBAL KEDATON Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6278,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LEAD": [
+        {
+            "nama": "LOGINDO SAMUDRAMAKMUR Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 2319,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LFLO": [
+        {
+            "nama": "IMAGO MULIA PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2443,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LIFE": [
+        {
+            "nama": "MSIG LIFE INSURANCE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1250,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LINK": [
+        {
+            "nama": "LINK NET Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1922,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LIVE": [
+        {
+            "nama": "HOMECO VICTORIA MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7869,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LMAS": [
+        {
+            "nama": "LIMAS INDONESIA MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 746,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LMAX": [
+        {
+            "nama": "LUPROMAX PELUMAS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 546,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LMPI": [
+        {
+            "nama": "LANGGENG MAKMUR INDUSTRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1312,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LOPI": [
+        {
+            "nama": "LOGISTICSPLUS INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6713,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LPGI": [
+        {
+            "nama": "LIPPO GENERAL INSURANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1810,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LPIN": [
+        {
+            "nama": "PT. MULTI PRIMA SEJAHTERA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 8171,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LPKR": [
+        {
+            "nama": "PT. LIPPO KARAWACI Tbk",
+            "tipe": "Lokal",
+            "jumlah": 1040,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LPLI": [
+        {
+            "nama": "STAR PACIFIC Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5060,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LPPF": [
+        {
+            "nama": "MDS RETAILING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 930,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LPPS": [
+        {
+            "nama": "LENOX PASIFIK INVESTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6752,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LRNA": [
+        {
+            "nama": "EKA SARI LORENA TRANSPORT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1282,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LTLS": [
+        {
+            "nama": "LAUTAN LUAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 611,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LUCK": [
+        {
+            "nama": "SENTRAL MITRA INFORMATIKA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1493,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "LUCY": [
+        {
+            "nama": "LIMA DUA LIMA TIGA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5942,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MABA": [
+        {
+            "nama": "MARGA ABHINAYA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1516,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAGP": [
+        {
+            "nama": "MULTI AGRO GEMILANG PLANTATION Tbk",
+            "tipe": "Lokal",
+            "jumlah": 1579,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAIN": [
+        {
+            "nama": "MALINDO FEEDMILL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 508,
+            "persen": 60.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAMI": [
+        {
+            "nama": "MAS MURNI INDONESIA Tbk , PT",
+            "tipe": "Lokal",
+            "jumlah": 642,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAMIP": [
+        {
+            "nama": "MAS MURNI INDONESIA Tbk , PT",
+            "tipe": "Lokal",
+            "jumlah": 833,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MANG": [
+        {
+            "nama": "MANGGUNG POLAHRAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5456,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MANY": [
+        {
+            "nama": "MANLY UNITAMA FINANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8337,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAPB": [
+        {
+            "nama": "MAP BOGA ADIPERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2014,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAPI": [
+        {
+            "nama": "MITRA ADIPERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5100,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MARI": [
+        {
+            "nama": "MAHAKA RADIO INTEGRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4035,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MARK": [
+        {
+            "nama": "MARK DYNAMICS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2070,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAXI": [
+        {
+            "nama": "MAXINDO KARYA ANUGERAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 659,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MAYA": [
+        {
+            "nama": "BANK MAYAPADA INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 858,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MBAP": [
+        {
+            "nama": "MITRABARA ADIPERDANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 900,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MBMA": [
+        {
+            "nama": "MERDEKA BATTERY MATERIALS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5004,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MBSS": [
+        {
+            "nama": "MITRABAHTERA SEGARA SEJATI Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 8250,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MCAS": [
+        {
+            "nama": "M CASH INTEGRASI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1349,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MCOR": [
+        {
+            "nama": "BANK CHINA CONSTRUCTION BANK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MDIA": [
+        {
+            "nama": "INTERMEDIA CAPITAL Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 8328,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MDIY": [
+        {
+            "nama": "DAYA INTIGUNA YASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3554,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MDKA": [
+        {
+            "nama": "MERDEKA COPPER GOLD Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1188,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MDLA": [
+        {
+            "nama": "MEDELA POTENTIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2398,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MDLN": [
+        {
+            "nama": "MODERNLAND REALTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1314,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MDRN": [
+        {
+            "nama": "MODERN INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1710,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MEDC": [
+        {
+            "nama": "MEDCO ENERGI INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5150,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MEDS": [
+        {
+            "nama": "HETZER MEDICAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5693,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MEGA": [
+        {
+            "nama": "BANK MEGA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5802,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MEJA": [
+        {
+            "nama": "HARTA DJAYA KARYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3931,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MENN": [
+        {
+            "nama": "MENN TEKNOLOGI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1837,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MERK": [
+        {
+            "nama": "MERCK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1266,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "META": [
+        {
+            "nama": "NUSANTARA INFRASTRUCTURE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9714,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MFMI": [
+        {
+            "nama": "MULTIFILING MITRA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9935,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MGLV": [
+        {
+            "nama": "PANCA ANUGRAH WISESA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7874,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MGNA": [
+        {
+            "nama": "MAGNA INVESTAMA MANDIRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7019,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MGRO": [
+        {
+            "nama": "MAHKOTA GROUP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5640,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MHKI": [
+        {
+            "nama": "MULTI HANNA KREASINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7860,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MICE": [
+        {
+            "nama": "MULTI INDOCITRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 659,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MIDI": [
+        {
+            "nama": "MIDI UTAMA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7709,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MIKA": [
+        {
+            "nama": "MITRA KELUARGA KARYASEHAT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6465,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MINA": [
+        {
+            "nama": "SANURHASTA MITRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3048,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MINE": [
+        {
+            "nama": "SINAR TERANG MANDIRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8079,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MIRA": [
+        {
+            "nama": "MITRA INTERNATIONAL RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 579,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MITI": [
+        {
+            "nama": "MITRA INVESTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4515,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MKNT": [
+        {
+            "nama": "MITRA KOMUNIKASI NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2263,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MKPI": [
+        {
+            "nama": "METROPOLITAN KENTJANA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 715,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MKTR": [
+        {
+            "nama": "MENTHOBI KARYATAMA RAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6862,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MLBI": [
+        {
+            "nama": "MULTI BINTANG INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 754,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MLIA": [
+        {
+            "nama": "MULIA INDUSTRINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2580,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MLPL": [
+        {
+            "nama": "MULTIPOLAR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 990,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MLPT": [
+        {
+            "nama": "PT. MULTIPOLAR TECHNOLOGY Tbk",
+            "tipe": "Lokal",
+            "jumlah": 8495,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MMIX": [
+        {
+            "nama": "MULTI MEDIKA INTERNASIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5674,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MMLP": [
+        {
+            "nama": "MEGA MANUNGGAL PROPERTY Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 9144,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MNCN": [
+        {
+            "nama": "MEDIA NUSANTARA CITRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3918,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MOLI": [
+        {
+            "nama": "MADUSARI MURNI INDAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5215,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MORA": [
+        {
+            "nama": "EKAMAS MORA REPUBLIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1494,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MPMX": [
+        {
+            "nama": "MITRA PINASTHIKA MUSTIKA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 509,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MPOW": [
+        {
+            "nama": "MEGAPOWER MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 570,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MPPA": [
+        {
+            "nama": "MATAHARI PUTRA PRIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5014,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MPRO": [
+        {
+            "nama": "MAHA PROPERTI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1006,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MREI": [
+        {
+            "nama": "MASKAPAI REASURANSI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2053,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MSIN": [
+        {
+            "nama": "PT. MNC DIGITAL ENTERTAINMENT Tbk",
+            "tipe": "Lokal",
+            "jumlah": 773,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MSJA": [
+        {
+            "nama": "MULTI SPUNINDO JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1063,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTDL": [
+        {
+            "nama": "METRODATA ELECTRONICS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 643,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTEL": [
+        {
+            "nama": "DAYAMITRA TELEKOMUNIKASI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 598,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTFN": [
+        {
+            "nama": "CAPITALINC INVESTMENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 515,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTLA": [
+        {
+            "nama": "METROPOLITAN LAND Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 1500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTPS": [
+        {
+            "nama": "META EPSI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1848,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTSM": [
+        {
+            "nama": "METRO REALTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 656,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MTWI": [
+        {
+            "nama": "MALACCA TRUST WUWUNGAN INSURANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8590,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MUTU": [
+        {
+            "nama": "MUTUAGUNG LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 732,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MYOH": [
+        {
+            "nama": "SAMINDO RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1418,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MYRX": [
+        {
+            "nama": "HANSON INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1087,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MYRXP": [
+        {
+            "nama": "HANSON INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1079,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "MYTX": [
+        {
+            "nama": "ASIA PACIFIC INVESTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1851,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NAIK": [
+        {
+            "nama": "ADIWARNA ANUGERAH ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5254,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NANO": [
+        {
+            "nama": "NANOTECH INDONESIA GLOBAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4750,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NASA": [
+        {
+            "nama": "ANDALAN PERKASA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4271,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NASI": [
+        {
+            "nama": "WAHANA INTI MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 563,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NATO": [
+        {
+            "nama": "OLYMPUS STRATEGIC INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2687,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NAYZ": [
+        {
+            "nama": "HASSANA BOGA SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5710,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NCKL": [
+        {
+            "nama": "TRIMEGAH BANGUN PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 628,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NELY": [
+        {
+            "nama": "PT. PELAYARAN NELLY DWI PUTRI Tbk",
+            "tipe": "Lokal",
+            "jumlah": 8383,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NEST": [
+        {
+            "nama": "ESTA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NETV": [
+        {
+            "nama": "MDTV MEDIA TECHNOLOGIES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 800,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NFCX": [
+        {
+            "nama": "NFC INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5129,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NICE": [
+        {
+            "nama": "ADHI KARTIKO PRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6957,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NICK": [
+        {
+            "nama": "CHARNIC CAPITAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1738,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NIKL": [
+        {
+            "nama": "PELAT TIMAH NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NINE": [
+        {
+            "nama": "TECHNO9 INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3585,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NIPS": [
+        {
+            "nama": "NIPRESS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2273,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NIRO": [
+        {
+            "nama": "CITY RETAIL DEVELOPMENTS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7525,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NISP": [
+        {
+            "nama": "BANK OCBC NISP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8508,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NOBU": [
+        {
+            "nama": "BANK NATIONALNOBU Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 973,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NPGF": [
+        {
+            "nama": "NUSA PALAPA GEMILANG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2399,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NRCA": [
+        {
+            "nama": "NUSA RAYA CIPTA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6394,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NSSS": [
+        {
+            "nama": "NUSANTARA SAWIT SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 631,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NTBK": [
+        {
+            "nama": "NUSATAMA BERKAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5185,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "NUSA": [
+        {
+            "nama": "SINERGI MEGAH INTERNUSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3801,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OASA": [
+        {
+            "nama": "MAHARAKSA BIRU ENERGI Tbk",
+            "tipe": "Lokal",
+            "jumlah": 500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OBAT": [
+        {
+            "nama": "BRIGIT BIOFARMAKA TEKNOLOGI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1395,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OBMD": [
+        {
+            "nama": "OBM DRILCHEM Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 781,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OCAP": [
+        {
+            "nama": "ONIX CAPITAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 583,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OKAS": [
+        {
+            "nama": "ANCORA INDONESIA RESOURCES Tbk",
+            "tipe": "Lokal",
+            "jumlah": 3869,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OLIV": [
+        {
+            "nama": "OSCAR MITRA SUKSES SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6791,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OMRE": [
+        {
+            "nama": "INDONESIA PRIMA PROPERTY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3443,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "OPMS": [
+        {
+            "nama": "OPTIMA PRIMA METAL SINERGI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1629,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PACK": [
+        {
+            "nama": "ABADI NUSANTARA HIJAU INVESTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4057,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PADA": [
+        {
+            "nama": "PERSONEL ALIH DAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5357,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PAFI": [
+        {
+            "nama": "PANASIA FILAMENT INTI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 550,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PALM": [
+        {
+            "nama": "PT. PROVIDENT INVESTASI BERSAMA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 5802,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PAMG": [
+        {
+            "nama": "BIMA SAKTI PERTIWI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6824,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PANR": [
+        {
+            "nama": "PANORAMA SENTRAWISATA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4490,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PANS": [
+        {
+            "nama": "PANIN SEKURITAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PBID": [
+        {
+            "nama": "PANCA BUDI IDAMAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7467,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PBRX": [
+        {
+            "nama": "PAN BROTHERS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3107,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PBSA": [
+        {
+            "nama": "PARAMITA BANGUN SARANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4616,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PCAR": [
+        {
+            "nama": "PRIMA CAKRAWALA ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PDES": [
+        {
+            "nama": "DESTINASI TIRTA NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6615,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PDPP": [
+        {
+            "nama": "PRIMADAYA PLASTISINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PEGE": [
+        {
+            "nama": "PANCA GLOBAL KAPITAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 906,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PEHA": [
+        {
+            "nama": "PHAPROS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2839,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PEVE": [
+        {
+            "nama": "PENTA VALENT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3965,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PGEO": [
+        {
+            "nama": "PERTAMINA GEOTHERMAL ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1482,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PGJO": [
+        {
+            "nama": "BAHTERA BUMI RAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8230,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PGLI": [
+        {
+            "nama": "PEMBANGUNAN GRAHA LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4682,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PGUN": [
+        {
+            "nama": "PRADIKSI GUNATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1569,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PICO": [
+        {
+            "nama": "PELANGI INDAH CANINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3204,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PIPA": [
+        {
+            "nama": "MULTI MAKMUR LEMINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4992,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PKPK": [
+        {
+            "nama": "PARAGON KARYA PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PLAS": [
+        {
+            "nama": "POLARIS INVESTAMA TBK, PT.",
+            "tipe": "Lokal",
+            "jumlah": 849,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PLIN": [
+        {
+            "nama": "PT PLAZA INDONESIA REALTY Tbk",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 9661,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PMJS": [
+        {
+            "nama": "PUTRA MANDIRI JEMBAR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3400,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PMMP": [
+        {
+            "nama": "PANCA MITRA MULTIPERDANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 727,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PNBN": [
+        {
+            "nama": "BANK PAN INDONESIA , TBK , PT",
+            "tipe": "Lokal",
+            "jumlah": 3882,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PNBS": [
+        {
+            "nama": "BANK PANIN DUBAI SYARIAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1516,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PNGO": [
+        {
+            "nama": "PINAGO UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9826,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PNIN": [
+        {
+            "nama": "PANINVEST Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 602,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PNLF": [
+        {
+            "nama": "PANIN FINANCIAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1519,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PNSE": [
+        {
+            "nama": "PUDJIADI AND SONS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2503,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POLA": [
+        {
+            "nama": "POOL ADVISTA FINANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7634,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POLI": [
+        {
+            "nama": "PERSEROAN TERBATAS POLLUX HOTELS GROUP Tbk",
+            "tipe": "Lokal",
+            "jumlah": 2300,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POLL": [
+        {
+            "nama": "PT. POLLUX PROPERTI INDONESIA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 7814,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POLU": [
+        {
+            "nama": "GOLDEN FLOWER Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 855,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POLY": [
+        {
+            "nama": "ASIA PACIFIC FIBERS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6242,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POOL": [
+        {
+            "nama": "POOL ADVISTA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 748,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PORT": [
+        {
+            "nama": "NUSANTARA PELABUHAN HANDAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2415,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POSA": [
+        {
+            "nama": "BLISS PROPERTI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3636,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "POWR": [
+        {
+            "nama": "CIKARANG LISTRINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2664,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PPRI": [
+        {
+            "nama": "PAPEROCKS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2605,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PPRO": [
+        {
+            "nama": "PP Properti Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 813,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PRAY": [
+        {
+            "nama": "FAMON AWAL BROS SEDAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1734,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PRDA": [
+        {
+            "nama": "PRODIA WIDYAHUSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 509,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PRIM": [
+        {
+            "nama": "ROYAL PRIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 717,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PSAB": [
+        {
+            "nama": "J RESOURCES ASIA PASIFIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PSKT": [
+        {
+            "nama": "RED PLANET INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4077,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PSSI": [
+        {
+            "nama": "IMC PELITA LOGISTIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 546,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PTDU": [
+        {
+            "nama": "DJASA UBERSAKTI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3167,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PTPW": [
+        {
+            "nama": "PRATAMA WIDYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1042,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PTRO": [
+        {
+            "nama": "PETROSEA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4533,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PTSN": [
+        {
+            "nama": "SAT NUSAPERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PTSP": [
+        {
+            "nama": "PIONEERINDO GOURMET INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2763,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PUDP": [
+        {
+            "nama": "PUDJIADI PRESTIGE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4454,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PURA": [
+        {
+            "nama": "PUTRA RAJAWALI KENCANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1221,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PURE": [
+        {
+            "nama": "TRINITAN METALS AND MINERALS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2645,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PURI": [
+        {
+            "nama": "PURI GLOBAL SUKSES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 515,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PWON": [
+        {
+            "nama": "PT. PAKUWON JATI Tbk",
+            "tipe": "Lokal",
+            "jumlah": 6868,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PYFA": [
+        {
+            "nama": "PYRIDAM FARMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6402,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "PZZA": [
+        {
+            "nama": "SARI MELATI KENCANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6479,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RAAM": [
+        {
+            "nama": "TRIPAR MULTIVSION PLUS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 909,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RAJA": [
+        {
+            "nama": "RUKUN RAHARJA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3573,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RALS": [
+        {
+            "nama": "RAMAYANA LESTARI SENTOSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1355,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RANC": [
+        {
+            "nama": "SUPRA BOGA LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 576,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RATU": [
+        {
+            "nama": "RAHARJA ENERGI CEPU Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6868,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RBMS": [
+        {
+            "nama": "RISTIA BINTANG MAHKOTASEJATI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5188,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RCCC": [
+        {
+            "nama": "UTAMA RADAR CAHAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7792,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RDTX": [
+        {
+            "nama": "PT. RODA VIVATEX Tbk",
+            "tipe": "Lokal",
+            "jumlah": 1877,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "REAL": [
+        {
+            "nama": "REPOWER ASIA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1557,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RELF": [
+        {
+            "nama": "GRAHA MITRA ASIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1944,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RELI": [
+        {
+            "nama": "RELIANCE SEKURITAS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8565,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RGAS": [
+        {
+            "nama": "KIAN SANTANG MULIATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 964,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RIGS": [
+        {
+            "nama": "RIG TENDERS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8054,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RIMO": [
+        {
+            "nama": "RIMO INTERNATIONAL LESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1058,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RLCO": [
+        {
+            "nama": "ABADI LESTARI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7760,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RMKE": [
+        {
+            "nama": "RMK ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4875,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RMKO": [
+        {
+            "nama": "ROYALTAMA MULIA KONTRAKTORINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1250,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ROCK": [
+        {
+            "nama": "ROCKFIELDS PROPERTI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2600,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RODA": [
+        {
+            "nama": "PT. PIKKO LAND DEVELOPMENT Tbk",
+            "tipe": "Lokal",
+            "jumlah": 644,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RONY": [
+        {
+            "nama": "ARACORD NUSANTARA GROUP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ROTI": [
+        {
+            "nama": "NIPPON INDOSARI CORPINDO, PT",
+            "tipe": "Lokal",
+            "jumlah": 912,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RSGK": [
+        {
+            "nama": "KEDOYA ADYARAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1313,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RUIS": [
+        {
+            "nama": "RADIANT UTAMA INTERINSCO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1431,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RUNS": [
+        {
+            "nama": "GLOBAL SUKSES SOLUSI TBK, PT",
+            "tipe": "Lokal",
+            "jumlah": 2748,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "RYAN": [
+        {
+            "nama": "RYANE ADIBUSANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8250,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SAFE": [
+        {
+            "nama": "STEADY SAFE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 749,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SAGE": [
+        {
+            "nama": "SAPTAUSAHA GEMILANGINDAH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 965,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SAME": [
+        {
+            "nama": "SARANA MEDITAMA METROPOLITAN Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 8483,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SAPX": [
+        {
+            "nama": "SATRIA ANTARAN PRIMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4656,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SATU": [
+        {
+            "nama": "KOTA SATU PROPERTI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 970,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SBAT": [
+        {
+            "nama": "SEJAHTERA BINTANG ABADI TEXTILE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1400,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SCMA": [
+        {
+            "nama": "SURYA CITRA MEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7442,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SCNP": [
+        {
+            "nama": "SELARAS CITRA NUSANTARA PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 769,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SCPI": [
+        {
+            "nama": "ORGANON PHARMA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9879,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SDMU": [
+        {
+            "nama": "SIDOMULYO SELARAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5230,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SDPC": [
+        {
+            "nama": "MILLENNIUM PHARMACON INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 972,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SDRA": [
+        {
+            "nama": "BANK WOORI SAUDARA INDONESIA 1906 Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9075,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SFAN": [
+        {
+            "nama": "SURYA FAJAR CAPITAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6139,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SGER": [
+        {
+            "nama": "SUMBER GLOBAL ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 525,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SGRO": [
+        {
+            "nama": "PRIME AGRI RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9870,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SHID": [
+        {
+            "nama": "HOTEL SAHID JAYA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 608,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SHIP": [
+        {
+            "nama": "SILLO MARITIME PERDANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4485,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SIAP": [
+        {
+            "nama": "SEKAWAN INTIPRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 615,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SICO": [
+        {
+            "nama": "SIGMA ENERGY COMPRESSINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6736,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SIDO": [
+        {
+            "nama": "INDUSTRI JAMU DAN FARMASI SIDO MUNCUL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5950,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SILO": [
+        {
+            "nama": "SILOAM INTERNATIONAL HOSPITALS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2060,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SIMA": [
+        {
+            "nama": "SIWANI MAKMUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 521,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SIMP": [
+        {
+            "nama": "SALIM IVOMAS PRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 514,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SINI": [
+        {
+            "nama": "SINGARAJA PUTRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1974,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SIPD": [
+        {
+            "nama": "SREEYA SEWU INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9078,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SKBM": [
+        {
+            "nama": "SEKAR BUMI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 612,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SKLT": [
+        {
+            "nama": "SEKAR LAUT Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 969,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SKRN": [
+        {
+            "nama": "SUPERKRANE MITRA UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 509,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SKYB": [
+        {
+            "nama": "NORTHCLIFF CITRANUSA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1837,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SLIS": [
+        {
+            "nama": "GAYA ABADI SEMPURNA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4567,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMBR": [
+        {
+            "nama": "PERUSAHAAN PERSEROAN (PERSERO) PT SEMEN BATURAJA Tbk",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 789,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMCB": [
+        {
+            "nama": "SOLUSI BANGUN INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8352,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMDM": [
+        {
+            "nama": "PT. SURYAMAS DUTAMAKMUR Tbk",
+            "tipe": "Lokal",
+            "jumlah": 9897,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMGA": [
+        {
+            "nama": "SUMBER MINERAL GLOBAL ABADI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2971,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMIL": [
+        {
+            "nama": "SARANA MITRA LUAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 514,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMKM": [
+        {
+            "nama": "SUMBER MAS KONSTRUKSI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMLE": [
+        {
+            "nama": "SINERGI MULTI LESTARINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6961,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMMA": [
+        {
+            "nama": "SINAR MAS MULTIARTHA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4956,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMMT": [
+        {
+            "nama": "GOLDEN EAGLE ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2115,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMRA": [
+        {
+            "nama": "SUMMARECON AGUNG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2314,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SMRU": [
+        {
+            "nama": "SMR UTAMA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 5230,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SNLK": [
+        {
+            "nama": "SUNTER LAKESIDE HOTEL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3669,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOCI": [
+        {
+            "nama": "PT. SOECHI LINES Tbk",
+            "tipe": "Lokal",
+            "jumlah": 3505,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOFA": [
+        {
+            "nama": "SOLUSI ENVIRONMENT ASIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7097,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOHO": [
+        {
+            "nama": "SOHO GLOBAL HEALTH Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2247,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOLA": [
+        {
+            "nama": "XOLARE RCR ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 792,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SONA": [
+        {
+            "nama": "SONA TOPAS TOURISM INDUSTRY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3165,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOSS": [
+        {
+            "nama": "SHIELD ON SERVICE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9886,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOTS": [
+        {
+            "nama": "SATRIA MEGA KENCANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1419,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SOUL": [
+        {
+            "nama": "MITRA TIRTA BUWANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7321,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SPMA": [
+        {
+            "nama": "SUPARMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1068,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SPRE": [
+        {
+            "nama": "SORAYA BERJAYA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2783,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SPTO": [
+        {
+            "nama": "SURYA PERTIWI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SQBB": [
+        {
+            "nama": "TAISHO PHARMACEUTICAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 10000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SQBI": [
+        {
+            "nama": "TAISHO PHARMACEUTICAL INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7863,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SQMI": [
+        {
+            "nama": "WILTON MAKMUR INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4848,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SRAJ": [
+        {
+            "nama": "SEJAHTERARAYA ANUGRAHJAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5027,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SRIL": [
+        {
+            "nama": "SRI REJEKI ISMAN Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 5796,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SRSN": [
+        {
+            "nama": "INDO ACIDATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1415,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SRTG": [
+        {
+            "nama": "SARATOGA INVESTAMA SEDAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2484,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SSIA": [
+        {
+            "nama": "SURYA SEMESTA INTERNUSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1024,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SSMS": [
+        {
+            "nama": "SAWIT SUMBERMAS SARANA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1208,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "STAA": [
+        {
+            "nama": "SUMBER TANI AGUNG RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 625,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "STAR": [
+        {
+            "nama": "BUANA ARTHA ANUGERAH Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 3219,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "STRK": [
+        {
+            "nama": "LOVINA BEACH BREWERY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6187,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "STTP": [
+        {
+            "nama": "SIANTAR TOP Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5676,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SUDI": [
+        {
+            "nama": "SURYA DUMAI INDUSTRI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1011,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SUGI": [
+        {
+            "nama": "SUGIH ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 649,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SULI": [
+        {
+            "nama": "SLJ GLOBAL Tbk",
+            "tipe": "Lokal",
+            "jumlah": 518,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SUPA": [
+        {
+            "nama": "SUPER BANK INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2760,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SURE": [
+        {
+            "nama": "SUPER ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3340,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "SURI": [
+        {
+            "nama": "MAJA AGUNG LATEXINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8540,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TALF": [
+        {
+            "nama": "TUNAS ALFIN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9041,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TAMA": [
+        {
+            "nama": "LANCARTAMA SEJATI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4331,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TAMU": [
+        {
+            "nama": "PELAYARAN TAMARIN SAMUDRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TAPG": [
+        {
+            "nama": "TRIPUTRA AGRO PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 593,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TARA": [
+        {
+            "nama": "AGUNG SEMESTA SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1504,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TAXI": [
+        {
+            "nama": "EXPRESS TRANSINDO UTAMA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 563,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TAYS": [
+        {
+            "nama": "JAYA SWARASA AGUNG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1499,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TBIG": [
+        {
+            "nama": "TOWER BERSAMA INFRASTRUCTURE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 937,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TBLA": [
+        {
+            "nama": "TUNAS BARU LAMPUNG Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2656,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TBMS": [
+        {
+            "nama": "TEMBAGA MULIA SEMANAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TDPM": [
+        {
+            "nama": "TRIDOMAIN PERFORMANCE MATERIALS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7251,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TEBE": [
+        {
+            "nama": "DANA BRATA LUHUR Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7691,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TECH": [
+        {
+            "nama": "INDOSTERLING TECHNOMEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 590,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TELE": [
+        {
+            "nama": "OMNI INOVASI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2400,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TFAS": [
+        {
+            "nama": "TELEFAST INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4195,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TGKA": [
+        {
+            "nama": "PT TIGARAKSA SATRIA Tbk ,",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 2535,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TGRA": [
+        {
+            "nama": "TERREGRA ASIA ENERGY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1646,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TGUK": [
+        {
+            "nama": "PLATINUM WAHAB NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 747,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TIFA": [
+        {
+            "nama": "KDB TIFA FINANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1500,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TIRA": [
+        {
+            "nama": "TIRA AUSTENITE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4412,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TIRT": [
+        {
+            "nama": "TIRTA MAHAKAM RESOURCES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7113,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TLDN": [
+        {
+            "nama": "TELADAN PRIMA AGRO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5988,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TLKM": [
+        {
+            "nama": "TELKOM INDONESIA (PERSERO) Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 617,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TMAS": [
+        {
+            "nama": "TEMAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7221,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TMPI": [
+        {
+            "nama": "SIGMAGOLD INTI PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 707,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TMPO": [
+        {
+            "nama": "TEMPO INTI MEDIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 988,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TNCA": [
+        {
+            "nama": "TRIMUDA NUANSA CITRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3162,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOBA": [
+        {
+            "nama": "TBS ENERGI UTAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 791,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOOL": [
+        {
+            "nama": "ROHARTINDO NUSANTARA LUAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7610,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOPS": [
+        {
+            "nama": "TOTALINDO EKA PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4739,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOSK": [
+        {
+            "nama": "TOPINDO SOLUSI KOMUNIKA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1184,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOTL": [
+        {
+            "nama": "TOTAL BANGUN PERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1103,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOTO": [
+        {
+            "nama": "SURYA TOTO INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 529,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOWR": [
+        {
+            "nama": "SARANA MENARA NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 745,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TOYS": [
+        {
+            "nama": "SUNINDO ADIPERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2066,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TPIA": [
+        {
+            "nama": "CHANDRA ASRI PACIFIC Tbk, PT.",
+            "tipe": "Lokal",
+            "jumlah": 1367,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TPMA": [
+        {
+            "nama": "TRANS POWER MARINE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 901,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRAM": [
+        {
+            "nama": "TRADA ALAM MINERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 509,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRGU": [
+        {
+            "nama": "CERESTAR INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3007,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRIL": [
+        {
+            "nama": "TRIWIRA INSANLESTARI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1443,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRIM": [
+        {
+            "nama": "TRIMEGAH SEKURITAS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 581,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRIN": [
+        {
+            "nama": "PERINTIS TRINITI PROPERTI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3578,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRIO": [
+        {
+            "nama": "PT TRIKOMSEL OKE TBK",
+            "tipe": "Lokal (Korporat/Institusi)",
+            "jumlah": 869,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRIS": [
+        {
+            "nama": "TRISULA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 605,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRJA": [
+        {
+            "nama": "TRANSKON JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 526,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRON": [
+        {
+            "nama": "TEKNOLOGI KARYA DIGITAL NUSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5903,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRST": [
+        {
+            "nama": "TRIAS SENTOSA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 577,
+            "persen": 300.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRUB": [
+        {
+            "nama": "TRUBA ALAM MANUNGGAL ENGINEERING Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1151,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRUE": [
+        {
+            "nama": "TRINITI DINAMIK Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 501,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRUK": [
+        {
+            "nama": "GUNA TIMUR RAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TRUS": [
+        {
+            "nama": "TRUST FINANCE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2797,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TSPC": [
+        {
+            "nama": "TEMPO SCAN PACIFIC Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9066,
+            "persen": 116.0,
+            "kategori": ">5%"
+        }
+    ],
+    "TUGU": [
+        {
+            "nama": "ASURANSI TUGU PRATAMA INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 529,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UANG": [
+        {
+            "nama": "PAKUAN Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 949,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UCID": [
+        {
+            "nama": "UNI-CHARM INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1323,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UDNG": [
+        {
+            "nama": "AGRO BAHARI NUSANTARA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2271,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ULTJ": [
+        {
+            "nama": "ULTRAJAYA MILK INDUSTRY & TRADING COMPANY Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5317,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UNIC": [
+        {
+            "nama": "UNGGUL INDAH CAHAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1034,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UNIQ": [
+        {
+            "nama": "ULIMA NITRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2252,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UNIT": [
+        {
+            "nama": "CAHAYA PERMATA SEJAHTERA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2178,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UNSP": [
+        {
+            "nama": "BAKRIE SUMATERA PLANTATIONS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1782,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UNTR": [
+        {
+            "nama": "UNITED TRACTORS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 577,
+            "persen": 208.9,
+            "kategori": ">5%"
+        }
+    ],
+    "URBN": [
+        {
+            "nama": "URBAN JAKARTA PROPERTINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7430,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "UVCR": [
+        {
+            "nama": "TRIMEGAH KARYA PRATAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3118,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VERN": [
+        {
+            "nama": "VERONA INDAH PICTURES Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4663,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VICI": [
+        {
+            "nama": "VICTORIA CARE INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5995,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VICO": [
+        {
+            "nama": "VICTORIA INVESTAMA Tbk. PT",
+            "tipe": "Lokal",
+            "jumlah": 4506,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VINS": [
+        {
+            "nama": "VICTORIA INSURANCE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8493,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VISI": [
+        {
+            "nama": "SATU VISI PUTRA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 7154,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VIVA": [
+        {
+            "nama": "VISI MEDIA ASIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3263,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VKTR": [
+        {
+            "nama": "VKTR TEKNOLOGI MOBILITAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1420,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VOKS": [
+        {
+            "nama": "VOKSEL ELECTRIC Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5467,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VRNA": [
+        {
+            "nama": "MIZUHO LEASING INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2268,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "VTNY": [
+        {
+            "nama": "VENTENY FORTUNA INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 967,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WAPO": [
+        {
+            "nama": "PT. WAHANA PRONATURAL Tbk",
+            "tipe": "Lokal",
+            "jumlah": 3607,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WEHA": [
+        {
+            "nama": "WEHA TRANSPORTASI INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1450,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WGSH": [
+        {
+            "nama": "WIRA GLOBAL SOLUSI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3642,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WICO": [
+        {
+            "nama": "WICAKSANA OVERSEAS INTERNATIONAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9550,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WIDI": [
+        {
+            "nama": "WIDIANT JAYA KRENINDO Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 777,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WIFI": [
+        {
+            "nama": "SOLUSI SINERGI DIGITAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5442,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WIIM": [
+        {
+            "nama": "WISMILAK INTI MAKMUR Tbk",
+            "tipe": "Lokal",
+            "jumlah": 548,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WINE": [
+        {
+            "nama": "HATTEN BALI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 725,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WINR": [
+        {
+            "nama": "WINNER NUSANTARA JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 5862,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WINS": [
+        {
+            "nama": "WINTERMAR OFFSHORE MARINE Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 846,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WMPP": [
+        {
+            "nama": "WIDODO MAKMUR PERKASA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 651,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WMUU": [
+        {
+            "nama": "WIDODO MAKMUR UNGGAS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2741,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WOMF": [
+        {
+            "nama": "WAHANA OTTOMITRA MULTIARTHA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2501,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WOOD": [
+        {
+            "nama": "INTEGRA INDOCABINET Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 1703,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WOWS": [
+        {
+            "nama": "GINTING JAYA ENERGI Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4244,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "WSBP": [
+        {
+            "nama": "WASKITA BETON PRECAST Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 690,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "YELO": [
+        {
+            "nama": "YELOOO INTEGRA DATANET Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 3740,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "YOII": [
+        {
+            "nama": "ASURANSI DIGITAL BERSAMA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 4230,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "YPAS": [
+        {
+            "nama": "YANAPRIMA HASTAPERSADA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 8947,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "YULE": [
+        {
+            "nama": "YULIE SEKURITAS INDONESIA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 998,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "YUPI": [
+        {
+            "nama": "YUPI INDO JELLY GUM Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 9000,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ZATA": [
+        {
+            "nama": "BERSAMA ZATTA JAYA Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 6871,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ZBRA": [
+        {
+            "nama": "PT. DOSNI ROHA INDONESIA Tbk",
+            "tipe": "Lokal",
+            "jumlah": 6201,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ZINC": [
+        {
+            "nama": "KAPUAS PRIMA COAL Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 978,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ],
+    "ZONE": [
+        {
+            "nama": "MEGA PERINTIS Tbk, PT",
+            "tipe": "Lokal",
+            "jumlah": 2365,
+            "persen": 0.0,
+            "kategori": ">5%"
+        }
+    ]
+}
