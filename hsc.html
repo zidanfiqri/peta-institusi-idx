@@ -3,324 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holding Share Composition</title>
+    <title>1% Ownership - IDX</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Vue.js untuk reaktivitas UI -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- PapaParse untuk CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
+    <!-- Vis.js untuk Network Graph -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <!-- Phosphor Icons (Sesuai di video) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <style>
-        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #ffffff; color: #111827; }
-        /* Kustomisasi Select2 agar flat dan minimalis */
-        .select2-container--default .select2-selection--single { 
-            height: 38px; border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; font-size: 14px; box-shadow: none; outline: none;
-        }
-        .select2-container--default .select2-selection--single .select2-selection__arrow { top: 6px; }
-        .select2-dropdown { border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-        /* Tabel Minimalis */
-        th { border-bottom: 2px solid #111827; padding-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; color: #4b5563; }
-        td { border-bottom: 1px solid #f3f4f6; padding: 12px 0; font-size: 13px; color: #374151; }
-        tr:hover td { background-color: #f9fafb; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFA; overflow: hidden; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #E5E7EB; border-radius: 20px; }
+        
+        /* Vis Network Container */
+        #network-graph { width: 100%; height: 100%; outline: none; }
     </style>
 </head>
-<body class="antialiased">
-
-    <nav class="border-b border-gray-200 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-14 items-center">
-                <div class="flex space-x-6 items-center">
-                    <span class="font-semibold text-gray-900 tracking-tight text-lg">Holding Composition</span>
-                    <div class="hidden md:flex space-x-4">
-                        <a href="index.html" class="text-gray-500 hover:text-gray-900 text-sm transition-colors">Pergerakan Institusi</a>
-                        <a href="smart_money_tracker.html" class="text-gray-500 hover:text-gray-900 text-sm transition-colors">Radar Inflow</a>
-                    </div>
+<body>
+    <div id="app" class="h-screen flex flex-col">
+        <!-- TOP NAVBAR -->
+        <header class="bg-white border-b border-gray-200 h-14 flex items-center justify-between px-4 shrink-0">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 font-bold text-gray-800">
+                    <span class="bg-gray-800 text-white text-xs px-1.5 py-0.5 rounded">ID</span> IDX
+                    <span class="text-gray-400 font-normal ml-1">· 1% Ownership</span>
                 </div>
-                <div class="text-xs text-gray-400 font-medium tracking-wide">
-                    KSEI DATA SOURCE
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <div class="flex flex-col md:flex-row gap-6 mb-10 items-end">
-            <div class="w-full md:w-64">
-                <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wider">Cari Emiten</label>
-                <select id="emiten-select" class="w-full"></select>
-            </div>
-            <div class="flex-1" id="emiten-title-area" style="display: none;">
-                <h1 class="text-3xl font-bold text-gray-900 tracking-tight leading-none" id="lbl-emiten-kode">-</h1>
-                <p class="text-sm text-gray-500 mt-1" id="lbl-emiten-nama">-</p>
-            </div>
-        </div>
-
-        <div id="loading-indicator" class="text-center py-20 text-gray-400 text-sm">
-            Memuat dataset KSEI (CSV)...
-        </div>
-
-        <div id="dashboard-content" style="display: none;">
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Grup Konglomerasi</p>
-                    <p class="font-semibold text-gray-900" id="info-konglo">-</p>
-                </div>
-                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Sektor</p>
-                    <p class="font-semibold text-gray-900 truncate" id="info-sektor">-</p>
-                </div>
-                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Industri</p>
-                    <p class="font-semibold text-gray-900 truncate" id="info-industri">-</p>
-                </div>
-                <div class="border border-gray-200 rounded p-4 bg-gray-50/50">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Indeks HHI (Konsentrasi)</p>
-                    <p class="font-semibold text-gray-900" id="info-hhi">-</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
-                <div>
-                    <h2 class="text-sm font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">Komposisi Lokal vs Asing</h2>
-                    <div class="relative h-64 w-full flex justify-center">
-                        <canvas id="chart-lokal-asing"></canvas>
-                    </div>
-                </div>
-                <div>
-                    <h2 class="text-sm font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">Distribusi Tipe Investor</h2>
-                    <div class="relative h-64 w-full flex justify-center">
-                        <canvas id="chart-tipe"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8">
-                <div class="flex justify-between items-end mb-4 border-b-2 border-gray-800 pb-2">
-                    <h2 class="text-lg font-bold text-gray-900 tracking-tight">Daftar Pemegang Saham Mayoritas</h2>
-                    <span class="text-xs text-gray-500">Sumber: KSEI (>5% & >1%)</span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr>
-                                <th class="w-1/3">Nama Investor</th>
-                                <th>Kategori</th>
-                                <th>Asal</th>
-                                <th>Negara</th>
-                                <th class="text-right">Jumlah Saham (Lbr)</th>
-                                <th class="text-right">Persentase (%)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-investors">
-                            </tbody>
-                    </table>
-                </div>
+                <button class="flex items-center gap-1 px-2 py-1 text-sm border border-gray-200 rounded text-gray-600 hover:bg-gray-50">
+                    <i class="ph ph-book-open"></i> Guide
+                </button>
             </div>
             
-        </div>
+            <div class="flex items-center gap-2 text-xs font-medium text-gray-500">
+                <img src="https://ui-avatars.com/api/?name=Zidan+Fikri&background=0D8ABC&color=fff&size=24" class="rounded-full" alt="User">
+                <span class="text-gray-400">kangritel · <span class="text-emerald-500">Klinik Penyesalan</span></span>
+            </div>
+
+            <div class="flex items-center gap-4 text-xs text-gray-400 font-medium">
+                <span>Per 03 Jun 2026</span>
+                <span>·</span>
+                <span>Sumber: KSEI</span>
+                <div class="flex gap-2">
+                    <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><i class="ph ph-question"></i></button>
+                    <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><i class="ph ph-moon"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- SUB NAVBAR (TABS) -->
+        <nav class="bg-white border-b border-gray-200 h-12 flex items-center px-4 shrink-0 overflow-x-auto">
+            <div class="flex gap-8 text-sm font-medium">
+                <button class="flex items-center gap-2 h-12 border-b-2 border-emerald-500 text-emerald-600">
+                    <i class="ph ph-list-dashes"></i> Ringkasan Saham
+                </button>
+                <button class="flex items-center gap-2 h-12 text-gray-500 hover:text-gray-800 transition-colors">
+                    <i class="ph ph-user"></i> Per Investor
+                </button>
+                <button class="flex items-center gap-2 h-12 text-gray-500 hover:text-gray-800 transition-colors">
+                    <i class="ph ph-buildings"></i> Konglo Stocks
+                </button>
+                <button class="flex items-center gap-2 h-12 text-gray-500 hover:text-gray-800 transition-colors">
+                    <i class="ph ph-chart-bar"></i> Metrik
+                </button>
+                <button class="flex items-center gap-2 h-12 text-gray-500 hover:text-gray-800 transition-colors ml-auto">
+                    <i class="ph ph-clock-counter-clockwise text-emerald-500"></i> Changelog
+                </button>
+            </div>
+        </nav>
+
+        <!-- MAIN LAYOUT -->
+        <main class="flex-1 flex overflow-hidden bg-white">
+            
+            <!-- LEFT PANEL (LIST SAHAM) -->
+            <div class="w-[450px] border-r border-gray-200 flex flex-col shrink-0">
+                <!-- Search & Filters -->
+                <div class="p-3 border-b border-gray-200 bg-gray-50/50">
+                    <div class="relative">
+                        <i class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
+                        <input type="text" v-model="searchQuery" placeholder="Cari saham, emiten, atau pemegang saham..." 
+                               class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                    </div>
+                </div>
+
+                <!-- List Items -->
+                <div class="flex-1 overflow-y-auto custom-scrollbar p-2">
+                    <div v-if="isLoading" class="text-center py-10 text-sm text-gray-400">Menganalisis Data KSEI...</div>
+                    
+                    <div v-for="stock in filteredStocks" :key="stock.kode" 
+                         @click="selectStock(stock)"
+                         :class="['p-3 rounded-lg cursor-pointer border mb-2 transition-all', 
+                                  selectedStock?.kode === stock.kode ? 'border-emerald-500 bg-emerald-50/30 shadow-sm' : 'border-transparent hover:border-gray-200 hover:bg-gray-50']">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white text-xs font-bold px-1.5 py-0.5 rounded">{{ stock.kode }}</span>
+                                <span class="text-sm font-semibold text-gray-800 line-clamp-1">{{ stock.nama }}</span>
+                            </div>
+                            <!-- Status Kepemilikan (Mayoritas, Oligopoli, dll) -->
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide" 
+                                  :class="getStatusColor(stock.status)">
+                                {{ stock.status }} {{ stock.totalPersen.toFixed(2) }}%
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-gray-500">
+                            <span class="bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 font-medium">CCS {{ stock.ccs }}</span>
+                            <span>{{ stock.sektor }}</span>
+                            <span>·</span>
+                            <span>{{ stock.holders.length }} pemegang saham</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL (DETAIL & GRAFIK) -->
+            <div class="flex-1 flex flex-col overflow-hidden bg-gray-50/30 relative">
+                <div v-if="!selectedStock" class="absolute inset-0 flex items-center justify-center">
+                    <i class="ph ph-chart-network text-9xl text-gray-100"></i>
+                </div>
+
+                <template v-else>
+                    <!-- Header Data Detail -->
+                    <div class="p-4 border-b border-gray-200 bg-white shrink-0 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-emerald-600">{{ selectedStock.kode }}</span>
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800 leading-tight">{{ selectedStock.nama }}</h2>
+                                <p class="text-xs text-gray-500">{{ selectedStock.sektor }} · {{ selectedStock.industri }}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-gray-500 mb-1">Composite Concentration Score (CCS)</div>
+                            <div class="text-2xl font-bold" :class="getCCSColor(selectedStock.ccs)">{{ selectedStock.ccs }} / 100</div>
+                        </div>
+                    </div>
+
+                    <!-- Split View: Table & Graph -->
+                    <div class="flex-1 flex overflow-hidden">
+                        <!-- Table -->
+                        <div class="w-1/2 flex flex-col border-r border-gray-200 bg-white">
+                            <div class="flex text-xs font-semibold text-gray-400 border-b border-gray-200 p-3 uppercase tracking-wider bg-gray-50">
+                                <div class="w-5/12">Investor</div>
+                                <div class="w-2/12 text-center">Tipe</div>
+                                <div class="w-2/12 text-center">Asal</div>
+                                <div class="w-3/12 text-right">Persentase</div>
+                            </div>
+                            <div class="flex-1 overflow-y-auto custom-scrollbar">
+                                <div v-for="holder in selectedStock.holders" :key="holder.nama" class="flex items-center p-3 border-b border-gray-100 hover:bg-gray-50 text-sm">
+                                    <div class="w-5/12 font-medium text-gray-800 line-clamp-2 pr-2">{{ holder.nama }}</div>
+                                    <div class="w-2/12 text-center text-xs text-emerald-600 bg-emerald-50 py-1 rounded">{{ holder.tipe }}</div>
+                                    <div class="w-2/12 text-center text-xs" :class="holder.asal === 'Lokal' ? 'text-blue-600' : 'text-orange-600'">{{ holder.asal }}</div>
+                                    <div class="w-3/12 text-right font-semibold text-gray-800">{{ holder.persen.toFixed(2) }}%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Network Graph -->
+                        <div class="w-1/2 relative">
+                            <div class="absolute top-2 left-2 z-10 bg-white/80 backdrop-blur px-2 py-1 rounded text-xs font-semibold text-gray-500 border border-gray-200 shadow-sm flex items-center gap-1">
+                                <i class="ph ph-share-network"></i> Jaringan Relasi
+                            </div>
+                            <div id="network-graph"></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </main>
     </div>
 
     <script>
-        // Variabel global untuk menyimpan data dari CSV
-        let dataSaham = [];
-        let dataKonglo = [];
-        let chartLokalAsing = null;
-        let chartTipe = null;
+        const { createApp } = Vue;
 
-        // Palet warna estetik (Monochrome, Sage Green, Mustard)
-        const colorPalette = ['#8BA888', '#E2B96F', '#4B5563', '#9CA3AF', '#D1D5DB', '#374151'];
-
-        // Format angka ke format ribuan Indonesia
-        const formatNum = (num) => new Intl.NumberFormat('id-ID').format(Math.round(num));
-        // Parse string persentase ber-koma (contoh: "40,03") menjadi float
-        const parsePersen = (str) => parseFloat((str || "0").toString().replace(',', '.'));
-
-        $(document).ready(function() {
-            // Load CSVs secara paralel menggunakan Promise
-            Promise.all([
-                fetchCSV('ksei_saham_20260603.csv'),
-                fetchCSV('ksei_konglo_20260603.csv')
-            ]).then(([sahamData, kongloData]) => {
-                dataSaham = sahamData;
-                dataKonglo = kongloData;
-
-                initDropdown();
-                $('#loading-indicator').hide();
-            }).catch(err => {
-                console.error(err);
-                $('#loading-indicator').html('<span class="text-red-500">Gagal memuat file CSV. Pastikan file ksei_saham_20260603.csv dan ksei_konglo_20260603.csv berada di folder yang sama.</span>');
-            });
-
-            $('#emiten-select').on('change', function() {
-                const kode = $(this).val();
-                if(kode) {
-                    renderDashboard(kode);
-                } else {
-                    $('#dashboard-content').hide();
-                    $('#emiten-title-area').hide();
+        createApp({
+            data() {
+                return {
+                    isLoading: true,
+                    rawData: [],
+                    stocks: [],
+                    searchQuery: '',
+                    selectedStock: null,
+                    network: null
                 }
-            });
-        });
+            },
+            computed: {
+                filteredStocks() {
+                    if (!this.searchQuery) return this.stocks;
+                    const q = this.searchQuery.toLowerCase();
+                    return this.stocks.filter(s => 
+                        s.kode.toLowerCase().includes(q) || 
+                        s.nama.toLowerCase().includes(q)
+                    );
+                }
+            },
+            methods: {
+                // Parsing format persentase "40,03" ke float
+                parsePersen(str) {
+                    if(!str) return 0;
+                    return parseFloat(str.toString().replace(',', '.'));
+                },
 
-        // Helper fungsi membaca dan parsing CSV menggunakan PapaParse
-        function fetchCSV(filename) {
-            return new Promise((resolve, reject) => {
-                Papa.parse(filename, {
+                // LOGIKA FORMULA CCS SESUAI PERMINTAAN ANDA
+                calculateMetrics(holders) {
+                    let totalPersen = 0;
+                    let hhi_raw = 0;
+                    
+                    // Urutkan dari terbesar ke terkecil
+                    let sorted = holders.map(h => this.parsePersen(h.Persentase)).sort((a,b) => b-a);
+                    
+                    sorted.forEach(p => {
+                        totalPersen += p;
+                        hhi_raw += Math.pow(p, 2);
+                    });
+
+                    // 1. HHI (Dinormalisasi ke 0-1) - Max HHI adalah 10000 (100^2)
+                    let hhi_norm = hhi_raw / 10000;
+
+                    // 2. CR3 (Concentration Ratio top 3)
+                    let cr3 = 0;
+                    for(let i=0; i<Math.min(3, sorted.length); i++) cr3 += sorted[i];
+                    let cr3_norm = cr3 / 100;
+
+                    // 3. Inverse Holder (1 = skor 100%, >=20 = skor 0%)
+                    let holder_count = sorted.length;
+                    let holder_score = holder_count === 1 ? 1 : (holder_count >= 20 ? 0 : (20 - holder_count) / 19);
+
+                    // 4. Formula CCS Gabungan
+                    let ccs = Math.round(((hhi_norm * 0.45) + (cr3_norm * 0.35) + (holder_score * 0.20)) * 100);
+
+                    // 5. Penentuan Tipe Kepemilikan (Status)
+                    let cr1 = sorted.length > 0 ? sorted[0] : 0;
+                    let status = "Moderat";
+                    
+                    if (cr1 >= 50) status = "Mayoritas";
+                    else if (cr3 >= 60) status = "Oligopoli";
+                    else if (totalPersen >= 70) status = "Terkonsentrasi";
+                    else if (totalPersen <= 40) status = "Tersebar";
+
+                    return { ccs, status, totalPersen, cr1, cr3 };
+                },
+
+                getStatusColor(status) {
+                    const colors = {
+                        'Mayoritas': 'bg-red-100 text-red-700',
+                        'Oligopoli': 'bg-orange-100 text-orange-700',
+                        'Terkonsentrasi': 'bg-amber-100 text-amber-700',
+                        'Moderat': 'bg-blue-100 text-blue-700',
+                        'Tersebar': 'bg-emerald-100 text-emerald-700'
+                    };
+                    return colors[status] || 'bg-gray-100 text-gray-700';
+                },
+
+                getCCSColor(ccs) {
+                    if (ccs >= 56) return 'text-red-600'; // Tinggi
+                    if (ccs >= 26) return 'text-amber-500'; // Sedang
+                    return 'text-emerald-500'; // Rendah
+                },
+
+                processData(data) {
+                    // Group data berdasarkan Kode Emiten
+                    const grouped = {};
+                    data.forEach(row => {
+                        if(!row.Kode) return;
+                        if(!grouped[row.Kode]) {
+                            grouped[row.Kode] = {
+                                kode: row.Kode,
+                                nama: row.Emiten,
+                                sektor: row.Sektor || 'Unknown Sector',
+                                industri: row.Industri || '-',
+                                rawHolders: []
+                            };
+                        }
+                        grouped[row.Kode].rawHolders.push(row);
+                    });
+
+                    // Hitung metrik CCS untuk masing-masing Emiten
+                    const result = [];
+                    for (const key in grouped) {
+                        const stock = grouped[key];
+                        const metrics = this.calculateMetrics(stock.rawHolders);
+                        
+                        // Format array holder untuk UI
+                        const formattedHolders = stock.rawHolders.map(h => ({
+                            nama: h.Investor,
+                            tipe: h.Tipe,
+                            asal: h['Lokal/Asing'],
+                            persen: this.parsePersen(h.Persentase)
+                        })).sort((a,b) => b.persen - a.persen);
+
+                        result.push({
+                            kode: stock.kode,
+                            nama: stock.nama,
+                            sektor: stock.sektor,
+                            industri: stock.industri,
+                            holders: formattedHolders,
+                            ccs: metrics.ccs,
+                            status: metrics.status,
+                            totalPersen: metrics.totalPersen
+                        });
+                    }
+
+                    // Urutkan default berdasarkan CCS tertinggi
+                    this.stocks = result.sort((a,b) => b.ccs - a.ccs);
+                    this.isLoading = false;
+                },
+
+                selectStock(stock) {
+                    this.selectedStock = stock;
+                    // Beri waktu sedikit untuk render DOM container sebelum menggambar Node
+                    setTimeout(() => {
+                        this.drawNetworkGraph(stock);
+                    }, 50);
+                },
+
+                drawNetworkGraph(stock) {
+                    const container = document.getElementById('network-graph');
+                    if (!container) return;
+
+                    // Node Emiten di tengah
+                    const nodes = new vis.DataSet([
+                        { id: 'pusat', label: stock.kode, shape: 'circle', color: '#10B981', font: { color: 'white', bold: true }, size: 30 }
+                    ]);
+                    
+                    const edges = new vis.DataSet([]);
+
+                    // Tambahkan node Investor mengelilingi emiten
+                    stock.holders.forEach((h, index) => {
+                        let size = 10 + (h.persen * 0.5); // Ukuran membesar tergantung persen
+                        if(size > 40) size = 40;
+                        
+                        // Warna berdasarkan asal usul
+                        let bgColor = h.asal === 'Lokal' ? '#60A5FA' : '#F87171';
+                        
+                        nodes.add({
+                            id: index,
+                            label: h.nama,
+                            shape: 'dot',
+                            size: size,
+                            color: { background: bgColor, border: 'white' },
+                            font: { size: 10, color: '#374151' },
+                            title: `${h.persen.toFixed(2)}%` // Tooltip saat dihover
+                        });
+
+                        // Garis penghubung
+                        edges.add({
+                            from: index,
+                            to: 'pusat',
+                            width: (h.persen / 10) + 1,
+                            color: { color: '#E5E7EB', highlight: '#10B981' }
+                        });
+                    });
+
+                    const data = { nodes: nodes, edges: edges };
+                    const options = {
+                        physics: {
+                            forceAtlas2Based: { gravitationalConstant: -50, centralGravity: 0.01, springLength: 100 },
+                            minVelocity: 0.75,
+                            solver: "forceAtlas2Based"
+                        },
+                        interaction: { hover: true, tooltipDelay: 200 }
+                    };
+
+                    if(this.network) this.network.destroy();
+                    this.network = new vis.Network(container, data, options);
+                }
+            },
+            mounted() {
+                // Membaca CSV menggunakan PapaParse
+                Papa.parse('ksei_saham_20260603.csv', {
                     download: true,
                     header: true,
                     skipEmptyLines: true,
-                    complete: function(results) {
-                        resolve(results.data);
+                    complete: (results) => {
+                        this.processData(results.data);
                     },
-                    error: function(err) {
-                        reject(err);
+                    error: (err) => {
+                        console.error(err);
+                        this.isLoading = false;
+                        alert("Gagal membaca file ksei_saham_20260603.csv. Pastikan file berada di folder yang sama.");
                     }
                 });
-            });
-        }
-
-        function initDropdown() {
-            // Ambil daftar kode unik dari data saham
-            const uniqueKodes = [...new Set(dataSaham.map(item => item.Kode).filter(Boolean))].sort();
-            
-            const select = $('#emiten-select');
-            select.append(new Option('', '')); // Placeholder kosong
-            uniqueKodes.forEach(kode => {
-                select.append(new Option(kode, kode));
-            });
-            
-            select.select2({ 
-                placeholder: "Ketik Kode Saham...", 
-                allowClear: true 
-            });
-        }
-
-        function renderDashboard(kode) {
-            $('#dashboard-content').fadeIn();
-            $('#emiten-title-area').fadeIn();
-            
-            // Filter data investor untuk emiten yang dipilih
-            let filteredData = dataSaham.filter(d => d.Kode === kode);
-            if(filteredData.length === 0) return;
-
-            // Info Emiten Umum (ambil dari baris pertama)
-            const info = filteredData[0];
-            $('#lbl-emiten-kode').text(info.Kode);
-            $('#lbl-emiten-nama').text(info.Emiten);
-            $('#info-sektor').text(info.Sektor || '-');
-            $('#info-industri').text(info.Industri || '-');
-            $('#info-hhi').text(info.HHI || '-');
-
-            // Info Konglomerasi (Cari dari dataKonglo)
-            const kongloInfo = dataKonglo.find(k => k.Ticker === kode);
-            if(kongloInfo && kongloInfo['Grup Konglo']) {
-                $('#info-konglo').text(kongloInfo['Grup Konglo']);
-            } else {
-                $('#info-konglo').html('<span class="text-gray-400">Non-Konglomerasi / Independen</span>');
             }
-
-            // Agregasi Data untuk Grafik
-            let sumLokalAsing = {};
-            let sumTipe = {};
-
-            filteredData.forEach(row => {
-                const pct = parsePersen(row.Persentase);
-                const la = row['Lokal/Asing'] || 'Unknown';
-                const tipe = row.Tipe || 'Unknown';
-
-                sumLokalAsing[la] = (sumLokalAsing[la] || 0) + pct;
-                sumTipe[tipe] = (sumTipe[tipe] || 0) + pct;
-            });
-
-            renderCharts(sumLokalAsing, sumTipe);
-            renderTable(filteredData);
-        }
-
-        function renderCharts(sumLokalAsing, sumTipe) {
-            Chart.defaults.font.family = 'Inter';
-            Chart.defaults.color = '#6b7280';
-
-            // 1. Chart Lokal vs Asing
-            const labelsLA = Object.keys(sumLokalAsing);
-            const dataLA = Object.values(sumLokalAsing);
-            
-            if(chartLokalAsing) chartLokalAsing.destroy();
-            chartLokalAsing = new Chart(document.getElementById('chart-lokal-asing'), {
-                type: 'doughnut',
-                data: {
-                    labels: labelsLA,
-                    datasets: [{
-                        data: dataLA,
-                        backgroundColor: [colorPalette[0], colorPalette[2]], // Sage Green & Dark Gray
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 6, font: {size: 11} } },
-                        tooltip: { callbacks: { label: function(c) { return ' ' + c.label + ': ' + c.raw.toFixed(2) + '%'; } } }
-                    }
-                }
-            });
-
-            // 2. Chart Tipe Investor
-            const labelsTipe = Object.keys(sumTipe).sort((a,b) => sumTipe[b] - sumTipe[a]); // Sort terbesar
-            const dataTipe = labelsTipe.map(l => sumTipe[l]);
-
-            if(chartTipe) chartTipe.destroy();
-            chartTipe = new Chart(document.getElementById('chart-tipe'), {
-                type: 'doughnut',
-                data: {
-                    labels: labelsTipe,
-                    datasets: [{
-                        data: dataTipe,
-                        backgroundColor: colorPalette,
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 6, font: {size: 11} } },
-                        tooltip: { callbacks: { label: function(c) { return ' ' + c.label + ': ' + c.raw.toFixed(2) + '%'; } } }
-                    }
-                }
-            });
-        }
-
-        function renderTable(investorsData) {
-            const tbody = $('#table-investors');
-            tbody.empty();
-
-            // Urutkan berdasarkan persentase (Descending)
-            investorsData.sort((a, b) => parsePersen(b.Persentase) - parsePersen(a.Persentase));
-
-            investorsData.forEach(inv => {
-                const lembar = parseInt(inv['Lembar Saham'] || 0);
-                const persen = parsePersen(inv.Persentase);
-                
-                tbody.append(`
-                    <tr>
-                        <td class="font-medium text-gray-900 pr-4">${inv.Investor}</td>
-                        <td>${inv.Tipe}</td>
-                        <td>${inv['Lokal/Asing']}</td>
-                        <td class="text-gray-500">${inv.Nasionalitas || '-'}</td>
-                        <td class="text-right font-mono text-gray-600">${formatNum(lembar)}</td>
-                        <td class="text-right font-medium text-gray-900">${persen.toFixed(2)}%</td>
-                    </tr>
-                `);
-            });
-        }
+        }).mount('#app')
     </script>
 </body>
 </html>
