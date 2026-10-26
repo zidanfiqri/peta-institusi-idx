@@ -1,0 +1,1393 @@
+{
+ "sumber": "BEI: Perusahaan Tercatat > Kepemilikan Saham Terkonsentrasi Tinggi",
+ "url_halaman": "https://www.idx.co.id/id/perusahaan-tercatat/kepemilikan-saham-terkonsentrasi-tinggi/",
+ "diambil": "2026-10-26 13.07 WIB",
+ "pengumuman_terakhir": "2026-10-22",
+ "jumlah_pengumuman": 88,
+ "jumlah_aktif": 82,
+ "aktif": [
+  {
+   "kode": "ADES",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 95.1,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/ukwpuv0l/signed_pengumuman-hsc-ades.pdf"
+  },
+  {
+   "kode": "AGAR",
+   "aktif": true,
+   "sejak": "2026-08-04",
+   "persen": 99.32,
+   "posisi_per": "2026-07-31",
+   "link": "https://www.idx.co.id/Media/5lyft4gk/pengumuman-hsc-agar-1.pdf"
+  },
+  {
+   "kode": "AGII",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 97.75,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/adddo4jk/20260402_peng-00001-hsc-agii_2-april-2026.pdf"
+  },
+  {
+   "kode": "ALII",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 97.62,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/mmhmcei1/1784045882_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part25.pdf"
+  },
+  {
+   "kode": "ALKA",
+   "aktif": true,
+   "sejak": "2026-08-04",
+   "persen": 98.21,
+   "posisi_per": "2026-07-31",
+   "link": "https://www.idx.co.id/Media/3e0poveb/pengumuman-hsc-alka-1.pdf"
+  },
+  {
+   "kode": "BAJA",
+   "aktif": true,
+   "sejak": "2026-08-10",
+   "persen": 93.89,
+   "posisi_per": "2026-08-06",
+   "link": "https://www.idx.co.id/Media/jt3npklr/pengumuman-hsc-baja.pdf"
+  },
+  {
+   "kode": "BALI",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 92.6,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/z4lh0tue/signed_pengumuman-hsc-bali.pdf"
+  },
+  {
+   "kode": "BBHI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 92.71,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/zfkagvrj/1784045968_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part17.pdf"
+  },
+  {
+   "kode": "BBMD",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.25,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/gampge4t/signed_pengumuman-hsc-bbmd.pdf"
+  },
+  {
+   "kode": "BBSI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.95,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/atzhomm0/1784045940_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part20.pdf"
+  },
+  {
+   "kode": "BDKR",
+   "aktif": true,
+   "sejak": "2026-08-26",
+   "persen": 94.95,
+   "posisi_per": "2026-08-21",
+   "link": "https://www.idx.co.id/Media/bs3clo3w/pengumuman-hsc-bdkr.pdf"
+  },
+  {
+   "kode": "BELI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 93.83,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/pl2bsrqy/1784045823_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part8.pdf"
+  },
+  {
+   "kode": "BIKE",
+   "aktif": true,
+   "sejak": "2026-09-30",
+   "persen": 93.08,
+   "posisi_per": "2026-09-28",
+   "link": "https://www.idx.co.id/Media/sxig0bux/pengumuman-hsc-bike.pdf"
+  },
+  {
+   "kode": "BINA",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 94.79,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tllk0hoh/1784045978_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part15.pdf"
+  },
+  {
+   "kode": "BKDP",
+   "aktif": true,
+   "sejak": "2026-08-05",
+   "persen": 95.45,
+   "posisi_per": "2026-07-31",
+   "link": "https://www.idx.co.id/Media/uj5jl2kj/pengumuman-hsc-bkdp.pdf"
+  },
+  {
+   "kode": "BMAS",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.91,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/hygpyoh5/signed_pengumuman-hsc-bmas.pdf"
+  },
+  {
+   "kode": "BNII",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.14,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tisp3ef3/1784045920_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part22.pdf"
+  },
+  {
+   "kode": "BNLI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.92,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/1c3o5pc3/1784045989_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part6.pdf"
+  },
+  {
+   "kode": "BREN",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 97.31,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/lyyhtbhm/20260402_peng-00002-hsc-bren_2-april-2026.pdf"
+  },
+  {
+   "kode": "BSWD",
+   "aktif": true,
+   "sejak": "2026-10-06",
+   "persen": 99.95,
+   "posisi_per": "2026-10-02",
+   "link": "https://www.idx.co.id/Media/bsdh5k3m/pengumuman-hsc-bswd.pdf"
+  },
+  {
+   "kode": "BTPN",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.78,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/wcoo1ewx/1784045931_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part18.pdf"
+  },
+  {
+   "kode": "BYAN",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 98.5,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/xewlcm2f/1784046042_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part2.pdf"
+  },
+  {
+   "kode": "CITA",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.16,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/uwtludks/signed_pengumuman-hsc-cita.pdf"
+  },
+  {
+   "kode": "CLAY",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.89,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/zllp4vxs/signed_pengumuman-hsc-clay.pdf"
+  },
+  {
+   "kode": "CMNP",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 96.64,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/yl1kojhn/1784045842_signed_pengumuman-hsc-14-juli-2026-pray-cmnp_part2.pdf"
+  },
+  {
+   "kode": "CMNT",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.41,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/515jj5fi/1784045852_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part35.pdf"
+  },
+  {
+   "kode": "DCII",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.96,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/vjggywu1/1784046057_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part1.pdf"
+  },
+  {
+   "kode": "DGWG",
+   "aktif": true,
+   "sejak": "2026-06-30",
+   "persen": 97.35,
+   "posisi_per": "2026-06-25",
+   "link": "https://www.idx.co.id/Media/qioi5ezf/peng-00014-hsc-dgwg_30-juni-2026.pdf"
+  },
+  {
+   "kode": "DMND",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.86,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/s0hbwngl/signed_pengumuman-hsc-dmnd.pdf"
+  },
+  {
+   "kode": "DNET",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 98.06,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/mrrhzoj2/1784046025_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part5.pdf"
+  },
+  {
+   "kode": "DSSA",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 95.76,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/1mumo14o/20260402_peng-00003-hsc-dssa_2-april-2026.pdf"
+  },
+  {
+   "kode": "DUTI",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.88,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/bfsbsfi1/signed_pengumuman-hsc-duti.pdf"
+  },
+  {
+   "kode": "ELPI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 98.9,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/yirjryqf/1784045900_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part28.pdf"
+  },
+  {
+   "kode": "EPMT",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 99.01,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/ti4jyxj3/signed_pengumuman-hsc-epmt.pdf"
+  },
+  {
+   "kode": "FAPA",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.77,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/icxjwi4d/1784045949_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part14.pdf"
+  },
+  {
+   "kode": "FILM",
+   "aktif": true,
+   "sejak": "2026-10-22",
+   "persen": 92.98,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/s3pmoa53/pengumuman-hsc-film.pdf",
+   "catatan": "Masuk kembali: persentase dari penetapan 14 Jul 2026 (posisi 30 Jun 2026); penurunan yang jadi dasar pencabutan 12 Okt terjadi lewat transaksi repo"
+  },
+  {
+   "kode": "FITT",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 95.0,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/o0wnm0qr/1784045877_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part31.pdf"
+  },
+  {
+   "kode": "GEMS",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.24,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/wqudmwhh/1784045810_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part10.pdf"
+  },
+  {
+   "kode": "HATM",
+   "aktif": true,
+   "sejak": "2026-07-01",
+   "persen": 96.09,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/w41lwkip/peng-00015-hsc-hatm_1-juli-2026.pdf"
+  },
+  {
+   "kode": "IFSH",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 99.77,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/iyccv241/20260402_peng-00004-hsc-ifsh_2-april-2026.pdf"
+  },
+  {
+   "kode": "INDO",
+   "aktif": true,
+   "sejak": "2026-10-02",
+   "persen": 94.96,
+   "posisi_per": "2026-09-30",
+   "link": "https://www.idx.co.id/Media/2iwbapnd/pengumuman-hsc-indo.pdf"
+  },
+  {
+   "kode": "INPP",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 98.72,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/ynzhla1c/signed_pengumuman-hsc-inpp.pdf"
+  },
+  {
+   "kode": "KING",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 98.4,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/kkspxtxe/1784045892_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part32.pdf"
+  },
+  {
+   "kode": "KONI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 95.08,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/jvvdgjip/1784045866_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part33.pdf"
+  },
+  {
+   "kode": "LIFE",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.21,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/1bebr4ij/1784045911_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part23.pdf"
+  },
+  {
+   "kode": "MAYA",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 96.68,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/1q0pf2li/signed_pengumuman-hsc-maya.pdf"
+  },
+  {
+   "kode": "MCOL",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 98.62,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/chccrjuz/1784045916_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part24.pdf"
+  },
+  {
+   "kode": "MDIA",
+   "aktif": true,
+   "sejak": "2026-08-14",
+   "persen": 94.31,
+   "posisi_per": "2026-08-12",
+   "link": "https://www.idx.co.id/Media/wqvlntzx/pengumuman-hsc-mdia.pdf"
+  },
+  {
+   "kode": "MEGA",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 95.68,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/5wjpnhwu/signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part11-1.pdf"
+  },
+  {
+   "kode": "MGRO",
+   "aktif": true,
+   "sejak": "2026-05-29",
+   "persen": 93.76,
+   "posisi_per": "2026-05-26",
+   "link": "https://www.idx.co.id/Media/kuigdsbl/20260529_peng-00012-hsc-mgro_29-mei-2026.pdf"
+  },
+  {
+   "kode": "MKPI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 97.02,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/gxjla5ax/1784045857_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part34.pdf"
+  },
+  {
+   "kode": "MLPT",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.42,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/oeqlsuwe/1784045801_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part12.pdf"
+  },
+  {
+   "kode": "MORA",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 95.65,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/th0h51j0/1784046016_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part3.pdf"
+  },
+  {
+   "kode": "MPRO",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.99,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tdenwvpp/1784045828_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part7.pdf"
+  },
+  {
+   "kode": "MSJA",
+   "aktif": true,
+   "sejak": "2026-09-29",
+   "persen": 98.62,
+   "posisi_per": "2026-09-25",
+   "link": "https://www.idx.co.id/Media/uprftnul/pengumuman-hsc-msja.pdf"
+  },
+  {
+   "kode": "MTEL",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 95.58,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/5nobvd3i/signed_pengumuman-hsc-mtel.pdf"
+  },
+  {
+   "kode": "NICK",
+   "aktif": true,
+   "sejak": "2026-09-22",
+   "persen": 99.28,
+   "posisi_per": "2026-09-18",
+   "link": "https://www.idx.co.id/Media/py4bucpa/pengumuman-hsc-nick.pdf"
+  },
+  {
+   "kode": "PGUN",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.95,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/0yualss4/1784045973_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part9.pdf"
+  },
+  {
+   "kode": "POLU",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.94,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/ykdc4wgl/1784045906_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part29.pdf"
+  },
+  {
+   "kode": "PRAY",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.84,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/xo5dnusk/1784045833_signed_pengumuman-hsc-14-juli-2026-pray-cmnp_part1.pdf"
+  },
+  {
+   "kode": "PSAB",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 95.78,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/4ucpkzpm/signed_pengumuman-hsc-psab.pdf"
+  },
+  {
+   "kode": "RISE",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 98.03,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tlljoh1j/1784045955_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part16.pdf"
+  },
+  {
+   "kode": "RLCO",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 95.35,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/ah0o2ala/20260402_peng-00007-hsc-rlco_2-april-2026.pdf"
+  },
+  {
+   "kode": "ROCK",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 99.85,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/yyhhqntb/20260402_peng-00008-hsc-rock_2-april-2026.pdf"
+  },
+  {
+   "kode": "SAFE",
+   "aktif": true,
+   "sejak": "2026-09-04",
+   "persen": 98.14,
+   "posisi_per": "2026-09-02",
+   "link": "https://www.idx.co.id/Media/nnxmmzpc/pengumuman-hsc-safe.pdf"
+  },
+  {
+   "kode": "SAME",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 94.99,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/zckdje0k/signed_pengumuman-hsc-same.pdf"
+  },
+  {
+   "kode": "SATU",
+   "aktif": true,
+   "sejak": "2026-06-04",
+   "persen": 94.27,
+   "posisi_per": "2026-05-29",
+   "link": "https://www.idx.co.id/Media/v25po401/peng-00013-hsc-satu_4-juni-2026.pdf"
+  },
+  {
+   "kode": "SHIP",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 98.3,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/gzqajc25/signed_pengumuman-hsc-ship.pdf"
+  },
+  {
+   "kode": "SILO",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 96.7,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/amgm12fv/1784045945_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part13.pdf"
+  },
+  {
+   "kode": "SMAR",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.58,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/41sjj1y0/1784045847_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part21.pdf"
+  },
+  {
+   "kode": "SMMT",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 97.12,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/0ralz1yt/signed_pengumuman-hsc-smmt.pdf"
+  },
+  {
+   "kode": "SOHO",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.93,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/htfnadu5/1784045963_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part19.pdf"
+  },
+  {
+   "kode": "SOTS",
+   "aktif": true,
+   "sejak": "2026-04-02",
+   "persen": 98.35,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/trljqris/20260402_peng-00009-hsc-sots_2-april-2026.pdf"
+  },
+  {
+   "kode": "SRAJ",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 97.21,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/mvcdfkf4/1784046005_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part4.pdf"
+  },
+  {
+   "kode": "SSMS",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 95.79,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/wzlhyit2/signed_pengumuman-hsc-ssms.pdf"
+  },
+  {
+   "kode": "STTP",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 94.95,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/2t3kudmn/1784045926_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part26.pdf"
+  },
+  {
+   "kode": "TBIG",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 96.62,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/qb0fxmta/signed_pengumuman-hsc-tbig.pdf"
+  },
+  {
+   "kode": "TCPI",
+   "aktif": true,
+   "sejak": "2026-05-29",
+   "persen": 94.1,
+   "posisi_per": "2026-05-25",
+   "link": "https://www.idx.co.id/Media/3q3pxzh1/20260529_peng-00011-hsc-tcpi_29-mei-2026.pdf"
+  },
+  {
+   "kode": "TFCO",
+   "aktif": true,
+   "sejak": "2026-10-21",
+   "persen": 99.7,
+   "posisi_per": "2026-10-15",
+   "link": "https://www.idx.co.id/Media/bfzj3bma/pengumuman-hsc-tfco.pdf"
+  },
+  {
+   "kode": "TMAS",
+   "aktif": true,
+   "sejak": "2026-10-12",
+   "persen": 95.3,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/rpajybd3/signed_pengumuman-hsc-tmas.pdf"
+  },
+  {
+   "kode": "WBSA",
+   "aktif": true,
+   "sejak": "2026-05-08",
+   "persen": 95.82,
+   "posisi_per": "2026-05-07",
+   "link": "https://www.idx.co.id/Media/ffbcirx2/20260508_peng-00010-hsc-wbsa_8-mei-2026.pdf"
+  },
+  {
+   "kode": "YUPI",
+   "aktif": true,
+   "sejak": "2026-07-14",
+   "persen": 99.91,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/h4fjf4xm/1784045871_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part27.pdf"
+  }
+ ],
+ "keluar": [
+  {
+   "kode": "LUCY",
+   "aktif": false,
+   "masuk": "2026-04-02",
+   "persen_terakhir": 95.47,
+   "keluar": "2026-07-02",
+   "posisi_keluar": "2026-06-29",
+   "link_keluar": "https://www.idx.co.id/Media/wcqboos2/peng-00016-hsc-lucy_2-juli-2026.pdf"
+  },
+  {
+   "kode": "MGLV",
+   "aktif": false,
+   "masuk": "2026-04-02",
+   "persen_terakhir": 95.94,
+   "keluar": "2026-10-12",
+   "posisi_keluar": "2026-09-30",
+   "link_keluar": "https://www.idx.co.id/Media/zejh5cvz/signed_pengumuman-keluar-hsc-mglv.pdf"
+  }
+ ],
+ "riwayat": [
+  {
+   "kode": "FILM",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-22",
+   "persen": 92.98,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/s3pmoa53/pengumuman-hsc-film.pdf"
+  },
+  {
+   "kode": "TFCO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-21",
+   "persen": 99.7,
+   "posisi_per": "2026-10-15",
+   "link": "https://www.idx.co.id/Media/bfzj3bma/pengumuman-hsc-tfco.pdf"
+  },
+  {
+   "kode": "TMAS",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 95.3,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/rpajybd3/signed_pengumuman-hsc-tmas.pdf"
+  },
+  {
+   "kode": "TBIG",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 96.62,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/qb0fxmta/signed_pengumuman-hsc-tbig.pdf"
+  },
+  {
+   "kode": "SSMS",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 95.79,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/wzlhyit2/signed_pengumuman-hsc-ssms.pdf"
+  },
+  {
+   "kode": "SMMT",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 97.12,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/0ralz1yt/signed_pengumuman-hsc-smmt.pdf"
+  },
+  {
+   "kode": "SHIP",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 98.3,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/gzqajc25/signed_pengumuman-hsc-ship.pdf"
+  },
+  {
+   "kode": "SAME",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 94.99,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/zckdje0k/signed_pengumuman-hsc-same.pdf"
+  },
+  {
+   "kode": "PSAB",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 95.78,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/4ucpkzpm/signed_pengumuman-hsc-psab.pdf"
+  },
+  {
+   "kode": "MTEL",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 95.58,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/5nobvd3i/signed_pengumuman-hsc-mtel.pdf"
+  },
+  {
+   "kode": "MGLV",
+   "jenis": "Pencabutan",
+   "tanggal": "2026-10-12",
+   "persen": null,
+   "posisi_per": "2026-09-30",
+   "link": "https://www.idx.co.id/Media/zejh5cvz/signed_pengumuman-keluar-hsc-mglv.pdf"
+  },
+  {
+   "kode": "MAYA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 96.68,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/1q0pf2li/signed_pengumuman-hsc-maya.pdf"
+  },
+  {
+   "kode": "INPP",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 98.72,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/ynzhla1c/signed_pengumuman-hsc-inpp.pdf"
+  },
+  {
+   "kode": "FILM",
+   "jenis": "Pencabutan",
+   "tanggal": "2026-10-12",
+   "persen": null,
+   "posisi_per": "2026-10-05",
+   "link": "https://www.idx.co.id/Media/nbsjgniy/signed_pengumuman-keluar-hsc-film.pdf"
+  },
+  {
+   "kode": "EPMT",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.01,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/ti4jyxj3/signed_pengumuman-hsc-epmt.pdf"
+  },
+  {
+   "kode": "DUTI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.88,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/bfsbsfi1/signed_pengumuman-hsc-duti.pdf"
+  },
+  {
+   "kode": "DMND",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.86,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/s0hbwngl/signed_pengumuman-hsc-dmnd.pdf"
+  },
+  {
+   "kode": "CLAY",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.89,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/zllp4vxs/signed_pengumuman-hsc-clay.pdf"
+  },
+  {
+   "kode": "CITA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.16,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/uwtludks/signed_pengumuman-hsc-cita.pdf"
+  },
+  {
+   "kode": "BMAS",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.91,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/hygpyoh5/signed_pengumuman-hsc-bmas.pdf"
+  },
+  {
+   "kode": "BBMD",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 99.25,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/gampge4t/signed_pengumuman-hsc-bbmd.pdf"
+  },
+  {
+   "kode": "BALI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 92.6,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/z4lh0tue/signed_pengumuman-hsc-bali.pdf"
+  },
+  {
+   "kode": "ADES",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-12",
+   "persen": 95.1,
+   "posisi_per": "2026-10-01",
+   "link": "https://www.idx.co.id/Media/ukwpuv0l/signed_pengumuman-hsc-ades.pdf"
+  },
+  {
+   "kode": "BSWD",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-06",
+   "persen": 99.95,
+   "posisi_per": "2026-10-02",
+   "link": "https://www.idx.co.id/Media/bsdh5k3m/pengumuman-hsc-bswd.pdf"
+  },
+  {
+   "kode": "INDO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-10-02",
+   "persen": 94.96,
+   "posisi_per": "2026-09-30",
+   "link": "https://www.idx.co.id/Media/2iwbapnd/pengumuman-hsc-indo.pdf"
+  },
+  {
+   "kode": "BIKE",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-09-30",
+   "persen": 93.08,
+   "posisi_per": "2026-09-28",
+   "link": "https://www.idx.co.id/Media/sxig0bux/pengumuman-hsc-bike.pdf"
+  },
+  {
+   "kode": "MSJA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-09-29",
+   "persen": 98.62,
+   "posisi_per": "2026-09-25",
+   "link": "https://www.idx.co.id/Media/uprftnul/pengumuman-hsc-msja.pdf"
+  },
+  {
+   "kode": "NICK",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-09-22",
+   "persen": 99.28,
+   "posisi_per": "2026-09-18",
+   "link": "https://www.idx.co.id/Media/py4bucpa/pengumuman-hsc-nick.pdf"
+  },
+  {
+   "kode": "SAFE",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-09-04",
+   "persen": 98.14,
+   "posisi_per": "2026-09-02",
+   "link": "https://www.idx.co.id/Media/nnxmmzpc/pengumuman-hsc-safe.pdf"
+  },
+  {
+   "kode": "BDKR",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-08-26",
+   "persen": 94.95,
+   "posisi_per": "2026-08-21",
+   "link": "https://www.idx.co.id/Media/bs3clo3w/pengumuman-hsc-bdkr.pdf"
+  },
+  {
+   "kode": "MDIA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-08-14",
+   "persen": 94.31,
+   "posisi_per": "2026-08-12",
+   "link": "https://www.idx.co.id/Media/wqvlntzx/pengumuman-hsc-mdia.pdf"
+  },
+  {
+   "kode": "BAJA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-08-10",
+   "persen": 93.89,
+   "posisi_per": "2026-08-06",
+   "link": "https://www.idx.co.id/Media/jt3npklr/pengumuman-hsc-baja.pdf"
+  },
+  {
+   "kode": "BKDP",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-08-05",
+   "persen": 95.45,
+   "posisi_per": "2026-07-31",
+   "link": "https://www.idx.co.id/Media/uj5jl2kj/pengumuman-hsc-bkdp.pdf"
+  },
+  {
+   "kode": "ALKA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-08-04",
+   "persen": 98.21,
+   "posisi_per": "2026-07-31",
+   "link": "https://www.idx.co.id/Media/3e0poveb/pengumuman-hsc-alka-1.pdf"
+  },
+  {
+   "kode": "AGAR",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-08-04",
+   "persen": 99.32,
+   "posisi_per": "2026-07-31",
+   "link": "https://www.idx.co.id/Media/5lyft4gk/pengumuman-hsc-agar-1.pdf"
+  },
+  {
+   "kode": "YUPI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.91,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/h4fjf4xm/1784045871_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part27.pdf"
+  },
+  {
+   "kode": "STTP",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 94.95,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/2t3kudmn/1784045926_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part26.pdf"
+  },
+  {
+   "kode": "SRAJ",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 97.21,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/mvcdfkf4/1784046005_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part4.pdf"
+  },
+  {
+   "kode": "SOHO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.93,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/htfnadu5/1784045963_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part19.pdf"
+  },
+  {
+   "kode": "SMAR",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.58,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/41sjj1y0/1784045847_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part21.pdf"
+  },
+  {
+   "kode": "SILO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 96.7,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/amgm12fv/1784045945_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part13.pdf"
+  },
+  {
+   "kode": "RISE",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 98.03,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tlljoh1j/1784045955_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part16.pdf"
+  },
+  {
+   "kode": "PRAY",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.84,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/xo5dnusk/1784045833_signed_pengumuman-hsc-14-juli-2026-pray-cmnp_part1.pdf"
+  },
+  {
+   "kode": "POLU",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.94,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/ykdc4wgl/1784045906_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part29.pdf"
+  },
+  {
+   "kode": "PGUN",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.95,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/0yualss4/1784045973_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part9.pdf"
+  },
+  {
+   "kode": "MPRO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.99,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tdenwvpp/1784045828_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part7.pdf"
+  },
+  {
+   "kode": "MORA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 95.65,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/th0h51j0/1784046016_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part3.pdf"
+  },
+  {
+   "kode": "MLPT",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.42,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/oeqlsuwe/1784045801_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part12.pdf"
+  },
+  {
+   "kode": "MKPI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 97.02,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/gxjla5ax/1784045857_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part34.pdf"
+  },
+  {
+   "kode": "MEGA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 95.68,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/5wjpnhwu/signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part11-1.pdf"
+  },
+  {
+   "kode": "MCOL",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 98.62,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/chccrjuz/1784045916_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part24.pdf"
+  },
+  {
+   "kode": "LIFE",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.21,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/1bebr4ij/1784045911_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part23.pdf"
+  },
+  {
+   "kode": "KONI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 95.08,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/jvvdgjip/1784045866_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part33.pdf"
+  },
+  {
+   "kode": "KING",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 98.4,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/kkspxtxe/1784045892_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part32.pdf"
+  },
+  {
+   "kode": "GEMS",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.24,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/wqudmwhh/1784045810_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part10.pdf"
+  },
+  {
+   "kode": "FITT",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 95.0,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/o0wnm0qr/1784045877_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part31.pdf"
+  },
+  {
+   "kode": "FILM",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 92.98,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/rzmd0jym/1784045896_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part30.pdf"
+  },
+  {
+   "kode": "FAPA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.77,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/icxjwi4d/1784045949_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part14.pdf"
+  },
+  {
+   "kode": "ELPI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 98.9,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/yirjryqf/1784045900_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part28.pdf"
+  },
+  {
+   "kode": "DNET",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 98.06,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/mrrhzoj2/1784046025_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part5.pdf"
+  },
+  {
+   "kode": "DCII",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.96,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/vjggywu1/1784046057_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part1.pdf"
+  },
+  {
+   "kode": "CMNT",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.41,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/515jj5fi/1784045852_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part35.pdf"
+  },
+  {
+   "kode": "CMNP",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 96.64,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/yl1kojhn/1784045842_signed_pengumuman-hsc-14-juli-2026-pray-cmnp_part2.pdf"
+  },
+  {
+   "kode": "BYAN",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 98.5,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/xewlcm2f/1784046042_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part2.pdf"
+  },
+  {
+   "kode": "BTPN",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.78,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/wcoo1ewx/1784045931_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part18.pdf"
+  },
+  {
+   "kode": "BNLI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.92,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/1c3o5pc3/1784045989_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part6.pdf"
+  },
+  {
+   "kode": "BNII",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.14,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tisp3ef3/1784045920_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part22.pdf"
+  },
+  {
+   "kode": "BINA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 94.79,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/tllk0hoh/1784045978_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part15.pdf"
+  },
+  {
+   "kode": "BELI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 93.83,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/pl2bsrqy/1784045823_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part8.pdf"
+  },
+  {
+   "kode": "BBSI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 99.95,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/atzhomm0/1784045940_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part20.pdf"
+  },
+  {
+   "kode": "BBHI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 92.71,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/zfkagvrj/1784045968_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part17.pdf"
+  },
+  {
+   "kode": "ALII",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-14",
+   "persen": 97.62,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/mmhmcei1/1784045882_signed_lamp-2-draft-pengumuman-hsc-14-juli-2026_part25.pdf"
+  },
+  {
+   "kode": "LUCY",
+   "jenis": "Pencabutan",
+   "tanggal": "2026-07-02",
+   "persen": null,
+   "posisi_per": "2026-06-29",
+   "link": "https://www.idx.co.id/Media/wcqboos2/peng-00016-hsc-lucy_2-juli-2026.pdf"
+  },
+  {
+   "kode": "HATM",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-07-01",
+   "persen": 96.09,
+   "posisi_per": "2026-06-30",
+   "link": "https://www.idx.co.id/Media/w41lwkip/peng-00015-hsc-hatm_1-juli-2026.pdf"
+  },
+  {
+   "kode": "DGWG",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-06-30",
+   "persen": 97.35,
+   "posisi_per": "2026-06-25",
+   "link": "https://www.idx.co.id/Media/qioi5ezf/peng-00014-hsc-dgwg_30-juni-2026.pdf"
+  },
+  {
+   "kode": "SATU",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-06-04",
+   "persen": 94.27,
+   "posisi_per": "2026-05-29",
+   "link": "https://www.idx.co.id/Media/v25po401/peng-00013-hsc-satu_4-juni-2026.pdf"
+  },
+  {
+   "kode": "TCPI",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-05-29",
+   "persen": 94.1,
+   "posisi_per": "2026-05-25",
+   "link": "https://www.idx.co.id/Media/3q3pxzh1/20260529_peng-00011-hsc-tcpi_29-mei-2026.pdf"
+  },
+  {
+   "kode": "MGRO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-05-29",
+   "persen": 93.76,
+   "posisi_per": "2026-05-26",
+   "link": "https://www.idx.co.id/Media/kuigdsbl/20260529_peng-00012-hsc-mgro_29-mei-2026.pdf"
+  },
+  {
+   "kode": "WBSA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-05-08",
+   "persen": 95.82,
+   "posisi_per": "2026-05-07",
+   "link": "https://www.idx.co.id/Media/ffbcirx2/20260508_peng-00010-hsc-wbsa_8-mei-2026.pdf"
+  },
+  {
+   "kode": "SOTS",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 98.35,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/trljqris/20260402_peng-00009-hsc-sots_2-april-2026.pdf"
+  },
+  {
+   "kode": "ROCK",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 99.85,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/yyhhqntb/20260402_peng-00008-hsc-rock_2-april-2026.pdf"
+  },
+  {
+   "kode": "RLCO",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 95.35,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/ah0o2ala/20260402_peng-00007-hsc-rlco_2-april-2026.pdf"
+  },
+  {
+   "kode": "MGLV",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 95.94,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/ejmhskq1/20260402_peng-00006-hsc-mglv_2-april-2026.pdf"
+  },
+  {
+   "kode": "LUCY",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 95.47,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/3mxnovh0/20260402_peng-00005-hsc-lucy_2-april-2026.pdf"
+  },
+  {
+   "kode": "IFSH",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 99.77,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/iyccv241/20260402_peng-00004-hsc-ifsh_2-april-2026.pdf"
+  },
+  {
+   "kode": "DSSA",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 95.76,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/1mumo14o/20260402_peng-00003-hsc-dssa_2-april-2026.pdf"
+  },
+  {
+   "kode": "BREN",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 97.31,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/lyyhtbhm/20260402_peng-00002-hsc-bren_2-april-2026.pdf"
+  },
+  {
+   "kode": "AGII",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-04-02",
+   "persen": 97.75,
+   "posisi_per": "2026-03-31",
+   "link": "https://www.idx.co.id/Media/adddo4jk/20260402_peng-00001-hsc-agii_2-april-2026.pdf"
+  }
+ ]
+}
