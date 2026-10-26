@@ -1,0 +1,956 @@
+kode,nama,sektor,industri
+AADI,ADARO ANDALAN INDONESIA Tbk,Energy,Thermal Coal
+AALI,ASTRA AGRO LESTARI Tbk,Consumer Defensive,Farm Products
+ABBA,MAHAKA MEDIA Tbk,Communication Services,Publishing
+ABDA,ASURANSI BINA DANA ARTA Tbk,Financial Services,Insurance - Property & Casualty
+ABMM,ABM INVESTAMA Tbk,Energy,Thermal Coal
+ACES,ASPIRASI HIDUP INDONESIA Tbk,Consumer Cyclical,Specialty Retail
+ACRO,SAMCRO HYOSUNG ADILESTARI Tbk,Consumer Cyclical,Apparel Manufacturing
+ACST,ACSET INDONUSA Tbk,Industrials,Engineering & Construction
+ADCP,ADHI COMMUTER PROPERTI Tbk,Real Estate,Real Estate - Development
+ADES,AKASHA WIRA INTERNATIONAL Tbk,Consumer Defensive,Beverages - Non-Alcoholic
+ADHI,ADHI KARYA (PERSERO) Tbk,Industrials,Engineering & Construction
+ADMF,ADIRA DINAMIKA MULTI FINANCE Tbk,Financial Services,Credit Services
+ADMG,POLYCHEM INDONESIA Tbk,Basic Materials,Chemicals
+ADMR,ALAMTRI MINERALS INDONESIA Tbk,Basic Materials,Coking Coal
+ADRO,ALAMTRI RESOURCES INDONESIA Tbk,Energy,Thermal Coal
+AEGS,ANUGERAH SPAREPARTS SEJAHTERA Tbk,Consumer Cyclical,Auto Parts
+AGAR,ASIA SEJAHTERA MINA Tbk,Consumer Defensive,Farm Products
+AGII,SAMATOR INDO GAS Tbk,Basic Materials,Chemicals
+AGRO,BANK RAYA INDONESIA Tbk,Financial Services,Banks - Regional
+AGRS,BANK IBK INDONESIA Tbk,Financial Services,Banks - Regional
+AHAP,ASURANSI HARTA AMAN PRATAMA Tbk,Financial Services,Insurance - Property & Casualty
+AIMS,ARTHA MAHIYA INVESTAMA Tbk,Energy,Thermal Coal
+AISA,FKS FOOD SEJAHTERA Tbk,Consumer Defensive,Packaged Foods
+AKKU,ANUGERAH KAGUM KARYA UTAMA Tbk,Consumer Cyclical,Lodging
+AKPI,ARGHA KARYA PRIMA INDUSTRY Tbk,Consumer Cyclical,Packaging & Containers
+AKRA,AKR CORPORINDO Tbk,Energy,Oil & Gas Refining & Marketing
+AKSI,MINERAL SUMBERDAYA MANDIRI Tbk,Industrials,Trucking
+ALDO,ALKINDO NARATAMA Tbk,Basic Materials,Paper & Paper Products
+ALII,ANCARA LOGISTICS INDONESIA Tbk,Industrials,Marine Shipping
+ALKA,ALAKASA INDUSTRINDO Tbk,Basic Materials,Aluminum
+ALMI,ALUMINDO LIGHT METAL INDUSTRY Tbk,Basic Materials,Aluminum
+ALTO,TRI BANYAN TIRTA Tbk,Consumer Defensive,Beverages - Non-Alcoholic
+AMAG,ASURANSI MULTI ARTHA GUNA Tbk,Financial Services,Insurance - Property & Casualty
+AMAN,MAKMUR BERKAH AMANDA Tbk,Real Estate,Real Estate - Development
+AMAR,BANK AMAR INDONESIA Tbk,Financial Services,Banks - Regional
+AMFG,ASAHIMAS FLAT GLASS Tbk,Basic Materials,Building Materials
+AMIN,ATELIERS MECANIQUES D`INDONESIE Tbk,Industrials,Specialty Industrial Machinery
+AMMN,AMMAN MINERAL INTERNASIONAL Tbk,Basic Materials,Other Precious Metals & Mining
+AMMS,AGUNG MENJANGAN MAS Tbk,Consumer Defensive,Farm Products
+AMOR,ASHMORE ASSET MANAGEMENT INDONESIA Tbk,Financial Services,Asset Management
+AMRT,SUMBER ALFARIA TRIJAYA Tbk,Consumer Defensive,Grocery Stores
+ANDI,ANDIRA AGRO Tbk,Consumer Defensive,Farm Products
+ANJT,AUSTINDO NUSANTARA JAYA Tbk,Consumer Defensive,Farm Products
+ANTM,ANEKA TAMBANG Tbk,Basic Materials,Gold
+APEX,APEXINDO PRATAMA DUTA Tbk,Energy,Oil & Gas Drilling
+APIC,PACIFIC STRATEGIC FINANCIAL Tbk,Financial Services,Insurance - Life
+APII,ARITA PRIMA INDONESIA Tbk,Industrials,Tools & Accessories
+APLI,ASIAPLAST INDUSTRIES Tbk,Consumer Cyclical,Packaging & Containers
+APLN,AGUNG PODOMORO LAND Tbk,Real Estate,Real Estate - Development
+ARCI,ARCHI INDONESIA Tbk,Basic Materials,Gold
+AREA,DUNIA VIRTUAL ONLINE Tbk,Technology,Information Technology Services
+ARGO,ARGO PANTES Tbk,Consumer Cyclical,Textile Manufacturing
+ARII,ATLAS RESOURCES Tbk,Energy,Thermal Coal
+ARKA,ARKHA JAYANTI PERSADA Tbk,Industrials,Specialty Business Services
+ARKO,ARKORA HYDRO Tbk,Utilities,Utilities - Renewable
+ARMY,ARMIDIAN KARYATAMA Tbk,,
+ARNA,ARWANA CITRAMULIA Tbk,Industrials,Building Products & Equipment
+ARTA,ARTHAVEST Tbk,Consumer Cyclical,Lodging
+ARTI,RATU PRABU ENERGI Tbk,Energy,Oil & Gas Equipment & Services
+ARTO,BANK JAGO Tbk,Financial Services,Banks - Regional
+ASBI,ASURANSI BINTANG Tbk,Financial Services,Insurance - Diversified
+ASDM,ASURANSI DAYIN MITRA Tbk,Financial Services,Insurance - Diversified
+ASGR,ASTRA GRAPHIA Tbk,Industrials,Specialty Business Services
+ASHA,CILACAP SAMUDERA FISHING INDUSTRY Tbk,Consumer Defensive,Farm Products
+ASII,ASTRA INTERNATIONAL Tbk,Industrials,Conglomerates
+ASJT,ASURANSI JASA TANIA Tbk,Financial Services,Insurance - Property & Casualty
+ASLC,AUTOPEDIA SUKSES LESTARI Tbk,Consumer Cyclical,Auto & Truck Dealerships
+ASLI,ASRI KARYA LESTARI Tbk,Industrials,Engineering & Construction
+ASMI,ASURANSI MAXIMUS GRAHA PERSADA Tbk,Financial Services,Insurance - Property & Casualty
+ASPI,ANDALAN SAKTI PRIMAINDO Tbk,Consumer Cyclical,Residential Construction
+ASPR,ASIA PRAMULIA Tbk,Consumer Cyclical,Packaging & Containers
+ASRI,ALAM SUTERA REALTY Tbk,Real Estate,Real Estate - Development
+ASRM,ASURANSI RAMAYANA Tbk,Financial Services,Insurance - Property & Casualty
+ASSA,ADI SARANA ARMADA Tbk,Industrials,Rental & Leasing Services
+ATAP,TRIMITRA PRAWARA GOLDLAND Tbk,Consumer Cyclical,Residential Construction
+ATIC,ANABATIC TECHNOLOGIES Tbk,Technology,Information Technology Services
+ATLA,ATLANTIS SUBSEA INDONESIA Tbk,Energy,Oil & Gas Equipment & Services
+AUTO,ASTRA OTOPARTS Tbk,Consumer Cyclical,Auto Parts
+AVIA,AVIA AVIAN Tbk,Basic Materials,Specialty Chemicals
+AWAN,ERA DIGITAL MEDIA Tbk,Communication Services,Internet Content & Information
+AXIO,TERA DATA INDONUSA Tbk,Technology,Computer Hardware
+AYAM,JANU PUTRA SEJAHTERA Tbk,Consumer Defensive,Farm Products
+AYLS,AGRO YASA LESTARI Tbk,Consumer Defensive,Food Distribution
+BABP,BANK MNC INTERNASIONAL Tbk,Financial Services,Banks - Regional
+BABY,MULTITREND INDO Tbk,Consumer Cyclical,Apparel Retail
+BACA,BANK CAPITAL INDONESIA Tbk,Financial Services,Banks - Regional
+BAIK,BERSAMA MENCAPAI PUNCAK Tbk,Consumer Cyclical,Restaurants
+BAJA,SARANACENTRAL BAJATAMA Tbk,Basic Materials,Steel
+BALI,BALI TOWERINDO SENTRA Tbk,Communication Services,Telecom Services
+BANK,BANK ALADIN SYARIAH Tbk,Financial Services,Banks - Regional
+BAPA,BEKASI ASRI PEMULA Tbk,Real Estate,Real Estate - Development
+BAPI,BHAKTI AGUNG PROPERTINDO Tbk,Real Estate,Real Estate - Development
+BATA,SEPATU BATA Tbk,Consumer Cyclical,Footwear & Accessories
+BATR,BENTENG API TECHNIC Tbk,Basic Materials,Building Materials
+BAUT,MITRA ANGKASA SEJAHTERA Tbk,Industrials,Tools & Accessories
+BAYU,BAYU BUANA Tbk,Consumer Cyclical,Travel Services
+BBCA,BANK CENTRAL ASIA Tbk,Financial Services,Banks - Regional
+BBHI,ALLO BANK INDONESIA Tbk,Financial Services,Banks - Regional
+BBKP,BANK KB INDONESIA Tbk,Financial Services,Banks - Regional
+BBLD,BUANA FINANCE Tbk,Financial Services,Credit Services
+BBMD,BANK MESTIKA DHARMA Tbk,Financial Services,Banks - Regional
+BBNI,BANK NEGARA INDONESIA Tbk,Financial Services,Banks - Regional
+BBRI,BANK RAKYAT INDONESIA (PERSERO) Tbk,Financial Services,Banks - Regional
+BBRM,PELAYARAN NASIONAL BINA BUANA RAYA Tbk,Industrials,Marine Shipping
+BBSI,KROM BANK INDONESIA Tbk,Financial Services,Banks - Regional
+BBSS,BUMI BENOWO SUKSES SEJAHTERA Tbk,Industrials,Engineering & Construction
+BBTN,BANK TABUNGAN NEGARA (PERSERO) Tbk,Financial Services,Banks - Regional
+BBYB,BANK NEO COMMERCE Tbk,Financial Services,Banks - Regional
+BCAP,MNC KAPITAL INDONESIA Tbk,Financial Services,Financial Conglomerates
+BCIC,BANK JTRUST INDONESIA Tbk,Financial Services,Banks - Regional
+BCIP,BUMI CITRA PERMAI Tbk,Real Estate,Real Estate - Development
+BDKR,BERDIKARI PONDASI PERKASA Tbk,Industrials,Engineering & Construction
+BDMN,BANK DANAMON INDONESIA Tbk,Financial Services,Banks - Regional
+BEBS,BERKAH BETON SADAYA Tbk,Basic Materials,Building Materials
+BEEF,ESTIKA TATA TIARA Tbk,Consumer Defensive,Packaged Foods
+BEER,JOBUBU JARUM MINAHASA Tbk,Consumer Defensive,Beverages - Wineries & Distilleries
+BEKS,BANK PEMBANGUNAN DAERAH BANTEN Tbk,Financial Services,Banks - Regional
+BELI,GLOBAL DIGITAL NIAGA Tbk,Consumer Cyclical,Internet Retail
+BELL,TRISULA TEXTILE INDUSTRIES Tbk,Consumer Cyclical,Textile Manufacturing
+BESS,BATULICIN NUSANTARA MARITIM Tbk,Industrials,Marine Shipping
+BEST,BEKASI FAJAR INDUSTRIAL ESTATE Tbk,Real Estate,Real Estate Services
+BFIN,BFI FINANCE INDONESIA Tbk,Financial Services,Credit Services
+BGTG,BANK GANESHA Tbk,Financial Services,Banks - Regional
+BHAT,BHAKTI MULTI ARTHA Tbk,Financial Services,Insurance - Life
+BHIT,MNC ASIA HOLDING Tbk,Communication Services,Entertainment
+BIKA,BINAKARYA JAYA ABADI Tbk,Real Estate,Real Estate - Development
+BIKE,SEPEDA BERSAMA INDONESIA Tbk,Consumer Cyclical,Leisure
+BIMA,PRIMARINDO ASIA INFRASTRUCTURE Tbk,Consumer Cyclical,Footwear & Accessories
+BINA,BANK INA PERDANA Tbk,Financial Services,Banks - Regional
+BINO,PERMA PLASINDO Tbk,Industrials,Business Equipment & Supplies
+BIPI,ASTRINDO NUSANTARA INFRASTRUKTUR Tbk,Industrials,Infrastructure Operations
+BIPP,BHUWANATALA INDAH PERMAI Tbk,Real Estate,Real Estate - Diversified
+BIRD,BLUE BIRD Tbk,Industrials,Railroads
+BISI,BISI INTERNATIONAL Tbk,Basic Materials,Agricultural Inputs
+BJBR,BANK JABAR BANTEN Tbk,Financial Services,Banks - Regional
+BJTM,BANK PEMBANGUNAN DAERAH JAWA TIMUR Tbk,Financial Services,Banks - Regional
+BKDP,BUKIT DARMO PROPERTY Tbk,Real Estate,Real Estate Services
+BKSL,SENTUL CITY Tbk,Real Estate,Real Estate - Development
+BKSW,BANK QNB INDONESIA Tbk,Financial Services,Banks - Regional
+BLES,SUPERIOR PRIMA SUKSES Tbk,Basic Materials,Building Materials
+BLOG,TRIMITRA TRANS PERSADA Tbk,Industrials,Integrated Freight & Logistics
+BLTA,BERLIAN LAJU TANKER Tbk,Industrials,Marine Shipping
+BLTZ,GRAHA LAYAR PRIMA Tbk,Communication Services,Entertainment
+BLUE,BERKAH PRIMA PERKASA Tbk,Technology,Electronics & Computer Distribution
+BMAS,BANK MASPION INDONESIA Tbk,Financial Services,Banks - Regional
+BMBL,LAVENDER BINA CENDIKIA Tbk,Consumer Defensive,Education & Training Services
+BMHS,BUNDAMEDIK Tbk,Healthcare,Medical Care Facilities
+BMRI,BANK MANDIRI ( PERSERO ) Tbk,Financial Services,Banks - Regional
+BMSR,BINTANG MITRA SEMESTARAYA Tbk,Basic Materials,Chemicals
+BMTR,GLOBAL MEDIACOM Tbk,Communication Services,Entertainment
+BNBA,BANK BUMI ARTA Tbk,Financial Services,Banks - Regional
+BNBR,BAKRIE AND BROTHERS Tbk,Industrials,Conglomerates
+BNGA,BANK CIMB NIAGA Tbk,Financial Services,Banks - Regional
+BNII,BANK MAYBANK INDONESIA Tbk,Financial Services,Banks - Regional
+BNLI,BANK PERMATA Tbk,Financial Services,Banks - Regional
+BOAT,NEWPORT MARINE SERVICES Tbk,Energy,Oil & Gas Drilling
+BOBA,FORMOSA INGREDIENT FACTORY Tbk,Consumer Defensive,Packaged Foods
+BOGA,APOLLO GLOBAL INTERACTIVE Tbk,Consumer Cyclical,Auto & Truck Dealerships
+BOLA,BALI BINTANG SEJAHTERA Tbk,Communication Services,Entertainment
+BOLT,GARUDA METALINDO Tbk,Industrials,Tools & Accessories
+BOSS,BORNEO OLAH SARANA SUKSES Tbk,,
+BPFI,WOORI FINANCE INDONESIA Tbk,Financial Services,Credit Services
+BPII,BATAVIA PROSPERINDO INTERNASIONAL Tbk,Financial Services,Asset Management
+BPTR,BATAVIA PROSPERINDO TRANS Tbk,Industrials,Rental & Leasing Services
+BRAM,INDO KORDSA Tbk,Consumer Cyclical,Textile Manufacturing
+BREN,BARITO RENEWABLES ENERGY Tbk,Utilities,Utilities - Renewable
+BRIS,BANK SYARIAH INDONESIA Tbk,Financial Services,Banks - Regional
+BRMS,BUMI RESOURCES MINERALS Tbk,Basic Materials,Other Industrial Metals & Mining
+BRNA,BERLINA Tbk,Consumer Cyclical,Packaging & Containers
+BRPT,BARITO PACIFIC Tbk,Basic Materials,Chemicals
+BRRC,RAJA ROTI CEMERLANG Tbk,Consumer Defensive,Packaged Foods
+BSBK,WULANDARI BANGUN LAKSANA Tbk,Real Estate,Real Estate - Development
+BSDE,BUMI SERPONG DAMAI Tbk,Real Estate,Real Estate - Development
+BSIM,BANK SINAR MAS Tbk,Financial Services,Banks - Regional
+BSML,BINTANG SAMUDERA MANDIRI LINES Tbk,Industrials,Marine Shipping
+BSSR,BARAMULTI SUKSESSARANA Tbk,Energy,Thermal Coal
+BSWD,BANK OF INDIA INDONESIA Tbk,Financial Services,Banks - Regional
+BTEK,BUMI TEKNOKULTURA UNGGUL Tbk,Consumer Defensive,Farm Products
+BTEL,BAKRIE TELECOM Tbk,,
+BTON,BETONJAYA MANUNGGAL Tbk,Basic Materials,Steel
+BTPN,BANK SMBC INDONESIA Tbk,Financial Services,Banks - Regional
+BTPS,BANK BTPN SYARIAH Tbk,Financial Services,Banks - Regional
+BUAH,SEGAR KUMALA INDONESIA Tbk,Consumer Defensive,Food Distribution
+BUDI,BUDI STARCH & SWEETENER Tbk,Consumer Defensive,Packaged Foods
+BUKA,BUKALAPAK.COM Tbk,Consumer Cyclical,Internet Retail
+BUKK,BUKAKA TEKNIK UTAMA Tbk,Industrials,Engineering & Construction
+BULL,BUANA LINTAS LAUTAN Tbk,Industrials,Marine Shipping
+BUMI,BUMI RESOURCES Tbk,Energy,Thermal Coal
+BUVA,BUKIT ULUWATU VILLA Tbk,Consumer Cyclical,Lodging
+BVIC,BANK VICTORIA INTERNATIONAL Tbk,Financial Services,Banks - Regional
+BWPT,"EAGLE HIGH PLANTATIONS, Tbk",Consumer Defensive,Packaged Foods
+BYAN,BAYAN RESOURCES Tbk,Energy,Thermal Coal
+CAKK,CAHAYAPUTRA ASA KERAMIK Tbk,Industrials,Building Products & Equipment
+CAMP,CAMPINA ICE CREAM INDUSTRY Tbk,Consumer Defensive,Packaged Foods
+CANI,CAPITOL NUSANTARA INDONESIA Tbk,Industrials,Marine Shipping
+CARE,METRO HEALTHCARE INDONESIA Tbk,Healthcare,Medical Care Facilities
+CARS,INDUSTRI DAN PERDAGANGAN BINTRACO DHARMA Tbk,Consumer Cyclical,Auto & Truck Dealerships
+CASA,CAPITAL FINANCIAL INDONESIA Tbk,Financial Services,Insurance - Life
+CASH,CASHLEZ WORLDWIDE INDONESIA Tbk,Industrials,Business Equipment & Supplies
+CASS,CAHAYA AERO SERVICES Tbk,Industrials,Airports & Air Services
+CBDK,BANGUN KOSAMBI SUKSES Tbk,Real Estate,Real Estate Services
+CBMF,CAHAYA BINTANG MEDAN Tbk,,
+CBPE,CITRA BUANA PRASIDA Tbk,Real Estate,Real Estate - Development
+CBRE,CAKRA BUANA RESOURCES ENERGI Tbk,Industrials,Marine Shipping
+CBUT,CITRA BORNEO UTAMA Tbk,Consumer Defensive,Packaged Foods
+CCSI,COMMUNICATION CABLE SYSTEMS INDONESIA Tbk,Technology,Communication Equipment
+CDIA,CHANDRA DAYA INVESTASI Tbk,Utilities,Utilities - Regulated Electric
+CEKA,WILMAR CAHAYA INDONESIA Tbk,Consumer Defensive,Packaged Foods
+CENT,CENTRATAMA TELEKOMUNIKASI INDONESIA Tbk,Communication Services,Telecom Services
+CFIN,CLIPAN FINANCE INDONESIA Tbk,Financial Services,Credit Services
+CGAS,CITRA NUSANTARA GEMILANG Tbk,Energy,Oil & Gas Refining & Marketing
+CHEK,DIASTIKA BIOTEKINDO Tbk,Healthcare,Medical Devices
+CHEM,CHEMSTAR INDONESIA Tbk,Basic Materials,Specialty Chemicals
+CHIP,PELITA TEKNOLOGI GLOBAL Tbk,Communication Services,Telecom Services
+CINT,CHITOSE INTERNASIONAL Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+CITA,CITA MINERAL INVESTINDO Tbk,Basic Materials,Other Industrial Metals & Mining
+CITY,NATURA CITY DEVELOPMENTS Tbk,Real Estate,Real Estate - Development
+CLAY,CITRA PUTRA REALTY Tbk,Consumer Cyclical,Lodging
+CLEO,SARIGUNA PRIMATIRTA Tbk,Consumer Defensive,Beverages - Non-Alcoholic
+CLPI,COLORPAK INDONESIA Tbk,Basic Materials,Specialty Chemicals
+CMNP,CITRA MARGA NUSAPHALA PERSADA Tbk,Industrials,Infrastructure Operations
+CMNT,CEMINDO GEMILANG Tbk,Basic Materials,Building Materials
+CMPP,AIRASIA INDONESIA Tbk,Industrials,Airlines
+CMRY,CISARUA MOUNTAIN DAIRY Tbk,Consumer Defensive,Packaged Foods
+CNKO,EXPLOITASI ENERGI INDONESIA Tbk,Energy,Thermal Coal
+CNMA,NUSANTARA SEJAHTERA RAYA Tbk,Communication Services,Entertainment
+CNTX,CENTEX Tbk,Consumer Cyclical,Textile Manufacturing
+COAL,BLACK DIAMOND RESOURCES Tbk,Energy,Thermal Coal
+COCO,WAHANA INTERFOOD NUSANTARA Tbk,Consumer Defensive,Confectioners
+COIN,INDOKRIPTO KOIN SEMESTA Tbk,Financial Services,Financial Data & Stock Exchanges
+COWL,COWELL DEVELOPMENT Tbk,,
+CPIN,CHAROEN POKPHAND INDONESIA Tbk,Consumer Defensive,Farm Products
+CPRI,CAPRI NUSA SATU PROPERTI Tbk,,
+CPRO,CENTRAL PROTEINAPRIMA Tbk,Consumer Defensive,Farm Products
+CRAB,TOBA SURIMI INDUSTRIES Tbk,Consumer Defensive,Packaged Foods
+CRSN,CARSURIN Tbk,Industrials,Specialty Business Services
+CSAP,CATUR SENTOSA ADIPRANA Tbk,Industrials,Industrial Distribution
+CSIS,CAHAYASAKTI INVESTINDO SUKSES Tbk,Real Estate,Real Estate - Development
+CSMI,CIPTA SELERA MURNI Tbk,Consumer Cyclical,Restaurants
+CSRA,CISADANE SAWIT RAYA Tbk,Consumer Defensive,Farm Products
+CTBN,CITRA TUBINDO Tbk,Energy,Oil & Gas Equipment & Services
+CTRA,CIPUTRA DEVELOPMENT Tbk,Real Estate,Real Estate - Development
+CTTH,CITATAH Tbk,Basic Materials,Building Materials
+CUAN,PETRINDO JAYA KREASI Tbk,Energy,Thermal Coal
+CYBR,ITSEC ASIA Tbk,Technology,Software - Infrastructure
+DAAZ,DAAZ BARA LESTARI Tbk,Basic Materials,Other Industrial Metals & Mining
+DADA,DIAMOND CITRA PROPERTINDO Tbk,Real Estate,Real Estate Services
+DART,DUTA ANGGADA REALTY Tbk,Real Estate,Real Estate Services
+DATA,REMALA ABADI Tbk,Communication Services,Telecom Services
+DAYA,DUTA INTIDAYA Tbk,Consumer Cyclical,Specialty Retail
+DCII,DCI INDONESIA Tbk,Technology,Information Technology Services
+DEAL,DEWATA FREIGHTINTERNATIONAL Tbk,,
+DEFI,DANASUPRA ERAPACIFIC Tbk,Financial Services,Credit Services
+DEPO,CATURKARDA DEPO BANGUNAN Tbk,Consumer Cyclical,Home Improvement Retail
+DEWA,DARMA HENWA Tbk,Energy,Thermal Coal
+DEWI,DEWI SHRI FARMINDO Tbk,Consumer Defensive,Farm Products
+DFAM,DAFAM PROPERTY INDONESIA Tbk,Real Estate,Real Estate Services
+DGIK,NUSA KONSTRUKSI ENJINIRING Tbk,Industrials,Engineering & Construction
+DGNS,DIAGNOS LABORATORIUM UTAMA Tbk,Healthcare,Diagnostics & Research
+DGWG,DELTA GIRI WACANA Tbk,Basic Materials,Agricultural Inputs
+DIGI,ARKADIA DIGITAL MEDIA Tbk,Communication Services,Internet Content & Information
+DILD,INTILAND DEVELOPMENT Tbk,Real Estate,Real Estate - Development
+DIVA,DISTRIBUSI VOUCHER NUSANTARA Tbk,Technology,Software - Application
+DKFT,CENTRAL OMEGA RESOURCES Tbk,Basic Materials,Other Industrial Metals & Mining
+DKHH,CIPTA SARANA MEDIKA Tbk,Healthcare,Medical Care Facilities
+DLTA,DELTA DJAKARTA Tbk,Consumer Defensive,Beverages - Brewers
+DMAS,PURADELTA LESTARI Tbk,Real Estate,Real Estate - Development
+DMMX,DIGITAL MEDIATAMA MAXIMA Tbk,Communication Services,Advertising Agencies
+DMND,DIAMOND FOOD INDONESIA Tbk,Consumer Defensive,Packaged Foods
+DNAR,BANK OKE INDONESIA Tbk,Financial Services,Banks - Regional
+DNET,INDORITEL MAKMUR INTERNASIONAL Tbk,Communication Services,Telecom Services
+DOID,BUMA INTERNASIONAL GRUP Tbk,Energy,Thermal Coal
+DOOH,ERA MEDIA SEJAHTERA Tbk,Communication Services,Advertising Agencies
+DOSS,GLOBAL SUKSES DIGITAL Tbk,Consumer Cyclical,Specialty Retail
+DPNS,DUTA PERTIWI NUSANTARA,Basic Materials,Specialty Chemicals
+DPUM,DUA PUTRA UTAMA MAKMUR Tbk,Consumer Defensive,Packaged Foods
+DRMA,DHARMA POLIMETAL Tbk,Consumer Cyclical,Auto Parts
+DSFI,DHARMA SAMUDERA FISHING INDUSTRIES Tbk,Consumer Defensive,Farm Products
+DSNG,DHARMA SATYA NUSANTARA Tbk,Consumer Defensive,Farm Products
+DSSA,DIAN SWASTATIKA SENTOSA Tbk,Energy,Thermal Coal
+DUCK,JAYA BERSAMA INDO Tbk,,
+DUTI,DUTA PERTIWI Tbk,Real Estate,Real Estate - Development
+DVLA,DARYA - VARIA LABORATORIA Tbk,Healthcare,Drug Manufacturers - Specialty & Generic
+DWGL,DWI GUNA LAKSANA Tbk,Energy,Thermal Coal
+DYAN,DYANDRA MEDIA INTERNATIONAL Tbk,Communication Services,Entertainment
+EAST,EASTPARC HOTEL Tbk,Consumer Cyclical,Lodging
+ECII,ELECTRONIC CITY INDONESIA Tbk,Consumer Cyclical,Specialty Retail
+EDGE,INDOINTERNET Tbk,Technology,Information Technology Services
+EKAD,EKADHARMA INTERNATIONAL Tbk,Basic Materials,Specialty Chemicals
+ELIT,DATA SINERGITAMA JAYA Tbk,Technology,Information Technology Services
+ELPI,PELAYARAN NASIONAL EKALYA PURNAMASARI Tbk,Industrials,Marine Shipping
+ELSA,ELNUSA Tbk,Energy,Oil & Gas Equipment & Services
+ELTY,BAKRIELAND DEVELOPMENT Tbk,Real Estate,Real Estate Services
+EMAS,MERDEKA GOLD RESOURCES Tbk,Basic Materials,Gold
+EMDE,MEGAPOLITAN DEVELOPMENTS Tbk,Real Estate,Real Estate Services
+EMTK,ELANG MAHKOTA TEKNOLOGI Tbk,Communication Services,Broadcasting
+ENAK,CHAMP RESTO INDONESIA Tbk,Consumer Cyclical,Restaurants
+ENRG,ENERGI MEGA PERSADA Tbk,Energy,Oil & Gas E&P
+ENVY,ENVY TECHNOLOGIES INDONESIA Tbk,,
+ENZO,MORENZO ABADI PERKASA Tbk,Consumer Defensive,Packaged Foods
+EPAC,MEGALESTARI EPACK SENTOSARAYA Tbk,Consumer Cyclical,Packaging & Containers
+EPMT,ENSEVAL PUTERA MEGATRADING Tbk,Healthcare,Medical Distribution
+ERAA,ERAJAYA SWASEMBADA Tbk,Consumer Cyclical,Specialty Retail
+ERAL,SINAR EKA SELARAS Tbk,Consumer Cyclical,Specialty Retail
+ERTX,ERATEX DJAJA Tbk,Consumer Cyclical,Apparel Manufacturing
+ESIP,SINERGI INTI PLASTINDO Tbk,Consumer Cyclical,Packaging & Containers
+ESSA,ESSA INDUSTRIES INDONESIA Tbk,Basic Materials,Chemicals
+ESTA,ESTA MULTI USAHA Tbk,Consumer Cyclical,Lodging
+ESTI,EVER SHINE TEXTILE INDUSTRY,Consumer Cyclical,Textile Manufacturing
+ETWA,ETERINDO WAHANATAMA Tbk,,
+EURO,ESTEE GOLD FEET Tbk,Consumer Defensive,Household & Personal Products
+EXCL,XLSMART TELECOM SEJAHTERA Tbk,Communication Services,Telecom Services
+FAPA,FAP AGRI Tbk,Consumer Defensive,Farm Products
+FAST,FAST FOOD INDONESIA Tbk,Consumer Cyclical,Restaurants
+FASW,FAJAR SURYA WISESA Tbk,Consumer Cyclical,Packaging & Containers
+FILM,MD ENTERTAINMENT Tbk,Communication Services,Entertainment
+FIMP,FIMPERKASA UTAMA Tbk,Industrials,Engineering & Construction
+FIRE,ALFA ENERGI INVESTAMA Tbk,Energy,Thermal Coal
+FISH,FKS MULTI AGRO Tbk,Consumer Defensive,Farm Products
+FITT,HOTEL FITRA INTERNATIONAL Tbk,Consumer Cyclical,Lodging
+FLMC,FALMACO NONWOVEN INDUSTRI Tbk,Consumer Defensive,Household & Personal Products
+FMII,FORTUNE MATE INDONESIA Tbk,Real Estate,Real Estate - Development
+FOLK,MULTI GARAM UTAMA Tbk,Consumer Cyclical,Internet Retail
+FOOD,SENTRA FOOD INDONESIA Tbk,Consumer Defensive,Packaged Foods
+FORE,FORE KOPI INDONESIA Tbk,Consumer Cyclical,Restaurants
+FORU,FORTUNE INDONESIA Tbk,Communication Services,Advertising Agencies
+FPNI,LOTTE CHEMICAL TITAN Tbk,Basic Materials,Specialty Chemicals
+FUJI,FUJI FINANCE INDONESIA Tbk,Financial Services,Credit Services
+FUTR,FUTURA ENERGI GLOBAL Tbk,Utilities,Utilities - Renewable
+FWCT,WIJAYA CAHAYA TIMBER Tbk,Basic Materials,Lumber & Wood Production
+GAMA,AKSARA GLOBAL DEVELOPMENT Tbk,,
+GDST,GUNAWAN DIANJAYA STEEL Tbk,Basic Materials,Steel
+GDYR,GOODYEAR INDONESIA Tbk,Consumer Cyclical,Auto Parts
+GEMA,GEMA GRAHASARANA Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+GEMS,GOLDEN ENERGY MINES Tbk,Energy,Thermal Coal
+GGRM,GUDANG GARAM Tbk,Consumer Defensive,Tobacco
+GGRP,GUNUNG RAJA PAKSI Tbk,Basic Materials,Steel
+GHON,GIHON TELEKOMUNIKASI INDONESIA Tbk,Communication Services,Telecom Services
+GIAA,GARUDA INDONESIA (PERSERO) Tbk,Industrials,Airlines
+GJTL,GAJAH TUNGGAL Tbk,Consumer Cyclical,Auto Parts
+GLOB,GLOBE KITA TERANG Tbk,Consumer Cyclical,Specialty Retail
+GLVA,GALVA TECHNOLOGIES Tbk,Technology,Electronics & Computer Distribution
+GMFI,GARUDA MAINTENANCE FACILITY AERO ASIA Tbk,Industrials,Aerospace & Defense
+GMTD,GOWA MAKASSAR TOURISM DEVELOPMENT Tbk,Real Estate,Real Estate - Development
+GOLD,VISI TELEKOMUNIKASI INFRASTRUKTUR Tbk,Communication Services,Telecom Services
+GOLF,INTRA GOLFLINK RESORTS Tbk,Consumer Cyclical,Leisure
+GOLL,GOLDEN PLANTATION Tbk,,
+GOOD,GARUDAFOOD PUTRA PUTRI JAYA Tbk,Consumer Defensive,Packaged Foods
+GOTO,GOTO GOJEK TOKOPEDIA Tbk,Technology,Software - Infrastructure
+GPRA,PERDANA GAPURAPRIMA Tbk,Real Estate,Real Estate - Development
+GPSO,GEOPRIMA SOLUSI Tbk,Technology,Scientific & Technical Instruments
+GRIA,INGRIA PRATAMA CAPITALINDO Tbk,Real Estate,Real Estate - Development
+GRPH,GRIPTHA PUTRA PERSADA Tbk,Consumer Cyclical,Lodging
+GRPM,GRAHA PRIMA MENTARI Tbk,Consumer Defensive,Beverages - Non-Alcoholic
+GSMF,EQUITY DEVELOPMENT INVESTMENT Tbk,Financial Services,Insurance - Diversified
+GTBO,GARDA TUJUH BUANA Tbk,Energy,Thermal Coal
+GTRA,GRAHAPRIMA SUKSESMANDIRI Tbk,Industrials,Integrated Freight & Logistics
+GTSI,GTS INTERNASIONAL Tbk,Industrials,Marine Shipping
+GULA,AMAN AGRINDO Tbk,Consumer Defensive,Farm Products
+GUNA,GUNANUSA ERAMANDIRI Tbk,Consumer Defensive,Packaged Foods
+GWSA,GREENWOOD SEJAHTERA Tbk,Real Estate,Real Estate - Development
+GZCO,GOZCO PLANTATIONS Tbk,Consumer Defensive,Farm Products
+HADE,HIMALAYA ENERGI PERKASA Tbk,Consumer Cyclical,Specialty Retail
+HAIS,HASNUR INTERNASIONAL SHIPPING Tbk,Industrials,Marine Shipping
+HAJJ,ARSY BUANA TRAVELINDO Tbk,Consumer Cyclical,Travel Services
+HALO,HALONI JANE Tbk,Basic Materials,Chemicals
+HATM,HABCO TRANS MARITIMA Tbk,Industrials,Marine Shipping
+HBAT,MINAHASA MEMBANGUN HEBAT Tbk,Real Estate,Real Estate - Development
+HDFA,RADANA BHASKARA FINANCE Tbk,Financial Services,Credit Services
+HDIT,HENSEL DAVEST INDONESIA Tbk,Technology,Software - Infrastructure
+HEAL,MEDIKALOKA HERMINA Tbk,Healthcare,Medical Care Facilities
+HELI,JAYA TRISHINDO Tbk,Industrials,Airports & Air Services
+HERO,DFI RETAIL NUSANTARA Tbk,Consumer Cyclical,Department Stores
+HEXA,HEXINDO ADIPERKASA Tbk,Industrials,Industrial Distribution
+HGII,HERO GLOBAL INVESTMENT Tbk,Utilities,Utilities - Renewable
+HILL,HILLCON Tbk,Basic Materials,Other Industrial Metals & Mining
+HITS,HUMPUSS INTERMODA TRANSPORTASI Tbk,Industrials,Marine Shipping
+HKMU,HK METALS UTAMA Tbk,,
+HMSP,HANJAYA MANDALA SAMPOERNA Tbk,Consumer Defensive,Tobacco
+HOKI,BUYUNG POETRA SEMBADA Tbk,Consumer Defensive,Packaged Foods
+HOME,HOTEL MANDARINE REGENCY Tbk,,
+HOMI,GRAND HOUSE MULIA Tbk,Real Estate,Real Estate - Development
+HOPE,HARAPAN DUTA PERTIWI Tbk,Industrials,Metal Fabrication
+HOTL,SARASWATI GRIYA LESTARI Tbk,,
+HRME,MENTENG HERITAGE REALTY Tbk,Consumer Cyclical,Lodging
+HRTA,HARTADINATA ABADI Tbk,Consumer Cyclical,Luxury Goods
+HRUM,HARUM ENERGY Tbk,Energy,Thermal Coal
+HUMI,HUMPUSS MARITIM INTERNASIONAL Tbk,Industrials,Marine Shipping
+HYGN,ECOCARE INDO PASIFIK Tbk,Industrials,Specialty Business Services
+IATA,MNC ENERGY INVESTMENTS Tbk,Energy,Thermal Coal
+IBFN,INTAN BARU PRANA Tbk,Financial Services,Credit Services
+IBOS,INDO BOGA SUKSES Tbk,Consumer Cyclical,Restaurants
+IBST,INTI BANGUN SEJAHTERA Tbk,Communication Services,Telecom Services
+ICBP,INDOFOOD CBP SUKSES MAKMUR Tbk,Consumer Defensive,Packaged Foods
+ICON,ISLAND CONCEPTS INDONESIA Tbk,Energy,Oil & Gas Equipment & Services
+IDEA,IDEA INDONESIA AKADEMI Tbk,Consumer Defensive,Education & Training Services
+IDPR,INDONESIA PONDASI RAYA Tbk,Industrials,Engineering & Construction
+IFII,INDONESIA FIBREBOARD INDUSTRY Tbk,Basic Materials,Lumber & Wood Production
+IFSH,IFISHDECO Tbk,Basic Materials,Other Industrial Metals & Mining
+IGAR,CHAMPION PACIFIC INDONESIA Tbk,Consumer Cyclical,Packaging & Containers
+IIKP,INTI AGRI RESOURCES Tbk,,
+IKAI,INTIKERAMIK ALAMASRI INDUSTRI Tbk,Industrials,Building Products & Equipment
+IKAN,ERA MANDIRI CEMERLANG Tbk,Consumer Defensive,Farm Products
+IKBI,SUMI INDO KABEL Tbk,Industrials,Electrical Equipment & Parts
+IKPM,IKAPHARMINDO PUTRAMAS Tbk,Healthcare,Pharmaceutical Retailers
+IMAS,INDOMOBIL SUKSES INTERNASIONAL Tbk,Consumer Cyclical,Auto & Truck Dealerships
+IMJS,INDOMOBIL MULTI JASA Tbk,Industrials,Conglomerates
+IMPC,IMPACK PRATAMA INDUSTRI Tbk,Industrials,Building Products & Equipment
+INAF,INDOFARMA Tbk,Healthcare,Drug Manufacturers - Specialty & Generic
+INAI,INDAL ALUMINIUM INDUSTRY Tbk,Basic Materials,Aluminum
+INCF,INDO KOMODITI KORPORA Tbk,Basic Materials,Specialty Chemicals
+INCI,INTANWIJAYA INTERNASIONAL Tbk,Basic Materials,Specialty Chemicals
+INCO,VALE INDONESIA Tbk,Basic Materials,Other Industrial Metals & Mining
+INDF,INDOFOOD SUKSES MAKMUR Tbk,Consumer Defensive,Packaged Foods
+INDO,ROYALINDO INVESTA WIJAYA Tbk,Consumer Cyclical,Lodging
+INDR,INDO-RAMA SYNTHETICS Tbk,Consumer Cyclical,Textile Manufacturing
+INDS,INDOSPRING Tbk,Consumer Cyclical,Auto Parts
+INDX,TANAH LAUT Tbk,Industrials,Marine Shipping
+INDY,INDIKA ENERGY Tbk,Energy,Thermal Coal
+INET,SINERGI INTI ANDALAN PRIMA Tbk,Communication Services,Telecom Services
+INKP,INDAH KIAT PULP AND PAPER Tbk,Basic Materials,Paper & Paper Products
+INOV,INOCYCLE TECHNOLOGY GROUP Tbk,Industrials,Waste Management
+INPC,BANK ARTHA GRAHA INTERNASIONAL Tbk,Financial Services,Banks - Regional
+INPP,INDONESIAN PARADISE PROPERTY Tbk,Real Estate,Real Estate Services
+INPS,INDAH PRAKASA SENTOSA Tbk,Industrials,Trucking
+INRU,TOBA PULP LESTARI Tbk,Basic Materials,Paper & Paper Products
+INTA,INTRACO PENTA Tbk,Industrials,Industrial Distribution
+INTD,INTER DELTA Tbk,Basic Materials,Paper & Paper Products
+INTP,INDOCEMENT TUNGGAL PRAKARSA Tbk,Basic Materials,Building Materials
+IOTF,SUMBER SINERGI MAKMUR Tbk,Technology,Communication Equipment
+IPAC,ERA GRAHAREALTY Tbk,Real Estate,Real Estate Services
+IPCC,INDONESIA KENDARAAN TERMINAL Tbk,Industrials,Integrated Freight & Logistics
+IPCM,JASA ARMADA INDONESIA Tbk,Industrials,Marine Shipping
+IPOL,INDOPOLY SWAKARSA INDUSTRY Tbk,Consumer Cyclical,Packaging & Containers
+IPPE,INDO PURECO PRATAMA Tbk,Consumer Defensive,Packaged Foods
+IPTV,MNC VISION NETWORKS Tbk,Communication Services,Entertainment
+IRRA,ITAMA RANORAYA Tbk,Healthcare,Medical Distribution
+IRSX,FOLAGO GLOBAL NUSANTARA Tbk,Technology,Software - Application
+ISAP,ISRA PRESISI INDONESIA Tbk,Industrials,Metal Fabrication
+ISAT,INDOSAT Tbk,Communication Services,Telecom Services
+ISEA,INDO AMERICAN SEAFOODS Tbk,Consumer Defensive,Packaged Foods
+ISSP,STEEL PIPE INDUSTRY OF INDONESIA Tbk,Basic Materials,Steel
+ITIC,INDONESIAN TOBACCO Tbk,Consumer Defensive,Tobacco
+ITMA,SUMBER ENERGI ANDALAN Tbk,Basic Materials,Other Industrial Metals & Mining
+ITMG,INDO TAMBANGRAYA MEGAH Tbk,Energy,Thermal Coal
+JARR,JHONLIN AGRO RAYA Tbk,Consumer Defensive,Farm Products
+JAST,JASNITA TELEKOMINDO Tbk,Communication Services,Telecom Services
+JATI,INFORMASI TEKNOLOGI INDONESIA Tbk,Technology,Information Technology Services
+JAWA,JAYA AGRA WATTIE Tbk,Consumer Defensive,Farm Products
+JAYA,ARMADA BERJAYA TRANS Tbk,Industrials,Trucking
+JECC,JEMBO CABLE COMPANY Tbk,Industrials,Electrical Equipment & Parts
+JGLE,GRAHA ANDRASENTRA PROPERTINDO Tbk,Consumer Cyclical,Leisure
+JIHD,JAKARTA INTERNATIONAL HOTELS & DEVELOPMENT Tbk,Consumer Cyclical,Lodging
+JKON,JAYA KONSTRUKSI MANGGALA PRATAMA Tbk,Industrials,Conglomerates
+JMAS,ASURANSI JIWA SYARIAH JASA MITRA ABADI Tbk,Financial Services,Insurance - Life
+JPFA,JAPFA COMFEED INDONESIA Tbk,Consumer Defensive,Farm Products
+JRPT,JAYA REAL PROPERTY Tbk,Real Estate,Real Estate - Development
+JSKY,SKY ENERGY INDONESIA Tbk,,
+JSMR,JASA MARGA (PERSERO) Tbk,Industrials,Infrastructure Operations
+JSPT,JAKARTA SETIABUDI INTERNASIONAL Tbk,Real Estate,Real Estate Services
+JTPE,JASUINDO TIGA PERKASA Tbk,Industrials,Specialty Business Services
+KAEF,KIMIA FARMA Tbk,Healthcare,Medical Distribution
+KAQI,JANTRA GRUPO INDONESIA Tbk,Consumer Cyclical,Auto Parts
+KARW,MERATUS JASA PRIMA Tbk,Industrials,Marine Shipping
+KAYU,DARMI BERSAUDARA Tbk,,
+KBAG,KARYA BERSAMA ANUGERAH Tbk,Consumer Cyclical,Residential Construction
+KBLI,KMI Wire and Cable Tbk,Industrials,Electrical Equipment & Parts
+KBLM,KABELINDO MURNI Tbk,Industrials,Electrical Equipment & Parts
+KBLV,FIRST MEDIA Tbk,Communication Services,Entertainment
+KBRI,KERTAS BASUKI RACHMAT INDONESIA Tbk,,
+KDSI,KEDAWUNG SETIA INDUSTRIAL Tbk,Consumer Cyclical,Packaging & Containers
+KDTN,PURI SENTUL PERMAI Tbk,Consumer Cyclical,Restaurants
+KEEN,KENCANA ENERGI LESTARI Tbk,Utilities,Utilities - Independent Power Producers
+KEJU,MULIA BOGA RAYA Tbk,Consumer Defensive,Packaged Foods
+KETR,KETROSDEN TRIASMITRA Tbk,Technology,Communication Equipment
+KIAS,KERAMIKA INDONESIA ASSOSIASI Tbk,Industrials,Building Products & Equipment
+KICI,KEDAUNG INDAH CAN Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+KIJA,KAWASAN INDUSTRI JABABEKA Tbk,Real Estate,Real Estate - Development
+KING,HOFFMEN CLEANINDO Tbk,Industrials,Specialty Business Services
+KINO,KINO INDONESIA Tbk,Consumer Defensive,Beverages - Non-Alcoholic
+KIOS,KIOSON KOMERSIAL INDONESIA Tbk,Technology,Software - Application
+KJEN,KRIDA JARINGAN NUSANTARA Tbk,Industrials,Integrated Freight & Logistics
+KKES,KUSUMA KEMINDO SENTOSA Tbk,Basic Materials,Specialty Chemicals
+KKGI,RESOURCE ALAM INDONESIA Tbk,Energy,Thermal Coal
+KLAS,PELAYARAN KURNIA LAUTAN SEMESTA Tbk,Industrials,Marine Shipping
+KLBF,KALBE FARMA Tbk,Healthcare,Drug Manufacturers - General
+KLIN,KLINKO KARYA IMAJI Tbk,Consumer Cyclical,Home Improvement Retail
+KMDS,KURNIAMITRA DUTA SENTOSA Tbk,Consumer Defensive,Food Distribution
+KMTR,KIRANA MEGATARA Tbk,Consumer Cyclical,Auto Parts
+KOBX,KOBEXINDO TRACTORS Tbk,Industrials,Farm & Heavy Construction Machinery
+KOCI,KOKOH EXA NUSANTARA Tbk,Real Estate,Real Estate - Development
+KOIN,KOKOH INTI AREBAMA Tbk,Industrials,Building Products & Equipment
+KOKA,KOKA INDONESIA Tbk,Industrials,Engineering & Construction
+KONI,PERDANA BANGUN PUSAKA Tbk,Consumer Cyclical,Specialty Retail
+KOPI,MITRA ENERGI PERSADA Tbk,Energy,Oil & Gas Refining & Marketing
+KOTA,DMS PROPERTINDO Tbk,Real Estate,Real Estate Services
+KPIG,MNC LAND Tbk,Real Estate,Real Estate Services
+KRAS,KRAKATAU STEEL Tbk,Basic Materials,Steel
+KREN,QUANTUM CLOVERA INVESTAMA Tbk,Financial Services,Asset Management
+KRYA,BANGUN KARYA PERKASA JAYA Tbk,Industrials,Engineering & Construction
+KSIX,KENTANIX SUPRA INTERNATIONAL Tbk,Real Estate,Real Estate - Development
+KUAS,ACE OLDFIELDS Tbk,Industrials,Building Products & Equipment
+LABA,GREEN POWER GROUP Tbk,Basic Materials,Steel
+LABS,UBC MEDICAL INDONESIA Tbk,Healthcare,Medical Devices
+LAJU,JASA BERDIKARI LOGISTICS Tbk,Industrials,Integrated Freight & Logistics
+LAND,TRIMITRA PROPERTINDO Tbk,Real Estate,Real Estate Services
+LAPD,LEYAND INTERNATIONAL Tbk,,
+LCGP,EUREKA PRIMA JAKARTA Tbk,,
+LCKM,LCK GLOBAL KEDATON Tbk,Communication Services,Telecom Services
+LEAD,LOGINDO SAMUDRAMAKMUR Tbk,Industrials,Marine Shipping
+LFLO,IMAGO MULIA PERSADA Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+LIFE,MSIG LIFE INSURANCE INDONESIA Tbk,Financial Services,Insurance - Life
+LINK,LINK NET Tbk,Communication Services,Telecom Services
+LION,LION METAL WORKS Tbk,Industrials,Business Equipment & Supplies
+LIVE,HOMECO VICTORIA MAKMUR Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+LMAS,LIMAS INDONESIA MAKMUR Tbk,,
+LMAX,LUPROMAX PELUMAS INDONESIA Tbk,Energy,Oil & Gas Refining & Marketing
+LMPI,LANGGENG MAKMUR INDUSTRI Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+LMSH,LIONMESH PRIMA Tbk,Industrials,Metal Fabrication
+LOPI,LOGISTICSPLUS INTERNATIONAL Tbk,Industrials,Integrated Freight & Logistics
+LPCK,LIPPO CIKARANG Tbk,Real Estate,Real Estate - Development
+LPGI,LIPPO GENERAL INSURANCE Tbk,Financial Services,Insurance - Diversified
+LPIN,MULTI PRIMA SEJAHTERA Tbk,Consumer Cyclical,Auto Parts
+LPKR,LIPPO KARAWACI Tbk,Healthcare,Medical Care Facilities
+LPLI,STAR PACIFIC Tbk,Real Estate,Real Estate Services
+LPPF,MATAHARI DEPARTMENT STORE Tbk,Consumer Cyclical,Department Stores
+LPPS,LENOX PASIFIK INVESTAMA Tbk,Financial Services,Capital Markets
+LRNA,EKA SARI LORENA TRANSPORT Tbk,Industrials,Railroads
+LSIP,PP LONDON SUMATRA INDONESIA Tbk,Consumer Defensive,Farm Products
+LTLS,LAUTAN LUAS Tbk,Basic Materials,Specialty Chemicals
+LUCK,SENTRAL MITRA INFORMATIKA Tbk,Technology,Computer Hardware
+LUCY,LIMA DUA LIMA TIGA Tbk,Consumer Cyclical,Restaurants
+MABA,MARGA ABHINAYA ABADI Tbk,,
+MAGP,MULTI AGRO GEMILANG PLANTATION Tbk,,
+MAHA,MANDIRI HERINDO ADIPERKASA Tbk,Industrials,Trucking
+MAIN,MALINDO FEEDMILL Tbk,Consumer Defensive,Packaged Foods
+MANG,MANGGUNG POLAHRAYA Tbk,Industrials,Engineering & Construction
+MAPA,MAP AKTIF ADIPERKASA Tbk,Consumer Cyclical,Specialty Retail
+MAPB,MAP BOGA ADIPERKASA Tbk,Consumer Cyclical,Restaurants
+MAPI,MITRA ADIPERKASA Tbk,Consumer Cyclical,Department Stores
+MARI,MAHAKA RADIO INTEGRA Tbk,Communication Services,Broadcasting
+MARK,MARK DYNAMICS INDONESIA Tbk,Healthcare,Medical Instruments & Supplies
+MASB,BANK MULTIARTA SENTOSA Tbk,Financial Services,Banks - Regional
+MAXI,MAXINDO KARYA ANUGERAH Tbk,Consumer Defensive,Packaged Foods
+MAYA,BANK MAYAPADA INTERNASIONAL Tbk,Financial Services,Banks - Regional
+MBAP,MITRABARA ADIPERDANA Tbk,Energy,Thermal Coal
+MBMA,MERDEKA BATTERY MATERIALS Tbk,Basic Materials,Other Precious Metals & Mining
+MBSS,MITRABAHTERA SEGARA SEJATI Tbk,Industrials,Marine Shipping
+MBTO,MARTINA BERTO Tbk,Consumer Defensive,Household & Personal Products
+MCAS,M CASH INTEGRASI Tbk,Industrials,Business Equipment & Supplies
+MCOL,PRIMA ANDALAN MANDIRI Tbk,Energy,Thermal Coal
+MCOR,BANK CHINA CONSTRUCTION BANK INDONESIA Tbk,Financial Services,Banks - Regional
+MDIA,INTERMEDIA CAPITAL Tbk,Communication Services,Broadcasting
+MDIY,DAYA INTIGUNA YASA Tbk,Consumer Cyclical,Department Stores
+MDKA,MERDEKA COPPER GOLD Tbk,Basic Materials,Other Industrial Metals & Mining
+MDKI,EMDEKI UTAMA Tbk,Basic Materials,Specialty Chemicals
+MDLA,MEDELA POTENTIA Tbk,Healthcare,Medical Distribution
+MDLN,MODERNLAND REALTY Tbk,Real Estate,Real Estate - Development
+MDRN,MODERN INTERNASIONAL Tbk,Industrials,Business Equipment & Supplies
+MEDC,MEDCO ENERGI INTERNASIONAL Tbk,Energy,Oil & Gas E&P
+MEDS,HETZER MEDICAL INDONESIA Tbk,Healthcare,Medical Instruments & Supplies
+MEGA,BANK MEGA Tbk,Financial Services,Banks - Regional
+MEJA,HARTA DJAYA KARYA Tbk,Industrials,Engineering & Construction
+MENN,MENN TEKNOLOGI INDONESIA Tbk,Industrials,Electrical Equipment & Parts
+MERI,MERRY RIANA EDUKASI Tbk,Consumer Defensive,Education & Training Services
+MERK,MERCK Tbk,Healthcare,Drug Manufacturers - Specialty & Generic
+META,NUSANTARA INFRASTRUCTURE Tbk,,
+MFMI,MULTIFILING MITRA INDONESIA Tbk,Industrials,Specialty Business Services
+MGLV,PANCA ANUGRAH WISESA Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+MGNA,MAGNA INVESTAMA MANDIRI Tbk,Financial Services,Credit Services
+MGRO,MAHKOTA GROUP Tbk,Consumer Defensive,Packaged Foods
+MHKI,MULTI HANNA KREASINDO Tbk,Industrials,Waste Management
+MICE,MULTI INDOCITRA Tbk,Consumer Defensive,Household & Personal Products
+MIDI,MIDI UTAMA INDONESIA Tbk,Consumer Defensive,Grocery Stores
+MIKA,MITRA KELUARGA KARYASEHAT Tbk,Healthcare,Medical Care Facilities
+MINA,SANURHASTA MITRA Tbk,Consumer Cyclical,Lodging
+MINE,SINAR TERANG MANDIRI Tbk,Basic Materials,Other Industrial Metals & Mining
+MIRA,MITRA INTERNATIONAL RESOURCES Tbk,Energy,Oil & Gas Equipment & Services
+MITI,MITRA INVESTINDO Tbk,Industrials,Marine Shipping
+MKAP,MULTIKARYA ASIA PASIFIK RAYA Tbk,Energy,Oil & Gas Equipment & Services
+MKNT,MITRA KOMUNIKASI NUSANTARA Tbk,Technology,Communication Equipment
+MKPI,METROPOLITAN KENTJANA Tbk,Real Estate,Real Estate Services
+MKTR,MENTHOBI KARYATAMA RAYA Tbk,Consumer Defensive,Farm Products
+MLBI,MULTI BINTANG INDONESIA Tbk,Consumer Defensive,Beverages - Brewers
+MLIA,MULIA INDUSTRINDO Tbk,Industrials,Building Products & Equipment
+MLPL,MULTIPOLAR Tbk,Consumer Cyclical,Department Stores
+MLPT,MULTIPOLAR TECHNOLOGY Tbk,Technology,Information Technology Services
+MMIX,MULTI MEDIKA INTERNASIONAL Tbk,Healthcare,Pharmaceutical Retailers
+MMLP,MEGA MANUNGGAL PROPERTY Tbk,Real Estate,Real Estate Services
+MNCN,MEDIA NUSANTARA CITRA Tbk,Communication Services,Advertising Agencies
+MOLI,MADUSARI MURNI INDAH Tbk,Basic Materials,Chemicals
+MORA,MORA TELEMATIKA INDONESIA Tbk,Communication Services,Telecom Services
+MPIX,MITRA PEDAGANG INDONESIA Tbk,Technology,Software - Infrastructure
+MPMX,MITRA PINASTHIKA MUSTIKA Tbk,Consumer Cyclical,Auto & Truck Dealerships
+MPOW,MEGAPOWER MAKMUR Tbk,Utilities,Utilities - Independent Power Producers
+MPPA,MATAHARI PUTRA PRIMA Tbk,Consumer Cyclical,Department Stores
+MPRO,MAHA PROPERTI INDONESIA Tbk,Real Estate,Real Estate - Development
+MPXL,MPX LOGISTICS INTERNATIONAL Tbk,Industrials,Trucking
+MRAT,MUSTIKA RATU Tbk,Consumer Defensive,Household & Personal Products
+MREI,MASKAPAI REASURANSI INDONESIA Tbk,Financial Services,Insurance - Reinsurance
+MSIE,MULTISARANA INTAN EDUKA Tbk,Real Estate,Real Estate Services
+MSIN,MNC DIGITAL ENTERTAINMENT Tbk,Communication Services,Entertainment
+MSJA,MULTI SPUNINDO JAYA Tbk,Consumer Cyclical,Textile Manufacturing
+MSTI,MASTERSYSTEM INFOTAMA Tbk,Technology,Information Technology Services
+MTDL,METRODATA ELECTRONICS Tbk,Technology,Electronics & Computer Distribution
+MTEL,DAYAMITRA TELEKOMUNIKASI Tbk,Communication Services,Telecom Services
+MTFN,CAPITALINC INVESTMENT Tbk,Energy,Oil & Gas E&P
+MTLA,METROPOLITAN LAND Tbk,Real Estate,Real Estate Services
+MTMH,MURNI SADAR Tbk,Healthcare,Medical Care Facilities
+MTPS,META EPSI Tbk,Industrials,Engineering & Construction
+MTRA,MITRA PEMUDA Tbk,,
+MTSM,METRO REALTY Tbk,Real Estate,Real Estate Services
+MTWI,MALACCA TRUST WUWUNGAN INSURANCE Tbk,Financial Services,Insurance - Diversified
+MUTU,MUTUAGUNG LESTARI Tbk,Industrials,Specialty Business Services
+MYOH,SAMINDO RESOURCES Tbk,Energy,Thermal Coal
+MYOR,MAYORA INDAH Tbk,Consumer Defensive,Packaged Foods
+MYTX,ASIA PACIFIC INVESTAMA Tbk,Consumer Cyclical,Textile Manufacturing
+NAIK,ADIWARNA ANUGERAH ABADI Tbk,Basic Materials,Building Materials
+NANO,NANOTECH INDONESIA GLOBAL Tbk,Healthcare,Medical Devices
+NASA,ANDALAN PERKASA ABADI Tbk,Real Estate,Real Estate - Development
+NASI,WAHANA INTI MAKMUR Tbk,Consumer Defensive,Farm Products
+NATO,SURYA PERMATA ANDALAN Tbk,Consumer Cyclical,Lodging
+NAYZ,HASSANA BOGA SEJAHTERA TBK,Consumer Defensive,Packaged Foods
+NCKL,TRIMEGAH BANGUN PERSADA Tbk,Basic Materials,Other Industrial Metals & Mining
+NELY,PELAYARAN NELLY DWI PUTRI Tbk,Industrials,Marine Shipping
+NEST,ESTA INDONESIA Tbk,Consumer Defensive,Farm Products
+NETV,MDTV MEDIA TECHNOLOGIES Tbk,Communication Services,Broadcasting
+NFCX,NFC INDONESIA Tbk,Communication Services,Internet Content & Information
+NICE,ADHI KARTIKO PRATAMA Tbk,Basic Materials,Other Industrial Metals & Mining
+NICK,CHARNIC CAPITAL Tbk,Real Estate,Real Estate Services
+NICL,PAM MINERAL Tbk,Basic Materials,Other Industrial Metals & Mining
+NIKL,PELAT TIMAH NUSANTARA Tbk,Industrials,Metal Fabrication
+NINE,TECHNO9 INDONESIA Tbk,Technology,Information Technology Services
+NIRO,CITY RETAIL DEVELOPMENTS Tbk,Real Estate,Real Estate Services
+NISP,BANK OCBC NISP Tbk,Financial Services,Banks - Regional
+NOBU,BANK NATIONALNOBU Tbk,Financial Services,Banks - Regional
+NPGF,NUSA PALAPA GEMILANG Tbk,Basic Materials,Agricultural Inputs
+NRCA,NUSA RAYA CIPTA Tbk,Industrials,Engineering & Construction
+NSSS,NUSANTARA SAWIT SEJAHTERA Tbk,Consumer Defensive,Farm Products
+NTBK,NUSATAMA BERKAH Tbk,Industrials,Farm & Heavy Construction Machinery
+NUSA,SINERGI MEGAH INTERNUSA Tbk,,
+NZIA,NUSANTARA ALMAZIA Tbk,Real Estate,Real Estate - Development
+OASA,MAHARAKSA BIRU ENERGI Tbk,Utilities,Utilities - Renewable
+OBAT,BRIGIT BIOFARMAKA TEKNOLOGI Tbk,Consumer Defensive,Packaged Foods
+OBMD,OBM DRILCHEM Tbk,Basic Materials,Specialty Chemicals
+OCAP,ONIX CAPITAL Tbk,,
+OILS,INDO OIL PERKASA Tbk,Consumer Defensive,Packaged Foods
+OKAS,ANCORA INDONESIA RESOURCES Tbk,Basic Materials,Specialty Chemicals
+OLIV,OSCAR MITRA SUKSES SEJAHTERA Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+OMED,JAYAMAS MEDICA INDUSTRI Tbk,Healthcare,Medical Instruments & Supplies
+OMRE,INDONESIA PRIMA PROPERTY Tbk,Real Estate,Real Estate Services
+OPMS,OPTIMA PRIMA METAL SINERGI Tbk,Industrials,Waste Management
+PACK,ABADI NUSANTARA HIJAU INVESTAMA Tbk,Consumer Cyclical,Packaging & Containers
+PADA,PERSONEL ALIH DAYA Tbk,Industrials,Staffing & Employment Services
+PADI,MINNA PADI INVESTAMA SEKURITAS Tbk,Financial Services,Capital Markets
+PALM,PROVIDENT INVESTASI BERSAMA Tbk,Financial Services,Asset Management
+PAMG,BIMA SAKTI PERTIWI Tbk,Real Estate,Real Estate - Diversified
+PANI,PANTAI INDAH KAPUK DUA Tbk,Real Estate,Real Estate - Development
+PANR,PANORAMA SENTRAWISATA Tbk,Consumer Cyclical,Travel Services
+PANS,PANIN SEKURITAS Tbk,Financial Services,Capital Markets
+PART,CIPTA PERDANA LANCAR Tbk,Consumer Cyclical,Auto Parts
+PBID,PANCA BUDI IDAMAN Tbk,Consumer Cyclical,Packaging & Containers
+PBRX,PAN BROTHERS Tbk,Consumer Cyclical,Apparel Manufacturing
+PBSA,PARAMITA BANGUN SARANA Tbk,Industrials,Engineering & Construction
+PCAR,PRIMA CAKRAWALA ABADI Tbk,Consumer Defensive,Packaged Foods
+PDES,DESTINASI TIRTA NUSANTARA Tbk,Consumer Cyclical,Travel Services
+PDPP,PRIMADAYA PLASTISINDO Tbk,Consumer Cyclical,Packaging & Containers
+PEGE,PANCA GLOBAL KAPITAL Tbk,Financial Services,Capital Markets
+PEHA,PHAPROS Tbk,Healthcare,Drug Manufacturers - Specialty & Generic
+PEVE,PENTA VALENT Tbk,Healthcare,Pharmaceutical Retailers
+PGAS,PERUSAHAAN GAS NEGARA (PERSERO) Tbk,Utilities,Utilities - Regulated Gas
+PGEO,PERTAMINA GEOTHERMAL ENERGY Tbk,Utilities,Utilities - Renewable
+PGJO,BAHTERA BUMI RAYA Tbk,Consumer Cyclical,Travel Services
+PGLI,PEMBANGUNAN GRAHA LESTARI INDAH Tbk,Consumer Cyclical,Lodging
+PGUN,PRADIKSI GUNATAMA Tbk,Consumer Defensive,Farm Products
+PICO,PELANGI INDAH CANINDO Tbk,Consumer Cyclical,Packaging & Containers
+PIPA,MULTI MAKMUR LEMINDO Tbk,Industrials,Building Products & Equipment
+PJAA,PEMBANGUNAN JAYA ANCOL Tbk,Consumer Cyclical,Leisure
+PJHB,PELAYARAN JAYA HIDUP BARU Tbk,,
+PKPK,PARAGON KARYA PERKASA Tbk,Industrials,Engineering & Construction
+PLAN,PLANET PROPERINDO JAYA Tbk,Consumer Cyclical,Lodging
+PLAS,POLARIS INVESTAMA TBK,,
+PLIN,PLAZA INDONESIA REALTY Tbk,Real Estate,Real Estate Services
+PMJS,PUTRA MANDIRI JEMBAR Tbk,Consumer Cyclical,Auto & Truck Dealerships
+PMMP,PANCA MITRA MULTIPERDANA Tbk,Consumer Defensive,Packaged Foods
+PMUI,PRIMA MULTI USAHA INDONESIA Tbk,Technology,Electronics & Computer Distribution
+PNBN,BANK PAN INDONESIA Tbk,Financial Services,Banks - Regional
+PNBS,BANK PANIN DUBAI SYARIAH Tbk,Financial Services,Banks - Regional
+PNGO,PINAGO UTAMA Tbk,Consumer Defensive,Farm Products
+PNIN,PANINVEST Tbk,Financial Services,Insurance - Life
+PNLF,PANIN FINANCIAL Tbk,Financial Services,Banks - Regional
+PNSE,PUDJIADI AND SONS Tbk,Consumer Cyclical,Resorts & Casinos
+POLA,POOL ADVISTA FINANCE Tbk,Financial Services,Credit Services
+POLI,POLLUX HOTELS GROUP Tbk,Real Estate,Real Estate - Development
+POLL,POLLUX PROPERTIES INDONESIA Tbk,Real Estate,Real Estate - Development
+POLU,GOLDEN FLOWER Tbk,Consumer Cyclical,Apparel Manufacturing
+POLY,ASIA PACIFIC FIBERS Tbk,Basic Materials,Specialty Chemicals
+POOL,POOL ADVISTA INDONESIA Tbk,,
+PORT,NUSANTARA PELABUHAN HANDAL Tbk,Industrials,Marine Shipping
+POSA,BLISS PROPERTI INDONESIA Tbk,,
+POWR,CIKARANG LISTRINDO Tbk,Utilities,Utilities - Independent Power Producers
+PPGL,PRIMA GLOBALINDO LOGISTIK Tbk,Industrials,Integrated Freight & Logistics
+PPRE,PP PRESISI Tbk,Industrials,Engineering & Construction
+PPRI,PAPEROCKS INDONESIA Tbk,Consumer Cyclical,Packaging & Containers
+PPRO,PP Properti Tbk,Real Estate,Real Estate - Development
+PRAY,FAMON AWAL BROS SEDAYA Tbk,Healthcare,Medical Care Facilities
+PRDA,PRODIA WIDYAHUSADA Tbk,Healthcare,Diagnostics & Research
+PRIM,ROYAL PRIMA Tbk,Healthcare,Medical Care Facilities
+PSAB,J RESOURCES ASIA PASIFIK Tbk,Basic Materials,Gold
+PSAT,PANCARAN SAMUDERA TRANSPORT Tbk,Industrials,Marine Shipping
+PSDN,PRASIDHA ANEKA NIAGA Tbk,Consumer Defensive,Packaged Foods
+PSGO,PALMA SERASIH Tbk,Consumer Defensive,Farm Products
+PSKT,RED PLANET INDONESIA Tbk,Consumer Cyclical,Lodging
+PSSI,IMC PELITA LOGISTIK Tbk,Industrials,Marine Shipping
+PTBA,BUKIT ASAM Tbk,Energy,Thermal Coal
+PTDU,DJASA UBERSAKTI Tbk,Industrials,Engineering & Construction
+PTIS,INDO STRAITS Tbk,Industrials,Marine Shipping
+PTMP,MITRA PACK Tbk,Industrials,Specialty Industrial Machinery
+PTMR,MASTER PRINT Tbk,Consumer Cyclical,Packaging & Containers
+PTPP,PP (PERSERO) Tbk,Industrials,Engineering & Construction
+PTPS,PULAU SUBUR Tbk,Consumer Defensive,Farm Products
+PTPW,PRATAMA WIDYA Tbk,Industrials,Engineering & Construction
+PTRO,PETROSEA Tbk,Basic Materials,Other Industrial Metals & Mining
+PTSN,SAT NUSAPERSADA Tbk,Technology,Electronic Components
+PTSP,PIONEERINDO GOURMET INTERNATIONAL Tbk,Consumer Cyclical,Restaurants
+PUDP,PUDJIADI PRESTIGE Tbk,Real Estate,Real Estate Services
+PURA,PUTRA RAJAWALI KENCANA Tbk,Industrials,Trucking
+PURE,TRINITAN METALS AND MINERALS Tbk,,
+PURI,PURI GLOBAL SUKSES Tbk,Real Estate,Real Estate - Development
+PWON,PAKUWON JATI Tbk,Real Estate,Real Estate - Diversified
+PYFA,PYRIDAM FARMA Tbk,Healthcare,Drug Manufacturers - Specialty & Generic
+PZZA,SARIMELATI KENCANA Tbk,Consumer Cyclical,Restaurants
+RAAM,TRIPAR MULTIVSION PLUS Tbk,Communication Services,Entertainment
+RAFI,SARI KREASI BOGA Tbk,Consumer Cyclical,Restaurants
+RAJA,RUKUN RAHARJA Tbk,Utilities,Utilities - Regulated Gas
+RALS,RAMAYANA LESTARI SENTOSA Tbk,Consumer Cyclical,Department Stores
+RANC,SUPRA BOGA LESTARI Tbk,Consumer Defensive,Grocery Stores
+RATU,RAHARJA ENERGI CEPU Tbk,Energy,Oil & Gas E&P
+RBMS,RISTIA BINTANG MAHKOTASEJATI Tbk,Real Estate,Real Estate - Development
+RCCC,UTAMA RADAR CAHAYA Tbk,Industrials,Trucking
+RDTX,RODA VIVATEX Tbk,Real Estate,Real Estate Services
+REAL,REPOWER ASIA INDONESIA Tbk,Real Estate,Real Estate - Diversified
+RELF,GRAHA MITRA ASIA Tbk,Real Estate,Real Estate - Development
+RELI,RELIANCE SEKURITAS INDONESIA Tbk,Financial Services,Capital Markets
+RGAS,KIAN SANTANG MULIATAMA Tbk,Energy,Oil & Gas Equipment & Services
+RICY,RICKY PUTRA GLOBALINDO Tbk,Consumer Cyclical,Apparel Manufacturing
+RIGS,RIG TENDERS INDONESIA Tbk,Industrials,Marine Shipping
+RIMO,RIMO INTERNATIONAL LESTARI Tbk,,
+RISE,JAYA SUKSES MAKMUR SENTOSA Tbk,Real Estate,Real Estate - Development
+RLCO,ABADI LESTARI INDONESIA Tbk,,
+RMKE,RMK ENERGY Tbk,Energy,Thermal Coal
+RMKO,ROYALTAMA MULIA KONTRAKTORINDO Tbk,Energy,Thermal Coal
+ROCK,ROCKFIELDS PROPERTI INDONESIA Tbk,Real Estate,Real Estate Services
+RODA,PIKKO LAND DEVELOPMENT Tbk,Real Estate,Real Estate - Development
+RONY,ARACORD NUSANTARA GROUP Tbk,Industrials,Engineering & Construction
+ROTI,NIPPON INDOSARI CORPINDO Tbk,Consumer Defensive,Packaged Foods
+RSCH,CHARLIE HOSPITAL SEMARANG Tbk,Healthcare,Medical Care Facilities
+RSGK,KEDOYA ADYARAYA Tbk,Healthcare,Medical Care Facilities
+RUIS,RADIANT UTAMA INTERINSCO Tbk,Energy,Oil & Gas Equipment & Services
+RUNS,GLOBAL SUKSES SOLUSI Tbk,Technology,Software - Application
+SAFE,STEADY SAFE Tbk,Industrials,Railroads
+SAGE,SAPTAUSAHA GEMILANGINDAH Tbk,Real Estate,Real Estate - Development
+SAME,SARANA MEDITAMA METROPOLITAN Tbk,Healthcare,Medical Care Facilities
+SAMF,SARASWANTI ANUGERAH MAKMUR Tbk,Basic Materials,Agricultural Inputs
+SAPX,SATRIA ANTARAN PRIMA Tbk,Industrials,Integrated Freight & Logistics
+SATU,KOTA SATU PROPERTI Tbk,Real Estate,Real Estate - Development
+SBAT,SEJAHTERA BINTANG ABADI TEXTILE Tbk,Consumer Cyclical,Textile Manufacturing
+SBMA,SURYA BIRU MURNI ACETYLENE Tbk,Basic Materials,Chemicals
+SCCO,SUPREME CABLE MANUFACTURING & COMMERCE Tbk,Industrials,Electrical Equipment & Parts
+SCMA,SURYA CITRA MEDIA Tbk,Communication Services,Broadcasting
+SCNP,SELARAS CITRA NUSANTARA PERKASA Tbk,Technology,Consumer Electronics
+SCPI,ORGANON PHARMA INDONESIA Tbk,,
+SDMU,SIDOMULYO SELARAS Tbk,Industrials,Trucking
+SDPC,MILLENNIUM PHARMACON INTERNATIONAL Tbk,Healthcare,Medical Distribution
+SDRA,BANK WOORI SAUDARA INDONESIA 1906 Tbk,Financial Services,Banks - Regional
+SEMA,SEMACOM INTEGRATED Tbk,Industrials,Specialty Industrial Machinery
+SFAN,SURYA FAJAR CAPITAL Tbk,Financial Services,Asset Management
+SGER,SUMBER GLOBAL ENERGY Tbk,Energy,Thermal Coal
+SGRO,PRIME AGRI RESOURCES Tbk,Consumer Defensive,Farm Products
+SHID,HOTEL SAHID JAYA INTERNATIONAL Tbk,Consumer Cyclical,Lodging
+SHIP,SILLO MARITIME PERDANA Tbk,Energy,Oil & Gas Equipment & Services
+SICO,SIGMA ENERGY COMPRESSINDO Tbk,Energy,Oil & Gas Equipment & Services
+SIDO,INDUSTRI JAMU DAN FARMASI SIDO MUNCUL Tbk,Healthcare,Drug Manufacturers - Specialty & Generic
+SILO,SILOAM INTERNATIONAL HOSPITALS Tbk,Healthcare,Medical Care Facilities
+SIMA,SIWANI MAKMUR Tbk,,
+SIMP,SALIM IVOMAS PRATAMA Tbk,Consumer Defensive,Packaged Foods
+SINI,SINGARAJA PUTRA Tbk,Basic Materials,Lumber & Wood Production
+SIPD,SREEYA SEWU INDONESIA Tbk,Consumer Defensive,Farm Products
+SKBM,SEKAR BUMI Tbk,Consumer Defensive,Packaged Foods
+SKLT,SEKAR LAUT Tbk,Consumer Defensive,Packaged Foods
+SKRN,SUPERKRANE MITRA UTAMA Tbk,Industrials,Rental & Leasing Services
+SKYB,NORTHCLIFF CITRANUSA INDONESIA Tbk,,
+SLIS,GAYA ABADI SEMPURNA Tbk,Technology,Electronics & Computer Distribution
+SMAR,SINAR MAS AGRO RESOURCES AND TECHNOLOGY Tbk,Consumer Defensive,Farm Products
+SMBR,SEMEN BATURAJA Tbk,Basic Materials,Building Materials
+SMCB,SOLUSI BANGUN INDONESIA Tbk,Basic Materials,Building Materials
+SMDM,SURYAMAS DUTAMAKMUR Tbk,Real Estate,Real Estate - Development
+SMDR,SAMUDERA INDONESIA Tbk,Industrials,Marine Shipping
+SMGA,SUMBER MINERAL GLOBAL ABADI Tbk,Basic Materials,Other Industrial Metals & Mining
+SMGR,SEMEN INDONESIA (PERSERO) Tbk,Basic Materials,Building Materials
+SMIL,SARANA MITRA LUAS Tbk,Industrials,Rental & Leasing Services
+SMKL,SATYAMITRA KEMAS LESTARI Tbk,Consumer Cyclical,Packaging & Containers
+SMKM,SUMBER MAS KONSTRUKSI Tbk,Industrials,Engineering & Construction
+SMLE,SINERGI MULTI LESTARINDO Tbk,Basic Materials,Specialty Chemicals
+SMMA,SINAR MAS MULTIARTHA Tbk,Financial Services,Insurance - Diversified
+SMMT,GOLDEN EAGLE ENERGY Tbk,Energy,Thermal Coal
+SMRA,SUMMARECON AGUNG Tbk,Real Estate,Real Estate - Development
+SMRU,SMR UTAMA Tbk,,
+SMSM,SELAMAT SEMPURNA Tbk,Consumer Cyclical,Auto Parts
+SNLK,SUNTER LAKESIDE HOTEL Tbk,Consumer Cyclical,Lodging
+SOCI,SOECHI LINES Tbk,Industrials,Marine Shipping
+SOFA,SOLUSI ENVIRONMENT ASIA Tbk,Utilities,Utilities - Renewable
+SOHO,SOHO GLOBAL HEALTH Tbk,Healthcare,Medical Distribution
+SOLA,XOLARE RCR ENERGY Tbk,Industrials,Engineering & Construction
+SONA,SONA TOPAS TOURISM INDUSTRY Tbk,Consumer Cyclical,Travel Services
+SOSS,SHIELD ON SERVICE Tbk,Industrials,Staffing & Employment Services
+SOTS,SATRIA MEGA KENCANA Tbk,Consumer Cyclical,Lodging
+SOUL,MITRA TIRTA BUWANA Tbk,Industrials,Specialty Business Services
+SPMA,SUPARMA Tbk,Basic Materials,Paper & Paper Products
+SPRE,SORAYA BERJAYA INDONESIA Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+SPTO,SURYA PERTIWI Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+SQMI,WILTON MAKMUR INDONESIA Tbk,Basic Materials,Gold
+SRAJ,SEJAHTERARAYA ANUGRAHJAYA Tbk,Healthcare,Medical Care Facilities
+SRIL,SRI REJEKI ISMAN Tbk,,
+SRSN,INDO ACIDATAMA Tbk,Basic Materials,Chemicals
+SRTG,SARATOGA INVESTAMA SEDAYA Tbk,Financial Services,Asset Management
+SSIA,SURYA SEMESTA INTERNUSA Tbk,Industrials,Engineering & Construction
+SSMS,SAWIT SUMBERMAS SARANA Tbk,Consumer Defensive,Farm Products
+SSTM,SUNSON TEXTILE MANUFACTURER Tbk,Consumer Cyclical,Textile Manufacturing
+STAA,SUMBER TANI AGUNG RESOURCES Tbk,Consumer Defensive,Farm Products
+STAR,BUANA ARTHA ANUGERAH Tbk,Financial Services,Asset Management
+STRK,LOVINA BEACH BREWERY Tbk,Consumer Defensive,Beverages - Brewers
+STTP,SIANTAR TOP Tbk,Consumer Defensive,Packaged Foods
+SUGI,SUGIH ENERGY Tbk,,
+SULI,SLJ GLOBAL Tbk,Basic Materials,Lumber & Wood Production
+SUNI,SUNINDO PRATAMA Tbk,Energy,Oil & Gas Equipment & Services
+SUPA,SUPER BANK INDONESIA Tbk,Financial Services,Banks - Regional
+SUPR,SOLUSI TUNAS PRATAMA Tbk,Real Estate,Real Estate Services
+SURE,SUPER ENERGY Tbk,Energy,Oil & Gas Integrated
+SURI,MAJA AGUNG LATEXINDO Tbk,Healthcare,Medical Instruments & Supplies
+SWAT,SRIWAHANA ADITYAKARTA Tbk,Consumer Cyclical,Packaging & Containers
+SWID,SARASWANTI INDOLAND DEVELOPMENT Tbk,Real Estate,Real Estate - Development
+TALF,TUNAS ALFIN Tbk,Consumer Cyclical,Packaging & Containers
+TAMA,LANCARTAMA SEJATI Tbk,Real Estate,Real Estate - Development
+TAMU,PELAYARAN TAMARIN SAMUDRA Tbk,Industrials,Marine Shipping
+TAPG,TRIPUTRA AGRO PERSADA Tbk,Consumer Defensive,Farm Products
+TARA,AGUNG SEMESTA SEJAHTERA Tbk,Real Estate,Real Estate - Diversified
+TAXI,EXPRESS TRANSINDO UTAMA Tbk,Industrials,Railroads
+TAYS,JAYA SWARASA AGUNG Tbk,Consumer Defensive,Packaged Foods
+TBIG,TOWER BERSAMA INFRASTRUCTURE Tbk,Communication Services,Telecom Services
+TBLA,TUNAS BARU LAMPUNG Tbk,Consumer Defensive,Packaged Foods
+TBMS,TEMBAGA MULIA SEMANAN Tbk,Industrials,Metal Fabrication
+TCID,MANDOM INDONESIA Tbk,Consumer Defensive,Household & Personal Products
+TCPI,TRANSCOAL PACIFIC Tbk,Industrials,Marine Shipping
+TDPM,TRIDOMAIN PERFORMANCE MATERIALS Tbk,,
+TEBE,DANA BRATA LUHUR Tbk,Industrials,Infrastructure Operations
+TECH,INDOSTERLING TECHNOMEDIA Tbk,,
+TELE,OMNI INOVASI INDONESIA Tbk,Communication Services,Telecom Services
+TFAS,TELEFAST INDONESIA Tbk,Industrials,Staffing & Employment Services
+TFCO,TIFICO FIBER INDONESIA Tbk,Consumer Cyclical,Textile Manufacturing
+TGKA,TIGARAKSA SATRIA Tbk,Consumer Defensive,Food Distribution
+TGRA,TERREGRA ASIA ENERGY Tbk,Utilities,Utilities - Renewable
+TGUK,PLATINUM WAHAB NUSANTARA Tbk,Consumer Defensive,Food Distribution
+TIFA,KDB TIFA FINANCE Tbk,Financial Services,Credit Services
+TINS,TIMAH Tbk,Basic Materials,Other Industrial Metals & Mining
+TIRA,TIRA AUSTENITE Tbk,Industrials,Industrial Distribution
+TIRT,TIRTA MAHAKAM RESOURCES Tbk,Basic Materials,Lumber & Wood Production
+TKIM,PABRIK KERTAS TJIWI KIMIA Tbk,Basic Materials,Paper & Paper Products
+TLDN,TELADAN PRIMA AGRO Tbk,Consumer Defensive,Farm Products
+TLKM,TELKOM INDONESIA (PERSERO) Tbk,Communication Services,Telecom Services
+TMAS,TEMAS Tbk,Industrials,Marine Shipping
+TMPO,TEMPO INTI MEDIA Tbk,Communication Services,Publishing
+TNCA,TRIMUDA NUANSA CITRA Tbk,Industrials,Integrated Freight & Logistics
+TOBA,TBS ENERGI UTAMA Tbk,Energy,Thermal Coal
+TOOL,ROHARTINDO NUSANTARA LUAS Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+TOPS,TOTALINDO EKA PERSADA Tbk,Industrials,Engineering & Construction
+TOSK,TOPINDO SOLUSI KOMUNIKA Tbk,Technology,Software - Application
+TOTL,TOTAL BANGUN PERSADA Tbk,Industrials,Engineering & Construction
+TOTO,SURYA TOTO INDONESIA Tbk,Industrials,Building Products & Equipment
+TOWR,SARANA MENARA NUSANTARA Tbk,Real Estate,Real Estate Services
+TOYS,SUNINDO ADIPERSADA Tbk,Consumer Cyclical,Leisure
+TPIA,CHANDRA ASRI PACIFIC Tbk,Basic Materials,Specialty Chemicals
+TPMA,TRANS POWER MARINE Tbk,Industrials,Marine Shipping
+TRAM,TRADA ALAM MINERA Tbk,,
+TRGU,CERESTAR INDONESIA Tbk,Consumer Defensive,Packaged Foods
+TRIL,TRIWIRA INSANLESTARI Tbk,,
+TRIM,TRIMEGAH SEKURITAS INDONESIA Tbk,Financial Services,Capital Markets
+TRIN,PERINTIS TRINITI PROPERTI Tbk,Real Estate,Real Estate - Development
+TRIO,TRIKOMSEL OKE Tbk,,
+TRIS,TRISULA INTERNATIONAL Tbk,Consumer Cyclical,Apparel Manufacturing
+TRJA,TRANSKON JAYA Tbk,Industrials,Rental & Leasing Services
+TRON,TEKNOLOGI KARYA DIGITAL NUSA Tbk,Technology,Information Technology Services
+TRST,TRIAS SENTOSA Tbk,Consumer Cyclical,Packaging & Containers
+TRUE,TRINITI DINAMIK Tbk,Real Estate,Real Estate - Development
+TRUK,GUNA TIMUR RAYA Tbk,Industrials,Trucking
+TRUS,TRUST FINANCE INDONESIA Tbk,Financial Services,Credit Services
+TSPC,TEMPO SCAN PACIFIC Tbk,Industrials,Conglomerates
+TUGU,ASURANSI TUGU PRATAMA INDONESIA Tbk,Financial Services,Insurance - Diversified
+TYRE,KING TIRE INDONESIA Tbk,Consumer Cyclical,Auto Parts
+UANG,PAKUAN Tbk,Consumer Cyclical,Leisure
+UCID,UNI-CHARM INDONESIA Tbk,Consumer Defensive,Household & Personal Products
+UDNG,AGRO BAHARI NUSANTARA Tbk,Consumer Defensive,Farm Products
+UFOE,DAMAI SEJAHTERA ABADI Tbk,Consumer Cyclical,Department Stores
+ULTJ,ULTRAJAYA MILK INDUSTRY AND TRADING COMPANY Tbk,Consumer Defensive,Beverages - Non-Alcoholic
+UNIC,UNGGUL INDAH CAHAYA Tbk,Basic Materials,Chemicals
+UNIQ,ULIMA NITRA Tbk,Energy,Thermal Coal
+UNIT,CAHAYA PERMATA SEJAHTERA Tbk,,
+UNSP,BAKRIE SUMATERA PLANTATIONS Tbk,Consumer Defensive,Farm Products
+UNTD,TERANG DUNIA INTERNUSA Tbk,Consumer Cyclical,Auto Manufacturers
+UNTR,UNITED TRACTORS Tbk,Basic Materials,Other Industrial Metals & Mining
+UNVR,UNILEVER INDONESIA Tbk,Consumer Defensive,Household & Personal Products
+URBN,URBAN JAKARTA PROPERTINDO Tbk,Real Estate,Real Estate - Development
+UVCR,TRIMEGAH KARYA PRATAMA Tbk,Technology,Software - Application
+VAST,VASTLAND INDONESIA Tbk,Real Estate,Real Estate Services
+VERN,VERONA INDAH PICTURES Tbk,Communication Services,Entertainment
+VICI,VICTORIA CARE INDONESIA Tbk,Consumer Defensive,Household & Personal Products
+VICO,VICTORIA INVESTAMA Tbk,Financial Services,Asset Management
+VINS,VICTORIA INSURANCE Tbk,Financial Services,Insurance - Property & Casualty
+VISI,SATU VISI PUTRA Tbk,Industrials,Industrial Distribution
+VIVA,VISI MEDIA ASIA Tbk,Communication Services,Broadcasting
+VKTR,VKTR TEKNOLOGI MOBILITAS Tbk,Consumer Cyclical,Recreational Vehicles
+VOKS,VOKSEL ELECTRIC Tbk,Industrials,Electrical Equipment & Parts
+VRNA,MIZUHO LEASING INDONESIA Tbk,Financial Services,Credit Services
+VTNY,VENTENY FORTUNA INTERNATIONAL Tbk,Industrials,Staffing & Employment Services
+WAPO,WAHANA PRONATURAL Tbk,Consumer Defensive,Packaged Foods
+WEGE,WIJAYA KARYA BANGUNAN GEDUNG Tbk,Industrials,Engineering & Construction
+WEHA,WEHA TRANSPORTASI INDONESIA Tbk,Industrials,Railroads
+WGSH,WIRA GLOBAL SOLUSI Tbk,Technology,Software - Infrastructure
+WICO,WICAKSANA OVERSEAS INTERNATIONAL Tbk,Consumer Defensive,Food Distribution
+WIDI,WIDIANT JAYA KRENINDO Tbk,Industrials,Rental & Leasing Services
+WIFI,SOLUSI SINERGI DIGITAL Tbk,Technology,Information Technology Services
+WIIM,WISMILAK INTI MAKMUR Tbk,Consumer Defensive,Tobacco
+WIKA,WIJAYA KARYA (PERSERO) Tbk,Industrials,Engineering & Construction
+WINE,HATTEN BALI Tbk,Consumer Defensive,Beverages - Wineries & Distilleries
+WINR,WINNER NUSANTARA JAYA Tbk,Real Estate,Real Estate - Development
+WINS,WINTERMAR OFFSHORE MARINE Tbk,Industrials,Marine Shipping
+WIRG,WIR ASIA Tbk,Technology,Information Technology Services
+WMPP,WIDODO MAKMUR PERKASA Tbk,Industrials,Conglomerates
+WMUU,WIDODO MAKMUR UNGGAS Tbk,Consumer Defensive,Farm Products
+WOMF,WAHANA OTTOMITRA MULTIARTHA Tbk,Financial Services,Credit Services
+WOOD,INTEGRA INDOCABINET Tbk,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+WOWS,GINTING JAYA ENERGI Tbk,Energy,Oil & Gas Equipment & Services
+WSBP,WASKITA BETON PRECAST Tbk,Basic Materials,Building Materials
+WSKT,WASKITA KARYA (PERSERO) Tbk,,
+WTON,WIJAYA KARYA BETON Tbk,Basic Materials,Building Materials
+YELO,YELOOO INTEGRA DATANET Tbk,Consumer Cyclical,Travel Services
+YOII,ASURANSI DIGITAL BERSAMA Tbk,Financial Services,Insurance - Diversified
+YPAS,YANAPRIMA HASTAPERSADA Tbk,Consumer Cyclical,Packaging & Containers
+YULE,YULIE SEKURITAS INDONESIA Tbk,Financial Services,Capital Markets
+YUPI,YUPI INDO JELLY GUM Tbk,Consumer Defensive,Confectioners
+ZATA,BERSAMA ZATTA JAYA Tbk,Consumer Cyclical,Apparel Retail
+ZBRA,DOSNI ROHA INDONESIA Tbk,Healthcare,Medical Distribution
+ZINC,KAPUAS PRIMA COAL Tbk,Basic Materials,Other Industrial Metals & Mining
+ZONE,MEGA PERINTIS Tbk,Consumer Cyclical,Apparel Retail
+ZYRX,ZYREXINDO MANDIRI BUANA Tbk,Technology,Computer Hardware
