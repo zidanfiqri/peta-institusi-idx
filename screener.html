@@ -20,6 +20,34 @@
         @media (prefers-reduced-motion: reduce) { #drawer { transition: none; } }
         .bar { height: 8px; border-radius: 4px; background: #6366f1; }
         input[type=number] { -moz-appearance: textfield; }
+        /* Grafik komposisi: warna per peran (lokal biru, asing oranye, asing pengendali oranye arsir) */
+        .viz-root { --lokal: #2a78d6; --asing: #eb6834; --asing-tint: #f9cdb8; --grid: #e5e7eb; --ink: #111827; --ink-2: #4b5563; --surface: #ffffff; position: relative; }
+        .g-hatch { background: repeating-linear-gradient(135deg, var(--asing) 0 2px, var(--asing-tint) 2px 6px); }
+        .g-grid { display: grid; grid-template-columns: 52px 1fr; column-gap: 10px; }
+        .g-axis { position: relative; height: 18px; }
+        .g-axis span { position: absolute; transform: translateX(-50%); font-size: 11px; color: var(--ink-2); }
+        .g-axis span:first-child { transform: none; } .g-axis span:last-child { transform: translateX(-100%); }
+        .g-body { position: relative; }
+        .g-lines { position: absolute; top: 0; bottom: 0; left: 62px; right: 0; pointer-events: none;
+            background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px); background-size: 25% 100%; border-right: 1px solid var(--grid); }
+        .g-row { position: relative; align-items: center; padding: 3px 0; outline: none; }
+        .g-row:focus-visible .g-track { box-shadow: 0 0 0 2px #312e81; border-radius: 4px; }
+        .g-lab { text-align: right; font-size: 12px; font-weight: 700; color: #312e81; padding: 4px 0; }
+        .g-lab:hover { text-decoration: underline; }
+        .g-track { display: flex; gap: 2px; height: 24px; cursor: pointer; }
+        .g-seg { position: relative; min-width: 1px; display: flex; align-items: center; justify-content: center; transition: filter .1s; }
+        .g-seg:first-child { border-radius: 4px 0 0 4px; } .g-seg:last-child { border-radius: 0 4px 4px 0; } .g-seg:only-child { border-radius: 4px; }
+        .g-row:hover .g-seg, .g-row.on .g-seg { filter: brightness(1.08); }
+        .g-seg span { font-size: 11px; font-weight: 600; color: #fff; white-space: nowrap; padding: 0 4px; font-variant-numeric: tabular-nums; }
+        .g-hatch span { color: var(--ink); background: rgba(255,255,255,.88); border-radius: 3px; padding: 0 3px; }
+        .g-sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 6px; }
+        #g-tip { position: absolute; z-index: 20; pointer-events: none; background: #111827; color: #fff; border-radius: 6px; padding: 8px 10px; font-size: 12px; min-width: 190px; box-shadow: 0 6px 16px rgba(0,0,0,.2); }
+        #g-tip .t-row { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
+        #g-tip .t-key { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+        #g-tip .t-val { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 52px; text-align: right; }
+        #g-tip .t-lab { color: #d1d5db; }
+        .seg-btn { padding: 6px 12px; } .seg-btn[aria-pressed="true"] { background: #312e81; color: #fff; }
+        @media (max-width: 640px) { .g-grid { grid-template-columns: 44px 1fr; column-gap: 8px; } .g-lines { left: 52px; } }
     </style>
 </head>
 <body class="text-gray-800">
@@ -52,6 +80,7 @@
     <!-- Tab -->
     <div class="flex flex-wrap gap-2" role="tablist">
         <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="true" data-tab="screener"><i class="fa-solid fa-list-ol mr-2"></i>Screener</button>
+        <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="false" data-tab="grafik"><i class="fa-solid fa-chart-bar mr-2"></i>Grafik</button>
         <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="false" data-tab="hsc"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Daftar HSC</button>
         <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="false" data-tab="metode"><i class="fa-solid fa-book mr-2"></i>Metodologi</button>
     </div>
@@ -142,6 +171,62 @@
         </div>
     </section>
 
+    <!-- TAB GRAFIK -->
+    <section id="tab-grafik" class="hidden space-y-4">
+        <div class="card p-4 space-y-4 viz-root">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                    <h2 class="text-lg font-semibold text-indigo-900"><i class="fa-solid fa-chart-bar text-indigo-500 mr-2"></i>Komposisi lokal dan asing per saham</h2>
+                    <p id="g-sub" class="text-xs text-gray-500 mt-1"></p>
+                </div>
+                <div class="inline-flex rounded-md border border-gray-300 overflow-hidden text-xs font-semibold" role="group" aria-label="Tampilan">
+                    <button id="g-v-chart" class="seg-btn" aria-pressed="true"><i class="fa-solid fa-chart-bar mr-1"></i>Grafik</button>
+                    <button id="g-v-table" class="seg-btn border-l border-gray-300" aria-pressed="false"><i class="fa-solid fa-table mr-1"></i>Tabel</button>
+                </div>
+            </div>
+            <div class="grid gap-3 grid-cols-2 md:grid-cols-12 items-end">
+                <label class="text-xs font-medium text-gray-600 md:col-span-2">Saham
+                    <select id="g-src" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white">
+                        <option value="top">Mcap terbesar</option>
+                        <option value="filter">Hasil Screener</option>
+                        <option value="pilih">Pilih kode</option>
+                    </select>
+                </label>
+                <label id="g-n-wrap" class="text-xs font-medium text-gray-600 md:col-span-2">Jumlah saham
+                    <select id="g-n" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white num">
+                        <option>10</option><option selected>20</option><option>30</option><option>50</option>
+                    </select>
+                </label>
+                <label id="g-kode-wrap" class="hidden text-xs font-medium text-gray-600 md:col-span-2">Kode saham
+                    <input id="g-kode" type="text" placeholder="BBCA, BBRI, ASII" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm uppercase">
+                </label>
+                <label class="text-xs font-medium text-gray-600 col-span-2 md:col-span-3">Basis
+                    <select id="g-basis" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white">
+                        <option value="pisah">Total saham, pisah pengendali</option>
+                        <option value="total">Total saham, asing digabung</option>
+                        <option value="ksei">Tanpa warkat (versi KSEI)</option>
+                    </select>
+                </label>
+                <label class="text-xs font-medium text-gray-600 col-span-2 md:col-span-3">Urutkan
+                    <select id="g-sort" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white">
+                        <option value="desc">Asing tertinggi</option>
+                        <option value="asc">Asing terendah</option>
+                        <option value="mc">Market cap terbesar</option>
+                    </select>
+                </label>
+                <label id="g-hsc-wrap" class="inline-flex items-center gap-2 text-sm pb-2 col-span-2 md:col-span-2"><input id="g-nohsc" type="checkbox" checked class="w-4 h-4 accent-indigo-600"> Tanpa saham HSC</label>
+            </div>
+            <div id="g-legend" class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-gray-700"></div>
+            <div id="g-chart">
+                <div class="g-grid"><div></div><div class="g-axis" id="g-axis"></div></div>
+                <div class="g-body"><div class="g-lines"></div><div id="g-rows"></div></div>
+            </div>
+            <div id="g-table" class="hidden overflow-x-auto"></div>
+            <div id="g-tip" class="hidden" role="tooltip"></div>
+            <p id="g-note" class="text-xs text-gray-500 border-t pt-3"></p>
+        </div>
+    </section>
+
     <!-- TAB HSC -->
     <section id="tab-hsc" class="hidden space-y-4">
         <div class="card p-4">
@@ -183,10 +268,14 @@
                 <p>Status lokal atau asing mengikuti status rekening efek, bukan pemilik akhir. Anak usaha lokal milik grup asing tercatat lokal. Contoh: HMSP hanya 0,83% asing karena 92,44% dipegang Philip Morris Indonesia yang tercatat lokal.</p></div>
             <div><h3 class="font-semibold">Breakdown tipe asing</h3>
                 <p>Sembilan tipe dari Balancepos: Asuransi (IS), Korporat (CP), Dana Pensiun (PF), Bank dan Lembaga Keuangan (IB), Individu (ID), Reksadana (MF), Sekuritas (SC), Yayasan (FD), Lainnya (OT), ditambah kelompok Warkat. Bila file klasifikasi BEI tersedia, komposisi asing juga dirinci ke 39 klasifikasi (Investment Manager, Pension Funds, Sovereign Wealth Fund, Hedge Fund, dan lainnya), dihitung dari saham asing tanpa warkat. Kolom dan filter Asing didominasi memakai klasifikasi dengan porsi terbesar.</p></div>
-            <div><h3 class="font-semibold">Free float indikatif</h3>
-                <p>100% dikurangi total pemegang di atas 5% menurut file pemegang 1%. Ini perkiraan, bukan free float versi regulasi yang juga mengeluarkan pihak terafiliasi dan direksi. Rekening kustodian yang mewakili banyak investor (misalnya bank penyimpan ADR) ikut terhitung di atas 5% bila porsinya besar.</p></div>
-            <div><h3 class="font-semibold">Perubahan 1 dan 3 bulan</h3>
-                <p>Selisih saham asing tanpa warkat antara bulan terakhir dan bulan pembanding, dalam poin persen dari total saham beredar.</p></div>
+            <div><h3 class="font-semibold">Free float</h3>
+                <p>100% dikurangi jumlah persentase seluruh pemegang di file pemegang di atas 1% BEI, warkat maupun tanpa warkat. Pemegang yang masuk daftar 1% tidak dihitung sebagai masyarakat. Metodenya sama dengan dashboard KSEI Ownership, jadi angkanya identik.</p></div>
+            <div><h3 class="font-semibold">Market cap dan harga</h3>
+                <p>Harga penutupan dari Balancepos KSEI dikali jumlah saham tercatat (Sec. Num) pada tanggal yang sama, sehingga market cap selaras dengan tanggal kepemilikan. Situs lain yang memakai harga lebih baru akan menunjukkan angka sedikit berbeda.</p></div>
+            <div><h3 class="font-semibold">Perubahan dan tren bulanan</h3>
+                <p>Posisi asing setiap akhir bulan = saham asing tanpa warkat dari Balancepos bulan itu ditambah warkat dari file 1% bulan yang sama, dibagi total saham saat ini. Ubah 1 bulan membandingkan bulan terakhir dengan akhir bulan sebelumnya; ubah 3 bulan dengan akhir tiga bulan sebelumnya (contoh: September dibanding Juni). Posisi setiap bulan di antaranya, termasuk Juli, ada di tabel Tren asing akhir bulan pada detail saham.</p></div>
+            <div><h3 class="font-semibold">Tab Grafik</h3>
+                <p>Batang 100% per saham. Basis Total saham memakai angka yang sama dengan Screener: lokal = 100% dikurangi asing; asing pengendali (arsir) dan non pengendali (polos) bisa dipisah. Basis Tanpa warkat hanya memakai Balancepos KSEI: asing tanpa warkat dibagi seluruh saham tanpa warkat. Basis ini biasa dipakai di grafik yang beredar, tetapi melewatkan saham warkat, misalnya Jardine di ASII, sehingga asing ASII tampak 68% padahal 85,49% dari total saham.</p></div>
             <div><h3 class="font-semibold">HSC</h3>
                 <p>Daftar resmi BEI. Persen adalah porsi saham yang secara agregat dikuasai sejumlah tertentu pemegang saham, sesuai PDF pengumuman, pada tanggal posisi masing-masing. BEI mengumumkan pada 19 Okt 2026 bahwa saham HSC akan dikeluarkan dari perhitungan IHSG; tanggal efektifnya belum ditetapkan.</p></div>
             <div><h3 class="font-semibold">Periode data</h3>
@@ -315,12 +404,16 @@
         if (r.h) parts.push('<div class="bg-red-50 border border-red-200 rounded p-3 text-red-800"><b>Saham HSC.</b> Sejumlah tertentu pemegang saham menguasai ' + pct(r.h.p) + ' per ' + tgl(r.h.pos) + '. Masuk daftar ' + tgl(r.h.sj) + '. <a class="underline" target="_blank" rel="noopener" href="' + esc(r.h.u) + '">PDF BEI</a></div>');
         parts.push('<div class="grid grid-cols-2 gap-3">' + [
             ["Asing non pengendali", pct(r.an)], ["Asing termasuk pengendali", pct(r.a)],
-            ["Asing via warkat", pct(r.aw)], ["Ubah non pengendali 1 bln", pp(r.cn1) + " pp"],
-            ["Free float indikatif", r.ff == null ? "-" : pct(r.ff, 1)], ["Pemegang di atas 1%", r.k1 == null ? "-" : pct(r.k1, 1)],
-            ["Market cap", "Rp " + mcap(r.mc) + " T"], ["Harga", "Rp " + F0.format(r.p)],
-            ["Ubah asing 1 bln", pp(r.c1) + " pp"], ["Ubah asing 3 bln", pp(r.c3) + " pp"],
-            ["Ritel lokal", pct(r.rt)], ["Data tercatat", F1.format(r.cv * 100) + "% saham"]
-        ].map(function (x) { return '<div class="bg-gray-50 rounded p-2"><div class="text-xs text-gray-500">' + x[0] + '</div><div class="font-semibold num">' + x[1] + "</div></div>"; }).join("") + "</div>");
+            ["Asing via warkat", pct(r.aw)], ["Ritel lokal", pct(r.rt)],
+            ["Free float", r.ff == null ? "-" : pct(r.ff), r.n1 == null ? "" : "di luar " + F0.format(r.n1) + " pemegang di atas 1%"],
+            ["Market cap", "Rp " + mcap(r.mc) + " T", "harga Rp " + F0.format(r.p) + ", " + tgl(META.balancepos)],
+            ["Data tercatat", F1.format(r.cv * 100) + "% saham"]
+        ].map(function (x) { return '<div class="bg-gray-50 rounded p-2"><div class="text-xs text-gray-500">' + x[0] + '</div><div class="font-semibold num">' + x[1] + "</div>" + (x[2] ? '<div class="text-[11px] text-gray-500">' + esc(x[2]) + "</div>" : "") + "</div>"; }).join("") + "</div>");
+        if (r.tr && r.tr.length > 1) {
+            var t0 = r.tr[r.tr.length - 1];
+            parts.push('<div><h3 class="font-semibold text-indigo-900 mb-1">Tren asing akhir bulan</h3><p class="text-xs text-gray-500 mb-2">Persen dari total saham saat ini. Kolom ubah = posisi ' + bln(t0[0]) + ' dikurangi bulan itu, dalam pp.</p><table class="w-full text-xs"><thead class="text-gray-500"><tr><th class="text-left py-1">Bulan</th><th class="text-right py-1">Non pengendali</th><th class="text-right py-1">Ubah</th><th class="text-right py-1">Termasuk pengendali</th><th class="text-right py-1">Ubah</th></tr></thead><tbody>' +
+                r.tr.map(function (x) { var now = x === t0; return '<tr class="border-t' + (now ? " font-semibold" : "") + '"><td class="py-1">' + bln(x[0]) + '</td><td class="py-1 text-right num">' + pct(x[2]) + '</td><td class="py-1 text-right num">' + (now ? "" : pp(Math.round((t0[2] - x[2]) * 100) / 100)) + '</td><td class="py-1 text-right num">' + pct(x[1]) + '</td><td class="py-1 text-right num">' + (now ? "" : pp(Math.round((t0[1] - x[1]) * 100) / 100)) + "</td></tr>"; }).join("") + "</tbody></table></div>");
+        }
         if (r.pg && r.pg.length) parts.push('<div class="bg-amber-50 border border-amber-200 rounded p-3 text-amber-900"><b>Asing pengendali yang dikecualikan:</b><ul class="mt-1 space-y-0.5">' + r.pg.map(function (x) { return "<li>" + esc(x[0]) + ' <span class="text-amber-700">(' + esc(x[1] || "tanpa klasifikasi") + ", " + F2.format(x[2]) + "%)</span></li>"; }).join("") + "</ul></div>");
         if (r.cv < 0.98 || r.cv > 1.02) parts.push('<p class="text-xs text-amber-700">Total saham tercatat ' + F1.format(r.cv * 100) + '% dari saham beredar. Bisa karena ada warkat di bawah 1% atau beda tanggal file 1% dengan Balancepos.</p>');
         var items = Object.keys(r.ab || {}).map(function (t) { return [t, r.ab[t]]; });
@@ -363,6 +456,139 @@
         }).join("") || '<li class="text-gray-500">Belum ada.</li>';
     }
 
+    // ---------------- tab grafik ----------------
+    var G = { view: "chart", touch: false, cur: [] };
+    var SERI = {
+        lokal: { n: "Lokal", c: "var(--lokal)", key: "#2a78d6" },
+        ctrl: { n: "Asing pengendali", hatch: true, key: "repeating-linear-gradient(90deg,#eb6834 0 3px,transparent 3px 5px)" },
+        non: { n: "Asing non pengendali", c: "var(--asing)", key: "#eb6834" },
+        asing: { n: "Asing", c: "var(--asing)", key: "#eb6834" }
+    };
+    function gNilai(r, basis) {
+        if (basis === "ksei") {
+            var t = (r.fsl || 0) + (r.lsl || 0); if (t <= 0) return null;
+            var as = r.fsl / t * 100;
+            return { seg: [["lokal", 100 - as], ["asing", as]], kunci: as };
+        }
+        var lok = Math.max(0, 100 - r.a);
+        if (basis === "total") return { seg: [["lokal", lok], ["asing", r.a]], kunci: r.a };
+        return { seg: [["lokal", lok], ["ctrl", Math.max(0, r.a - r.an)], ["non", r.an]], kunci: r.an };
+    }
+    function gPilih() {
+        var src = $("#g-src").value, n = Number($("#g-n").value), out = [], hilang = [];
+        if (src === "pilih") {
+            var seen = {};
+            $("#g-kode").value.toUpperCase().split(/[\s,;]+/).filter(Boolean).forEach(function (k) {
+                if (seen[k]) return; seen[k] = 1;
+                var r = rows.find(function (x) { return x.k === k; });
+                if (r) out.push(r); else hilang.push(k);
+            });
+        } else if (src === "filter") {
+            out = view.slice(0, n);
+        } else {
+            out = rows.filter(function (r) { return !($("#g-nohsc").checked && r.h); }).sort(function (a, b) { return b.mc - a.mc; }).slice(0, n);
+        }
+        return { list: out, hilang: hilang, src: src };
+    }
+    function gVisible() { return !$("#tab-grafik").classList.contains("hidden"); }
+    function renderGrafik() {
+        if (!rows.length || !gVisible()) return;
+        gHideTip();
+        var basis = $("#g-basis").value, urut = $("#g-sort").value, p = gPilih();
+        $("#g-n-wrap").classList.toggle("hidden", p.src === "pilih");
+        $("#g-kode-wrap").classList.toggle("hidden", p.src !== "pilih");
+        $("#g-hsc-wrap").classList.toggle("hidden", p.src !== "top");
+        var nmA = basis === "pisah" ? "Asing non pengendali" : "Asing";
+        $("#g-sort").options[0].text = nmA + " tertinggi"; $("#g-sort").options[1].text = nmA + " terendah";
+        var data = p.list.map(function (r) { return { r: r, v: gNilai(r, basis) }; }).filter(function (x) { return x.v; });
+        data.sort(function (x, y) { return (urut === "mc" ? y.r.mc - x.r.mc : urut === "asc" ? x.v.kunci - y.v.kunci : y.v.kunci - x.v.kunci) || x.r.k.localeCompare(y.r.k); });
+        G.cur = data;
+        var seri = basis === "pisah" ? ["lokal", "ctrl", "non"] : ["lokal", "asing"];
+        $("#g-legend").innerHTML = seri.map(function (s) { var x = SERI[s]; return '<span><span class="g-sw' + (x.hatch ? " g-hatch" : "") + '"' + (x.hatch ? "" : ' style="background:' + x.c + '"') + "></span>" + x.n + "</span>"; }).join("");
+        var asal = p.src === "top" ? F0.format(data.length) + " saham market cap terbesar" + ($("#g-nohsc").checked ? " di luar HSC" : "")
+            : p.src === "filter" ? F0.format(data.length) + " saham pertama dari hasil filter Screener" : F0.format(data.length) + " saham pilihan";
+        $("#g-sub").textContent = asal + ". " + (basis === "ksei" ? "Persen dari saham tanpa warkat" : "Persen dari total saham") + ", per " + tgl(META.balancepos) + ".";
+        $("#g-axis").innerHTML = [0, 25, 50, 75, 100].map(function (t) { return '<span style="left:' + t + '%">' + t + "%</span>"; }).join("");
+        $("#g-rows").innerHTML = data.length ? data.map(function (d, i) {
+            return '<div class="g-row g-grid" data-i="' + i + '" tabindex="0" aria-label="' + esc(d.r.k + ": " + d.v.seg.map(function (s) { return SERI[s[0]].n + " " + F2.format(s[1]) + "%"; }).join(", ")) + '">' +
+                '<button type="button" class="g-lab" data-k="' + esc(d.r.k) + '" title="Buka detail ' + esc(d.r.k) + '">' + esc(d.r.k) + "</button>" +
+                '<div class="g-track">' + d.v.seg.filter(function (s) { return s[1] > 0.005; }).map(function (s) {
+                    var x = SERI[s[0]];
+                    return '<div class="g-seg' + (x.hatch ? " g-hatch" : "") + '" style="flex:' + s[1].toFixed(3) + " 1 0" + (x.hatch ? "" : ";background:" + x.c) + '"><span>' + F0.format(s[1]) + "%</span></div>";
+                }).join("") + "</div></div>";
+        }).join("") : '<p class="py-8 text-center text-sm text-gray-500">' + (p.src === "pilih" ? "Ketik kode saham, pisahkan dengan koma." : "Tidak ada saham. Longgarkan filter di tab Screener.") + "</p>";
+        gFit();
+        var note = [];
+        if (p.hilang.length) note.push("Tidak ditemukan: " + p.hilang.join(", ") + ".");
+        note.push(basis === "ksei" ? "Basis ini hanya memakai Balancepos KSEI, jadi saham warkat seperti Jardine di ASII tidak terhitung. Pakai basis Total saham untuk angka yang sama dengan Screener."
+            : basis === "pisah" ? "Lokal = 100% dikurangi asing. Asing pengendali (arsir) mengikuti aturan di Metodologi, contohnya Jardine dan Toyota di ASII."
+            : "Lokal = 100% dikurangi asing; asing termasuk saham warkat dari file pemegang 1%.");
+        note.push("Sumber: KSEI Balancepos" + (basis === "ksei" ? "" : " dan BEI pemegang di atas 1%") + ", per " + tgl(META.balancepos) + ". Klik kode saham untuk detail.");
+        $("#g-note").textContent = note.join(" ");
+        gTable(data, seri);
+    }
+    function gFit() {
+        if (G.view !== "chart") return;
+        document.querySelectorAll("#g-rows .g-seg").forEach(function (seg) {
+            var sp = seg.firstChild; sp.style.visibility = "";
+            if (sp.offsetWidth + 6 > seg.clientWidth) sp.style.visibility = "hidden";
+        });
+    }
+    function gTable(data, seri) {
+        $("#g-table").innerHTML = '<table class="min-w-full text-sm"><thead class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wide"><tr><th class="px-3 py-2 text-left">Kode</th><th class="px-3 py-2 text-left hidden md:table-cell">Emiten</th>' +
+            seri.map(function (s) { return '<th class="px-3 py-2 text-right">' + SERI[s].n + "</th>"; }).join("") + '<th class="px-3 py-2 text-right">Mcap (Rp T)</th></tr></thead><tbody>' +
+            data.map(function (d) { return '<tr class="row border-t border-gray-100" data-k="' + esc(d.r.k) + '"><td class="px-3 py-2 font-bold text-indigo-900">' + esc(d.r.k) + '</td><td class="px-3 py-2 hidden md:table-cell">' + esc(d.r.n) + "</td>" +
+                d.v.seg.map(function (s) { return '<td class="px-3 py-2 text-right num">' + pct(s[1]) + "</td>"; }).join("") + '<td class="px-3 py-2 text-right num">' + mcap(d.r.mc) + "</td></tr>"; }).join("") + "</tbody></table>";
+    }
+    function gEl(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+    function gTip(row, ev) {
+        var d = G.cur[Number(row.getAttribute("data-i"))]; if (!d) return;
+        document.querySelectorAll("#g-rows .g-row.on").forEach(function (x) { if (x !== row) x.classList.remove("on"); });
+        row.classList.add("on");
+        var tip = $("#g-tip"); tip.textContent = "";
+        var h = gEl("div", null, d.r.k); h.style.fontWeight = "700"; tip.appendChild(h);
+        var nm = gEl("div", "t-lab", d.r.n); nm.style.fontSize = "11px"; nm.style.marginBottom = "4px"; tip.appendChild(nm);
+        d.v.seg.slice().reverse().forEach(function (s) {
+            var r = gEl("div", "t-row"), k = gEl("span", "t-key"); k.style.background = SERI[s[0]].key;
+            r.appendChild(k); r.appendChild(gEl("span", "t-val", F2.format(s[1]) + "%")); r.appendChild(gEl("span", "t-lab", SERI[s[0]].n));
+            tip.appendChild(r);
+        });
+        var mc = gEl("div", "t-lab", "Market cap Rp " + mcap(d.r.mc) + " T"); mc.style.marginTop = "5px"; mc.style.fontSize = "11px"; tip.appendChild(mc);
+        tip.classList.remove("hidden");
+        var box = row.closest(".viz-root").getBoundingClientRect(), rr = row.getBoundingClientRect();
+        var x = (ev && ev.clientX != null ? ev.clientX : rr.left + rr.width / 2) - box.left + 14, y = rr.bottom - box.top + 4;
+        var tw = tip.offsetWidth; if (x + tw > box.width - 8) x = Math.max(8, x - tw - 28);
+        tip.style.left = x + "px"; tip.style.top = y + "px";
+    }
+    function gHideTip() { $("#g-tip").classList.add("hidden"); document.querySelectorAll("#g-rows .g-row.on").forEach(function (x) { x.classList.remove("on"); }); }
+    function gView(v) {
+        G.view = v;
+        $("#g-v-chart").setAttribute("aria-pressed", String(v === "chart")); $("#g-v-table").setAttribute("aria-pressed", String(v === "table"));
+        $("#g-chart").classList.toggle("hidden", v !== "chart"); $("#g-legend").classList.toggle("hidden", v !== "chart"); $("#g-table").classList.toggle("hidden", v !== "table");
+        gHideTip(); gFit();
+    }
+    $("#g-v-chart").addEventListener("click", function () { gView("chart"); });
+    $("#g-v-table").addEventListener("click", function () { gView("table"); });
+    ["#g-src", "#g-n", "#g-basis", "#g-sort", "#g-nohsc"].forEach(function (id) { $(id).addEventListener("change", renderGrafik); });
+    $("#g-kode").addEventListener("input", debounce(renderGrafik, 300));
+    var gRows = $("#g-rows");
+    gRows.addEventListener("pointerdown", function (e) { G.touch = e.pointerType !== "mouse"; G.ptr = true; setTimeout(function () { G.ptr = false; }, 400); });
+    gRows.addEventListener("pointermove", function (e) { if (e.pointerType !== "mouse") return; var row = e.target.closest(".g-row"); if (row) gTip(row, e); });
+    gRows.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") gHideTip(); });
+    gRows.addEventListener("click", function (e) {
+        var lab = e.target.closest(".g-lab"), row = e.target.closest(".g-row");
+        if (lab) { gHideTip(); openDetail(lab.getAttribute("data-k")); return; }
+        if (!row) return;
+        if (G.touch) { if (row.classList.contains("on")) gHideTip(); else gTip(row, e); }
+        else openDetail(G.cur[Number(row.getAttribute("data-i"))].r.k);
+    });
+    gRows.addEventListener("focusin", function (e) { var row = e.target.closest(".g-row"); if (row && e.target === row && !G.ptr) gTip(row, null); });
+    gRows.addEventListener("focusout", function (e) { if (!gRows.contains(e.relatedTarget)) gHideTip(); });
+    gRows.addEventListener("keydown", function (e) { if (e.key === "Enter" && e.target.classList.contains("g-row")) openDetail(G.cur[Number(e.target.getAttribute("data-i"))].r.k); });
+    $("#g-table").addEventListener("click", rowClick);
+    document.addEventListener("pointerdown", function (e) { if (!e.target.closest("#g-rows")) gHideTip(); });
+    window.addEventListener("resize", debounce(function () { gHideTip(); gFit(); }, 150));
+
     // ---------------- ekspor ----------------
     function exportRows() {
         return view.map(function (r, i) {
@@ -372,8 +598,8 @@
                 "Ubah non pengendali 1 bln (pp)": r.cn1, "Ubah non pengendali 3 bln (pp)": r.cn3,
                 "Asing termasuk pengendali (%)": r.a, "Asing via warkat (%)": r.aw,
                 "Ubah asing total 1 bln (pp)": r.c1, "Ubah asing total 3 bln (pp)": r.c3,
-                "Asing pengendali dikecualikan": (r.pg || []).map(function (x) { return x[0] + " (" + x[2] + "%)"; }).join("; "), "Free float indikatif (%)": r.ff,
-                "Pemegang di atas 1% (%)": r.k1, "Ritel lokal (%)": r.rt, "Tipe asing terbesar (9 tipe KSEI)": t ? TIPE[t[0]] : "",
+                "Asing pengendali dikecualikan": (r.pg || []).map(function (x) { return x[0] + " (" + x[2] + "%)"; }).join("; "), "Free float (%)": r.ff,
+                "Jumlah pemegang di atas 1%": r.n1, "Ritel lokal (%)": r.rt, "Tipe asing terbesar (9 tipe KSEI)": t ? TIPE[t[0]] : "",
                 "Komposisi asing teratas (39 klasifikasi)": (KL(r) || []).slice(0, 3).map(function (x) { return x[0] + " " + x[1] + "%"; }).join("; ")
             };
             Object.keys(TIPE).forEach(function (k) { if (k !== "W") o["Asing " + TIPE[k] + " (%)"] = (r.ab && r.ab[k]) || 0; });
@@ -431,7 +657,10 @@
     document.querySelectorAll(".tab-btn").forEach(function (b) {
         b.addEventListener("click", function () {
             document.querySelectorAll(".tab-btn").forEach(function (x) { x.setAttribute("aria-selected", x === b ? "true" : "false"); });
-            ["screener", "hsc", "metode"].forEach(function (t) { $("#tab-" + t).classList.toggle("hidden", b.getAttribute("data-tab") !== t); });
+            var tab = b.getAttribute("data-tab");
+            ["screener", "grafik", "hsc", "metode"].forEach(function (t) { $("#tab-" + t).classList.toggle("hidden", tab !== t); });
+            try { history.replaceState(null, "", tab === "screener" ? location.pathname + location.search : "#" + tab); } catch (e) { }
+            if (tab === "grafik") renderGrafik();
         });
     });
     function debounce(fn, ms) { var t; return function () { clearTimeout(t); t = setTimeout(fn, ms); }; }
@@ -454,15 +683,15 @@
                 '<td class="py-2 px-3 text-right num">' + pp(x.cn3) + " pp</td>" +
                 '<td class="py-2 px-3 text-right num">' + pct(x.a) + '<div class="text-xs text-gray-500">Rp ' + F0.format(x.rp_a) + " T</div></td></tr>";
         }).join("");
-        $("#agg-note").textContent = "Persen dari market cap, harga dan kepemilikan per " + tgl(META.balancepos) + ". Perubahan dibanding " + bln(META.banding_1) + " dan " + bln(META.banding_3) + ".";
+        $("#agg-note").textContent = "Persen dari market cap; harga dan kepemilikan per " + tgl(META.balancepos) + ".";
     }
     function renderMeta() {
         var m = META;
         var kotak = [
-            ["Kepemilikan per tipe", "KSEI Balancepos", "per " + tgl(m.balancepos), m.sumber.ksei],
+            ["Kepemilikan, harga, market cap", "KSEI Balancepos", "per " + tgl(m.balancepos), m.sumber.ksei],
             ["Pemegang 1% dan klasifikasi", "BEI", (m.satu_persen ? "1% per " + tgl(m.satu_persen) : "1% belum ada") + "; " + (m.klasifikasi ? "klasifikasi per " + tgl(m.klasifikasi) : "klasifikasi belum ada"), m.sumber.bei_kepemilikan],
             ["Daftar HSC", "BEI, " + m.hsc_jumlah + " saham", "pengumuman terakhir " + tgl(m.hsc_terakhir) + ", diambil " + waktu(m.hsc_diambil), m.sumber.bei_hsc],
-            ["Perubahan asing", "dibanding", bln(m.banding_1) + " dan " + bln(m.banding_3), null]
+            ["Perubahan asing", "1 bln dan 3 bln", "vs akhir " + bln(m.banding_1) + " dan akhir " + bln(m.banding_3) + "; tiap bulan ada di detail saham", null]
         ];
         $("#meta").innerHTML = kotak.map(function (x) {
             return '<div><div class="text-xs uppercase tracking-wide text-gray-500">' + x[0] + '</div><div class="font-semibold">' + (x[3] ? '<a class="text-indigo-800 hover:underline" target="_blank" rel="noopener" href="' + esc(x[3]) + '">' + esc(x[1]) + ' <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>' : esc(x[1])) + '</div><div class="text-xs text-gray-500">' + esc(x[2]) + "</div></div>";
@@ -478,6 +707,8 @@
     fetch("screener.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (d) {
         DATA = d; META = d.meta; rows = d.rows;
         renderMeta(); renderAgg(); renderHSC(); apply();
+        var awal = document.querySelector('.tab-btn[data-tab="' + location.hash.slice(1) + '"]');
+        if (awal) awal.click();
     }).catch(function (e) {
         $("#meta").innerHTML = '<div class="text-red-600 col-span-full">Gagal memuat screener.json (' + esc(e.message) + '). Jalankan build_screener.py lalu push, atau buka lewat server lokal (py -m http.server).</div>';
     });

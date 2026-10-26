@@ -205,6 +205,8 @@ def main():
     idx_now = bulan.index(bln_now) if bln_now in bulan else len(bulan) - 1
     bln_1 = bulan[idx_now - 1] if idx_now >= 1 else None
     bln_3 = bulan[idx_now - 3] if idx_now >= 3 else None
+    # tiga bulan sebelum bulan terakhir, untuk tren bulanan di detail saham (contoh: Jun, Jul, Agu)
+    bln_tren = bulan[max(0, idx_now - 3):idx_now]
 
     # ---------------- pemegang di atas 1% ----------------
     bei = kenali_file_bei()
@@ -213,9 +215,7 @@ def main():
     pemegang = baca_1pct(p1_path) if p1_path else {}
     # file 1% bulan pembanding, supaya perubahan asing non pengendali tepat
     pemegang_bln = {}
-    for ym in (bln_1, bln_3):
-        if not ym:
-            continue
+    for ym in bln_tren:
         cocok = [p for t, p in bei["1pct"] if t[:6] == ym.replace("-", "")]
         pemegang_bln[ym] = baca_1pct(cocok[-1]) if cocok else None
     # ---------------- klasifikasi 39 tipe (opsional) ----------------
@@ -252,16 +252,17 @@ def main():
         g = pemegang.get(kode)
         f_scrip = l_scrip = 0.0
         holders_f = []
-        konsentrasi1 = ff5 = None
+        n1 = ff = None
         nama = None
         pa = pecah_asing(g)
         if g is not None:
             f_scrip = pa["scrip"]
             l_scrip = g.loc[g["LOCAL_FOREIGN"] != "F", "HOLDINGS_SCRIP"].sum()
             nama = str(g["ISSUER_NAME"].iloc[0])
-            per_inv = g.groupby("INVESTOR_NAME")["PERCENTAGE"].sum()
-            konsentrasi1 = round(float(per_inv.sum()), 2)
-            ff5 = round(max(0.0, 100 - float(per_inv[per_inv >= 5].sum())), 2)
+            # sama dengan dashboard KSEI Ownership: free float = 100 dikurangi jumlah persentase
+            # SEMUA baris pemegang di atas 1% (warkat dan tanpa warkat); n1 = jumlah baris pemegang
+            n1 = int(len(g))
+            ff = round(max(0.0, 100 - sum(int(round(x * 100)) for x in g["PERCENTAGE"]) / 100), 2)
             gf = g[g["LOCAL_FOREIGN"] == "F"].sort_values("PERCENTAGE", ascending=False)
             holders_f = [[str(x.INVESTOR_NAME), str(x.INVESTOR_CLASSIFICATION) if pd.notna(x.INVESTOR_CLASSIFICATION) else "",
                           str(x.NATIONALITY) if pd.notna(x.NATIONALITY) and str(x.NATIONALITY) != "nan" else (str(x.DOMICILE) if pd.notna(x.DOMICILE) else ""),
@@ -275,21 +276,28 @@ def main():
         sk = sektor.get(kode)
         nama = nama or (sk.nama if sk is not None and isinstance(sk.nama, str) else kode)
 
-        def chg(ym, hanya_non_ctrl):
-            """Perubahan porsi asing (poin persen dari total saham) dibanding bulan ym."""
-            if not ym:
-                return None
-            v = asing_bulan(kode, ym)
+        a_now, an_now = round(asing / sec * 100, 2), round(non_ctrl / sec * 100, 2)
+
+        def posisi(ym):
+            """Porsi asing akhir bulan ym (termasuk dan non pengendali), persen dari total saham
+            saat ini, supaya selisihnya murni perubahan jumlah saham asing."""
+            v = asing_bulan(kode, ym) if ym else None
             if v is None:
                 return None
             bln_pem = pemegang_bln.get(ym)
             pm = pecah_asing(bln_pem.get(kode)) if bln_pem is not None else pa
-            dulu = v + pm["scrip"]
-            sekarang = asing
-            if hanya_non_ctrl:
-                dulu = max(0.0, v - pm["ctrl_sl"]) + max(0.0, pm["scrip"] - pm["ctrl_sc"])
-                sekarang = non_ctrl
-            return round((sekarang - dulu) / sec * 100, 2)
+            a_ = v + pm["scrip"]
+            an_ = max(0.0, v - pm["ctrl_sl"]) + max(0.0, pm["scrip"] - pm["ctrl_sc"])
+            return round(a_ / sec * 100, 2), round(an_ / sec * 100, 2)
+
+        tren = {ym: posisi(ym) for ym in bln_tren}
+
+        def chg(ym, hanya_non_ctrl):
+            """Perubahan porsi asing (poin persen dari total saham) dibanding akhir bulan ym."""
+            x = tren.get(ym) if ym in tren else posisi(ym)
+            if x is None:
+                return None
+            return round((an_now - x[1]) if hanya_non_ctrl else (a_now - x[0]), 2)
 
         h = hsc_aktif.get(kode)
         row = {
@@ -297,14 +305,17 @@ def main():
             "s": (sk.sektor if sk is not None and isinstance(sk.sektor, str) else ""),
             "i": (sk.industri if sk is not None and isinstance(sk.industri, str) else ""),
             "p": r["Price"], "mc": round(sec * r["Price"] / 1e12, 3),
-            "a": round(asing / sec * 100, 2),
+            "a": a_now,
             "aw": round(f_scrip / sec * 100, 2),
             "ab": {t: round(v / sec * 100, 3) for t, v in f_sl.items() if v > 0},
             "rt": round(l_sl["ID"] / sec * 100, 2),
-            "an": round(non_ctrl / sec * 100, 2),
+            # total tanpa warkat (Balancepos), untuk grafik versi KSEI
+            "fsl": round(f_sl_tot / sec * 100, 3), "lsl": round(sum(l_sl.values()) / sec * 100, 3),
+            "an": an_now,
             "c1": chg(bln_1, False), "c3": chg(bln_3, False),
             "cn1": chg(bln_1, True), "cn3": chg(bln_3, True),
-            "ff": ff5, "k1": konsentrasi1,
+            "ff": ff, "n1": n1,
+            "tr": [[ym] + list(x) for ym, x in tren.items() if x is not None] + [[bln_now, a_now, an_now]],
             "cv": round(min(tercatat / sec, 9.99), 3),
             "hf": holders_f,
         }
@@ -338,7 +349,7 @@ def main():
         "klasifikasi": iso(kl_tgl) if kl_path else None,
         "hsc_terakhir": hsc["pengumuman_terakhir"], "hsc_diambil": hsc["diambil"],
         "hsc_jumlah": hsc["jumlah_aktif"],
-        "banding_1": bln_1, "banding_3": bln_3,
+        "banding_1": bln_1, "banding_3": bln_3, "bulan_tren": bln_tren + [bln_now],
         "dilewati_harga_nol": len(dilewati),
         "hsc_keluar": hsc["keluar"],
         "sumber": {
