@@ -58,6 +58,20 @@
 
     <!-- TAB SCREENER -->
     <section id="tab-screener" class="space-y-4">
+        <div class="card p-4" aria-label="Porsi asing di pasar">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+                <h2 class="text-lg font-semibold text-indigo-900"><i class="fa-solid fa-globe text-indigo-500 mr-2"></i>Porsi asing di pasar saham Indonesia</h2>
+                <span class="text-xs text-gray-500" id="agg-note"></span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <thead class="text-xs uppercase tracking-wide text-gray-500">
+                        <tr><th class="text-left py-1 pr-4"></th><th class="text-right py-1 px-3">Asing non pengendali</th><th class="text-right py-1 px-3">Ubah 1 bln</th><th class="text-right py-1 px-3">Ubah 3 bln</th><th class="text-right py-1 px-3">Asing termasuk pengendali</th></tr>
+                    </thead>
+                    <tbody id="agg-body"></tbody>
+                </table>
+            </div>
+        </div>
         <div class="card p-4 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <h2 class="text-lg font-semibold text-indigo-900"><i class="fa-solid fa-sliders text-indigo-500 mr-2"></i>Filter</h2>
@@ -66,7 +80,7 @@
                     <button id="preset-short" class="px-3 py-1.5 text-sm rounded-md bg-indigo-600 text-white hover:bg-indigo-700 font-medium">Shortlist awal</button>
                 </div>
             </div>
-            <div class="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+            <div class="grid gap-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
                 <label class="text-xs font-medium text-gray-600 col-span-2 md:col-span-1">Cari kode atau nama
                     <input id="f-q" type="text" placeholder="contoh: BBCA" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm">
                 </label>
@@ -85,9 +99,13 @@
                 <label class="text-xs font-medium text-gray-600">Sektor
                     <select id="f-sek" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white"><option value="">Semua sektor</option></select>
                 </label>
+                <label class="text-xs font-medium text-gray-600" title="Klasifikasi investor asing dengan porsi terbesar menurut file klasifikasi BEI">Asing didominasi
+                    <select id="f-dom" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white"><option value="">Semua tipe</option></select>
+                </label>
             </div>
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
                 <label class="inline-flex items-center gap-2"><input id="f-nohsc" type="checkbox" checked class="w-4 h-4 accent-indigo-600"> Sembunyikan saham HSC</label>
+                <label class="inline-flex items-center gap-2" title="Hitung hanya investor asing portofolio; pemegang asing pengendali atau strategis seperti Jardine di ASII dikecualikan"><input id="f-ex" type="checkbox" checked class="w-4 h-4 accent-indigo-600"> Kecualikan asing pengendali</label>
                 <button id="f-reset" class="text-indigo-700 hover:underline text-sm">Hapus semua filter</button>
             </div>
         </div>
@@ -108,11 +126,11 @@
                             <th class="px-3 py-2 text-left sortable" data-k="k">Kode</th>
                             <th class="px-3 py-2 text-left sortable hidden md:table-cell" data-k="n">Emiten</th>
                             <th class="px-3 py-2 text-right sortable" data-k="mc">Mcap (Rp T)</th>
-                            <th class="px-3 py-2 text-right sortable" data-k="a">Asing</th>
+                            <th class="px-3 py-2 text-right sortable" data-k="a"><span id="h-a">Asing</span></th>
                             <th class="px-3 py-2 text-right sortable hidden sm:table-cell" data-k="c1" title="Perubahan porsi asing, poin persen dari total saham">Ubah 1 bln</th>
                             <th class="px-3 py-2 text-right sortable hidden lg:table-cell" data-k="c3" title="Perubahan porsi asing, poin persen dari total saham">Ubah 3 bln</th>
                             <th class="px-3 py-2 text-right sortable" data-k="ff">Free float</th>
-                            <th class="px-3 py-2 text-left hidden lg:table-cell">Asing terbesar</th>
+                            <th class="px-3 py-2 text-left hidden lg:table-cell" title="Klasifikasi investor asing terbesar, persen dari saham asing">Asing didominasi</th>
                         </tr>
                     </thead>
                     <tbody id="tbody"></tbody>
@@ -158,10 +176,13 @@
             <h2 class="text-lg font-semibold text-indigo-900">Cara angka dihitung</h2>
             <div><h3 class="font-semibold">Kepemilikan asing</h3>
                 <p>Porsi asing = (saham asing tanpa warkat menurut Balancepos KSEI + saham warkat milik pemegang asing di atas 1%) dibagi total saham beredar (Sec. Num). Saham warkat perlu ditambahkan karena Balancepos hanya mencatat saham tanpa warkat, padahal pemegang pengendali sering memegang warkat. Contoh: Jardine Cycle &amp; Carriage memegang 50,11% ASII dalam bentuk warkat.</p></div>
+            <div><h3 class="font-semibold">Asing non pengendali</h3>
+                <p>Tujuan Screener ini mengukur porsi investor asing portofolio, jenis investor yang mengikuti indeks seperti MSCI. Karena itu pemegang asing pengendali atau strategis dikecualikan bila opsi Kecualikan asing pengendali aktif. Dari file pemegang di atas 1%, pemegang asing dianggap pengendali kalau: (1) porsinya minimal 10%, apa pun klasifikasinya, misalnya Jardine di ASII atau MUFG di BDMN; (2) klasifikasinya bukan investor portofolio (Corporate, Private Equity, Venture Capital, Firm, Partnership, BUMN, Government, dan sejenisnya), misalnya Toyota 4,74% di ASII; atau (3) individu dengan porsi minimal 5%. Rekening kustodian atau broker global (Morgan Stanley, HSBC, Citibank, BNY Mellon, dan sejenisnya) tetap dihitung sebagai portofolio selama porsinya di bawah 10%, karena menyimpan saham milik banyak investor. Daftar pemegang yang dikecualikan ada di detail setiap saham.</p>
+                <p class="mt-1">Perubahan 1 dan 3 bulan versi non pengendali memakai file pemegang 1% bulan pembanding, sehingga keluar masuknya pemegang strategis (contoh: VICI pada September) tidak terbaca sebagai arus investor portofolio.</p></div>
             <div><h3 class="font-semibold">Asing versi KSEI</h3>
                 <p>Status lokal atau asing mengikuti status rekening efek, bukan pemilik akhir. Anak usaha lokal milik grup asing tercatat lokal. Contoh: HMSP hanya 0,83% asing karena 92,44% dipegang Philip Morris Indonesia yang tercatat lokal.</p></div>
             <div><h3 class="font-semibold">Breakdown tipe asing</h3>
-                <p>Sembilan tipe dari Balancepos: Asuransi (IS), Korporat (CP), Dana Pensiun (PF), Bank dan Lembaga Keuangan (IB), Individu (ID), Reksadana (MF), Sekuritas (SC), Yayasan (FD), Lainnya (OT), ditambah kelompok Warkat. Bila file klasifikasi BEI tersedia, komposisi asing juga dirinci ke 39 klasifikasi (Investment Manager, Pension Funds, Sovereign Wealth Fund, Hedge Fund, dan lainnya), dihitung dari saham asing tanpa warkat.</p></div>
+                <p>Sembilan tipe dari Balancepos: Asuransi (IS), Korporat (CP), Dana Pensiun (PF), Bank dan Lembaga Keuangan (IB), Individu (ID), Reksadana (MF), Sekuritas (SC), Yayasan (FD), Lainnya (OT), ditambah kelompok Warkat. Bila file klasifikasi BEI tersedia, komposisi asing juga dirinci ke 39 klasifikasi (Investment Manager, Pension Funds, Sovereign Wealth Fund, Hedge Fund, dan lainnya), dihitung dari saham asing tanpa warkat. Kolom dan filter Asing didominasi memakai klasifikasi dengan porsi terbesar.</p></div>
             <div><h3 class="font-semibold">Free float indikatif</h3>
                 <p>100% dikurangi total pemegang di atas 5% menurut file pemegang 1%. Ini perkiraan, bukan free float versi regulasi yang juga mengeluarkan pihak terafiliasi dan direksi. Rekening kustodian yang mewakili banyak investor (misalnya bank penyimpan ADR) ikut terhitung di atas 5% bila porsinya besar.</p></div>
             <div><h3 class="font-semibold">Perubahan 1 dan 3 bulan</h3>
@@ -194,6 +215,10 @@
     var PAGE = 100;
     var DATA = null, META = null, rows = [], view = [], shown = PAGE;
     var sortKey = "a", sortDir = 1, hscSortKey = "hp", hscSortDir = -1;
+    var PETA_EX = { a: "an", c1: "cn1", c3: "cn3" };
+    function EX() { return $("#f-ex").checked; }
+    function F(r, k) { return r[EX() && PETA_EX[k] ? PETA_EX[k] : k]; }
+    function KL(r) { return EX() && r.kln ? r.kln : r.kl; }
 
     function $(s) { return document.querySelector(s); }
     function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -218,19 +243,20 @@
     function apply() {
         var q = $("#f-q").value.trim().toUpperCase();
         var amin = num("#f-amin"), amax = num("#f-amax"), mc = num("#f-mc"), ff = num("#f-ff");
-        var s = $("#f-sek").value, nohsc = $("#f-nohsc").checked;
+        var s = $("#f-sek").value, dom = $("#f-dom").value, nohsc = $("#f-nohsc").checked;
         view = rows.filter(function (r) {
             if (nohsc && r.h) return false;
             if (q && r.k.indexOf(q) < 0 && r.n.toUpperCase().indexOf(q) < 0) return false;
-            if (amin != null && r.a < amin) return false;
-            if (amax != null && r.a > amax) return false;
+            if (amin != null && F(r, "a") < amin) return false;
+            if (amax != null && F(r, "a") > amax) return false;
             if (mc != null && r.mc < mc) return false;
             if (ff != null && (r.ff == null || r.ff < ff)) return false;
             if (s && r.s !== s) return false;
+            if (dom && !(KL(r) && KL(r)[0] && KL(r)[0][0] === dom)) return false;
             return true;
         });
         view.sort(function (x, y) {
-            var a = x[sortKey], b = y[sortKey];
+            var a = F(x, sortKey), b = F(y, sortKey);
             if (a == null && b == null) return 0;
             if (a == null) return 1;
             if (b == null) return -1;
@@ -245,22 +271,28 @@
         var tb = $("#tbody");
         var html = view.slice(0, shown).map(function (r, i) {
             var t = topTipe(r);
+            var kl = KL(r);
+            var domHtml = kl && kl.length ? esc(kl[0][0]) + ' <span class="text-gray-400 num">' + F0.format(kl[0][1]) + "% asing</span>"
+                : (t ? esc(TIPE[t[0]]) + ' <span class="text-gray-400 num">' + F2.format(t[1]) + "%</span>" : '<span class="text-gray-400">-</span>');
             return '<tr class="row border-t border-gray-100" data-k="' + esc(r.k) + '" tabindex="0">' +
                 '<td class="px-3 py-2 text-right text-gray-400 num">' + (i + 1) + "</td>" +
                 '<td class="px-3 py-2 font-bold text-indigo-900">' + esc(r.k) + (r.h ? ' <span class="ml-1 text-[10px] font-bold bg-red-100 text-red-700 px-1.5 py-0.5 rounded">HSC</span>' : "") + "</td>" +
                 '<td class="px-3 py-2 hidden md:table-cell"><div class="truncate max-w-[260px]">' + esc(r.n) + '</div><div class="text-xs text-gray-400">' + esc(sek(r.s)) + "</div></td>" +
                 '<td class="px-3 py-2 text-right num">' + mcap(r.mc) + "</td>" +
-                '<td class="px-3 py-2 text-right num font-semibold">' + pct(r.a) + "</td>" +
-                '<td class="px-3 py-2 text-right num hidden sm:table-cell">' + pp(r.c1) + "</td>" +
-                '<td class="px-3 py-2 text-right num hidden lg:table-cell">' + pp(r.c3) + "</td>" +
+                '<td class="px-3 py-2 text-right num font-semibold">' + pct(F(r, "a")) + (EX() && r.pg ? ' <i class="fa-solid fa-user-tie text-[10px] text-amber-600" title="Ada asing pengendali yang dikecualikan"></i>' : "") + "</td>" +
+                '<td class="px-3 py-2 text-right num hidden sm:table-cell">' + pp(F(r, "c1")) + "</td>" +
+                '<td class="px-3 py-2 text-right num hidden lg:table-cell">' + pp(F(r, "c3")) + "</td>" +
                 '<td class="px-3 py-2 text-right num">' + (r.ff == null ? '<span class="text-gray-400">-</span>' : pct(r.ff, 1)) + "</td>" +
-                '<td class="px-3 py-2 hidden lg:table-cell text-xs">' + (t ? esc(TIPE[t[0]]) + ' <span class="text-gray-400 num">' + F2.format(t[1]) + "%</span>" : '<span class="text-gray-400">-</span>') + "</td></tr>";
+                '<td class="px-3 py-2 hidden lg:table-cell text-xs">' + domHtml + "</td></tr>";
         }).join("");
         tb.innerHTML = html || '<tr><td colspan="9" class="px-4 py-8 text-center text-gray-500">Tidak ada saham yang cocok. Longgarkan filter atau klik Hapus semua filter.</td></tr>';
         $("#more").classList.toggle("hidden", view.length <= shown);
         var nohsc = $("#f-nohsc").checked;
+        var mc = 0, an = 0, at = 0;
+        view.forEach(function (r) { mc += r.mc; an += r.an / 100 * r.mc; at += r.a / 100 * r.mc; });
+        $("#h-a").textContent = EX() ? "Asing non pengendali" : "Asing";
         $("#summary").innerHTML = '<b class="num">' + F0.format(view.length) + "</b> saham cocok dari " + F0.format(rows.length) + (nohsc ? " (saham HSC disembunyikan)" : "") +
-            '. Urut: <b>' + esc(labelSort()) + "</b>.";
+            '. Urut: <b>' + esc(labelSort()) + "</b>." + (view.length ? '<div class="text-xs text-gray-600 mt-1">Di saham yang tampil, asing non pengendali memegang <b class="num">Rp ' + F0.format(an) + " T</b> atau <b class=\"num\">" + pct(mc ? an / mc * 100 : 0) + "</b> dari market cap Rp " + F0.format(mc) + " T (termasuk pengendali: " + pct(mc ? at / mc * 100 : 0) + ").</div>" : "");
         document.querySelectorAll("th.sortable[data-k]").forEach(function (th) {
             var on = th.getAttribute("data-k") === sortKey;
             th.setAttribute("aria-sort", on ? (sortDir === 1 ? "ascending" : "descending") : "none");
@@ -269,7 +301,7 @@
         });
     }
     function labelSort() {
-        var m = { k: "kode", n: "nama", mc: "market cap", a: "porsi asing", c1: "perubahan 1 bulan", c3: "perubahan 3 bulan", ff: "free float" };
+        var m = { k: "kode", n: "nama", mc: "market cap", a: EX() ? "porsi asing non pengendali" : "porsi asing", c1: "perubahan 1 bulan", c3: "perubahan 3 bulan", ff: "free float" };
         var dir = sortKey === "a" ? (sortDir === 1 ? "terendah" : "tertinggi") : (sortDir === 1 ? "naik" : "turun");
         return m[sortKey] + " " + dir;
     }
@@ -282,28 +314,31 @@
         var parts = [];
         if (r.h) parts.push('<div class="bg-red-50 border border-red-200 rounded p-3 text-red-800"><b>Saham HSC.</b> Sejumlah tertentu pemegang saham menguasai ' + pct(r.h.p) + ' per ' + tgl(r.h.pos) + '. Masuk daftar ' + tgl(r.h.sj) + '. <a class="underline" target="_blank" rel="noopener" href="' + esc(r.h.u) + '">PDF BEI</a></div>');
         parts.push('<div class="grid grid-cols-2 gap-3">' + [
-            ["Porsi asing", pct(r.a)], ["Asing via warkat", pct(r.aw)],
+            ["Asing non pengendali", pct(r.an)], ["Asing termasuk pengendali", pct(r.a)],
+            ["Asing via warkat", pct(r.aw)], ["Ubah non pengendali 1 bln", pp(r.cn1) + " pp"],
             ["Free float indikatif", r.ff == null ? "-" : pct(r.ff, 1)], ["Pemegang di atas 1%", r.k1 == null ? "-" : pct(r.k1, 1)],
             ["Market cap", "Rp " + mcap(r.mc) + " T"], ["Harga", "Rp " + F0.format(r.p)],
             ["Ubah asing 1 bln", pp(r.c1) + " pp"], ["Ubah asing 3 bln", pp(r.c3) + " pp"],
             ["Ritel lokal", pct(r.rt)], ["Data tercatat", F1.format(r.cv * 100) + "% saham"]
         ].map(function (x) { return '<div class="bg-gray-50 rounded p-2"><div class="text-xs text-gray-500">' + x[0] + '</div><div class="font-semibold num">' + x[1] + "</div></div>"; }).join("") + "</div>");
+        if (r.pg && r.pg.length) parts.push('<div class="bg-amber-50 border border-amber-200 rounded p-3 text-amber-900"><b>Asing pengendali yang dikecualikan:</b><ul class="mt-1 space-y-0.5">' + r.pg.map(function (x) { return "<li>" + esc(x[0]) + ' <span class="text-amber-700">(' + esc(x[1] || "tanpa klasifikasi") + ", " + F2.format(x[2]) + "%)</span></li>"; }).join("") + "</ul></div>");
         if (r.cv < 0.98 || r.cv > 1.02) parts.push('<p class="text-xs text-amber-700">Total saham tercatat ' + F1.format(r.cv * 100) + '% dari saham beredar. Bisa karena ada warkat di bawah 1% atau beda tanggal file 1% dengan Balancepos.</p>');
         var items = Object.keys(r.ab || {}).map(function (t) { return [t, r.ab[t]]; });
         if (r.aw > 0) items.push(["W", r.aw]);
         items.sort(function (x, y) { return y[1] - x[1]; });
         var mx = items.length ? items[0][1] : 1;
-        parts.push('<div><h3 class="font-semibold text-indigo-900 mb-2">Breakdown asing (% dari total saham)</h3>' + (items.length ? items.map(function (x) {
+        parts.push('<div><h3 class="font-semibold text-indigo-900 mb-2">Breakdown seluruh asing, termasuk pengendali (% dari total saham)</h3>' + (items.length ? items.map(function (x) {
             return '<div class="mb-1.5"><div class="flex justify-between text-xs"><span>' + esc(TIPE[x[0]]) + '</span><span class="num">' + F2.format(x[1]) + '%</span></div><div class="bg-gray-100 rounded"><div class="bar" style="width:' + Math.max(1, x[1] / mx * 100).toFixed(1) + '%"></div></div></div>';
         }).join("") : '<p class="text-gray-500">Tidak ada kepemilikan asing tercatat.</p>') + "</div>");
-        if (r.kl && r.kl.length) {
-            parts.push('<div><h3 class="font-semibold text-indigo-900 mb-1">Komposisi asing per klasifikasi</h3><p class="text-xs text-gray-500 mb-2">Persen dari total saham asing tanpa warkat, file BEI per ' + tgl(META.klasifikasi) + '.</p><table class="w-full text-xs">' +
-                r.kl.map(function (x) { return '<tr class="border-t"><td class="py-1">' + esc(x[0]) + '</td><td class="py-1 text-right num">' + F1.format(x[1]) + "%</td></tr>"; }).join("") + "</table></div>");
+        var klr = KL(r);
+        if (klr && klr.length) {
+            parts.push('<div><h3 class="font-semibold text-indigo-900 mb-1">Komposisi asing per klasifikasi</h3><p class="text-xs text-gray-500 mb-2">Persen dari total saham asing tanpa warkat' + (EX() && r.kln ? ", setelah mengeluarkan pengendali" : "") + ', file BEI per ' + tgl(META.klasifikasi) + '.</p><table class="w-full text-xs">' +
+                klr.map(function (x) { return '<tr class="border-t"><td class="py-1">' + esc(x[0]) + '</td><td class="py-1 text-right num">' + F1.format(x[1]) + "%</td></tr>"; }).join("") + "</table></div>");
         } else if (!META.klasifikasi) {
             parts.push('<p class="text-xs text-gray-500">Rincian 39 klasifikasi (Investment Manager, Pension Funds, dan lainnya) muncul setelah file klasifikasi BEI masuk lewat update berikutnya.</p>');
         }
         parts.push('<div><h3 class="font-semibold text-indigo-900 mb-1">Investor asing di atas 1%</h3><p class="text-xs text-gray-500 mb-2">File BEI per ' + tgl(META.satu_persen) + '.</p>' + (r.hf.length ? '<table class="w-full text-xs"><thead class="text-gray-500"><tr><th class="text-left py-1">Investor</th><th class="text-left py-1">Klasifikasi</th><th class="text-right py-1">%</th></tr></thead><tbody>' +
-            r.hf.map(function (x) { return '<tr class="border-t align-top"><td class="py-1 pr-2">' + esc(x[0]) + (x[2] ? '<div class="text-gray-400">' + esc(x[2]) + "</div>" : "") + (x[4] ? '<span class="text-[10px] bg-amber-100 text-amber-800 px-1 rounded">warkat</span>' : "") + '</td><td class="py-1 pr-2">' + esc(x[1]) + '</td><td class="py-1 text-right num">' + F2.format(x[3]) + "</td></tr>"; }).join("") + "</tbody></table>" : '<p class="text-gray-500">Tidak ada investor asing di atas 1%.</p>') + "</div>");
+            r.hf.map(function (x) { return '<tr class="border-t align-top"><td class="py-1 pr-2">' + esc(x[0]) + (x[2] ? '<div class="text-gray-400">' + esc(x[2]) + "</div>" : "") + (x[4] ? '<span class="text-[10px] bg-amber-100 text-amber-800 px-1 rounded mr-1">warkat</span>' : "") + (x[5] ? '<span class="text-[10px] bg-red-100 text-red-700 px-1 rounded">pengendali</span>' : "") + '</td><td class="py-1 pr-2">' + esc(x[1]) + '</td><td class="py-1 text-right num">' + F2.format(x[3]) + "</td></tr>"; }).join("") + "</tbody></table>" : '<p class="text-gray-500">Tidak ada investor asing di atas 1%.</p>') + "</div>");
         parts.push('<div class="flex flex-wrap gap-2 pt-2 border-t">' +
             '<a class="px-3 py-1.5 rounded-md bg-indigo-600 text-white text-xs font-medium" href="index.html?kode=' + encodeURIComponent(r.k) + '"><i class="fa-solid fa-chart-pie mr-1"></i>Tren di Peta Institusi</a>' +
             '<a class="px-3 py-1.5 rounded-md border text-xs font-medium" target="_blank" rel="noopener" href="' + esc(META.sumber.ksei) + '">Sumber KSEI</a>' +
@@ -333,9 +368,13 @@
         return view.map(function (r, i) {
             var t = topTipe(r), o = {
                 "Peringkat": i + 1, "Kode": r.k, "Emiten": r.n, "Sektor": sek(r.s), "HSC": r.h ? "Ya" : "Tidak",
-                "Market cap (Rp T)": r.mc, "Harga (Rp)": r.p, "Porsi asing (%)": r.a, "Asing via warkat (%)": r.aw,
-                "Ubah asing 1 bln (pp)": r.c1, "Ubah asing 3 bln (pp)": r.c3, "Free float indikatif (%)": r.ff,
-                "Pemegang di atas 1% (%)": r.k1, "Ritel lokal (%)": r.rt, "Tipe asing terbesar": t ? TIPE[t[0]] : ""
+                "Market cap (Rp T)": r.mc, "Harga (Rp)": r.p, "Asing non pengendali (%)": r.an,
+                "Ubah non pengendali 1 bln (pp)": r.cn1, "Ubah non pengendali 3 bln (pp)": r.cn3,
+                "Asing termasuk pengendali (%)": r.a, "Asing via warkat (%)": r.aw,
+                "Ubah asing total 1 bln (pp)": r.c1, "Ubah asing total 3 bln (pp)": r.c3,
+                "Asing pengendali dikecualikan": (r.pg || []).map(function (x) { return x[0] + " (" + x[2] + "%)"; }).join("; "), "Free float indikatif (%)": r.ff,
+                "Pemegang di atas 1% (%)": r.k1, "Ritel lokal (%)": r.rt, "Tipe asing terbesar (9 tipe KSEI)": t ? TIPE[t[0]] : "",
+                "Komposisi asing teratas (39 klasifikasi)": (KL(r) || []).slice(0, 3).map(function (x) { return x[0] + " " + x[1] + "%"; }).join("; ")
             };
             Object.keys(TIPE).forEach(function (k) { if (k !== "W") o["Asing " + TIPE[k] + " (%)"] = (r.ab && r.ab[k]) || 0; });
             o["Investor asing di atas 1%"] = r.hf.map(function (x) { return x[0] + " (" + x[1] + ", " + x[3] + "%)"; }).join("; ");
@@ -369,8 +408,9 @@
 
     // ---------------- event ----------------
     ["#f-q", "#f-amin", "#f-amax", "#f-mc", "#f-ff"].forEach(function (id) { $(id).addEventListener("input", debounce(apply, 200)); });
-    ["#f-sek", "#f-nohsc"].forEach(function (id) { $(id).addEventListener("change", apply); });
-    function setFilter(o) { $("#f-q").value = ""; $("#f-amin").value = o.amin || ""; $("#f-amax").value = o.amax || ""; $("#f-mc").value = o.mc || ""; $("#f-ff").value = o.ff || ""; $("#f-sek").value = ""; $("#f-nohsc").checked = true; sortKey = "a"; sortDir = 1; apply(); }
+    ["#f-sek", "#f-dom", "#f-nohsc"].forEach(function (id) { $(id).addEventListener("change", apply); });
+    $("#f-ex").addEventListener("change", function () { buildDom(); apply(); });
+    function setFilter(o) { $("#f-q").value = ""; $("#f-amin").value = o.amin || ""; $("#f-amax").value = o.amax || ""; $("#f-mc").value = o.mc || ""; $("#f-ff").value = o.ff || ""; $("#f-sek").value = ""; $("#f-dom").value = ""; $("#f-nohsc").checked = true; sortKey = "a"; sortDir = 1; apply(); }
     $("#preset-all").addEventListener("click", function () { setFilter({}); });
     $("#preset-short").addEventListener("click", function () { setFilter({ amax: 5, mc: 5, ff: 15 }); });
     $("#f-reset").addEventListener("click", function () { setFilter({}); $("#f-nohsc").checked = false; apply(); });
@@ -397,11 +437,30 @@
     function debounce(fn, ms) { var t; return function () { clearTimeout(t); t = setTimeout(fn, ms); }; }
 
     // ---------------- muat data ----------------
+    function buildDom() {
+        var cur = $("#f-dom").value, dm = {};
+        rows.forEach(function (r) { var k = KL(r); if (k && k[0]) dm[k[0][0]] = (dm[k[0][0]] || 0) + 1; });
+        $("#f-dom").innerHTML = '<option value="">Semua tipe</option>' + Object.keys(dm).sort(function (a, b) { return dm[b] - dm[a]; }).map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + " (" + dm[k] + ")</option>"; }).join("");
+        if (dm[cur]) $("#f-dom").value = cur;
+    }
+    function renderAgg() {
+        var g = META.agregat; if (!g) return;
+        var baris = [["Semua saham aktif", g.semua], ["Saham non HSC", g.non_hsc]];
+        $("#agg-body").innerHTML = baris.map(function (b) {
+            var x = b[1];
+            return '<tr class="border-t"><td class="py-2 pr-4 font-medium">' + b[0] + ' <span class="text-xs text-gray-400 num">(' + F0.format(x.n) + " saham, Rp " + F0.format(x.mc) + ' T)</span></td>' +
+                '<td class="py-2 px-3 text-right num"><b class="text-indigo-900 text-base">' + pct(x.an) + '</b><div class="text-xs text-gray-500">Rp ' + F0.format(x.rp_an) + " T</div></td>" +
+                '<td class="py-2 px-3 text-right num">' + pp(x.cn1) + " pp</td>" +
+                '<td class="py-2 px-3 text-right num">' + pp(x.cn3) + " pp</td>" +
+                '<td class="py-2 px-3 text-right num">' + pct(x.a) + '<div class="text-xs text-gray-500">Rp ' + F0.format(x.rp_a) + " T</div></td></tr>";
+        }).join("");
+        $("#agg-note").textContent = "Persen dari market cap, harga dan kepemilikan per " + tgl(META.balancepos) + ". Perubahan dibanding " + bln(META.banding_1) + " dan " + bln(META.banding_3) + ".";
+    }
     function renderMeta() {
         var m = META;
         var kotak = [
             ["Kepemilikan per tipe", "KSEI Balancepos", "per " + tgl(m.balancepos), m.sumber.ksei],
-            ["Pemegang di atas 1%", "BEI", m.satu_persen ? "per " + tgl(m.satu_persen) : "belum ada", m.sumber.bei_kepemilikan],
+            ["Pemegang 1% dan klasifikasi", "BEI", (m.satu_persen ? "1% per " + tgl(m.satu_persen) : "1% belum ada") + "; " + (m.klasifikasi ? "klasifikasi per " + tgl(m.klasifikasi) : "klasifikasi belum ada"), m.sumber.bei_kepemilikan],
             ["Daftar HSC", "BEI, " + m.hsc_jumlah + " saham", "pengumuman terakhir " + tgl(m.hsc_terakhir) + ", diambil " + waktu(m.hsc_diambil), m.sumber.bei_hsc],
             ["Perubahan asing", "dibanding", bln(m.banding_1) + " dan " + bln(m.banding_3), null]
         ];
@@ -413,10 +472,12 @@
         if (warn.length) { $("#meta-warn").textContent = warn.join(" "); $("#meta-warn").classList.remove("hidden"); }
         var s = {}; rows.forEach(function (r) { if (r.s) s[r.s] = 1; });
         Object.keys(s).sort(function (a, b) { return sek(a).localeCompare(sek(b)); }).forEach(function (k) { $("#f-sek").insertAdjacentHTML("beforeend", '<option value="' + esc(k) + '">' + esc(sek(k)) + "</option>"); });
+        buildDom();
+        if (!m.klasifikasi) $("#f-dom").disabled = true;
     }
     fetch("screener.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (d) {
         DATA = d; META = d.meta; rows = d.rows;
-        renderMeta(); renderHSC(); apply();
+        renderMeta(); renderAgg(); renderHSC(); apply();
     }).catch(function (e) {
         $("#meta").innerHTML = '<div class="text-red-600 col-span-full">Gagal memuat screener.json (' + esc(e.message) + '). Jalankan build_screener.py lalu push, atau buka lewat server lokal (py -m http.server).</div>';
     });
