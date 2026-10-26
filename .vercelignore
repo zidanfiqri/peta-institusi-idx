@@ -1,0 +1,10 @@
+# File untuk proses update data. Tidak dibutuhkan situs, jadi tidak ikut dideploy ke Vercel.
+*.py
+*.bat
+*.ps1
+requirements.txt
+*.xlsx
+Balancepos*.txt
+data_src/
+sektor.csv
+README.md
