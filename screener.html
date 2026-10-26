@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screener Kepemilikan Asing IDX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f3f4f6; }
+        .card { background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .num { font-variant-numeric: tabular-nums; }
+        th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+        th.sortable:hover { color: #4338ca; }
+        tbody tr.row:hover { background: #eef2ff; cursor: pointer; }
+        .tab-btn[aria-selected="true"] { background: #312e81; color: #fff; }
+        #drawer { transition: transform .2s ease; }
+        #drawer.closed { transform: translateX(100%); }
+        @media (prefers-reduced-motion: reduce) { #drawer { transition: none; } }
+        .bar { height: 8px; border-radius: 4px; background: #6366f1; }
+        input[type=number] { -moz-appearance: textfield; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<nav class="bg-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 py-3 min-h-16">
+            <div class="flex items-center">
+                <i class="fa-solid fa-filter-circle-dollar text-2xl mr-3 text-indigo-400"></i>
+                <span class="font-bold text-xl tracking-tight">Screener Kepemilikan Asing</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <a href="index.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-chart-pie mr-2"></i>Peta Institusi</a>
+                <a href="smart_money_tracker.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-satellite-dish mr-2"></i>Smart Tracker</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
+
+    <!-- Posisi data -->
+    <section class="card p-4" aria-label="Posisi data">
+        <div id="meta" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+            <div class="text-gray-500">Memuat data...</div>
+        </div>
+        <div id="meta-warn" class="hidden mt-3 text-xs bg-amber-50 text-amber-800 border border-amber-200 rounded px-3 py-2"></div>
+    </section>
+
+    <!-- Tab -->
+    <div class="flex flex-wrap gap-2" role="tablist">
+        <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="true" data-tab="screener"><i class="fa-solid fa-list-ol mr-2"></i>Screener</button>
+        <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="false" data-tab="hsc"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Daftar HSC</button>
+        <button class="tab-btn px-4 py-2 rounded-md text-sm font-bold bg-white border border-gray-200" role="tab" aria-selected="false" data-tab="metode"><i class="fa-solid fa-book mr-2"></i>Metodologi</button>
+    </div>
+
+    <!-- TAB SCREENER -->
+    <section id="tab-screener" class="space-y-4">
+        <div class="card p-4 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <h2 class="text-lg font-semibold text-indigo-900"><i class="fa-solid fa-sliders text-indigo-500 mr-2"></i>Filter</h2>
+                <div class="flex flex-wrap gap-2">
+                    <button id="preset-all" class="px-3 py-1.5 text-sm rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 font-medium">Semua non HSC</button>
+                    <button id="preset-short" class="px-3 py-1.5 text-sm rounded-md bg-indigo-600 text-white hover:bg-indigo-700 font-medium">Shortlist awal</button>
+                </div>
+            </div>
+            <div class="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                <label class="text-xs font-medium text-gray-600 col-span-2 md:col-span-1">Cari kode atau nama
+                    <input id="f-q" type="text" placeholder="contoh: BBCA" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm">
+                </label>
+                <label class="text-xs font-medium text-gray-600">Asing minimal (%)
+                    <input id="f-amin" type="number" min="0" max="100" step="0.1" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm num">
+                </label>
+                <label class="text-xs font-medium text-gray-600">Asing maksimal (%)
+                    <input id="f-amax" type="number" min="0" max="100" step="0.1" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm num">
+                </label>
+                <label class="text-xs font-medium text-gray-600">Market cap minimal (Rp T)
+                    <input id="f-mc" type="number" min="0" step="0.5" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm num">
+                </label>
+                <label class="text-xs font-medium text-gray-600">Free float minimal (%)
+                    <input id="f-ff" type="number" min="0" max="100" step="1" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm num">
+                </label>
+                <label class="text-xs font-medium text-gray-600">Sektor
+                    <select id="f-sek" class="mt-1 w-full border border-gray-300 rounded-md px-2 py-2 text-sm bg-white"><option value="">Semua sektor</option></select>
+                </label>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+                <label class="inline-flex items-center gap-2"><input id="f-nohsc" type="checkbox" checked class="w-4 h-4 accent-indigo-600"> Sembunyikan saham HSC</label>
+                <button id="f-reset" class="text-indigo-700 hover:underline text-sm">Hapus semua filter</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b">
+                <div class="text-sm" id="summary">-</div>
+                <div class="flex gap-2">
+                    <button id="ex-xlsx" class="px-3 py-1.5 text-sm rounded-md bg-emerald-600 text-white hover:bg-emerald-700 font-medium"><i class="fa-solid fa-file-excel mr-1"></i>Excel</button>
+                    <button id="ex-csv" class="px-3 py-1.5 text-sm rounded-md border border-gray-300 hover:bg-gray-50 font-medium"><i class="fa-solid fa-file-csv mr-1"></i>CSV</button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wide">
+                        <tr>
+                            <th class="px-3 py-2 text-right w-12">#</th>
+                            <th class="px-3 py-2 text-left sortable" data-k="k">Kode</th>
+                            <th class="px-3 py-2 text-left sortable hidden md:table-cell" data-k="n">Emiten</th>
+                            <th class="px-3 py-2 text-right sortable" data-k="mc">Mcap (Rp T)</th>
+                            <th class="px-3 py-2 text-right sortable" data-k="a">Asing</th>
+                            <th class="px-3 py-2 text-right sortable hidden sm:table-cell" data-k="c1" title="Perubahan porsi asing, poin persen dari total saham">Ubah 1 bln</th>
+                            <th class="px-3 py-2 text-right sortable hidden lg:table-cell" data-k="c3" title="Perubahan porsi asing, poin persen dari total saham">Ubah 3 bln</th>
+                            <th class="px-3 py-2 text-right sortable" data-k="ff">Free float</th>
+                            <th class="px-3 py-2 text-left hidden lg:table-cell">Asing terbesar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+            <div class="px-4 py-3 border-t flex justify-center">
+                <button id="more" class="hidden px-4 py-2 text-sm rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 font-medium">Tampilkan lebih banyak</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB HSC -->
+    <section id="tab-hsc" class="hidden space-y-4">
+        <div class="card p-4">
+            <h2 class="text-lg font-semibold text-indigo-900 mb-1">Saham HSC aktif</h2>
+            <p class="text-sm text-gray-600 mb-3" id="hsc-intro"></p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wide">
+                        <tr>
+                            <th class="px-3 py-2 text-left sortable" data-hk="k">Kode</th>
+                            <th class="px-3 py-2 text-left hidden md:table-cell">Emiten</th>
+                            <th class="px-3 py-2 text-right sortable" data-hk="hp">Dikuasai pihak tertentu</th>
+                            <th class="px-3 py-2 text-left hidden sm:table-cell">Posisi per</th>
+                            <th class="px-3 py-2 text-left sortable" data-hk="hs">Masuk HSC</th>
+                            <th class="px-3 py-2 text-right sortable hidden sm:table-cell" data-hk="mc">Mcap (Rp T)</th>
+                            <th class="px-3 py-2 text-left">PDF BEI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hsc-body"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-lg font-semibold text-indigo-900 mb-2">Sudah keluar dari HSC</h2>
+            <ul id="hsc-out" class="text-sm space-y-1"></ul>
+        </div>
+    </section>
+
+    <!-- TAB METODOLOGI -->
+    <section id="tab-metode" class="hidden">
+        <div class="card p-5 text-sm leading-relaxed space-y-4 max-w-3xl">
+            <h2 class="text-lg font-semibold text-indigo-900">Cara angka dihitung</h2>
+            <div><h3 class="font-semibold">Kepemilikan asing</h3>
+                <p>Porsi asing = (saham asing tanpa warkat menurut Balancepos KSEI + saham warkat milik pemegang asing di atas 1%) dibagi total saham beredar (Sec. Num). Saham warkat perlu ditambahkan karena Balancepos hanya mencatat saham tanpa warkat, padahal pemegang pengendali sering memegang warkat. Contoh: Jardine Cycle &amp; Carriage memegang 50,11% ASII dalam bentuk warkat.</p></div>
+            <div><h3 class="font-semibold">Asing versi KSEI</h3>
+                <p>Status lokal atau asing mengikuti status rekening efek, bukan pemilik akhir. Anak usaha lokal milik grup asing tercatat lokal. Contoh: HMSP hanya 0,83% asing karena 92,44% dipegang Philip Morris Indonesia yang tercatat lokal.</p></div>
+            <div><h3 class="font-semibold">Breakdown tipe asing</h3>
+                <p>Sembilan tipe dari Balancepos: Asuransi (IS), Korporat (CP), Dana Pensiun (PF), Bank dan Lembaga Keuangan (IB), Individu (ID), Reksadana (MF), Sekuritas (SC), Yayasan (FD), Lainnya (OT), ditambah kelompok Warkat. Bila file klasifikasi BEI tersedia, komposisi asing juga dirinci ke 39 klasifikasi (Investment Manager, Pension Funds, Sovereign Wealth Fund, Hedge Fund, dan lainnya), dihitung dari saham asing tanpa warkat.</p></div>
+            <div><h3 class="font-semibold">Free float indikatif</h3>
+                <p>100% dikurangi total pemegang di atas 5% menurut file pemegang 1%. Ini perkiraan, bukan free float versi regulasi yang juga mengeluarkan pihak terafiliasi dan direksi. Rekening kustodian yang mewakili banyak investor (misalnya bank penyimpan ADR) ikut terhitung di atas 5% bila porsinya besar.</p></div>
+            <div><h3 class="font-semibold">Perubahan 1 dan 3 bulan</h3>
+                <p>Selisih saham asing tanpa warkat antara bulan terakhir dan bulan pembanding, dalam poin persen dari total saham beredar.</p></div>
+            <div><h3 class="font-semibold">HSC</h3>
+                <p>Daftar resmi BEI. Persen adalah porsi saham yang secara agregat dikuasai sejumlah tertentu pemegang saham, sesuai PDF pengumuman, pada tanggal posisi masing-masing. BEI mengumumkan pada 19 Okt 2026 bahwa saham HSC akan dikeluarkan dari perhitungan IHSG; tanggal efektifnya belum ditetapkan.</p></div>
+            <div><h3 class="font-semibold">Periode data</h3>
+                <p>Setiap sumber punya tanggal sendiri, tertulis di kotak Posisi data di atas. Bila tanggal file pemegang 1% berbeda dengan Balancepos, porsi warkat dan free float memakai file 1% terakhir yang tersedia.</p></div>
+            <p class="text-xs text-gray-500">Data disajikan apa adanya dari KSEI dan BEI untuk riset. Bukan rekomendasi jual atau beli.</p>
+        </div>
+    </section>
+</main>
+
+<!-- Drawer detail -->
+<div id="backdrop" class="hidden fixed inset-0 bg-black/30 z-30"></div>
+<aside id="drawer" class="closed fixed top-0 right-0 h-full w-full sm:w-[460px] bg-white shadow-2xl z-40 overflow-y-auto" aria-label="Detail emiten" aria-hidden="true">
+    <div class="sticky top-0 bg-indigo-900 text-white px-4 py-3 flex items-start justify-between gap-3">
+        <div><div id="d-kode" class="text-xl font-bold"></div><div id="d-nama" class="text-xs text-indigo-200"></div></div>
+        <button id="d-close" class="text-indigo-200 hover:text-white text-xl px-2" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="d-body" class="p-4 space-y-5 text-sm"></div>
+</aside>
+
+<script>
+(function () {
+    "use strict";
+    var TIPE = { IS: "Asuransi", CP: "Korporat", PF: "Dana Pensiun", IB: "Bank dan Lembaga Keuangan", ID: "Individu", MF: "Reksadana", SC: "Sekuritas", FD: "Yayasan", OT: "Lainnya", W: "Warkat (di atas 1%)" };
+    var SEKTOR = { "Financial Services": "Keuangan", "Industrials": "Perindustrian", "Consumer Cyclical": "Barang Konsumen Non Primer", "Consumer Defensive": "Barang Konsumen Primer", "Real Estate": "Properti dan Real Estat", "Basic Materials": "Barang Baku", "Energy": "Energi", "Communication Services": "Komunikasi", "Technology": "Teknologi", "Healthcare": "Kesehatan", "Utilities": "Utilitas" };
+    var BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+    var PAGE = 100;
+    var DATA = null, META = null, rows = [], view = [], shown = PAGE;
+    var sortKey = "a", sortDir = 1, hscSortKey = "hp", hscSortDir = -1;
+
+    function $(s) { return document.querySelector(s); }
+    function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+    var nf = function (d) { return new Intl.NumberFormat("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d }); };
+    var F0 = nf(0), F1 = nf(1), F2 = nf(2);
+    function pct(v, d) { return v == null ? "-" : (d === 1 ? F1 : F2).format(v) + "%"; }
+    function pp(v) { if (v == null) return '<span class="text-gray-400">-</span>'; var c = v > 0.005 ? "text-emerald-600" : v < -0.005 ? "text-red-600" : "text-gray-500"; return '<span class="' + c + '">' + (v > 0 ? "+" : "") + F2.format(v) + "</span>"; }
+    function mcap(v) { return v >= 100 ? F0.format(v) : v >= 1 ? F1.format(v) : F2.format(v); }
+    function tgl(iso) { if (!iso) return "-"; var p = iso.split("-").map(Number); return p[2] + " " + BULAN[p[1] - 1] + " " + p[0]; }
+    function waktu(s) { var m = /^(\d{4}-\d{2}-\d{2}) (\d{2}\.\d{2})/.exec(s || ""); return m ? tgl(m[1]) + ", " + m[2] + " WIB" : (s || "-"); }
+    function bln(ym) { if (!ym) return "-"; var p = ym.split("-").map(Number); return BULAN[p[1] - 1] + " " + p[0]; }
+    function sek(s) { return SEKTOR[s] || s || ""; }
+    function topTipe(r) {
+        var best = null, bv = 0;
+        Object.keys(r.ab || {}).forEach(function (t) { if (r.ab[t] > bv) { bv = r.ab[t]; best = t; } });
+        if (r.aw > bv) { bv = r.aw; best = "W"; }
+        return best ? [best, bv] : null;
+    }
+    function num(id) { var v = $(id).value.trim().replace(",", "."); return v === "" ? null : Number(v); }
+
+    // ---------------- filter dan urut ----------------
+    function apply() {
+        var q = $("#f-q").value.trim().toUpperCase();
+        var amin = num("#f-amin"), amax = num("#f-amax"), mc = num("#f-mc"), ff = num("#f-ff");
+        var s = $("#f-sek").value, nohsc = $("#f-nohsc").checked;
+        view = rows.filter(function (r) {
+            if (nohsc && r.h) return false;
+            if (q && r.k.indexOf(q) < 0 && r.n.toUpperCase().indexOf(q) < 0) return false;
+            if (amin != null && r.a < amin) return false;
+            if (amax != null && r.a > amax) return false;
+            if (mc != null && r.mc < mc) return false;
+            if (ff != null && (r.ff == null || r.ff < ff)) return false;
+            if (s && r.s !== s) return false;
+            return true;
+        });
+        view.sort(function (x, y) {
+            var a = x[sortKey], b = y[sortKey];
+            if (a == null && b == null) return 0;
+            if (a == null) return 1;
+            if (b == null) return -1;
+            if (typeof a === "string") return a.localeCompare(b) * sortDir;
+            return (a - b) * sortDir || x.k.localeCompare(y.k);
+        });
+        shown = PAGE;
+        renderTable();
+    }
+
+    function renderTable() {
+        var tb = $("#tbody");
+        var html = view.slice(0, shown).map(function (r, i) {
+            var t = topTipe(r);
+            return '<tr class="row border-t border-gray-100" data-k="' + esc(r.k) + '" tabindex="0">' +
+                '<td class="px-3 py-2 text-right text-gray-400 num">' + (i + 1) + "</td>" +
+                '<td class="px-3 py-2 font-bold text-indigo-900">' + esc(r.k) + (r.h ? ' <span class="ml-1 text-[10px] font-bold bg-red-100 text-red-700 px-1.5 py-0.5 rounded">HSC</span>' : "") + "</td>" +
+                '<td class="px-3 py-2 hidden md:table-cell"><div class="truncate max-w-[260px]">' + esc(r.n) + '</div><div class="text-xs text-gray-400">' + esc(sek(r.s)) + "</div></td>" +
+                '<td class="px-3 py-2 text-right num">' + mcap(r.mc) + "</td>" +
+                '<td class="px-3 py-2 text-right num font-semibold">' + pct(r.a) + "</td>" +
+                '<td class="px-3 py-2 text-right num hidden sm:table-cell">' + pp(r.c1) + "</td>" +
+                '<td class="px-3 py-2 text-right num hidden lg:table-cell">' + pp(r.c3) + "</td>" +
+                '<td class="px-3 py-2 text-right num">' + (r.ff == null ? '<span class="text-gray-400">-</span>' : pct(r.ff, 1)) + "</td>" +
+                '<td class="px-3 py-2 hidden lg:table-cell text-xs">' + (t ? esc(TIPE[t[0]]) + ' <span class="text-gray-400 num">' + F2.format(t[1]) + "%</span>" : '<span class="text-gray-400">-</span>') + "</td></tr>";
+        }).join("");
+        tb.innerHTML = html || '<tr><td colspan="9" class="px-4 py-8 text-center text-gray-500">Tidak ada saham yang cocok. Longgarkan filter atau klik Hapus semua filter.</td></tr>';
+        $("#more").classList.toggle("hidden", view.length <= shown);
+        var nohsc = $("#f-nohsc").checked;
+        $("#summary").innerHTML = '<b class="num">' + F0.format(view.length) + "</b> saham cocok dari " + F0.format(rows.length) + (nohsc ? " (saham HSC disembunyikan)" : "") +
+            '. Urut: <b>' + esc(labelSort()) + "</b>.";
+        document.querySelectorAll("th.sortable[data-k]").forEach(function (th) {
+            var on = th.getAttribute("data-k") === sortKey;
+            th.setAttribute("aria-sort", on ? (sortDir === 1 ? "ascending" : "descending") : "none");
+            var ic = th.querySelector("i"); if (ic) ic.remove();
+            if (on) th.insertAdjacentHTML("beforeend", ' <i class="fa-solid fa-sort-' + (sortDir === 1 ? "up" : "down") + '"></i>');
+        });
+    }
+    function labelSort() {
+        var m = { k: "kode", n: "nama", mc: "market cap", a: "porsi asing", c1: "perubahan 1 bulan", c3: "perubahan 3 bulan", ff: "free float" };
+        var dir = sortKey === "a" ? (sortDir === 1 ? "terendah" : "tertinggi") : (sortDir === 1 ? "naik" : "turun");
+        return m[sortKey] + " " + dir;
+    }
+
+    // ---------------- detail ----------------
+    function openDetail(k) {
+        var r = rows.find(function (x) { return x.k === k; }); if (!r) return;
+        $("#d-kode").textContent = r.k;
+        $("#d-nama").textContent = r.n + (r.s ? " · " + sek(r.s) : "") + (r.i ? " · " + r.i : "");
+        var parts = [];
+        if (r.h) parts.push('<div class="bg-red-50 border border-red-200 rounded p-3 text-red-800"><b>Saham HSC.</b> Sejumlah tertentu pemegang saham menguasai ' + pct(r.h.p) + ' per ' + tgl(r.h.pos) + '. Masuk daftar ' + tgl(r.h.sj) + '. <a class="underline" target="_blank" rel="noopener" href="' + esc(r.h.u) + '">PDF BEI</a></div>');
+        parts.push('<div class="grid grid-cols-2 gap-3">' + [
+            ["Porsi asing", pct(r.a)], ["Asing via warkat", pct(r.aw)],
+            ["Free float indikatif", r.ff == null ? "-" : pct(r.ff, 1)], ["Pemegang di atas 1%", r.k1 == null ? "-" : pct(r.k1, 1)],
+            ["Market cap", "Rp " + mcap(r.mc) + " T"], ["Harga", "Rp " + F0.format(r.p)],
+            ["Ubah asing 1 bln", pp(r.c1) + " pp"], ["Ubah asing 3 bln", pp(r.c3) + " pp"],
+            ["Ritel lokal", pct(r.rt)], ["Data tercatat", F1.format(r.cv * 100) + "% saham"]
+        ].map(function (x) { return '<div class="bg-gray-50 rounded p-2"><div class="text-xs text-gray-500">' + x[0] + '</div><div class="font-semibold num">' + x[1] + "</div></div>"; }).join("") + "</div>");
+        if (r.cv < 0.98 || r.cv > 1.02) parts.push('<p class="text-xs text-amber-700">Total saham tercatat ' + F1.format(r.cv * 100) + '% dari saham beredar. Bisa karena ada warkat di bawah 1% atau beda tanggal file 1% dengan Balancepos.</p>');
+        var items = Object.keys(r.ab || {}).map(function (t) { return [t, r.ab[t]]; });
+        if (r.aw > 0) items.push(["W", r.aw]);
+        items.sort(function (x, y) { return y[1] - x[1]; });
+        var mx = items.length ? items[0][1] : 1;
+        parts.push('<div><h3 class="font-semibold text-indigo-900 mb-2">Breakdown asing (% dari total saham)</h3>' + (items.length ? items.map(function (x) {
+            return '<div class="mb-1.5"><div class="flex justify-between text-xs"><span>' + esc(TIPE[x[0]]) + '</span><span class="num">' + F2.format(x[1]) + '%</span></div><div class="bg-gray-100 rounded"><div class="bar" style="width:' + Math.max(1, x[1] / mx * 100).toFixed(1) + '%"></div></div></div>';
+        }).join("") : '<p class="text-gray-500">Tidak ada kepemilikan asing tercatat.</p>') + "</div>");
+        if (r.kl && r.kl.length) {
+            parts.push('<div><h3 class="font-semibold text-indigo-900 mb-1">Komposisi asing per klasifikasi</h3><p class="text-xs text-gray-500 mb-2">Persen dari total saham asing tanpa warkat, file BEI per ' + tgl(META.klasifikasi) + '.</p><table class="w-full text-xs">' +
+                r.kl.map(function (x) { return '<tr class="border-t"><td class="py-1">' + esc(x[0]) + '</td><td class="py-1 text-right num">' + F1.format(x[1]) + "%</td></tr>"; }).join("") + "</table></div>");
+        } else if (!META.klasifikasi) {
+            parts.push('<p class="text-xs text-gray-500">Rincian 39 klasifikasi (Investment Manager, Pension Funds, dan lainnya) muncul setelah file klasifikasi BEI masuk lewat update berikutnya.</p>');
+        }
+        parts.push('<div><h3 class="font-semibold text-indigo-900 mb-1">Investor asing di atas 1%</h3><p class="text-xs text-gray-500 mb-2">File BEI per ' + tgl(META.satu_persen) + '.</p>' + (r.hf.length ? '<table class="w-full text-xs"><thead class="text-gray-500"><tr><th class="text-left py-1">Investor</th><th class="text-left py-1">Klasifikasi</th><th class="text-right py-1">%</th></tr></thead><tbody>' +
+            r.hf.map(function (x) { return '<tr class="border-t align-top"><td class="py-1 pr-2">' + esc(x[0]) + (x[2] ? '<div class="text-gray-400">' + esc(x[2]) + "</div>" : "") + (x[4] ? '<span class="text-[10px] bg-amber-100 text-amber-800 px-1 rounded">warkat</span>' : "") + '</td><td class="py-1 pr-2">' + esc(x[1]) + '</td><td class="py-1 text-right num">' + F2.format(x[3]) + "</td></tr>"; }).join("") + "</tbody></table>" : '<p class="text-gray-500">Tidak ada investor asing di atas 1%.</p>') + "</div>");
+        parts.push('<div class="flex flex-wrap gap-2 pt-2 border-t">' +
+            '<a class="px-3 py-1.5 rounded-md bg-indigo-600 text-white text-xs font-medium" href="index.html?kode=' + encodeURIComponent(r.k) + '"><i class="fa-solid fa-chart-pie mr-1"></i>Tren di Peta Institusi</a>' +
+            '<a class="px-3 py-1.5 rounded-md border text-xs font-medium" target="_blank" rel="noopener" href="' + esc(META.sumber.ksei) + '">Sumber KSEI</a>' +
+            '<a class="px-3 py-1.5 rounded-md border text-xs font-medium" target="_blank" rel="noopener" href="' + esc(META.sumber.bei_kepemilikan) + '">Sumber BEI</a></div>');
+        $("#d-body").innerHTML = parts.join("");
+        $("#drawer").classList.remove("closed"); $("#drawer").setAttribute("aria-hidden", "false");
+        $("#backdrop").classList.remove("hidden");
+        $("#d-close").focus();
+    }
+    function closeDetail() { $("#drawer").classList.add("closed"); $("#drawer").setAttribute("aria-hidden", "true"); $("#backdrop").classList.add("hidden"); }
+
+    // ---------------- tab HSC ----------------
+    function renderHSC() {
+        var list = rows.filter(function (r) { return r.h; }).map(function (r) { return Object.assign({ hp: r.h.p, hs: r.h.sj }, r); });
+        list.sort(function (x, y) { var a = x[hscSortKey], b = y[hscSortKey]; return (typeof a === "string" ? a.localeCompare(b) : a - b) * hscSortDir; });
+        $("#hsc-intro").innerHTML = F0.format(list.length) + " saham per pengumuman terakhir " + tgl(META.hsc_terakhir) + ', diambil dari <a class="text-indigo-700 underline" target="_blank" rel="noopener" href="' + esc(META.sumber.bei_hsc) + '">halaman HSC BEI</a> pada ' + esc(waktu(META.hsc_diambil)) + ". Persen dari PDF pengumuman masing-masing.";
+        $("#hsc-body").innerHTML = list.map(function (r) {
+            return '<tr class="row border-t border-gray-100" data-k="' + esc(r.k) + '"><td class="px-3 py-2 font-bold text-indigo-900">' + esc(r.k) + '</td><td class="px-3 py-2 hidden md:table-cell">' + esc(r.n) + '</td><td class="px-3 py-2 text-right num font-semibold">' + pct(r.h.p) + '</td><td class="px-3 py-2 hidden sm:table-cell num">' + tgl(r.h.pos) + '</td><td class="px-3 py-2 num">' + tgl(r.h.sj) + '</td><td class="px-3 py-2 text-right num hidden sm:table-cell">' + mcap(r.mc) + '</td><td class="px-3 py-2"><a class="text-indigo-700 underline" target="_blank" rel="noopener" href="' + esc(r.h.u) + '" onclick="event.stopPropagation()">PDF</a></td></tr>';
+        }).join("");
+        $("#hsc-out").innerHTML = (META.hsc_keluar || []).map(function (x) {
+            return "<li><b>" + esc(x.kode) + "</b>: masuk " + tgl(x.masuk) + " (" + pct(x.persen_terakhir) + "), keluar " + tgl(x.keluar) + ' <a class="text-indigo-700 underline" target="_blank" rel="noopener" href="' + esc(x.link_keluar) + '">PDF</a></li>';
+        }).join("") || '<li class="text-gray-500">Belum ada.</li>';
+    }
+
+    // ---------------- ekspor ----------------
+    function exportRows() {
+        return view.map(function (r, i) {
+            var t = topTipe(r), o = {
+                "Peringkat": i + 1, "Kode": r.k, "Emiten": r.n, "Sektor": sek(r.s), "HSC": r.h ? "Ya" : "Tidak",
+                "Market cap (Rp T)": r.mc, "Harga (Rp)": r.p, "Porsi asing (%)": r.a, "Asing via warkat (%)": r.aw,
+                "Ubah asing 1 bln (pp)": r.c1, "Ubah asing 3 bln (pp)": r.c3, "Free float indikatif (%)": r.ff,
+                "Pemegang di atas 1% (%)": r.k1, "Ritel lokal (%)": r.rt, "Tipe asing terbesar": t ? TIPE[t[0]] : ""
+            };
+            Object.keys(TIPE).forEach(function (k) { if (k !== "W") o["Asing " + TIPE[k] + " (%)"] = (r.ab && r.ab[k]) || 0; });
+            o["Investor asing di atas 1%"] = r.hf.map(function (x) { return x[0] + " (" + x[1] + ", " + x[3] + "%)"; }).join("; ");
+            return o;
+        });
+    }
+    function sumberBaris() {
+        return [["Sumber: KSEI Balancepos per " + tgl(META.balancepos) + "; BEI pemegang di atas 1% per " + tgl(META.satu_persen) + "; BEI daftar HSC pengumuman terakhir " + tgl(META.hsc_terakhir) + " (diambil " + waktu(META.hsc_diambil) + ")."],
+                ["Filter: " + $("#summary").textContent], ["Dibuat dari peta-institusi-idx. Untuk riset, bukan rekomendasi jual atau beli."], []];
+    }
+    function namaFile(ext) { return "screener_asing_" + META.balancepos.replace(/-/g, "") + "." + ext; }
+    function unduhBlob(blob, nama) { var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nama; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+    $("#ex-xlsx").addEventListener("click", function () {
+        if (!window.XLSX) { alertMsg("Library Excel belum termuat. Coba ekspor CSV."); return; }
+        var data = exportRows();
+        var ws = XLSX.utils.aoa_to_sheet(sumberBaris());
+        XLSX.utils.sheet_add_json(ws, data, { origin: -1 });
+        var wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Screener");
+        XLSX.writeFile(wb, namaFile("xlsx"));
+    });
+    $("#ex-csv").addEventListener("click", function () {
+        var data = exportRows(); if (!data.length) return;
+        var head = Object.keys(data[0]);
+        var q = function (v) { v = v == null ? "" : String(v); return /[";\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+        var lines = sumberBaris().map(function (r) { return r.map(q).join(";"); });
+        lines.push(head.map(q).join(";"));
+        data.forEach(function (o) { lines.push(head.map(function (h) { var v = o[h]; return q(typeof v === "number" ? String(v).replace(".", ",") : v); }).join(";")); });
+        unduhBlob(new Blob(["﻿" + lines.join("\n")], { type: "text/csv;charset=utf-8" }), namaFile("csv"));
+    });
+    function alertMsg(m) { $("#summary").innerHTML = '<span class="text-red-600">' + esc(m) + "</span>"; }
+
+    // ---------------- event ----------------
+    ["#f-q", "#f-amin", "#f-amax", "#f-mc", "#f-ff"].forEach(function (id) { $(id).addEventListener("input", debounce(apply, 200)); });
+    ["#f-sek", "#f-nohsc"].forEach(function (id) { $(id).addEventListener("change", apply); });
+    function setFilter(o) { $("#f-q").value = ""; $("#f-amin").value = o.amin || ""; $("#f-amax").value = o.amax || ""; $("#f-mc").value = o.mc || ""; $("#f-ff").value = o.ff || ""; $("#f-sek").value = ""; $("#f-nohsc").checked = true; sortKey = "a"; sortDir = 1; apply(); }
+    $("#preset-all").addEventListener("click", function () { setFilter({}); });
+    $("#preset-short").addEventListener("click", function () { setFilter({ amax: 5, mc: 5, ff: 15 }); });
+    $("#f-reset").addEventListener("click", function () { setFilter({}); $("#f-nohsc").checked = false; apply(); });
+    $("#more").addEventListener("click", function () { shown += PAGE; renderTable(); });
+    document.querySelectorAll("th.sortable[data-k]").forEach(function (th) {
+        th.addEventListener("click", function () { var k = th.getAttribute("data-k"); if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = (k === "k" || k === "n" || k === "a") ? 1 : -1; } apply(); });
+    });
+    document.querySelectorAll("th.sortable[data-hk]").forEach(function (th) {
+        th.addEventListener("click", function () { var k = th.getAttribute("data-hk"); if (hscSortKey === k) hscSortDir *= -1; else { hscSortKey = k; hscSortDir = k === "k" ? 1 : -1; } renderHSC(); });
+    });
+    function rowClick(e) { var tr = e.target.closest("tr.row"); if (tr) openDetail(tr.getAttribute("data-k")); }
+    $("#tbody").addEventListener("click", rowClick);
+    $("#tbody").addEventListener("keydown", function (e) { if (e.key === "Enter") rowClick(e); });
+    $("#hsc-body").addEventListener("click", rowClick);
+    $("#d-close").addEventListener("click", closeDetail);
+    $("#backdrop").addEventListener("click", closeDetail);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDetail(); });
+    document.querySelectorAll(".tab-btn").forEach(function (b) {
+        b.addEventListener("click", function () {
+            document.querySelectorAll(".tab-btn").forEach(function (x) { x.setAttribute("aria-selected", x === b ? "true" : "false"); });
+            ["screener", "hsc", "metode"].forEach(function (t) { $("#tab-" + t).classList.toggle("hidden", b.getAttribute("data-tab") !== t); });
+        });
+    });
+    function debounce(fn, ms) { var t; return function () { clearTimeout(t); t = setTimeout(fn, ms); }; }
+
+    // ---------------- muat data ----------------
+    function renderMeta() {
+        var m = META;
+        var kotak = [
+            ["Kepemilikan per tipe", "KSEI Balancepos", "per " + tgl(m.balancepos), m.sumber.ksei],
+            ["Pemegang di atas 1%", "BEI", m.satu_persen ? "per " + tgl(m.satu_persen) : "belum ada", m.sumber.bei_kepemilikan],
+            ["Daftar HSC", "BEI, " + m.hsc_jumlah + " saham", "pengumuman terakhir " + tgl(m.hsc_terakhir) + ", diambil " + waktu(m.hsc_diambil), m.sumber.bei_hsc],
+            ["Perubahan asing", "dibanding", bln(m.banding_1) + " dan " + bln(m.banding_3), null]
+        ];
+        $("#meta").innerHTML = kotak.map(function (x) {
+            return '<div><div class="text-xs uppercase tracking-wide text-gray-500">' + x[0] + '</div><div class="font-semibold">' + (x[3] ? '<a class="text-indigo-800 hover:underline" target="_blank" rel="noopener" href="' + esc(x[3]) + '">' + esc(x[1]) + ' <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>' : esc(x[1])) + '</div><div class="text-xs text-gray-500">' + esc(x[2]) + "</div></div>";
+        }).join("");
+        var warn = [];
+        if (m.satu_persen && m.satu_persen !== m.balancepos) warn.push("File pemegang 1% (" + tgl(m.satu_persen) + ") lebih lama dari Balancepos (" + tgl(m.balancepos) + "). Porsi warkat, free float, dan daftar investor asing memakai file 1% itu sampai file terbaru masuk lewat update otomatis.");
+        if (warn.length) { $("#meta-warn").textContent = warn.join(" "); $("#meta-warn").classList.remove("hidden"); }
+        var s = {}; rows.forEach(function (r) { if (r.s) s[r.s] = 1; });
+        Object.keys(s).sort(function (a, b) { return sek(a).localeCompare(sek(b)); }).forEach(function (k) { $("#f-sek").insertAdjacentHTML("beforeend", '<option value="' + esc(k) + '">' + esc(sek(k)) + "</option>"); });
+    }
+    fetch("screener.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (d) {
+        DATA = d; META = d.meta; rows = d.rows;
+        renderMeta(); renderHSC(); apply();
+    }).catch(function (e) {
+        $("#meta").innerHTML = '<div class="text-red-600 col-span-full">Gagal memuat screener.json (' + esc(e.message) + '). Jalankan build_screener.py lalu push, atau buka lewat server lokal (py -m http.server).</div>';
+    });
+})();
+</script>
+</body>
+</html>

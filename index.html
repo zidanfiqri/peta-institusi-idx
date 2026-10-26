@@ -33,6 +33,9 @@
                     <a href="smart_money_tracker.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
                         <i class="fa-solid fa-radar mr-2"></i> Buka Smart Tracker
                     </a>
+                    <a href="screener.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
+                        <i class="fa-solid fa-filter-circle-dollar mr-2"></i> Screener Asing
+                    </a>
                     <div class="text-sm text-indigo-200 font-medium hidden md:block">
                         <i class="fa-solid fa-clock mr-1"></i> Data KSEI (Update Terakhir: September 2026)
                     </div>
@@ -297,6 +300,12 @@
 
                     // Trigger Radar pertama kali
                     updateRadar();
+
+                    // Buka emiten dari link, misalnya index.html?kode=BBCA dari Screener
+                    const kodeLink = (new URLSearchParams(location.search).get('kode') || '').toUpperCase();
+                    if (kodeLink && data[kodeLink]) {
+                        setTimeout(() => window.jumpToEmiten(kodeLink), 300);
+                    }
                 })
                 .catch(err => {
                     console.error("Gagal memuat:", err);

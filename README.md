@@ -8,7 +8,7 @@ Dashboard statis komposisi kepemilikan saham Bursa Efek Indonesia per tipe inves
 |---|---|
 | `index.html` | Peta Kepemilikan Institusi: komposisi 18 tipe investor lokal dan asing per emiten, radar net flow asing |
 | `smart_money_tracker.html` | Smart Money Tracker: inflow asing, pola distribusi, watchlist |
-| `screener.html` | (sedang dibuat) Screener saham non HSC dengan kepemilikan asing rendah |
+| `screener.html` | Screener saham non HSC berdasarkan porsi asing: filter market cap, free float, sektor; breakdown tipe investor asing; daftar HSC; ekspor Excel |
 
 ## Sumber data
 
@@ -29,7 +29,7 @@ Semua sumber diperbarui oleh satu skrip, `update_data.py`. Skrip hanya mengambil
 2. Pastikan Google Chrome terpasang (dipakai untuk membuka situs BEI yang dilindungi Cloudflare).
 3. Di folder repo, jalankan: `py -m pip install -r requirements.txt`
 4. Klik dua kali `jalankan_update.bat` untuk uji coba pertama.
-5. Klik dua kali `pasang_jadwal.bat` supaya update jalan otomatis setiap hari jam 08.30.
+5. Klik dua kali `pasang_jadwal.bat` supaya update jalan otomatis setiap hari jam 08.00. Kalau komputer mati atau tidur pada jam itu, update dijalankan begitu komputer menyala lagi.
 
 **Menjalankan manual:** klik dua kali `jalankan_update.bat`, atau dari terminal:
 
@@ -56,6 +56,8 @@ data_src/                      File mentah dari sumber resmi
   balancepos/                  Disimpan di komputer saja (lihat .gitignore)
 update_data.py                 Update semua sumber
 update_hsc.py                  Membangun hsc.json dari CSV pengumuman
+build_screener.py              Membangun screener.json untuk screener.html
+screener.json                  Data Screener (dibangun ulang otomatis setiap ada data baru)
 jalankan_update.bat            Jalankan update dengan klik dua kali
 pasang_jadwal.bat              Pasang jadwal update harian di Windows
 ```

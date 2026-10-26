@@ -391,11 +391,25 @@ def tulis_emiten_info(ym, daftar):
 # --------------------------------------------------------------------------------------------
 # Git
 # --------------------------------------------------------------------------------------------
+GITIGNORE = [".cache/", "update_log.txt", "__pycache__/", "data_src/balancepos/"]
+
+
+def pastikan_gitignore():
+    """Buat atau lengkapi .gitignore supaya cache Chrome dan file mentah tidak ikut ke GitHub."""
+    ada = open(".gitignore", encoding="utf-8").read().splitlines() if os.path.exists(".gitignore") else []
+    kurang = [g for g in GITIGNORE if g not in ada]
+    if kurang:
+        with open(".gitignore", "a", encoding="utf-8") as f:
+            f.write(("\n" if ada and ada[-1] else "") + "\n".join(kurang) + "\n")
+        log(".gitignore dilengkapi: " + ", ".join(kurang))
+    return bool(kurang)
+
+
 def git_push():
     if not shutil.which("git") or not os.path.isdir(".git"):
         log("Git tidak ditemukan atau folder ini bukan hasil git clone. Upload file yang berubah secara manual.")
         return
-    jalur = ["data.json", "emiten_info.json", "hsc.json", HSC_CSV, DIR_1PCT, DIR_KLAS]
+    jalur = [".gitignore", "data.json", "emiten_info.json", "hsc.json", "screener.json", HSC_CSV, DIR_1PCT, DIR_KLAS]
     jalur = [j for j in jalur if os.path.exists(j)]
     subprocess.run(["git", "add", *jalur], check=True)
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
@@ -419,7 +433,7 @@ def main():
     a = ap.parse_args()
     pilih = {x.strip() for x in a.only.split(",")}
     log(f"Mulai update: {', '.join(sorted(pilih))}")
-    berubah = False
+    berubah = pastikan_gitignore()
     gagal = []
     if "ksei" in pilih:
         try:
@@ -441,6 +455,15 @@ def main():
                 log(f"BEI gagal{' (jendela terlihat)' if tampil else ' (mode tersembunyi)'}: {e}")
                 if tampil:
                     gagal.append("bei")
+    if berubah or not os.path.exists("screener.json"):
+        try:
+            import build_screener
+            build_screener.main()
+            log("Screener: screener.json dibangun ulang.")
+            berubah = True
+        except Exception as e:
+            gagal.append("screener")
+            log(f"Screener gagal dibangun: {e}")
     if berubah and not a.no_push:
         git_push()
     log("Selesai." + (f" Ada yang gagal: {', '.join(gagal)}." if gagal else ""))
