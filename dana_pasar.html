@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dana di Pasar Saham IDX - Lokal vs Asing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f3f4f6; }
+        .card { background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .num { font-variant-numeric: tabular-nums; }
+        th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+        th.sortable:hover { color: #4338ca; }
+        .seg-btn { padding: 6px 12px; } .seg-btn[aria-pressed="true"] { background: #312e81; color: #fff; }
+        .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+        .viz-root { --lokal: #2a78d6; --asing: #eb6834; }
+        .pos { color: #047857; } .neg { color: #b91c1c; }
+        #saham td, #tipe td, #dek td { white-space: nowrap; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<nav class="bg-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 py-3 min-h-16">
+            <div class="flex items-center">
+                <i class="fa-solid fa-sack-dollar text-2xl mr-3 text-indigo-400"></i>
+                <span class="font-bold text-xl tracking-tight">Dana di Pasar Saham</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <a href="index.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-chart-pie mr-2"></i>Peta Institusi</a>
+                <a href="smart_money_tracker.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-satellite-dish mr-2"></i>Smart Tracker</a>
+                <a href="screener.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-filter-circle-dollar mr-2"></i>Screener</a>
+                <a href="msci.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-globe mr-2"></i>ETF MSCI Indonesia</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5 viz-root">
+
+    <section class="card p-4 flex flex-wrap items-center gap-4 justify-between">
+        <div class="text-sm text-gray-600" id="posisi">Memuat data...</div>
+        <div class="flex flex-wrap items-center gap-3 text-sm">
+            <label class="flex items-center gap-2">Bulan
+                <select id="bulan" class="border rounded-md px-2 py-1.5"></select>
+            </label>
+            <div class="inline-flex rounded-md border overflow-hidden" role="group" aria-label="Mata uang">
+                <button class="seg-btn" data-cur="rp" aria-pressed="true">Rupiah</button>
+                <button class="seg-btn border-l" data-cur="usd" aria-pressed="false">USD</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" id="kpi"></section>
+
+    <section class="card p-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+            <h2 class="font-bold text-lg">Nilai kepemilikan saham tanpa warkat</h2>
+            <div class="inline-flex rounded-md border overflow-hidden text-sm" role="group" aria-label="Tampilan">
+                <button class="seg-btn" data-view="nilai" aria-pressed="true">Nominal</button>
+                <button class="seg-btn border-l" data-view="porsi" aria-pressed="false">Porsi asing</button>
+            </div>
+        </div>
+        <p class="text-xs text-gray-500 mb-3">Lembar per tipe investor (KSEI Balancepos) × harga penutupan akhir bulan (BEI).</p>
+        <div class="relative h-72"><canvas id="c-nilai" aria-label="Grafik nilai kepemilikan lokal dan asing per bulan"></canvas></div>
+    </section>
+
+    <section class="grid gap-5 lg:grid-cols-5">
+        <div class="card p-4 lg:col-span-3">
+            <h2 class="font-bold text-lg mb-1">Aliran dana asing per bulan</h2>
+            <p class="text-xs text-gray-500 mb-3">Estimasi beli/jual bersih: perubahan lembar × rata-rata harga awal dan akhir bulan. Efek harga, aksi korporasi, reklasifikasi tipe investor, dan keluar/masuk pencatatan KSEI dipisahkan. Batang ke atas = masuk, ke bawah = keluar.</p>
+            <div class="relative h-64"><canvas id="c-aliran" aria-label="Grafik aliran dana asing per bulan"></canvas></div>
+        </div>
+        <div class="card p-4 lg:col-span-2">
+            <h2 class="font-bold text-lg mb-1">Dari mana perubahan nilainya?</h2>
+            <p class="text-xs text-gray-500 mb-3" id="dek-sub"></p>
+            <table class="w-full text-sm num" id="dek"></table>
+        </div>
+    </section>
+
+    <section class="card p-4">
+        <h2 class="font-bold text-lg mb-1">Per tipe investor</h2>
+        <p class="text-xs text-gray-500 mb-3" id="tipe-sub"></p>
+        <div class="overflow-x-auto"><table class="w-full text-sm num" id="tipe"></table></div>
+    </section>
+
+    <section class="grid gap-5 lg:grid-cols-2" id="top"></section>
+
+    <section class="card p-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+            <div>
+                <h2 class="font-bold text-lg">Per saham</h2>
+                <p class="text-xs text-gray-500" id="saham-sub"></p>
+            </div>
+            <input id="cari" type="search" placeholder="Cari kode atau nama" class="border rounded-md px-3 py-1.5 text-sm w-56">
+        </div>
+        <div class="overflow-x-auto max-h-[560px] overflow-y-auto">
+            <table class="w-full text-sm num" id="saham"></table>
+        </div>
+    </section>
+
+    <section class="card p-4 text-xs text-gray-600 space-y-2" id="catatan"></section>
+</main>
+
+<script>
+const TIPE = {IS: 'Asuransi', CP: 'Korporat', PF: 'Dana Pensiun', IB: 'Bank', ID: 'Individual', MF: 'Reksadana', SC: 'Sekuritas', FD: 'Yayasan', OT: 'Lainnya'};
+const BLN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const css = v => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(v).trim();
+let D, cur = 'rp', view = 'nilai', sortKey = 'va', sortDir = -1, charts = {};
+
+const lblBulan = m => BLN[+m.slice(5) - 1] + ' ' + m.slice(0, 4);
+const nf = (x, d = 1) => x.toLocaleString('id-ID', {minimumFractionDigits: d, maximumFractionDigits: d});
+const sumSide = (o, side) => Object.entries(o).filter(([k]) => k.startsWith(side)).reduce((a, [, v]) => a + v, 0);
+function uang(rp, m, opt = {}) {           // opt.sign: tampilkan + ; opt.unit: 'T'|'M'|'auto'
+    if (rp == null || isNaN(rp)) return '–';
+    if (Math.abs(rp) < 5e5) return cur === 'usd' ? 'US$0' : 'Rp0';
+    const s = rp < 0 ? '−' : (opt.sign ? '+' : '');
+    rp = Math.abs(rp);
+    if (cur === 'usd') {
+        const u = rp / D.meta.kurs[m];
+        const a = Math.abs(u);
+        if (a >= 1e9) return s + 'US$' + nf(u / 1e9) + ' M';
+        if (a >= 1e6) return s + 'US$' + nf(u / 1e6) + ' jt';
+        return s + 'US$' + nf(u / 1e3) + ' rb';
+    }
+    const a = Math.abs(rp);
+    if (a >= 1e12) return s + 'Rp' + nf(rp / 1e12) + ' T';
+    if (a >= 1e9) return s + 'Rp' + nf(rp / 1e9) + ' M';
+    return s + 'Rp' + nf(rp / 1e6) + ' jt';
+}
+const kelas = v => v > 0 ? 'pos' : (v < 0 ? 'neg' : '');
+
+async function load() {
+    D = await (await fetch('dana.json?v=' + Date.now())).json();
+    const sel = $('#bulan');
+    sel.innerHTML = D.meta.bulan.slice().reverse().map(m => `<option value="${m}">${lblBulan(m)}</option>`).join('');
+    sel.onchange = render;
+    document.querySelectorAll('[data-cur]').forEach(b => b.onclick = () => { cur = b.dataset.cur; document.querySelectorAll('[data-cur]').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); });
+    document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => { view = b.dataset.view; document.querySelectorAll('[data-view]').forEach(x => x.setAttribute('aria-pressed', x === b)); grafikNilai(); });
+    $('#cari').oninput = tabelSaham;
+    const akhir = D.meta.bulan[D.meta.bulan.length - 1];
+    $('#posisi').innerHTML = `Data s.d. <b>${lblBulan(akhir)}</b> (hari bursa ${D.meta.tanggal[akhir].replace(/(\d{4})(\d{2})(\d{2})/, '$3/$2/$1')}) · kurs ${nf(D.meta.kurs[akhir], 0)} Rp/US$ · dibuat ${esc(D.meta.dibuat)}` +
+        (D.meta.bulan_hilang.length ? ` · <span class="text-amber-700">tidak ada data KSEI: ${D.meta.bulan_hilang.map(lblBulan).join(', ')}</span>` : '');
+    catatan();
+    render();
+}
+
+function render() { kpi(); grafikNilai(); grafikAliran(); dekomposisi(); tabelTipe(); topSaham(); tabelSaham(); }
+
+function kpi() {
+    const m = $('#bulan').value, t = D.total[m], al = D.aliran[m];
+    const L = sumSide(t, 'Local'), F = sumSide(t, 'Foreign');
+    const fa = al ? sumSide(al.aliran, 'Foreign') : null, fl = al ? sumSide(al.aliran, 'Local') : null;
+    const tile = (judul, nilai, sub, warna) => `<div class="card p-4"><div class="text-xs uppercase tracking-wide text-gray-500">${warna ? `<span class="sw" style="background:${warna}"></span>` : ''}${judul}</div><div class="text-2xl font-bold mt-1 num">${nilai}</div><div class="text-xs text-gray-500 mt-1 num">${sub}</div></div>`;
+    $('#kpi').innerHTML =
+        tile('Dana lokal', uang(L, m), cur === 'rp' ? 'setara ' + (() => { cur = 'usd'; const x = uang(L, m); cur = 'rp'; return x; })() : 'setara Rp' + nf(L / 1e12) + ' T', css('--lokal')) +
+        tile('Dana asing', uang(F, m), cur === 'rp' ? 'setara ' + (() => { cur = 'usd'; const x = uang(F, m); cur = 'rp'; return x; })() : 'setara Rp' + nf(F / 1e12) + ' T', css('--asing')) +
+        tile('Porsi asing', nf(F / (L + F) * 100) + '%', al ? 'bulan sebelumnya ' + nf(sumSide(D.total[al.dari], 'Foreign') / (sumSide(D.total[al.dari], 'Foreign') + sumSide(D.total[al.dari], 'Local')) * 100) + '%' : '') +
+        tile('Aliran dana asing', al ? `<span class="${kelas(fa)}">${uang(fa, m, {sign: true})}</span>` : '–', al ? `lokal <span class="${kelas(fl)}">${uang(fl, m, {sign: true})}</span> · vs ${lblBulan(al.dari)}` : 'bulan pertama data');
+}
+
+function grafikNilai() {
+    const B = D.meta.bulan, lok = B.map(m => sumSide(D.total[m], 'Local')), asg = B.map(m => sumSide(D.total[m], 'Foreign'));
+    const div = cur === 'usd' ? (v, m) => v / D.meta.kurs[m] / 1e9 : v => v / 1e12;
+    const unit = cur === 'usd' ? 'US$ miliar' : 'Rp triliun';
+    let ds, yTitle;
+    if (view === 'porsi') {
+        ds = [{label: 'Porsi asing', data: B.map((m, i) => asg[i] / (asg[i] + lok[i]) * 100), borderColor: css('--asing'), backgroundColor: css('--asing'), borderWidth: 2, pointRadius: 2, pointHoverRadius: 5, tension: 0.2}];
+        yTitle = '% dari total dana';
+    } else {
+        ds = [
+            {label: 'Lokal', data: B.map((m, i) => div(lok[i], m)), borderColor: css('--lokal'), backgroundColor: css('--lokal'), borderWidth: 2, pointRadius: 2, pointHoverRadius: 5, tension: 0.2},
+            {label: 'Asing', data: B.map((m, i) => div(asg[i], m)), borderColor: css('--asing'), backgroundColor: css('--asing'), borderWidth: 2, pointRadius: 2, pointHoverRadius: 5, tension: 0.2}];
+        yTitle = unit;
+    }
+    charts.nilai?.destroy();
+    charts.nilai = new Chart($('#c-nilai'), {type: 'line', data: {labels: B.map(lblBulan), datasets: ds},
+        options: {maintainAspectRatio: false, interaction: {mode: 'index', intersect: false},
+            plugins: {legend: {display: ds.length > 1, position: 'top', align: 'end', labels: {boxWidth: 12, boxHeight: 12}},
+                tooltip: {callbacks: {label: c => ` ${c.dataset.label}: ${view === 'porsi' ? nf(c.parsed.y) + '%' : (cur === 'usd' ? 'US$' : 'Rp') + nf(c.parsed.y) + (cur === 'usd' ? ' M' : ' T')}`}}},
+            scales: {y: {title: {display: true, text: yTitle, color: '#6b7280'}, grid: {color: '#eef0f3'}, ticks: {color: '#6b7280'}}, x: {grid: {display: false}, ticks: {color: '#6b7280', maxRotation: 0, autoSkip: true}}}}});
+}
+
+function grafikAliran() {
+    const B = D.meta.bulan.slice(1);
+    const v = B.map(m => sumSide(D.aliran[m].aliran, 'Foreign'));
+    const div = cur === 'usd' ? (x, m) => x / D.meta.kurs[m] / 1e9 : x => x / 1e12;
+    charts.aliran?.destroy();
+    charts.aliran = new Chart($('#c-aliran'), {type: 'bar',
+        data: {labels: B.map(lblBulan), datasets: [{label: 'Aliran asing', data: B.map((m, i) => div(v[i], m)), backgroundColor: css('--asing'), borderRadius: 4, maxBarThickness: 18}]},
+        options: {maintainAspectRatio: false, plugins: {legend: {display: false},
+            tooltip: {callbacks: {label: c => { const m = B[c.dataIndex], al = D.aliran[m]; return [` Asing: ${uang(sumSide(al.aliran, 'Foreign'), m, {sign: true})}`, ` Lokal: ${uang(sumSide(al.aliran, 'Local'), m, {sign: true})}`, al.dari !== D.meta.bulan[D.meta.bulan.indexOf(m) - 1] ? '' : ` (vs ${lblBulan(al.dari)})`]; }}}},
+            scales: {y: {title: {display: true, text: cur === 'usd' ? 'US$ miliar' : 'Rp triliun', color: '#6b7280'}, grid: {color: (c) => c.tick.value === 0 ? '#9ca3af' : '#eef0f3'}, ticks: {color: '#6b7280'}}, x: {grid: {display: false}, ticks: {color: '#6b7280', maxRotation: 0, autoSkip: true}}},
+            onClick: (e, el) => { if (el.length) { $('#bulan').value = B[el[0].index]; render(); } }}});
+}
+
+function dekomposisi() {
+    const m = $('#bulan').value, al = D.aliran[m];
+    if (!al) { $('#dek').innerHTML = '<tr><td class="text-gray-500">Bulan pertama data, belum ada pembanding.</td></tr>'; $('#dek-sub').textContent = ''; return; }
+    $('#dek-sub').textContent = `${lblBulan(al.dari)} → ${lblBulan(m)}` + (D.meta.bulan_hilang.some(x => x > al.dari && x < m) ? ' (melewati bulan tanpa data)' : '');
+    const t0 = D.total[al.dari], t1 = D.total[m];
+    const row = (lab, f, cls = '', ket = '') => `<tr class="border-t border-gray-100 ${cls}"><td class="py-1.5 pr-2">${lab}${ket ? `<div class="text-[11px] text-gray-500">${ket}</div>` : ''}</td><td class="py-1.5 text-right">${f('Local')}</td><td class="py-1.5 text-right">${f('Foreign')}</td></tr>`;
+    const komp = k => side => { const v = sumSide(al[k], side); return `<span class="${kelas(v)}">${uang(v, m, {sign: true})}</span>`; };
+    const sisa = side => sumSide(t1, side) - sumSide(t0, side) - ['aliran', 'efek_harga', 'aksi_korporasi', 'reklasifikasi', 'pencatatan'].reduce((a, k) => a + sumSide(al[k], side), 0);
+    const ak = al.daftar_aksi_korporasi.slice(0, 3).map(x => x.k).join(', ');
+    const rk = [...new Set(al.daftar_reklasifikasi.map(x => x.k))].join(', ');
+    const kv = al.daftar_pencatatan.slice(0, 3).map(x => x.k).join(', ');
+    $('#dek').innerHTML = `<thead><tr class="text-xs text-gray-500"><th class="text-left font-semibold pb-1"></th><th class="text-right font-semibold pb-1"><span class="sw" style="background:${css('--lokal')}"></span>Lokal</th><th class="text-right font-semibold pb-1"><span class="sw" style="background:${css('--asing')}"></span>Asing</th></tr></thead>` +
+        row('Nilai ' + lblBulan(al.dari), s => uang(sumSide(t0, s), al.dari), 'font-semibold') +
+        row('Aliran dana (beli/jual bersih)', komp('aliran')) +
+        row('Efek harga', komp('efek_harga')) +
+        row('Aksi korporasi', komp('aksi_korporasi'), '', ak ? 'rights issue, merger, dll: ' + ak : '') +
+        row('Reklasifikasi tipe/status investor', komp('reklasifikasi'), '', rk) +
+        row('Keluar/masuk pencatatan KSEI', komp('pencatatan'), '', kv ? 'IPO, konversi warkat, dll: ' + kv : '') +
+        (Math.abs(sisa('Local')) + Math.abs(sisa('Foreign')) > 5e11 ? row('Lainnya (data tidak lengkap)', s => `<span class="${kelas(sisa(s))}">${uang(sisa(s), m, {sign: true})}</span>`) : '') +
+        row('Nilai ' + lblBulan(m), s => uang(sumSide(t1, s), m), 'font-semibold');
+}
+
+function tabelTipe() {
+    const m = $('#bulan').value, i = D.meta.bulan.indexOf(m), t = D.total[m];
+    const tot = sumSide(t, 'Local') + sumSide(t, 'Foreign');
+    const kum = (c, n) => { let s = 0, ok = 0; for (let j = i; j > 0 && ok < n; j--) { const a = D.aliran[D.meta.bulan[j]]; s += a.aliran[c]; ok++; } return ok ? s : null; };
+    $('#tipe-sub').textContent = `${lblBulan(m)}. Aliran = estimasi beli/jual bersih; 3 dan 12 bulan = jumlah aliran bulanan yang tersedia.`;
+    const head = `<thead class="text-xs text-gray-500"><tr><th class="text-left py-2 pr-3">Tipe investor</th><th class="text-right py-2 px-2">Nilai</th><th class="text-right py-2 px-2">Porsi</th><th class="text-right py-2 px-2">Δ nilai 1 bln</th><th class="text-right py-2 px-2">Aliran 1 bln</th><th class="text-right py-2 px-2">Aliran 3 bln</th><th class="text-right py-2 px-2">Aliran 12 bln</th></tr></thead>`;
+    let body = '';
+    for (const side of ['Local', 'Foreign']) {
+        const warna = side === 'Local' ? css('--lokal') : css('--asing');
+        const rows = Object.keys(TIPE).map(k => side + ' ' + k).sort((a, b) => t[b] - t[a]);
+        body += `<tr class="bg-gray-50 font-semibold"><td class="py-1.5 pr-3"><span class="sw" style="background:${warna}"></span>${side === 'Local' ? 'Lokal' : 'Asing'}</td><td class="text-right px-2">${uang(sumSide(t, side), m)}</td><td class="text-right px-2">${nf(sumSide(t, side) / tot * 100)}%</td><td colspan="4"></td></tr>`;
+        for (const c of rows) {
+            const prev = i > 0 ? D.total[D.meta.bulan[i - 1]][c] : null;
+            const a1 = kum(c, 1), a3 = kum(c, 3), a12 = kum(c, 12);
+            body += `<tr class="border-t border-gray-100"><td class="py-1.5 pr-3 pl-6">${TIPE[c.split(' ')[1]]}</td><td class="text-right px-2">${uang(t[c], m)}</td><td class="text-right px-2">${nf(t[c] / tot * 100)}%</td>` +
+                `<td class="text-right px-2 ${kelas(t[c] - prev)}">${prev == null ? '–' : uang(t[c] - prev, m, {sign: true})}</td>` +
+                [a1, a3, a12].map(a => `<td class="text-right px-2 ${kelas(a)}">${a == null ? '–' : uang(a, m, {sign: true})}</td>`).join('') + '</tr>';
+        }
+    }
+    $('#tipe').innerHTML = head + '<tbody>' + body + '</tbody>';
+}
+
+function topSaham() {
+    const m = $('#bulan').value, al = D.aliran[m];
+    if (!al) { $('#top').innerHTML = ''; return; }
+    const blok = (judul, arr, warna) => `<div><div class="text-xs font-semibold text-gray-500 uppercase mb-1">${judul}</div>${arr.length ? arr.map(([k, v]) => `<div class="flex justify-between border-t border-gray-100 py-1"><a class="font-bold text-indigo-800 hover:underline" href="index.html?kode=${encodeURIComponent(k)}">${esc(k)}</a><span class="num ${kelas(v)}">${uang(v, m, {sign: true})}</span></div>`).join('') : '<div class="text-gray-400 text-sm">–</div>'}</div>`;
+    $('#top').innerHTML =
+        `<div class="card p-4"><h2 class="font-bold mb-3"><span class="sw" style="background:${css('--asing')}"></span>Saham dengan aliran asing terbesar · ${lblBulan(m)}</h2><div class="grid grid-cols-2 gap-4 text-sm">${blok('Masuk', al.top.asing_masuk)}${blok('Keluar', al.top.asing_keluar)}</div></div>` +
+        `<div class="card p-4"><h2 class="font-bold mb-3"><span class="sw" style="background:${css('--lokal')}"></span>Saham dengan aliran lokal terbesar · ${lblBulan(m)}</h2><div class="grid grid-cols-2 gap-4 text-sm">${blok('Masuk', al.top.lokal_masuk)}${blok('Keluar', al.top.lokal_keluar)}</div></div>`;
+}
+
+function tabelSaham() {
+    const akhir = D.meta.bulan[D.meta.bulan.length - 1], dari = D.aliran[akhir].dari;
+    $('#saham-sub').textContent = `${lblBulan(akhir)} (bulan terakhir). Aliran asing dibanding ${lblBulan(dari)}. Klik judul kolom untuk mengurutkan.`;
+    const q = $('#cari').value.trim().toUpperCase();
+    let rows = D.saham.filter(r => !q || r.k.includes(q) || (r.n || '').toUpperCase().includes(q));
+    rows.sort((a, b) => sortDir * ((a[sortKey] ?? -Infinity) > (b[sortKey] ?? -Infinity) ? 1 : -1));
+    const cols = [['k', 'Kode', 'left'], ['n', 'Nama', 'left'], ['va', 'Nilai asing', 'right'], ['vl', 'Nilai lokal', 'right'], ['pa', 'Porsi asing*', 'right'], ['aa', 'Aliran asing', 'right'], ['ea', 'Efek harga (asing)', 'right'], ['mc', 'Nilai saham tercatat', 'right']];
+    rows.forEach(r => r.pa = r.va + r.vl > 0 ? r.va / (r.va + r.vl) * 100 : null);
+    $('#saham').innerHTML = `<thead class="text-xs text-gray-500 sticky top-0 bg-white"><tr>${cols.map(([k, l, a]) => `<th class="sortable text-${a} py-2 px-2" data-k="${k}">${l}${sortKey === k ? (sortDir > 0 ? ' ▲' : ' ▼') : ''}</th>`).join('')}</tr></thead><tbody>` +
+        rows.slice(0, 300).map(r => `<tr class="border-t border-gray-100 hover:bg-indigo-50"><td class="py-1.5 px-2 font-bold"><a class="text-indigo-800 hover:underline" href="index.html?kode=${encodeURIComponent(r.k)}">${esc(r.k)}</a></td><td class="px-2 text-gray-600 truncate max-w-[220px]">${esc(r.n)}</td>` +
+            `<td class="text-right px-2">${uang(r.va, akhir)}</td><td class="text-right px-2">${uang(r.vl, akhir)}</td><td class="text-right px-2">${r.pa == null ? '–' : nf(r.pa) + '%'}</td>` +
+            `<td class="text-right px-2 ${kelas(r.aa)}">${uang(r.aa, akhir, {sign: true})}</td><td class="text-right px-2 ${kelas(r.ea)}">${uang(r.ea, akhir, {sign: true})}</td><td class="text-right px-2">${uang(r.mc, akhir)}</td></tr>`).join('') + '</tbody>';
+    document.querySelectorAll('#saham th.sortable').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : (k === 'k' || k === 'n' ? 1 : -1); sortKey = k; tabelSaham(); });
+}
+
+function catatan() {
+    $('#catatan').innerHTML = `
+        <div class="font-semibold text-gray-800 text-sm">Cara membaca</div>
+        <p><b>Cakupan.</b> Balancepos KSEI hanya mencatat saham <b>tanpa warkat</b> (scripless). Saham yang dipegang dalam bentuk warkat, sering milik pemegang pengendali, tidak ikut. Contoh: pengendali BBCA memegang 54,94% dalam bentuk warkat. Karena itu total dana di sini lebih kecil dari kapitalisasi pasar; kolom "Nilai saham tercatat" di tabel per saham adalah jumlah saham tercatat × harga.</p>
+        <p><b>Aliran dana</b> adalah estimasi dari perubahan lembar akhir bulan, bukan data transaksi harian. Perubahan nilai dipecah menjadi aliran (Δlembar × rata-rata harga), efek harga (Δharga × rata-rata lembar), aksi korporasi (saham dengan perubahan jumlah saham tercatat di luar pemecahan saham), reklasifikasi tipe/status investor (lembar pindah dari satu tipe ke tipe lain, mis. lokal ke asing atau individu ke korporat, dalam jumlah hampir persis sama dan ≥ Rp1 T), dan keluar/masuk pencatatan KSEI (total lembar di KSEI berubah ≥ Rp1 T tanpa lawan transaksi, mis. IPO atau konversi warkat). Pemecahan saham (split) dikoreksi otomatis.</p>
+        <p><b>Satuan.</b> T = triliun, M = miliar, jt = juta, rb = ribu.</p>
+        <p><b>USD.</b> Dikonversi dengan kurs referensi ECB USD/IDR akhir bulan (api.frankfurter.app), bukan JISDOR BI. Saham yang disuspensi dinilai dengan harga terakhir yang diketahui (maks. 12 bulan).</p>
+        <p><b>Sumber.</b> <a class="underline text-indigo-700" target="_blank" rel="noopener" href="https://www.ksei.co.id/id/publikasi/data-dan-statistik/kepemilikan-efek">KSEI Kepemilikan Efek</a> · <a class="underline text-indigo-700" target="_blank" rel="noopener" href="https://www.idx.co.id/id/data-pasar/ringkasan-perdagangan/ringkasan-saham/">BEI Ringkasan Saham</a>. Data disajikan untuk riset, bukan rekomendasi jual atau beli.</p>`;
+}
+
+load().catch(e => { $('#posisi').innerHTML = '<span class="text-red-700">Gagal memuat dana.json: ' + esc(e.message) + '</span>'; });
+</script>
+</body>
+</html>

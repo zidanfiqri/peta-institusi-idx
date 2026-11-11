@@ -9,6 +9,8 @@ Dashboard statis komposisi kepemilikan saham Bursa Efek Indonesia per tipe inves
 | `index.html` | Peta Kepemilikan Institusi: komposisi 18 tipe investor lokal dan asing per emiten, radar net flow asing |
 | `smart_money_tracker.html` | Smart Money Tracker: inflow asing, pola distribusi, watchlist |
 | `screener.html` | Screener saham non HSC berdasarkan porsi asing: filter market cap, free float, sektor; breakdown tipe investor asing; daftar HSC; ekspor Excel |
+| `dana_pasar.html` | Dana di Pasar: nilai kepemilikan lokal dan asing dalam Rupiah dan USD per bulan dan per tipe investor, estimasi aliran dana (dipisah dari efek harga, aksi korporasi, reklasifikasi, dan perubahan pencatatan KSEI), per saham |
+| `msci.html` | ETF MSCI Indonesia: portofolio iShares MSCI Indonesia ETF (EIDO) dari laporan N-PORT SEC, nilai USD dan Rupiah, perubahan per kuartal, porsi EIDO dari dana asing KSEI |
 
 ## Sumber data
 
@@ -18,6 +20,9 @@ Dashboard statis komposisi kepemilikan saham Bursa Efek Indonesia per tipe inves
 | Pemegang saham di atas 1% | BEI, Perusahaan Tercatat > Data Kepemilikan Saham | Bulanan | `data_src/1pct/` |
 | Kepemilikan per 39 klasifikasi investor | BEI, Perusahaan Tercatat > Data Kepemilikan Saham | Bulanan | `data_src/klasifikasi/` |
 | Daftar HSC (High Shareholding Concentration) | BEI, Perusahaan Tercatat > Kepemilikan Saham Terkonsentrasi Tinggi | Setiap ada pengumuman | `data_src/bei_hsc_pengumuman.csv`, `hsc.json` |
+| Harga penutupan dan jumlah saham akhir bulan | BEI Ringkasan Saham (riwayat), lalu kolom Price/Sec. Num Balancepos | Bulanan | `data_src/harga_akhir_bulan.csv` |
+| Kurs USD/IDR akhir bulan | Kurs referensi ECB via api.frankfurter.app | Bulanan | `data_src/kurs_usdidr.csv` |
+| Portofolio EIDO | SEC EDGAR, formulir N-PORT iShares Trust seri S000028553 | Per kuartal | `data_src/eido_nport.csv`, `data_src/eido_isin_kode.json` |
 
 ## Update data
 
@@ -42,6 +47,8 @@ py update_data.py --show       # tampilkan jendela Chrome kalau mode tersembunyi
 
 Riwayat setiap update tersimpan di `update_log.txt` (hanya disimpan di komputer, tidak dikirim ke GitHub).
 
+**Portofolio EIDO (per kuartal, manual):** tambahkan baris laporan N-PORT terbaru ke `data_src/eido_nport.csv` (format kolom sama), lalu jalankan `py build_dana.py`. Saham baru yang belum ada di `data_src/eido_isin_kode.json` perlu dipetakan ISIN ke kode BEI.
+
 **Kalau persen HSC tidak terbaca otomatis:** skrip menulis catatan di kolom `catatan` pada `data_src/bei_hsc_pengumuman.csv`. Isi kolom `persen` dari PDF BEI, lalu jalankan `py update_hsc.py`.
 
 ## Struktur folder
@@ -57,6 +64,7 @@ data_src/                      File mentah dari sumber resmi
 update_data.py                 Update semua sumber
 update_hsc.py                  Membangun hsc.json dari CSV pengumuman
 build_screener.py              Membangun screener.json untuk screener.html
+build_dana.py                  Membangun dana.json (dana_pasar.html) dan eido.json (msci.html)
 screener.json                  Data Screener (dibangun ulang otomatis setiap ada data baru)
 jalankan_update.bat            Jalankan update dengan klik dua kali
 pasang_jadwal.bat              Pasang jadwal update harian di Windows

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETF MSCI Indonesia (EIDO) - Portofolio dan Nilai Dana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f3f4f6; }
+        .card { background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .num { font-variant-numeric: tabular-nums; }
+        th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+        th.sortable:hover { color: #4338ca; }
+        .seg-btn { padding: 6px 12px; } .seg-btn[aria-pressed="true"] { background: #312e81; color: #fff; }
+        .viz-root { --etf: #2a78d6; --asing: #eb6834; }
+        .pos { color: #047857; } .neg { color: #b91c1c; }
+        .bar { height: 8px; border-radius: 4px; background: var(--etf); }
+        #tabel td { white-space: nowrap; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<nav class="bg-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 py-3 min-h-16">
+            <div class="flex items-center">
+                <i class="fa-solid fa-globe text-2xl mr-3 text-indigo-400"></i>
+                <span class="font-bold text-xl tracking-tight">ETF MSCI Indonesia (EIDO)</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <a href="index.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-chart-pie mr-2"></i>Peta Institusi</a>
+                <a href="smart_money_tracker.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-satellite-dish mr-2"></i>Smart Tracker</a>
+                <a href="screener.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-filter-circle-dollar mr-2"></i>Screener</a>
+                <a href="dana_pasar.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-sack-dollar mr-2"></i>Dana di Pasar</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5 viz-root">
+
+    <section class="card p-4 text-sm bg-amber-50 border border-amber-200 text-amber-900">
+        Halaman ini menampilkan <b>portofolio dana iShares MSCI Indonesia ETF (EIDO)</b> dari laporan resmi N-PORT di SEC EDGAR, bukan data indeks MSCI. EIDO mengacu ke MSCI Indonesia IMI 25/50 dengan strategi sampling, sehingga bobot di sini adalah porsi aset bersih (NAV) dana, yang mendekati tetapi tidak identik dengan bobot indeks.
+    </section>
+
+    <section class="card p-4 flex flex-wrap items-center gap-4 justify-between">
+        <div class="text-sm text-gray-600" id="posisi">Memuat data...</div>
+        <div class="inline-flex rounded-md border overflow-hidden text-sm" role="group" aria-label="Mata uang">
+            <button class="seg-btn" data-cur="usd" aria-pressed="true">USD</button>
+            <button class="seg-btn border-l" data-cur="rp" aria-pressed="false">Rupiah</button>
+        </div>
+    </section>
+
+    <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" id="kpi"></section>
+
+    <section class="grid gap-5 lg:grid-cols-5">
+        <div class="card p-4 lg:col-span-2">
+            <h2 class="font-bold text-lg mb-1">Aset bersih EIDO per kuartal</h2>
+            <p class="text-xs text-gray-500 mb-3">Nilai aset bersih pada akhir periode laporan N-PORT.</p>
+            <div class="relative h-64"><canvas id="c-nav" aria-label="Grafik aset bersih EIDO per kuartal"></canvas></div>
+        </div>
+        <div class="card p-4 lg:col-span-3">
+            <h2 class="font-bold text-lg mb-1">15 bobot terbesar</h2>
+            <p class="text-xs text-gray-500 mb-3" id="top-sub"></p>
+            <div class="relative h-64"><canvas id="c-top" aria-label="Grafik 15 saham dengan bobot terbesar"></canvas></div>
+        </div>
+    </section>
+
+    <section class="card p-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+            <div>
+                <h2 class="font-bold text-lg">Portofolio lengkap</h2>
+                <p class="text-xs text-gray-500" id="tabel-sub"></p>
+            </div>
+            <input id="cari" type="search" placeholder="Cari kode atau nama" class="border rounded-md px-3 py-1.5 text-sm w-56">
+        </div>
+        <div class="overflow-x-auto"><table class="w-full text-sm num" id="tabel"></table></div>
+        <div id="keluar" class="text-xs text-gray-600 mt-3"></div>
+    </section>
+
+    <section class="card p-4 text-xs text-gray-600 space-y-2" id="catatan"></section>
+</main>
+
+<script>
+const BLN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const css = v => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(v).trim();
+const nf = (x, d = 1) => x.toLocaleString('id-ID', {minimumFractionDigits: d, maximumFractionDigits: d});
+const tgl = p => +p.slice(8) + ' ' + BLN[+p.slice(5, 7) - 1] + ' ' + p.slice(0, 4);
+const kelas = v => v > 0 ? 'pos' : (v < 0 ? 'neg' : '');
+let E, cur = 'usd', sortKey = 'usd', sortDir = -1, charts = {};
+
+function uangUSD(u, opt = {}) {
+    if (u == null || isNaN(u)) return '–';
+    const s = u < 0 ? '−' : (opt.sign ? '+' : '');
+    u = Math.abs(u);
+    if (cur === 'rp') { const rp = u * E.meta.kurs[E.meta.akhir]; const a = Math.abs(rp); return s + (a >= 1e12 ? 'Rp' + nf(rp / 1e12, 2) + ' T' : a >= 1e9 ? 'Rp' + nf(rp / 1e9) + ' M' : 'Rp' + nf(rp / 1e6) + ' jt'); }
+    const a = Math.abs(u);
+    return s + (a >= 1e9 ? 'US$' + nf(u / 1e9, 2) + ' M' : a >= 1e6 ? 'US$' + nf(u / 1e6) + ' jt' : 'US$' + nf(u / 1e3) + ' rb');
+}
+function uangRp(rp) { if (rp == null) return '–'; if (cur === 'usd') { const u = rp / E.meta.kurs[E.meta.akhir]; return u >= 1e9 ? 'US$' + nf(u / 1e9, 2) + ' M' : 'US$' + nf(u / 1e6) + ' jt'; } return rp >= 1e12 ? 'Rp' + nf(rp / 1e12) + ' T' : 'Rp' + nf(rp / 1e9) + ' M'; }
+
+async function load() {
+    E = await (await fetch('eido.json?v=' + Date.now())).json();
+    document.querySelectorAll('[data-cur]').forEach(b => b.onclick = () => { cur = b.dataset.cur; document.querySelectorAll('[data-cur]').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); });
+    $('#cari').oninput = tabel;
+    const m = E.meta;
+    $('#posisi').innerHTML = `Portofolio per <b>${tgl(m.akhir)}</b> (laporan N-PORT terbaru) · dibanding ${tgl(m.sebelum)} · kurs ${nf(m.kurs[m.akhir], 0)} Rp/US$ · dana asing KSEI per ${BLN[+m.bulan_asing_ksei.slice(5) - 1]} ${m.bulan_asing_ksei.slice(0, 4)}`;
+    catatan();
+    render();
+}
+
+function render() { kpi(); grafikNav(); grafikTop(); tabel(); }
+
+function kpi() {
+    const m = E.meta, nav = m.nav_usd[m.akhir], nav0 = m.nav_usd[m.sebelum];
+    const ek = E.holdings.filter(h => h.asing_rp);
+    const asingTotal = ek.reduce((a, h) => a + h.asing_rp, 0);
+    const eidoRp = ek.reduce((a, h) => a + h.lb / h.asing_lb * h.asing_rp, 0);
+    const beli = E.holdings.reduce((a, h) => a + h.dusd, 0);
+    const tile = (j, v, s) => `<div class="card p-4"><div class="text-xs uppercase tracking-wide text-gray-500">${j}</div><div class="text-2xl font-bold mt-1 num">${v}</div><div class="text-xs text-gray-500 mt-1 num">${s}</div></div>`;
+    $('#kpi').innerHTML =
+        tile('Aset bersih EIDO', uangUSD(nav), (cur === 'usd' ? 'setara Rp' + nf(nav * m.kurs[m.akhir] / 1e12, 2) + ' T' : 'setara US$' + nf(nav / 1e6) + ' jt')) +
+        tile('Perubahan vs kuartal lalu', `<span class="${kelas(nav - nav0)}">${uangUSD(nav - nav0, {sign: true})}</span>`, `${nf((nav / nav0 - 1) * 100)}% · ${tgl(m.sebelum)}: ${uangUSD(nav0)}`) +
+        tile('Estimasi beli bersih saham', `<span class="${kelas(beli)}">${uangUSD(beli, {sign: true})}</span>`, 'Δ lembar × harga akhir periode, semua saham') +
+        tile('Porsi EIDO dari dana asing', nf(eidoRp / asingTotal * 100, 2) + '%', `di ${ek.length} saham EIDO, dana asing ${uangRp(asingTotal)} (KSEI, ${BLN[+E.meta.bulan_asing_ksei.slice(5) - 1]} ${E.meta.bulan_asing_ksei.slice(0, 4)})`);
+}
+
+function grafikNav() {
+    const P = E.meta.periode, k = E.meta.kurs;
+    const val = P.map(p => cur === 'usd' ? E.meta.nav_usd[p] / 1e6 : E.meta.nav_usd[p] * k[p] / 1e12);
+    charts.nav?.destroy();
+    charts.nav = new Chart($('#c-nav'), {type: 'bar',
+        data: {labels: P.map(tgl), datasets: [{label: 'Aset bersih', data: val, backgroundColor: css('--etf'), borderRadius: 4, maxBarThickness: 36}]},
+        options: {maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + (cur === 'usd' ? 'US$' + nf(c.parsed.y) + ' jt' : 'Rp' + nf(c.parsed.y, 2) + ' T') + ' · ' + E.meta.jumlah_saham[P[c.dataIndex]] + ' saham'}}},
+            scales: {y: {title: {display: true, text: cur === 'usd' ? 'US$ juta' : 'Rp triliun', color: '#6b7280'}, grid: {color: '#eef0f3'}, ticks: {color: '#6b7280'}}, x: {grid: {display: false}, ticks: {color: '#6b7280'}}}}});
+}
+
+function grafikTop() {
+    const t = E.holdings.slice(0, 15);
+    $('#top-sub').textContent = `Porsi dari aset bersih per ${tgl(E.meta.akhir)}. 15 saham ini = ${nf(t.reduce((a, h) => a + h.w, 0))}% NAV.`;
+    charts.top?.destroy();
+    charts.top = new Chart($('#c-top'), {type: 'bar',
+        data: {labels: t.map(h => h.k || h.n), datasets: [{label: 'Bobot', data: t.map(h => h.w), backgroundColor: css('--etf'), borderRadius: 4, barThickness: 10}]},
+        options: {indexAxis: 'y', maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => { const h = t[c.dataIndex]; return [` ${nf(h.w, 2)}% NAV`, ` ${uangUSD(h.usd)}`]; }}}},
+            scales: {x: {title: {display: true, text: '% aset bersih', color: '#6b7280'}, grid: {color: '#eef0f3'}, ticks: {color: '#6b7280'}}, y: {grid: {display: false}, ticks: {color: '#312e81', font: {weight: 700}, autoSkip: false}}}}});
+}
+
+function tabel() {
+    const q = $('#cari').value.trim().toUpperCase();
+    let rows = E.holdings.filter(h => !q || (h.k || '').includes(q) || h.n.toUpperCase().includes(q));
+    rows.sort((a, b) => sortDir * ((a[sortKey] ?? -Infinity) > (b[sortKey] ?? -Infinity) ? 1 : -1));
+    const maxW = Math.max(...E.holdings.map(h => h.w));
+    $('#tabel-sub').textContent = `${E.holdings.length} saham per ${tgl(E.meta.akhir)}. Δ lembar dibanding ${tgl(E.meta.sebelum)}. Klik judul kolom untuk mengurutkan.`;
+    const cols = [['k', 'Kode', 'left'], ['n', 'Nama', 'left'], ['w', 'Bobot NAV', 'left'], ['usd', 'Nilai', 'right'], ['lb', 'Lembar', 'right'], ['dl', 'Δ lembar', 'right'], ['dusd', 'Est. beli/jual', 'right'], ['pt', '% saham tercatat', 'right'], ['asing_rp', 'Dana asing KSEI', 'right'], ['porsi_asing', 'Porsi EIDO', 'right']];
+    $('#tabel').innerHTML = `<thead class="text-xs text-gray-500"><tr>${cols.map(([k, l, a]) => `<th class="sortable text-${a} py-2 px-2" data-k="${k}">${l}${sortKey === k ? (sortDir > 0 ? ' ▲' : ' ▼') : ''}</th>`).join('')}</tr></thead><tbody>` +
+        rows.map(h => `<tr class="border-t border-gray-100 hover:bg-indigo-50">` +
+            `<td class="py-1.5 px-2 font-bold">${h.k ? `<a class="text-indigo-800 hover:underline" href="index.html?kode=${encodeURIComponent(h.k)}">${esc(h.k)}</a>` : '<span class="text-gray-400" title="Tidak aktif di BEI">–</span>'}${h.baru ? ' <span class="text-[10px] bg-indigo-100 text-indigo-800 rounded px-1">baru</span>' : ''}</td>` +
+            `<td class="px-2 text-gray-600 truncate max-w-[220px]">${esc(h.n)}</td>` +
+            `<td class="px-2 w-40"><div class="flex items-center gap-2"><div class="bar" style="width:${Math.max(2, h.w / maxW * 90)}px"></div><span>${nf(h.w, 2)}%</span></div></td>` +
+            `<td class="text-right px-2">${uangUSD(h.usd)}</td><td class="text-right px-2">${h.lb.toLocaleString('id-ID')}</td>` +
+            `<td class="text-right px-2 ${kelas(h.dl)}">${h.dl ? (h.dl > 0 ? '+' : '') + h.dl.toLocaleString('id-ID') : '0'}</td>` +
+            `<td class="text-right px-2 ${kelas(h.dusd)}">${h.dusd ? uangUSD(h.dusd, {sign: true}) : '–'}</td>` +
+            `<td class="text-right px-2">${h.pt == null ? '–' : nf(h.pt, 2) + '%'}</td>` +
+            `<td class="text-right px-2">${uangRp(h.asing_rp)}</td>` +
+            `<td class="text-right px-2">${h.porsi_asing == null ? '–' : nf(h.porsi_asing, 2) + '%'}</td></tr>`).join('') + '</tbody>';
+    document.querySelectorAll('#tabel th.sortable').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : (k === 'k' || k === 'n' ? 1 : -1); sortKey = k; tabel(); });
+    $('#keluar').innerHTML = E.keluar.length ? `<b>Keluar dari portofolio sejak ${tgl(E.meta.sebelum)} (${E.keluar.length}):</b> ` + E.keluar.map(x => esc(x.k || x.n)).join(', ') : '';
+}
+
+function catatan() {
+    $('#catatan').innerHTML = `
+        <div class="font-semibold text-gray-800 text-sm">Cara membaca</div>
+        <p><b>Sumber.</b> ${esc(E.meta.sumber)}. Laporan N-PORT dilaporkan per kuartal dengan jeda sekitar 2 bulan, jadi posisi terbaru di sini bukan posisi hari ini. Nilai dalam USD sesuai laporan; konversi Rupiah memakai kurs referensi ECB pada akhir periode.</p>
+        <p><b>Est. beli/jual</b> = perubahan lembar dibanding kuartal sebelumnya × harga akhir periode. Ini estimasi; transaksi sebenarnya terjadi di harga yang berbeda-beda selama kuartal.</p>
+        <p><b>Dana asing KSEI</b> = total lembar milik investor asing di saham tersebut (Balancepos KSEI, saham tanpa warkat) × harga penutupan, pada bulan yang sama dengan laporan N-PORT. <b>Porsi EIDO</b> = lembar EIDO ÷ lembar milik seluruh investor asing. Lihat juga <a class="underline text-indigo-700" href="dana_pasar.html">Dana di Pasar</a>.</p>
+        <p>Satuan: T = triliun, M = miliar, jt = juta, rb = ribu.</p>
+        <p>Bobot dan daftar konstituen indeks MSCI tidak ditampilkan karena merupakan data milik MSCI. Data disajikan untuk riset, bukan rekomendasi jual atau beli.</p>`;
+}
+
+load().catch(e => { $('#posisi').innerHTML = '<span class="text-red-700">Gagal memuat data: ' + esc(e.message) + '</span>'; });
+</script>
+</body>
+</html>

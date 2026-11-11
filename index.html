@@ -36,8 +36,14 @@
                     <a href="screener.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
                         <i class="fa-solid fa-filter-circle-dollar mr-2"></i> Screener Asing
                     </a>
+                    <a href="dana_pasar.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
+                        <i class="fa-solid fa-sack-dollar mr-2"></i> Dana di Pasar
+                    </a>
+                    <a href="msci.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
+                        <i class="fa-solid fa-globe mr-2"></i> ETF MSCI Indonesia
+                    </a>
                     <div class="text-sm text-indigo-200 font-medium hidden md:block">
-                        <i class="fa-solid fa-clock mr-1"></i> Data KSEI (Update Terakhir: September 2026)
+                        <i class="fa-solid fa-clock mr-1"></i> Data KSEI (Update Terakhir: <span id="update-ksei">memuat...</span>)
                     </div>
                 </div>
             </div>
@@ -649,5 +655,11 @@
             }
         };
     </script>
+<script>
+fetch('emiten_info.json?v=' + Date.now()).then(r => r.json()).then(j => {
+    const B = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const p = j.periode; document.getElementById('update-ksei').textContent = +p.slice(8) + ' ' + B[+p.slice(5, 7) - 1] + ' ' + p.slice(0, 4);
+}).catch(() => {});
+</script>
 </body>
 </html>

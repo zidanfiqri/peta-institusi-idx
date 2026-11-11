@@ -303,6 +303,38 @@ def baca_balancepos(isi):
     return df[df["Code"].str.len() >= 4]
 
 
+HARGA_CSV = "data_src/harga_akhir_bulan.csv"
+KURS_CSV = "data_src/kurs_usdidr.csv"
+
+
+def simpan_harga_kurs(ym, tgl, df):
+    """Harga penutupan dan jumlah saham dari Balancepos (untuk halaman Dana di Pasar), plus kurs USD/IDR."""
+    if os.path.exists(HARGA_CSV):
+        with open(HARGA_CSV, encoding="utf-8") as f:
+            ada = {r["bulan"] for r in csv.DictReader(f)}
+        if ym not in ada:
+            with open(HARGA_CSV, "a", encoding="utf-8", newline="") as f:
+                w = csv.writer(f)
+                for _, r in df.iterrows():
+                    if r["Price"] > 0:
+                        w.writerow([ym, tgl, r["Code"], "", int(r["Price"]), int(r["Sec. Num"]), ""])
+            log(f"Harga {ym}: {len(df)} saham ditambahkan ke {HARGA_CSV}.")
+    if os.path.exists(KURS_CSV):
+        with open(KURS_CSV, encoding="utf-8") as f:
+            ada = {r["tanggal"][:7] for r in csv.DictReader(f)}
+        if ym not in ada:
+            try:
+                awal = f"{ym}-01"
+                akhir = f"{tgl[:4]}-{tgl[4:6]}-{tgl[6:]}"
+                j = _http_get(f"https://api.frankfurter.app/{awal}..{akhir}?from=USD&to=IDR").json()
+                t = max(j["rates"])
+                with open(KURS_CSV, "a", encoding="utf-8", newline="") as f:
+                    csv.writer(f).writerow([t, j["rates"][t]["IDR"]])
+                log(f"Kurs {ym}: {t} {j['rates'][t]['IDR']} Rp/US$ (ECB via frankfurter).")
+            except Exception as e:
+                log(f"Kurs {ym} gagal diambil ({e}); isi manual di {KURS_CSV}.")
+
+
 def masukkan_balancepos(db, df, ym):
     """Sama persis dengan logika update_ksei.py, supaya index.html dan Smart Money tetap jalan."""
     n = 0
@@ -349,7 +381,9 @@ def update_ksei():
             log(f"KSEI: file Balancepos {ym} belum tersedia di KSEI.")
             continue
         d, isi = hasil
-        n = masukkan_balancepos(db, baca_balancepos(isi), ym)
+        df_bp = baca_balancepos(isi)
+        n = masukkan_balancepos(db, df_bp, ym)
+        simpan_harga_kurs(ym, d, df_bp)
         log(f"KSEI: {ym} dimasukkan ke data.json ({n} emiten baru di bulan itu).")
         berubah = True
     if berubah:
@@ -409,7 +443,8 @@ def git_push():
     if not shutil.which("git") or not os.path.isdir(".git"):
         log("Git tidak ditemukan atau folder ini bukan hasil git clone. Upload file yang berubah secara manual.")
         return
-    jalur = [".gitignore", "data.json", "emiten_info.json", "hsc.json", "screener.json", HSC_CSV, DIR_1PCT, DIR_KLAS]
+    jalur = [".gitignore", "data.json", "emiten_info.json", "hsc.json", "screener.json", "dana.json", "eido.json",
+             HSC_CSV, HARGA_CSV, KURS_CSV, DIR_1PCT, DIR_KLAS]
     jalur = [j for j in jalur if os.path.exists(j)]
     subprocess.run(["git", "add", *jalur], check=True)
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
@@ -464,6 +499,13 @@ def main():
         except Exception as e:
             gagal.append("screener")
             log(f"Screener gagal dibangun: {e}")
+        try:
+            import build_dana
+            build_dana.main()
+            log("Dana di Pasar: dana.json dan eido.json dibangun ulang.")
+        except Exception as e:
+            gagal.append("dana")
+            log(f"Dana di Pasar gagal dibangun: {e}")
     if berubah and not a.no_push:
         git_push()
     log("Selesai." + (f" Ada yang gagal: {', '.join(gagal)}." if gagal else ""))
