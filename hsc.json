@@ -1,10 +1,10 @@
 {
  "sumber": "BEI: Perusahaan Tercatat > Kepemilikan Saham Terkonsentrasi Tinggi",
  "url_halaman": "https://www.idx.co.id/id/perusahaan-tercatat/kepemilikan-saham-terkonsentrasi-tinggi/",
- "diambil": "2026-10-26 13.07 WIB",
- "pengumuman_terakhir": "2026-10-22",
- "jumlah_pengumuman": 88,
- "jumlah_aktif": 82,
+ "diambil": "2026-11-11 08.45 WIB",
+ "pengumuman_terakhir": "2026-11-06",
+ "jumlah_pengumuman": 89,
+ "jumlah_aktif": 83,
  "aktif": [
   {
    "kode": "ADES",
@@ -408,6 +408,14 @@
    "link": "https://www.idx.co.id/Media/kuigdsbl/20260529_peng-00012-hsc-mgro_29-mei-2026.pdf"
   },
   {
+   "kode": "MKNT",
+   "aktif": true,
+   "sejak": "2026-11-06",
+   "persen": 99.64,
+   "posisi_per": "2026-11-05",
+   "link": "https://www.idx.co.id/Media/wq2bveoz/final-pengumuman-hsc-6-nov-2026.pdf"
+  },
+  {
    "kode": "MKPI",
    "aktif": true,
    "sejak": "2026-07-14",
@@ -685,6 +693,14 @@
   }
  ],
  "riwayat": [
+  {
+   "kode": "MKNT",
+   "jenis": "Pengenaan",
+   "tanggal": "2026-11-06",
+   "persen": 99.64,
+   "posisi_per": "2026-11-05",
+   "link": "https://www.idx.co.id/Media/wq2bveoz/final-pengumuman-hsc-6-nov-2026.pdf"
+  },
   {
    "kode": "FILM",
    "jenis": "Pengenaan",
