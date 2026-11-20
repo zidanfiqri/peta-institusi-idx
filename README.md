@@ -6,7 +6,7 @@ Dashboard statis komposisi kepemilikan saham Bursa Efek Indonesia per tipe inves
 
 | File | Isi |
 |---|---|
-| `index.html` | Peta Kepemilikan Institusi: komposisi 18 tipe investor lokal dan asing per emiten, radar net flow asing. Matriks bisa ditampilkan dalam lembar, % saham tanpa warkat, atau % total saham KSEI, dengan perubahan per bulan (poin persen). Klik satu tipe untuk melihat nama pemegang &ge;1% di tipe itu, persen per nama, dan sisanya (data sama dengan KSEI Ownership Dashboard) |
+| `index.html` | Peta Kepemilikan Institusi: komposisi 18 tipe investor lokal dan asing per emiten, radar net flow asing. Setiap angka lembar diberi persen di sampingnya (lembar &divide; saham beredar saat ini = Sec. Num KSEI bulan terakhir), ditambah baris saham warkat. Kartu emiten bergaya KSEI Ownership Dashboard: klik untuk buka, tabel kategori institusi bulan terakhir dan bulan sebelumnya, free float, market cap, saham beredar, dan jaringan koneksi (D3) yang menampilkan pemegang &ge;1% di kategori yang diklik beserta saham lain yang mereka pegang |
 | `smart_money_tracker.html` | Smart Money Tracker: inflow asing, pola distribusi, watchlist |
 | `screener.html` | Screener saham non HSC berdasarkan porsi asing: filter market cap, free float, sektor; breakdown tipe investor asing; daftar HSC; ekspor Excel |
 | `dana_pasar.html` | Dana di Pasar: nilai kepemilikan lokal dan asing dalam Rupiah dan USD per bulan dan per tipe investor, estimasi aliran dana (dipisah dari efek harga, aksi korporasi, reklasifikasi, dan perubahan pencatatan KSEI), per saham |
@@ -73,8 +73,9 @@ update_data.py                 Update semua sumber
 update_hsc.py                  Membangun hsc.json dari CSV pengumuman
 build_screener.py              Membangun screener.json untuk screener.html
 build_dana.py                  Membangun dana.json (dana_pasar.html) dan eido.json (msci.html)
-build_flow.py                  Membangun foreign_flow.json, harian_asing.json (foreign_flow.html) dan
-                               detail/KODE.json (persentase, Sec. Num, pemegang >=1% per tipe untuk index.html)
+build_flow.py                  Membangun foreign_flow.json, harian_asing.json (foreign_flow.html),
+                               detail/KODE.json (Sec. Num, split, pemegang >=1% per tipe untuk index.html) dan
+                               investor_1pct.json (saham lain yang dipegang tiap investor, untuk jaringan koneksi)
 screener.json                  Data Screener (dibangun ulang otomatis setiap ada data baru)
 jalankan_update.bat            Jalankan update dengan klik dua kali
 pasang_jadwal.bat              Pasang jadwal update harian di Windows

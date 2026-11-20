@@ -6,6 +6,7 @@
     <title>Peta Kepemilikan Institusi IDX</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -18,6 +19,66 @@
             height: 42px; border-color: #d1d5db; border-radius: 0.375rem; padding: 6px 12px;
         }
         .select2-container--default .select2-selection--single .select2-selection__arrow { top: 8px; }
+        /* ---- angka persen di samping jumlah lembar ---- */
+        .pct-samping { display: inline-block; min-width: 3.9em; margin-left: .45rem; font-size: .75rem; font-weight: 600; color: #4f46e5; text-align: right; font-family: Inter, system-ui, sans-serif; }
+        /* ---- kartu emiten ala KSEI Ownership Dashboard ---- */
+        @keyframes kartuMasuk { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .kartu { background: #fff; border: 1px solid rgba(0,0,0,.08); border-left: 3px solid transparent; border-radius: .75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); animation: kartuMasuk 300ms cubic-bezier(.16,1,.3,1) both; transition: border-color 180ms, box-shadow 180ms, transform 180ms; }
+        .kartu:hover { border-left-color: #15803d; box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+        .kartu.open { border-left-color: #15803d; }
+        .kartu-header { display: flex; align-items: center; gap: 1rem; padding: .75rem 1rem; cursor: pointer; user-select: none; min-height: 52px; transition: background 180ms; }
+        .kartu-header:hover { background: #f8fafc; }
+        .kartu-kiri { display: flex; align-items: center; gap: .75rem; flex: 1; min-width: 0; }
+        .kartu .chevron { width: 16px; height: 16px; color: #94a3b8; transition: transform 250ms cubic-bezier(.16,1,.3,1); flex-shrink: 0; }
+        .kartu.open .chevron { transform: rotate(90deg); }
+        .ticker-badge { font-size: .8rem; font-weight: 700; color: #fff; background: #15803d; padding: 3px 8px; border-radius: 6px; letter-spacing: .04em; flex-shrink: 0; }
+        .issuer-name { font-size: .875rem; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .kartu-kanan { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: .5rem; }
+        .pill-float { padding: 2px 10px; border-radius: 99px; background: rgba(21,128,61,.10); color: #15803d; font-size: .75rem; font-weight: 700; white-space: nowrap; }
+        .pill-info { padding: 2px 10px; border-radius: 99px; background: #f1f5f9; color: #0f172a; font-size: .75rem; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .pill-label { color: #64748b; font-weight: 500; margin-right: 3px; }
+        .kartu-body { max-height: 0; overflow: hidden; transition: max-height 300ms cubic-bezier(.16,1,.3,1); border-top: 0 solid rgba(0,0,0,.08); }
+        .kartu.open .kartu-body { max-height: 4000px; border-top-width: 1px; }
+        .kartu-inner { display: flex; }
+        .kartu-tabel { flex: 1 1 62%; min-width: 0; overflow-x: auto; }
+        .kartu-graf { flex: 0 0 38%; min-width: 300px; border-left: 1px solid rgba(0,0,0,.08); position: relative; display: flex; flex-direction: column; background: #fff; }
+        @media (max-width: 640px) { .kat-table .col-tipe, .kat-table .col-rank { display: none; } .issuer-name { display: none; } }
+        @media (max-width: 900px) { .kartu-inner { flex-direction: column; } .kartu-graf { flex: none; width: 100%; min-width: 0; border-left: none; border-top: 1px solid rgba(0,0,0,.08); } }
+        table.kat-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .8rem; }
+        .kat-table th { background: #f8fafc; padding: .5rem .55rem; text-align: left; font-size: .7rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; border-bottom: 1px solid rgba(0,0,0,.08); }
+        .kat-table th.right, .kat-table td.right { text-align: right; }
+        .kat-table td { padding: .5rem .55rem; border-bottom: 1px solid rgba(0,0,0,.06); white-space: nowrap; vertical-align: middle; }
+        .kat-table td.rank { color: #94a3b8; font-size: .7rem; font-weight: 600; text-align: center; }
+        .kat-table tbody tr { cursor: pointer; --bar: rgba(21,128,61,.12); --bar-h: rgba(21,128,61,.20); background: linear-gradient(to right, var(--bar) 0%, var(--bar) calc(var(--row-pct, 0%) - 2%), transparent calc(var(--row-pct, 0%) + 2%), transparent 100%); transition: background 120ms; }
+        .kat-table tbody tr:hover { background: linear-gradient(to right, var(--bar-h) 0%, var(--bar-h) calc(var(--row-pct, 0%) - 2%), #f1f5f9 calc(var(--row-pct, 0%) + 2%), #f1f5f9 100%); }
+        .kat-table tbody tr.aktif { box-shadow: inset 3px 0 0 #4f46e5; background-color: #eef2ff; }
+        .kat-table tbody tr.warkat { --bar: rgba(217,119,6,.12); --bar-h: rgba(217,119,6,.20); }
+        .kat-table tfoot td { border-top: 1px solid rgba(0,0,0,.12); background: #f8fafc; }
+        .kat-table td.naik .pct-samping { color: #059669; }
+        .kat-table td.turun .pct-samping { color: #dc2626; }
+        .angka { font-variant-numeric: tabular-nums; color: #334155; font-weight: 500; }
+        .pill-tipe { font-size: .7rem; padding: 2px 7px; border-radius: 6px; background: #f1f5f9; color: #334155; }
+        .pill-tipe .kode { color: #94a3b8; font-weight: 600; margin-left: 3px; }
+        .pill-status { font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 6px; }
+        .pill-status.lokal { background: #dbeafe; color: #1d4ed8; }
+        .pill-status.asing { background: #fee2e2; color: #b91c1c; }
+        .graf-judul { display: flex; align-items: center; gap: .5rem; padding: .5rem .75rem; border-bottom: 1px solid rgba(0,0,0,.08); font-size: .75rem; color: #64748b; min-width: 0; }
+        .graf-container { position: relative; flex: 1; min-height: 440px; background: #f8fafc; }
+        .graf-container > svg { display: block; width: 100%; height: 100%; }
+        .graf-zoom { position: absolute; top: .5rem; right: .5rem; display: flex; flex-direction: column; gap: 2px; z-index: 5; }
+        .graf-zoom button { width: 30px; height: 30px; border: 1px solid rgba(0,0,0,.13); border-radius: 6px; background: #fff; color: #475569; display: flex; align-items: center; justify-content: center; transition: all 180ms; }
+        .graf-zoom button:hover { background: #f1f5f9; border-color: #15803d; color: #0f172a; }
+        .graf-zoom button:active { transform: scale(.92); }
+        .graf-tooltip { position: absolute; pointer-events: none; background: rgba(255,255,255,.97); border: 1px solid rgba(0,0,0,.13); border-radius: 10px; padding: 8px 12px; font-size: .75rem; color: #0f172a; box-shadow: 0 8px 32px rgba(0,0,0,.18); max-width: 340px; z-index: 10; line-height: 1.5; }
+        .graf-tooltip hr { margin: 4px 0; border-color: #e2e8f0; }
+        .tip-muted { color: #64748b; } .tip-warn { color: #b45309; }
+        .tip-badge { font-size: .65rem; background: #ede9fe; color: #6d28d9; border-radius: 4px; padding: 0 4px; }
+        .graf-legend { display: flex; flex-wrap: wrap; gap: .4rem .9rem; padding: .5rem .75rem; font-size: .7rem; color: #64748b; border-top: 1px solid rgba(0,0,0,.06); }
+        .graf-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+        .graf-catatan { position: absolute; left: 12px; right: 48px; bottom: 8px; z-index: 4; pointer-events: none; text-align: center; font-size: 11px; line-height: 1.35; color: #92400e; background: rgba(255,251,235,.92); border: 1px solid #fde68a; border-radius: 8px; padding: 4px 8px; }
+        .angka-tab { font-variant-numeric: tabular-nums; }
+        #graf-wrap:fullscreen { background: #fff; }
+        #graf-wrap:fullscreen .graf-container { height: calc(100vh - 90px); }
     </style>
 </head>
 <body class="text-gray-800">
@@ -145,6 +206,59 @@
                 </div>
             </div>
 
+            <div class="mb-6" id="kartu-wrap">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-1 mb-2">
+                    <h2 class="text-lg font-semibold text-gray-900"><i class="fa-solid fa-diagram-project text-indigo-500 mr-2"></i>Kepemilikan per Kategori Institusi</h2>
+                    <span class="text-xs text-gray-500">Klik kartu untuk buka/tutup &middot; klik kategori untuk melihat jaringan pemegangnya</span>
+                </div>
+                <div class="kartu open" id="kartu">
+                    <div class="kartu-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleKartu()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleKartu(); }">
+                        <div class="kartu-kiri">
+                            <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="ticker-badge" id="kartu-kode"></span>
+                            <span class="issuer-name" id="kartu-nama"></span>
+                        </div>
+                        <div class="kartu-kanan" id="kartu-pills"></div>
+                    </div>
+                    <div class="kartu-body">
+                        <div class="kartu-inner">
+                            <div class="kartu-tabel">
+                                <table class="kat-table">
+                                    <thead id="kat-head"></thead>
+                                    <tbody id="kat-body"></tbody>
+                                    <tfoot id="kat-foot"></tfoot>
+                                </table>
+                                <p class="text-[11px] text-gray-500 px-3 py-2 whitespace-normal">% = lembar kategori &divide; saham beredar saat ini. Saham warkat = saham beredar yang tidak tercatat di rekening efek KSEI, sehingga KSEI tidak merincinya per kategori.</p>
+                            </div>
+                            <div class="kartu-graf" id="graf-wrap">
+                                <div class="graf-judul">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></svg>
+                                    <span class="font-semibold text-gray-700 whitespace-nowrap">Jaringan Koneksi</span>
+                                    <span id="graf-sub" class="truncate"></span>
+                                </div>
+                                <div class="graf-container" id="graf">
+                                    <div class="graf-zoom">
+                                        <button type="button" onclick="event.stopPropagation(); grafZoom(1.4)" title="Perbesar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                                        <button type="button" onclick="event.stopPropagation(); grafZoom(0.7)" title="Perkecil"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                                        <button type="button" onclick="event.stopPropagation(); grafReset()" title="Reset"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
+                                        <button type="button" onclick="event.stopPropagation(); grafLayarPenuh()" title="Layar penuh"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+                                    </div>
+                                    <div id="graf-catatan" class="graf-catatan" style="display:none"></div>
+                                </div>
+                                <div class="graf-legend">
+                                    <span><i style="background:#2563eb"></i>Kategori lokal</span>
+                                    <span><i style="background:#dc2626"></i>Kategori asing</span>
+                                    <span><i style="background:#2faa8a"></i>Pemegang &ge;1%</span>
+                                    <span><i style="background:#fff;border:2px dashed #2faa8a"></i>Tipe sama, saham warkat</span>
+                                    <span><i style="background:#cbd5e1"></i>Sisa &lt;1%</span>
+                                    <span><i style="background:#5b9bd5;border-radius:3px"></i>Saham lain yang dipegang (klik untuk buka)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card mb-6">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 border-b pb-3">
                     <div>
@@ -155,7 +269,7 @@
                     <span class="self-start bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded border border-indigo-200" id="table-period">Periode: -</span>
                 </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
                     <div>
                         <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Filter Kategori:</label>
                         <select id="filter-origin" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData()">
@@ -173,16 +287,8 @@
                             <option value="size-desc">Kepemilikan Terbesar</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Tampilan Angka:</label>
-                        <select id="filter-mode" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData(); if (rincianKey) bukaRincian(rincianKey);">
-                            <option value="lembar">Jumlah lembar</option>
-                            <option value="pct-sl">% saham tanpa warkat</option>
-                            <option value="pct-tot">% total saham (KSEI)</option>
-                        </select>
-                    </div>
                 </div>
-                <p class="text-xs text-gray-500 mb-3" id="mode-note"><i class="fa-solid fa-hand-pointer mr-1 text-indigo-500"></i>Klik salah satu baris untuk melihat <b>nama pemegang saham &ge;1%</b> di tipe itu dan berapa persen per nama (data KSEI, sama dengan <a class="text-indigo-600 underline" href="https://ksei-ownership-dashboard.vercel.app/" target="_blank" rel="noopener">KSEI Ownership Dashboard</a>).</p>
+                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-percent mr-1 text-indigo-500"></i>Persen di samping angka = jumlah lembar kategori &divide; saham beredar saat ini (Sec. Num KSEI). Klik baris untuk melihat jaringan pemegangnya.</p>
                 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
@@ -192,7 +298,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="rincian-panel" class="hidden mt-5 border-t-2 border-indigo-100 pt-4"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -263,7 +368,9 @@
         let globalSelectedMonths = []; 
         let globalScripless = [];      // total saham tanpa warkat per bulan (jumlah 18 tipe Balancepos)
         const detailCache = {};        // detail/{KODE}.json: Sec. Num KSEI dan pemegang >=1% per bulan
-        let rincianKey = null, rincianBulan = null, rincianSemua = false;
+        let emitenInfo = null;         // emiten_info.json: Sec. Num (saham beredar) dan harga bulan terakhir
+        let investorIdx = null;        // investor_1pct.json: saham lain yang dipegang tiap investor >=1%
+        let kategoriAktif = null;      // kategori yang sedang dibuka di jaringan koneksi
         const KSEI_DASH = 'https://ksei-ownership-dashboard.vercel.app/';
 
         function muatDetail(kode) {
@@ -301,6 +408,14 @@
         }
 
         $(document).ready(function() {
+            fetch('emiten_info.json?v=' + Date.now()).then(r => r.json()).then(j => {
+                emitenInfo = j;
+                if (currentEmitenGlobal) { processTableData(); renderKartu(); }
+            }).catch(() => {});
+            fetch('investor_1pct.json').then(r => r.json()).then(j => {
+                investorIdx = j;
+                if (currentEmitenGlobal) renderGraf();
+            }).catch(() => {});
             fetch('data.json')
                 .then(response => response.json())
                 .then(data => {
@@ -524,56 +639,67 @@
 
             processTableData();
             updateCharts(records);
+            renderKartu();
             muatDetail(emiten).then(() => {
                 if (currentEmitenGlobal !== emiten) return;
                 processTableData();
-                if (rincianKey) bukaRincian(rincianKey);
+                renderKartu();
             });
         }
 
-        // Persen per bulan untuk satu baris: basis "tanpa warkat" (selalu ada) atau "total saham KSEI" (Sec. Num)
-        function basisBulan(i, mode) {
-            const m = globalSelectedMonths[i];
-            if (mode === 'pct-sl') return globalScripless[i] || null;
-            const det = detailCache[currentEmitenGlobal];
-            const s = det && det.sec && det.sec[m];
-            return s ? s[0] : null;
+        // ---------------- Persentase: lembar ÷ saham beredar saat ini ----------------
+        // Saham beredar = Sec. Num KSEI bulan terakhir (emiten_info.json), sama dengan penyebut persen di file KSEI 1%.
+        // Bila ada stock split di antara bulan itu dan sekarang, lembar bulan lama dikali rasio split agar setara.
+        function sahamBeredar(kode) {
+            const e = emitenInfo && emitenInfo.data && emitenInfo.data[kode];
+            if (e && e.sec_num) return e.sec_num;
+            const d = detailCache[kode];
+            if (d && d.sec) { const ms = Object.keys(d.sec).sort(); if (ms.length) return d.sec[ms[ms.length - 1]][0]; }
+            return null;
         }
+        function faktorSplit(kode, m) {
+            const d = detailCache[kode];
+            if (!d || !d.split || !d.bulan) return 1;
+            const i = d.bulan.indexOf(m);
+            if (i < 0) return 1;
+            let f = 1;
+            for (let j = i; j < d.split.length; j++) f *= (d.split[j] || 1);
+            return f;
+        }
+        function persen(kode, m, lembar) {
+            const so = sahamBeredar(kode);
+            return so ? lembar * faktorSplit(kode, m) / so * 100 : null;
+        }
+        const tglIndo = (t) => {
+            if (!t) return '';
+            const B = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            return `${+t.slice(8, 10)} ${B[+t.slice(5, 7) - 1]} ${t.slice(0, 4)}`;
+        };
+        const fmtRp = (v) => v >= 1e12 ? 'Rp' + (v / 1e12).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' T'
+            : (v >= 1e9 ? 'Rp' + (v / 1e9).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' M' : 'Rp' + formatNumber(v));
 
         function processTableData() {
             const originFilter = $('#filter-origin').val();
             const sortFilter = $('#filter-sort').val();
-            
-            const mode = $('#filter-mode').val() || 'lembar';
-            const isPct = mode !== 'lembar';
-            const det = detailCache[currentEmitenGlobal];
-            const basis = globalSelectedMonths.map((m, i) => isPct ? basisBulan(i, mode) : null);
-            const thead = $('#tbl-head');
+            const kode = currentEmitenGlobal;
+            const so = sahamBeredar(kode);
+            const divisor = currentUnit === 'lot' ? 100 : 1;
+
             let thHtml = `<tr>
-                <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md whitespace-nowrap">Kategori Institusi</th>`;
-            globalSelectedMonths.forEach((m, i) => {
-                let tanda = '';
-                if (mode === 'pct-tot') {
-                    const s = det && det.sec && det.sec[m];
-                    tanda = !s ? ' <span class="text-gray-400 font-normal" title="Jumlah saham KSEI (Sec. Num) bulan ini belum tersedia">(n/a)</span>'
-                        : (s[1] === 'est' ? ' <span class="text-amber-600" title="Jumlah saham KSEI diturunkan dari file pemegang 1% bulan yang sama (galat &le; 0,1%)">&asymp;</span>' : '');
-                }
-                thHtml += `<th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">${m}${tanda}</th>`;
+                <th scope="col" class="px-3 py-3 text-left tracking-wider rounded-l-md whitespace-nowrap">Kategori Institusi</th>`;
+            globalSelectedMonths.forEach(m => {
+                thHtml += `<th scope="col" class="px-3 py-3 text-right tracking-wider whitespace-nowrap">${m}</th>`;
             });
             thHtml += `
-                <th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">${isPct ? 'Perubahan (poin persen)' : 'Perubahan Mutasi'}</th>
-                <th scope="col" class="px-6 py-3 text-center tracking-wider rounded-r-md whitespace-nowrap">Status</th>
+                <th scope="col" class="px-3 py-3 text-right tracking-wider whitespace-nowrap">Perubahan Mutasi</th>
+                <th scope="col" class="px-3 py-3 text-center tracking-wider rounded-r-md whitespace-nowrap">Status</th>
             </tr>`;
-            thead.html(thHtml);
-            if (mode === 'pct-tot' && !det) {
-                $('#flow-table-body').html(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-6 py-4 text-center text-gray-400">Memuat jumlah saham KSEI...</td></tr>`);
-                return;
-            }
-            // persen per bulan dan perubahan (poin persen) bulan pertama -> terakhir yang punya basis
+            $('#tbl-head').html(thHtml);
+
             globalRawChanges.forEach(c => {
-                c.pct = c.raw.map((v, i) => basis[i] ? v / basis[i] * 100 : null);
-                const ada = c.pct.map((v, i) => [v, i]).filter(x => x[0] !== null);
-                c.diffPct = ada.length >= 2 ? ada[ada.length - 1][0] - ada[0][0] : null;
+                c.pct = c.raw.map((v, i) => persen(kode, globalSelectedMonths[i], v));
+                const a = c.pct[0], b = c.pct[c.pct.length - 1];
+                c.diffPct = (a !== null && b !== null) ? b - a : null;
             });
 
             const tbody = $('#flow-table-body');
@@ -591,188 +717,335 @@
                 workingData.sort((a, b) => b.name.localeCompare(a.name));
             } else if (sortFilter === 'size-desc') {
                 workingData.sort((a, b) => b.last - a.last);
-            } else if (isPct) {
-                workingData.sort((a, b) => Math.abs(b.diffPct || 0) - Math.abs(a.diffPct || 0));
-            } else { 
+            } else {
                 workingData.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
             }
 
-            if(workingData.length === 0) {
-                tbody.append(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-6 py-4 text-center text-gray-400">Tidak ada data klasifikasi yang cocok</td></tr>`);
+            if (workingData.length === 0) {
+                tbody.append(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-3 py-4 text-center text-gray-400">Tidak ada data klasifikasi yang cocok</td></tr>`);
                 return;
             }
 
             workingData.forEach(c => {
-                const d = isPct ? (c.diffPct === null ? 0 : (Math.abs(c.diffPct) < 0.005 ? 0 : c.diffPct)) : c.diff;
-                let diffClass = d > 0 ? 'text-emerald-600' : (d < 0 ? 'text-red-600' : 'text-gray-500');
-                let diffIcon = d > 0 ? '<i class="fa-solid fa-square-plus mr-1"></i>' : (d < 0 ? '<i class="fa-solid fa-square-minus mr-1"></i>' : '');
-                let statusBadge = d > 0 
-                    ? '<span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Masuk</span>' 
-                    : (d < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Keluar</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Tetap</span>');
-                
-                let sign = d > 0 ? '+' : '';
-                const aktif = rincianKey === c.key ? ' bg-indigo-50' : '';
+                let diffClass = c.diff > 0 ? 'text-emerald-600' : (c.diff < 0 ? 'text-red-600' : 'text-gray-500');
+                let diffIcon = c.diff === 0 ? '-' : '';
+                let statusBadge = c.diff > 0
+                    ? '<span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Masuk</span>'
+                    : (c.diff < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Keluar</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Tetap</span>');
+                let sign = c.diff > 0 ? '+' : '';
 
-                let trHtml = `<tr class="hover:bg-indigo-50 transition-colors cursor-pointer${aktif}" onclick="bukaRincian('${c.key}')" title="Klik untuk melihat pemegang saham &ge;1% di tipe ini">
-                        <td class="px-6 py-3.5 font-semibold text-gray-900 whitespace-nowrap"><i class="fa-solid fa-list-ul text-indigo-300 mr-2"></i>${c.name}</td>`;
-                
-                if (isPct) {
-                    c.pct.forEach((v, i) => {
-                        const prev = i > 0 ? c.pct[i - 1] : null;
-                        const dm = (v !== null && prev !== null) ? v - prev : null;
-                        const dmc = dm === null || Math.abs(dm) < 0.005 ? 'text-gray-400' : (dm > 0 ? 'text-emerald-600' : 'text-red-600');
-                        trHtml += `<td class="px-6 py-2.5 text-right font-mono whitespace-nowrap"><div class="text-gray-700">${fmtPct(v)}</div>${i > 0 ? `<div class="text-[11px] ${dmc}">${dm === null ? '' : fmtPP(dm)}</div>` : ''}</td>`;
-                    });
-                    trHtml += `
-                        <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono whitespace-nowrap">${c.diffPct === null ? '–' : diffIcon + fmtPP(c.diffPct)}</td>
-                        <td class="px-6 py-3.5 text-center whitespace-nowrap">${statusBadge}</td>
+                let trHtml = `<tr class="hover:bg-indigo-50 transition-colors cursor-pointer" onclick="pilihKategori('${c.key}', true)" title="Klik untuk melihat jaringan pemegang saham kategori ini">
+                        <td class="px-3 py-3.5 font-semibold text-gray-900 whitespace-nowrap">${c.name}</td>`;
+                c.values.forEach((v, i) => {
+                    trHtml += `<td class="px-3 py-3.5 text-right text-gray-600 angka-tab whitespace-nowrap">${formatNumber(v)}<span class="pct-samping">${fmtPct(c.pct[i])}</span></td>`;
+                });
+                const ppCls = c.diffPct === null || Math.abs(c.diffPct) < 0.005 ? 'text-gray-400' : (c.diffPct > 0 ? 'text-emerald-600' : 'text-red-600');
+                trHtml += `
+                        <td class="px-3 py-3.5 text-right font-bold ${diffClass} angka-tab whitespace-nowrap">${diffIcon}${sign}${formatNumber(c.diff)}<span class="pct-samping ${ppCls}">${c.diffPct === null ? '' : fmtPP(c.diffPct)}</span></td>
+                        <td class="px-3 py-3.5 text-center whitespace-nowrap">${statusBadge}</td>
                     </tr>`;
-                } else {
-                    c.values.forEach(v => {
-                        trHtml += `<td class="px-6 py-3.5 text-right text-gray-500 font-mono whitespace-nowrap">${formatNumber(v)}</td>`;
-                    });
-                    trHtml += `
-                        <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono whitespace-nowrap">${diffIcon}${sign}${formatNumber(c.diff)}</td>
-                        <td class="px-6 py-3.5 text-center whitespace-nowrap">${statusBadge}</td>
-                    </tr>`;
-                }
-                
                 tbody.append(trHtml);
             });
-            if (isPct) {
-                const tot = mode === 'pct-sl' ? 'total saham tanpa warkat (jumlah 18 tipe Balancepos)' : 'jumlah saham KSEI (Sec. Num Balancepos; &asymp; = diturunkan dari file pemegang 1%, galat &le; 0,1%)';
-                tbody.append(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-6 py-2 text-xs text-gray-500 bg-gray-50">Persen = lembar tipe &divide; ${tot}. Angka kecil di bawah persen = perubahan dari bulan sebelumnya (poin persen). Bila total saham tanpa warkat berubah besar karena saham ditarik ke/dari warkat (mis. BRPT Jul 2026), pakai basis total saham.</td></tr>`);
+
+            if (originFilter === 'all' && so) {
+                // sisa saham beredar yang tidak tercatat per kategori di KSEI = saham warkat (sertifikat fisik)
+                const wv = globalSelectedMonths.map((m, i) => so / faktorSplit(kode, m) - globalScripless[i]);
+                let tr = `<tr class="bg-amber-50/40 cursor-pointer hover:bg-amber-50" onclick="pilihKategori('WARKAT', true)" title="Saham beredar yang tidak tercatat di rekening efek KSEI (warkat)">
+                    <td class="px-3 py-3 font-semibold text-amber-800 whitespace-nowrap">Saham Warkat <span class="text-xs font-normal text-amber-700">(di luar rekening efek)</span></td>`;
+                wv.forEach((v, i) => {
+                    tr += `<td class="px-3 py-3 text-right text-amber-800 angka-tab whitespace-nowrap">${v >= 0 ? formatNumber(v / divisor) : '–'}<span class="pct-samping text-amber-700">${v >= 0 ? fmtPct(persen(kode, globalSelectedMonths[i], v)) : ''}</span></td>`;
+                });
+                tr += `<td class="px-3 py-3"></td><td class="px-3 py-3"></td></tr>`;
+                tbody.append(tr);
             }
+            const per = emitenInfo && emitenInfo.periode ? tglIndo(emitenInfo.periode) : 'bulan terakhir';
+            tbody.append(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-3 py-2 text-xs text-gray-500 bg-gray-50">% = jumlah lembar kategori &divide; saham beredar saat ini (${so ? formatNumber(so) + ' lembar' : 'tidak tersedia'}, Sec. Num KSEI per ${per}). Angka di kolom perubahan = selisih lembar dan selisih persen (poin persen).</td></tr>`);
         }
 
-        // ---------- Rincian pemegang >=1% per tipe (data KSEI, sama dengan KSEI Ownership Dashboard) ----------
-        function pilihBulanRincian(m) { rincianBulan = m; bukaRincian(rincianKey); }
-        function toggleSemuaTipe() { rincianSemua = !rincianSemua; bukaRincian(rincianKey); }
-        function tutupRincian() { rincianKey = null; $('#rincian-panel').addClass('hidden').empty(); processTableData(); }
+        // ---------------- Kartu emiten ala KSEI Ownership Dashboard ----------------
+        const TIPE_LABEL = { IS: 'Insurance', CP: 'Corporate', PF: 'Pension Fund', IB: 'Financial Inst.', ID: 'Individual', MF: 'Mutual Fund', SC: 'Securities', FD: 'Foundation', OT: 'Others' };
 
-        function bukaRincian(key) {
-            if (!key) return;
-            const gantiBaris = rincianKey !== key;
-            rincianKey = key;
-            const kode = currentEmitenGlobal;
-            const panel = $('#rincian-panel').removeClass('hidden');
-            const det = detailCache[kode];
-            if (!det) {
-                panel.html('<p class="text-sm text-gray-500">Memuat data pemegang saham...</p>');
-                muatDetail(kode).then(() => bukaRincian(key));
-                return;
-            }
-            if (gantiBaris) processTableData();
-            const mode = $('#filter-mode').val() || 'lembar';
-            const side = key.startsWith('Local') ? 'L' : 'F';
-            const tipe = key.split(' ')[1];
-            const sisiNama = side === 'L' ? 'Lokal' : 'Asing';
-            const bulanP1 = Object.keys(det.p1 || {}).sort();
-            const endM = globalSelectedMonths[globalSelectedMonths.length - 1];
-            if (!rincianBulan || !bulanP1.includes(rincianBulan)) {
-                const cand = bulanP1.filter(m => m <= endM);
-                rincianBulan = cand.length ? cand[cand.length - 1] : (bulanP1[bulanP1.length - 1] || null);
-            }
-            const link = `${KSEI_DASH}#tab=summary&q=${encodeURIComponent(kode)}`;
-            let html = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
-                <div>
-                    <h3 class="text-base font-bold text-gray-900"><i class="fa-solid fa-users-viewfinder text-indigo-500 mr-2"></i>Rincian ${escHtml(INSTITUTION_MAP[key])} (${tipe}) &mdash; ${escHtml(kode)}</h3>
-                    <p class="text-xs text-gray-500 mt-0.5">Nama pemegang saham &ge;1% dari file KSEI (dipublikasikan BEI), dikelompokkan ke tipe investor KSEI. Sisa = pemegang di bawah 1% dan yang tidak teridentifikasi.</p>
-                </div>
-                <div class="flex flex-wrap gap-2 items-center">
-                    <a href="${link}" target="_blank" rel="noopener" class="text-xs font-semibold text-indigo-700 border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 rounded px-2 py-1"><i class="fa-solid fa-up-right-from-square mr-1"></i>Buka di KSEI Ownership Dashboard</a>
-                    <button onclick="tutupRincian()" class="text-xs font-semibold text-gray-600 border border-gray-200 hover:bg-gray-100 rounded px-2 py-1"><i class="fa-solid fa-xmark mr-1"></i>Tutup</button>
-                </div>
-            </div>`;
-            if (!rincianBulan) {
-                panel.html(html + '<p class="text-sm text-gray-500">Belum ada data pemegang saham &ge;1% untuk emiten ini. Data per nama tersedia mulai Mei 2026 (bulan yang tanggalnya sama dengan Balancepos).</p>');
-                return;
-            }
-            html += `<div class="flex flex-wrap items-center gap-2 mb-3 text-xs"><span class="font-semibold text-gray-500 uppercase">Posisi:</span>`;
-            bulanP1.forEach(m => {
-                const on = m === rincianBulan;
-                html += `<button onclick="pilihBulanRincian('${m}')" class="px-2 py-1 rounded border ${on ? 'bg-indigo-700 text-white border-indigo-700' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'}">${det.p1[m].tgl}</button>`;
-            });
-            html += `<label class="ml-auto inline-flex items-center gap-1 cursor-pointer text-gray-600"><input type="checkbox" ${rincianSemua ? 'checked' : ''} onchange="toggleSemuaTipe()"> Tampilkan semua pemegang ${sisiNama} (semua tipe)</label></div>`;
+        function toggleKartu() {
+            const k = document.getElementById('kartu');
+            const buka = !k.classList.contains('open');
+            k.classList.toggle('open', buka);
+            k.querySelector('.kartu-header').setAttribute('aria-expanded', buka);
+            if (buka) setTimeout(() => renderGraf(), 320);
+        }
 
-            const m = rincianBulan;
+        function bulanSebelum(kode, m) {
+            const rec = allData[kode] || [];
+            const i = rec.findIndex(r => r.Date === m);
+            return i > 0 ? rec[i - 1].Date : null;
+        }
+
+        function bulanP1(kode, m) {
+            // bulan data pemegang >=1% yang dipakai jaringan: bulan yang sama, atau bulan terakhir sebelumnya
+            const d = detailCache[kode];
+            if (!d || !d.p1) return null;
+            const ms = Object.keys(d.p1).sort().filter(x => x <= m);
+            return ms.length ? ms[ms.length - 1] : null;
+        }
+
+        function dataKategori(kode, m) {
             const rec = (allData[kode] || []).find(r => r.Date === m);
-            const keysSisi = side === 'L' ? LOCAL_KEYS : FOREIGN_KEYS;
-            const cap = rec ? (rincianSemua ? keysSisi.reduce((a, k) => a + (rec[k] || 0), 0) : (rec[key] || 0)) : null;
-            const scl = rec ? LOCAL_KEYS.concat(FOREIGN_KEYS).reduce((a, k) => a + (rec[k] || 0), 0) : null;
-            const secArr = det.sec && det.sec[m];
-            const usePctSl = mode === 'pct-sl' || !secArr;
-            const base = usePctSl ? scl : secArr[0];
-            const baseLabel = usePctSl ? '% saham tanpa warkat' : ('% total saham' + (secArr[1] === 'est' ? ' &asymp;' : ''));
-            const iM = bulanP1.indexOf(m);
-            const mPrev = iM > 0 ? bulanP1[iM - 1] : null;
-            const recPrev = mPrev ? (allData[kode] || []).find(r => r.Date === mPrev) : null;
-            const sPrev = mPrev && det.sec[mPrev] && !usePctSl ? det.sec[mPrev][0] : (recPrev ? LOCAL_KEYS.concat(FOREIGN_KEYS).reduce((a, k) => a + (recPrev[k] || 0), 0) : null);
-            const toObj = h => ({ nama: h[0], la: h[1], t: h[2], klas: h[3], sl: h[4], sc: h[5], pct: h[6], adj: h[7], ragu: h[8], ctrl: h[9] || '' });
-            const semua = (det.p1[m].h || []).map(toObj).filter(h => h.la === side);
-            semua.forEach(h => h.tipe = h.adj || h.t);
-            const prevMap = {};
-            if (mPrev) (det.p1[mPrev].h || []).map(toObj).filter(h => h.la === side).forEach(h => { h.tipe = h.adj || h.t; prevMap[h.nama] = h; });
-            const rows = (rincianSemua ? semua : semua.filter(h => h.tipe === tipe)).sort((a, b) => (b.sl - a.sl) || (b.pct - a.pct));
-            const keluar = mPrev ? Object.values(prevMap).filter(h => !semua.find(x => x.nama === h.nama) && (rincianSemua || h.tipe === tipe)) : [];
+            if (!rec) return null;
+            const so = sahamBeredar(kode);
+            const out = {};
+            let scl = 0;
+            Object.keys(INSTITUTION_MAP).forEach(k => { out[k] = rec[k] || 0; scl += rec[k] || 0; });
+            out.WARKAT = so ? Math.max(0, so / faktorSplit(kode, m) - scl) : null;
+            return out;
+        }
 
-            let jml = 0;
+        function renderKartu() {
+            const kode = currentEmitenGlobal;
+            if (!kode) return;
+            const d = detailCache[kode];
+            const so = sahamBeredar(kode);
+            const info = emitenInfo && emitenInfo.data && emitenInfo.data[kode];
+            const divisor = currentUnit === 'lot' ? 100 : 1;
+            $('#kartu-kode').text(kode);
+            $('#kartu-nama').text((d && d.nama) || '');
+            // free float = 100% - total pemegang >=1% (definisi yang sama dengan KSEI Ownership Dashboard)
+            let pills = '';
+            const pm = d && d.p1 ? Object.keys(d.p1).sort() : [];
+            if (pm.length) {
+                const last = pm[pm.length - 1];
+                const tot = d.p1[last].h.reduce((s, h) => s + (h[6] || 0), 0);
+                const ff = Math.max(0, 100 - tot);
+                pills += `<span class="pill-float" title="Free float = 100% − ${fmtPct(tot)} (total pemegang ≥1% per ${tglIndo(d.p1[last].tgl)})">Float ${fmtPct(ff)}</span>`;
+            }
+            if (so && info && info.price) pills += `<span class="pill-info" title="Harga ${formatNumber(info.price)} × saham beredar, per ${tglIndo(emitenInfo.periode)}"><span class="pill-label">MCap</span> ${fmtRp(so * info.price)}</span>`;
+            if (so) pills += `<span class="pill-info" title="Current share outstanding (Sec. Num KSEI) per ${emitenInfo ? tglIndo(emitenInfo.periode) : ''}"><span class="pill-label">Saham beredar</span> ${formatNumber(so)}</span>`;
+            $('#kartu-pills').html(pills);
+
+            const m1 = globalSelectedMonths[globalSelectedMonths.length - 1];
+            const m0 = bulanSebelum(kode, m1);
+            const a1 = dataKategori(kode, m1), a0 = m0 ? dataKategori(kode, m0) : null;
+            $('#kat-head').html(`<tr><th class="w-8 text-center col-rank">#</th><th>Kategori Institusi</th><th class="col-tipe">Tipe Investor</th><th>Status</th>
+                <th class="right">${m1}</th><th class="right">${m0 || 'Sebelumnya'}</th></tr>`);
+            if (!a1) { $('#kat-body').html('<tr><td colspan="6" class="text-center text-gray-400 py-4">Data tidak tersedia</td></tr>'); $('#kat-foot').empty(); return; }
+            const p = (m, v) => persen(kode, m, v);
+            const keys = Object.keys(INSTITUTION_MAP).filter(k => a1[k] > 0 || (a0 && a0[k] > 0))
+                .sort((x, y) => a1[y] - a1[x]);
+            if (!kategoriAktif || (kategoriAktif !== 'WARKAT' && !keys.includes(kategoriAktif))) kategoriAktif = keys[0] || 'WARKAT';
+            const sel = (v, m) => {
+                if (v === null || v === undefined) return '<span class="text-gray-300">–</span>';
+                return `<span class="angka">${formatNumber(v / divisor)}</span><span class="pct-samping">${fmtPct(p(m, v))}</span>`;
+            };
             let body = '';
-            rows.forEach(h => {
-                const p = base && h.sl ? h.sl / base * 100 : (h.sl ? null : 0);
-                if (h.sl > 0) jml += h.sl;
-                const pr = prevMap[h.nama];
-                let delta = '<span class="text-indigo-600 font-semibold">baru &ge;1%</span>';
-                if (pr) {
-                    const pp = (sPrev && base) ? (h.sl / base * 100 - pr.sl / sPrev * 100) : null;
-                    const dl = h.sl - pr.sl;
-                    const cls = Math.abs(dl) < 1 ? 'text-gray-400' : (dl > 0 ? 'text-emerald-600' : 'text-red-600');
-                    delta = Math.abs(dl) < 1 ? '<span class="text-gray-400">tetap</span>' : `<span class="${cls}">${dl > 0 ? '+' : ''}${formatNumber(dl)}${pp !== null ? ` <span class="text-[11px]">(${fmtPP(pp)})</span>` : ''}</span>`;
-                }
-                if (!mPrev) delta = '<span class="text-gray-400">&ndash;</span>';
-                const badge = [];
-                if (h.adj) badge.push(`<span class="text-[10px] bg-amber-50 text-amber-700 border border-amber-200 rounded px-1" title="Klasifikasi BEI '${escHtml(h.klas)}' biasanya tipe ${h.t || '?'}, tetapi lembarnya melebihi total tipe itu di Balancepos; satu-satunya tipe yang muat: ${h.adj}">tipe disesuaikan ${h.t || '?'}&rarr;${h.adj}</span>`);
-                if (h.ragu) badge.push(`<span class="text-[10px] bg-red-50 text-red-700 border border-red-200 rounded px-1" title="Lembarnya melebihi total tipe ${h.t} di Balancepos dan ada beberapa tipe lain yang mungkin; tipe sebenarnya tidak dapat dipastikan">tipe tidak pasti</span>`);
-                if (!h.sl && h.sc) badge.push('<span class="text-[10px] bg-gray-100 text-gray-600 border border-gray-200 rounded px-1" title="Seluruh sahamnya warkat (scrip), tidak tercatat di Balancepos">warkat</span>');
-                if (h.ctrl) badge.push(`<span class="text-[10px] bg-violet-50 text-violet-700 border border-violet-200 rounded px-1">${escHtml(h.ctrl.toLowerCase())}</span>`);
-                body += `<tr class="hover:bg-gray-50">
-                    <td class="px-3 py-2 whitespace-nowrap"><a class="text-indigo-700 hover:underline font-semibold" target="_blank" rel="noopener" href="${KSEI_DASH}#tab=investor&q=${encodeURIComponent(h.nama)}">${escHtml(h.nama)}</a> ${badge.join(' ')}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-gray-600">${escHtml(h.klas || '(tanpa klasifikasi)')}${rincianSemua ? ` <span class="text-gray-400">&middot; ${h.tipe || '?'}</span>` : ''}</td>
-                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap">${formatNumber(h.sl)}</td>
-                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap font-semibold">${p === null ? '–' : fmtPct(p)}</td>
-                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap text-gray-600">${fmtPct(h.pct)}</td>
-                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap">${delta}</td>
+            keys.forEach((k, i) => {
+                const lokal = k.startsWith('Local');
+                const t = k.split(' ')[1];
+                const v1 = a1[k], v0 = a0 ? a0[k] : null;
+                const p1 = p(m1, v1), p0 = v0 !== null ? p(m0, v0) : null;
+                const naik = p1 !== null && p0 !== null && Math.abs(p1 - p0) >= 0.005 ? (p1 > p0 ? 'naik' : 'turun') : '';
+                body += `<tr class="${kategoriAktif === k ? 'aktif' : ''}" style="--row-pct:${Math.min(100, p1 || 0)}%" onclick="pilihKategori('${k}')">
+                    <td class="rank col-rank">${i + 1}</td>
+                    <td class="font-medium text-gray-900">${INSTITUTION_MAP[k].split(' - ')[1]}</td>
+                    <td class="col-tipe"><span class="pill-tipe">${TIPE_LABEL[t]}<span class="kode">${t}</span></span></td>
+                    <td><span class="pill-status ${lokal ? 'lokal' : 'asing'}">${lokal ? 'Lokal' : 'Asing'}</span></td>
+                    <td class="right ${naik}" title="${naik ? (naik === 'naik' ? 'Naik ' : 'Turun ') + fmtPP(Math.abs(p1 - p0)).replace('+', '') + ' dari ' + m0 : ''}">${sel(v1, m1)}</td>
+                    <td class="right text-gray-500">${sel(v0, m0)}</td>
                 </tr>`;
             });
-            if (!rows.length) body = `<tr><td colspan="6" class="px-3 py-3 text-center text-gray-400">Tidak ada pemegang &ge;1% di tipe ini pada ${det.p1[m].tgl}.</td></tr>`;
-            const sisa = cap !== null ? cap - jml : null;
-            const pc = v => (base && v !== null) ? fmtPct(v / base * 100) : '–';
-            const judulTotal = rincianSemua ? `Total ${sisiNama} (Balancepos KSEI)` : `Total ${escHtml(INSTITUTION_MAP[key])} (Balancepos KSEI)`;
-            let foot = `<tr class="bg-gray-50 font-semibold"><td class="px-3 py-2" colspan="2">Jumlah pemegang &ge;1% di atas</td><td class="px-3 py-2 text-right font-mono">${formatNumber(jml)}</td><td class="px-3 py-2 text-right font-mono">${pc(jml)}</td><td colspan="2"></td></tr>`;
-            if (sisa !== null && sisa >= -1) foot += `<tr class="bg-gray-50"><td class="px-3 py-2 text-gray-600" colspan="2">Sisa: pemegang &lt;1% dan yang tidak teridentifikasi</td><td class="px-3 py-2 text-right font-mono">${formatNumber(Math.max(0, sisa))}</td><td class="px-3 py-2 text-right font-mono">${pc(Math.max(0, sisa))}</td><td colspan="2"></td></tr>`;
-            foot += `<tr class="bg-indigo-50 font-bold"><td class="px-3 py-2" colspan="2">${judulTotal}</td><td class="px-3 py-2 text-right font-mono">${cap === null ? '–' : formatNumber(cap)}</td><td class="px-3 py-2 text-right font-mono">${pc(cap)}</td><td class="px-3 py-2 text-right font-mono text-xs text-gray-500" colspan="2">${scl ? fmtPct(cap / scl * 100) + ' dari saham tanpa warkat' : ''}</td></tr>`;
-
-            html += `<div class="overflow-x-auto"><table class="min-w-full text-sm divide-y divide-gray-200">
-                <thead class="bg-gray-100 text-gray-700 text-xs uppercase"><tr>
-                    <th class="px-3 py-2 text-left">Nama pemegang</th>
-                    <th class="px-3 py-2 text-left">Klasifikasi BEI</th>
-                    <th class="px-3 py-2 text-right">Lembar tanpa warkat</th>
-                    <th class="px-3 py-2 text-right">${baseLabel}</th>
-                    <th class="px-3 py-2 text-right" title="Persen di file KSEI pemegang 1% (termasuk saham warkat); angka ini yang tampil di KSEI Ownership Dashboard">% file KSEI 1%</th>
-                    <th class="px-3 py-2 text-right">Perubahan vs ${mPrev ? det.p1[mPrev].tgl : '-'}</th>
-                </tr></thead><tbody class="divide-y divide-gray-100">${body}</tbody><tfoot>${foot}</tfoot></table></div>`;
-
-            const catatan = [];
-            if (sisa !== null && sisa < -1) catatan.push(`<li class="text-red-700"><b>Jumlah pemegang &ge;1% yang diklasifikasikan ke tipe ini melebihi total tipe di Balancepos sebesar ${formatNumber(-sisa)} lembar.</b> Artinya sebagian nama di atas sebenarnya tercatat di tipe investor lain di KSEI (klasifikasi BEI per nama tidak selalu sama dengan tipe rekening KSEI). Centang "semua pemegang ${sisiNama}" untuk membandingkan dengan total ${sisiNama}.</li>`);
-            const ragu = semua.filter(h => h.ragu && h.tipe !== tipe && !rincianSemua);
-            if (ragu.length) catatan.push(`<li>Ada ${ragu.length} pemegang ${sisiNama} lain yang tipenya tidak dapat dipastikan (lembarnya melebihi total tipe hasil pemetaan): ${ragu.map(h => escHtml(h.nama) + ' (' + escHtml(h.klas) + ')').join('; ')}.</li>`);
-            if (keluar.length) catatan.push(`<li>Tidak lagi tercatat &ge;1% dibanding ${det.p1[mPrev].tgl}: ${keluar.map(h => `${escHtml(h.nama)} (sebelumnya ${fmtPct(h.pct)})`).join('; ')}.</li>`);
-            if (!usePctSl && secArr[1] === 'est') catatan.push('<li>&asymp; Jumlah saham KSEI bulan ini diturunkan dari persen tiap pemegang di file 1% (galat &le; 0,1%), karena file Balancepos bulan itu tidak tersimpan di repo.</li>');
-            if (usePctSl && mode !== 'pct-sl') catatan.push('<li>Jumlah saham KSEI (Sec. Num) bulan ini tidak tersedia, jadi persen memakai basis saham tanpa warkat.</li>');
-            catatan.push('<li>Kolom persen ke-4 memakai lembar tanpa warkat agar bisa dijumlah dengan sisa menjadi total tipe. Kolom "% file KSEI 1%" adalah angka resmi KSEI (termasuk warkat), sama dengan yang tampil di KSEI Ownership Dashboard.</li>');
-            html += `<ul class="list-disc pl-5 mt-3 space-y-1 text-xs text-gray-600">${catatan.join('')}</ul>`;
-            panel.html(html);
+            if (a1.WARKAT !== null) {
+                body += `<tr class="warkat ${kategoriAktif === 'WARKAT' ? 'aktif' : ''}" style="--row-pct:${Math.min(100, p(m1, a1.WARKAT) || 0)}%" onclick="pilihKategori('WARKAT')">
+                    <td class="rank col-rank">${keys.length + 1}</td>
+                    <td class="font-medium text-amber-800">Saham Warkat</td>
+                    <td class="col-tipe"><span class="pill-tipe">Sertifikat fisik</span></td>
+                    <td><span class="text-gray-400 text-xs">Lokal &amp; asing</span></td>
+                    <td class="right">${sel(a1.WARKAT, m1)}</td>
+                    <td class="right text-gray-500">${a0 ? sel(a0.WARKAT, m0) : sel(null)}</td>
+                </tr>`;
+            }
+            $('#kat-body').html(body);
+            $('#kat-foot').html(so ? `<tr><td class="col-rank"></td><td class="font-semibold text-gray-700">Total saham beredar</td><td class="col-tipe"></td><td></td>
+                <td class="right font-semibold">${formatNumber(so / divisor)}<span class="pct-samping">100,00%</span></td><td></td></tr>` : '');
+            renderGraf();
         }
+
+        window.pilihKategori = function (key, dariMatriks) {
+            kategoriAktif = key;
+            const k = document.getElementById('kartu');
+            const tutup = !k.classList.contains('open');
+            if (tutup) { k.classList.add('open'); k.querySelector('.kartu-header').setAttribute('aria-expanded', true); }
+            renderKartu();
+            if (tutup) setTimeout(() => renderGraf(), 320);
+            if (dariMatriks) k.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        // ---------------- Jaringan koneksi (D3 force, gaya KSEI Ownership Dashboard) ----------------
+        function namaPendek(n, max = 24) { return n.length > max ? n.slice(0, max - 1) + '…' : n; }
+
+        function renderGraf() {
+            const box = document.getElementById('graf');
+            const kode = currentEmitenGlobal;
+            if (!box || !kode || typeof d3 === 'undefined') return;
+            if (!document.getElementById('kartu').classList.contains('open')) return;
+            const d = detailCache[kode];
+            const so = sahamBeredar(kode);
+            const m1 = globalSelectedMonths[globalSelectedMonths.length - 1];
+            const key = kategoriAktif;
+            const a1 = dataKategori(kode, m1);
+            if (!key || !a1) return;
+            const mp = bulanP1(kode, m1);
+            const warkat = key === 'WARKAT';
+            const side = warkat ? null : (key.startsWith('Local') ? 'L' : 'F');
+            const tipe = warkat ? null : key.split(' ')[1];
+            const namaKat = warkat ? 'Saham Warkat' : INSTITUTION_MAP[key].replace(' - ', ' · ');
+            const pKat = persen(kode, m1, a1[key]);
+            const pp = (lembar) => so ? lembar * faktorSplit(kode, mp || m1) / so * 100 : null;
+
+            const nodes = [], links = [];
+            const pusat = 'kat';
+            nodes.push({ id: pusat, type: 'kategori', depth: 0, label: namaKat, pct: pKat, side,
+                tip: `<b>${kode} · ${namaKat}</b><br>${formatNumber(a1[key])} lembar · <b>${fmtPct(pKat)}</b> dari saham beredar<br><span class="tip-muted">Posisi ${m1}</span>` });
+            let jml = 0;
+            const holders = [];
+            if (mp && d && d.p1[mp]) {
+                d.p1[mp].h.forEach(h => {
+                    const o = { nama: h[0], la: h[1], t: h[7] || h[2], klas: h[3], sl: h[4], sc: h[5], pct: h[6], ctrl: h[9] || '' };
+                    if (warkat) { if (o.sc > 0) holders.push(Object.assign(o, { nilai: o.sc, gaya: 'padat' })); return; }
+                    if (o.la !== side || o.t !== tipe) return;
+                    if (o.sl > 0) holders.push(Object.assign(o, { nilai: o.sl, gaya: 'padat' }));
+                    else if (o.sc > 0) holders.push(Object.assign(o, { nilai: o.sc, gaya: 'warkat' }));
+                });
+            }
+            holders.sort((x, y) => y.nilai - x.nilai);
+            const daftar = holders.slice(0, 15);
+            const perPemegang = daftar.length > 8 ? 2 : (daftar.length > 4 ? 3 : 5);
+            let jmlPill = 0;
+            daftar.forEach(o => {
+                const id = 'inv_' + o.nama;
+                const pv = o.gaya === 'warkat' ? o.pct : pp(o.nilai);
+                if (o.gaya === 'padat') jml += o.nilai;
+                const lain = investorIdx && investorIdx.inv[o.nama] ? investorIdx.inv[o.nama].filter(s => s[0] !== kode) : [];
+                nodes.push({ id, type: 'investor', depth: 1, label: `${namaPendek(o.nama)} · ${fmtPct(pv)}`, nm: namaPendek(o.nama, 20), pct: pv, gaya: o.gaya, nama: o.nama,
+                    tip: `<b>${escHtml(o.nama)}</b>${o.ctrl ? ` <span class="tip-badge">${escHtml(o.ctrl.toLowerCase())}</span>` : ''}<br>${escHtml(o.klas || '-')} · ${o.la === 'L' ? 'Lokal' : 'Asing'}<br>`
+                        + `Tanpa warkat ${formatNumber(o.sl)} · warkat ${formatNumber(o.sc)}<br>% di file KSEI 1%: <b>${fmtPct(o.pct)}</b>`
+                        + (o.gaya === 'warkat' ? '<br><span class="tip-warn">Sahamnya warkat: tidak termasuk angka kategori ini, dihitung di baris Saham Warkat.</span>' : '')
+                        + (lain.length ? `<hr><span class="tip-muted">Juga memegang ≥1% di:</span><br>${lain.slice(0, 8).map(s => `${s[0]} ${fmtPct(s[1])}`).join(' · ')}` : '') });
+                links.push({ source: pusat, target: id, depth: 1, width: Math.min(6, Math.max(1.2, (pv || 0) / 4)), putus: o.gaya === 'warkat' });
+                lain.slice(0, perPemegang).forEach(s => {
+                    const sid = 'stock_' + s[0];
+                    if (!nodes.find(n => n.id === sid) && jmlPill >= 14) return;
+                    if (!nodes.find(n => n.id === sid)) { jmlPill++; nodes.push({ id: sid, type: 'stock', depth: 2, label: s[0], kode: s[0],
+                        tip: `<b>${s[0]}</b><br>${escHtml(namaPendek(o.nama, 40))} memegang ${fmtPct(s[1])}<br><span class="tip-muted">Klik untuk membuka ${s[0]}</span>` }); }
+                    links.push({ source: id, target: sid, depth: 2, width: Math.min(4, Math.max(0.8, s[1] / 8)) });
+                });
+            });
+            const sisa = a1[key] - jml;
+            if (sisa > 0 && so) {
+                const ps = pp(sisa);
+                nodes.push({ id: 'sisa', type: 'sisa', depth: 1, label: `Sisa <1% · ${fmtPct(ps)}`, nm: 'Sisa <1%', pct: ps,
+                    tip: `<b>Sisa ${namaKat}</b><br>${formatNumber(sisa)} lembar · ${fmtPct(ps)}<br><span class="tip-muted">Pemegang di bawah 1% dan yang tidak teridentifikasi per nama.</span>` });
+                links.push({ source: pusat, target: 'sisa', depth: 1, width: Math.min(6, Math.max(1.2, ps / 4)), putus: false });
+            }
+            $('#graf-sub').html(`${escHtml(namaKat)} · ${fmtPct(pKat)}${mp ? ` · pemegang ≥1% per ${tglIndo(d.p1[mp].tgl)}` : ''}`);
+            let catatan = '';
+            if (!mp) catatan = 'Rincian pemegang &ge;1% per nama tersedia mulai Mei 2026.';
+            else if (!warkat && so && jml > a1[key] * 1.0001 + 1) catatan = `Jumlah pemegang &ge;1% di kategori ini (${fmtPct(pp(jml))}) melebihi total kategori (${fmtPct(pKat)}): klasifikasi per nama dari BEI tidak selalu sama dengan tipe rekening KSEI, jadi sebagian nama sebenarnya tercatat di kategori lain.`;
+            $('#graf-catatan').html(catatan).toggle(!!catatan);
+            gambarGraf(box, nodes, links, pusat);
+        }
+
+        function gambarGraf(container, nodes, links, centerId) {
+            const zoomCtrl = container.querySelector('.graf-zoom');
+            container.querySelectorAll(':scope > svg, :scope > .graf-tooltip').forEach(e => e.remove());
+            const width = container.clientWidth || 480;
+            const height = Math.max(420, container.clientHeight || 420);
+            const warnaPusat = { L: '#2563eb', F: '#dc2626' };
+            const svg = d3.select(container).append('svg').attr('width', width).attr('height', height).attr('viewBox', [0, 0, width, height]);
+            const g = svg.append('g');
+            const zoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', e => g.attr('transform', e.transform));
+            svg.call(zoom);
+            container.__zoom = zoom; container.__svg = svg;
+            const r = d => d.id === centerId ? 30 : (d.type === 'stock' ? 10 : Math.min(30, 8 + 3.2 * Math.sqrt(Math.max(0, d.pct || 0))));
+            const base = Math.min(width, height) * 0.31;
+            const lebarLabel = d => Math.max(6, (d.nm || '').length) * 5.4;   // perkiraan lebar nama (9,5px)
+            const pusatNode = nodes.find(n => n.id === centerId);
+            if (pusatNode) { pusatNode.fx = width / 2; pusatNode.fy = height / 2; }   // pusat dikunci di tengah
+            const sim = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(l => l.depth === 1 ? base : base * 0.75).strength(l => l.depth === 1 ? 0.5 : 0.3))
+                .force('charge', d3.forceManyBody().strength(d => d.id === centerId ? -650 : d.depth === 1 ? -300 : -120).distanceMax(base * 4))
+                .force('radial', d3.forceRadial(d => d.depth === 1 ? base : base * 1.65, width / 2, height / 2).strength(d => d.depth === 0 ? 0 : 0.3))
+                .force('collision', d3.forceCollide().radius(d => d.type === 'stock' ? 26 : d.id === centerId ? r(d) + 22 : Math.max(r(d) + 14, lebarLabel(d) / 2 + 4)).strength(0.9))
+                .alphaDecay(0.028);
+            const link = g.append('g').selectAll('line').data(links).join('line')
+                .attr('stroke', 'rgba(30,41,59,0.45)').attr('stroke-width', l => l.width || 1)
+                .attr('stroke-opacity', l => l.depth === 1 ? 0.55 : 0.28).attr('stroke-dasharray', l => l.putus ? '4 4' : null);
+            let mulai = null;
+            const node = g.append('g').selectAll('g').data(nodes).join('g').attr('cursor', d => d.type === 'kategori' ? 'default' : 'pointer')
+                .call(d3.drag()
+                    .on('start', (e, d) => { mulai = { x: e.x, y: e.y }; if (d.id === centerId) return; if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+                    .on('drag', (e, d) => { if (d.id === centerId) return; d.fx = e.x; d.fy = e.y; })
+                    .on('end', (e, d) => {
+                        if (d.id === centerId) { mulai = null; return; }
+                        if (!e.active) sim.alphaTarget(0);
+                        d.fx = null; d.fy = null;
+                        if (mulai && Math.abs(e.x - mulai.x) < 5 && Math.abs(e.y - mulai.y) < 5) {
+                            if (d.type === 'stock' && allData[d.kode]) window.jumpToEmiten(d.kode);
+                            else if (d.type === 'investor') window.open(`${KSEI_DASH}#tab=investor&q=${encodeURIComponent(d.nama)}`, '_blank', 'noopener');
+                        }
+                        mulai = null;
+                    }));
+            node.filter(d => d.type === 'stock').append('rect').attr('width', 46).attr('height', 20).attr('x', -23).attr('y', -10).attr('rx', 10).attr('fill', '#5b9bd5');
+            node.filter(d => d.type === 'stock').append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').attr('font-size', '9.5px').attr('font-weight', 600).attr('fill', '#fff').attr('pointer-events', 'none').text(d => d.label);
+            node.filter(d => d.type !== 'stock').append('circle').attr('r', r)
+                .attr('fill', d => d.type === 'kategori' ? (d.side ? warnaPusat[d.side] : '#d97706') : d.type === 'sisa' ? '#cbd5e1' : d.gaya === 'warkat' ? '#ffffff' : '#2faa8a')
+                .attr('stroke', d => d.type === 'kategori' ? 'rgba(0,0,0,0.15)' : d.gaya === 'warkat' ? '#2faa8a' : 'none')
+                .attr('stroke-width', d => d.type === 'kategori' ? 2.5 : d.gaya === 'warkat' ? 2 : 0)
+                .attr('stroke-dasharray', d => d.gaya === 'warkat' ? '4 3' : null);
+            node.filter(d => d.type === 'kategori').append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').attr('font-size', '10.5px').attr('font-weight', 700).attr('fill', '#fff').attr('pointer-events', 'none').text(d => fmtPct(d.pct));
+            node.filter(d => d.type === 'kategori').append('text').attr('text-anchor', 'middle').attr('y', 44).attr('font-size', '11px').attr('font-weight', 700).attr('fill', '#1e293b').attr('pointer-events', 'none').text(d => d.label);
+            const lab = node.filter(d => d.type === 'investor' || d.type === 'sisa').append('text').attr('text-anchor', 'middle').attr('y', d => r(d) + 11)
+                .attr('font-size', '9.5px').attr('font-weight', 500).attr('fill', 'rgba(30,40,60,0.9)').attr('pointer-events', 'none');
+            lab.append('tspan').attr('x', 0).text(d => d.nm);
+            lab.append('tspan').attr('x', 0).attr('dy', '1.2em').attr('font-weight', 700).attr('font-size', '10px')
+                .attr('fill', d => d.type === 'sisa' ? '#64748b' : d.gaya === 'warkat' ? '#b45309' : '#0f766e').text(d => fmtPct(d.pct) + (d.gaya === 'warkat' ? ' warkat' : ''));
+            const tip = d3.select(container).append('div').attr('class', 'graf-tooltip').style('display', 'none');
+            const posisi = (event) => {
+                const b = container.getBoundingClientRect();
+                let x = event.clientX - b.left + 14, y = event.clientY - b.top - 10;
+                const w = tip.node().offsetWidth, h = tip.node().offsetHeight;
+                if (x + w > b.width - 6) x = event.clientX - b.left - w - 14;
+                if (y + h > b.height - 6) y = b.height - h - 6;
+                tip.style('left', Math.max(4, x) + 'px').style('top', Math.max(4, y) + 'px');
+            };
+            node.on('mouseover', (event, d) => {
+                const terkait = new Set([d.id]);
+                links.forEach(l => { if (l.source.id === d.id) terkait.add(l.target.id); if (l.target.id === d.id) terkait.add(l.source.id); });
+                node.style('opacity', n => terkait.has(n.id) ? 1 : 0.15);
+                link.attr('stroke-opacity', l => (l.source.id === d.id || l.target.id === d.id) ? 0.85 : 0.06);
+                tip.style('display', 'block').html(d.tip || d.label); posisi(event);
+            }).on('mousemove', posisi).on('mouseout', () => {
+                node.style('opacity', 1); link.attr('stroke-opacity', l => l.depth === 1 ? 0.55 : 0.28); tip.style('display', 'none');
+            });
+            const pad = 34;
+            sim.on('tick', () => {
+                nodes.forEach(d => {
+                    const px = (d.type === 'investor' || d.type === 'sisa') ? Math.max(pad, lebarLabel(d) / 2 + 6) : pad;
+                    const bawah = (d.type === 'investor' || d.type === 'sisa') ? r(d) + 30 : pad;
+                    const kanan = d.y < 150 ? Math.max(px, 48 + (d.type === 'stock' ? 23 : px)) : px;   // ruang tombol zoom
+                    d.x = Math.max(px, Math.min(width - kanan, d.x));
+                    d.y = Math.max(pad, Math.min(height - bawah, d.y));
+                });
+                link.attr('x1', l => l.source.x).attr('y1', l => l.source.y).attr('x2', l => l.target.x).attr('y2', l => l.target.y);
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            });
+            if (zoomCtrl) container.appendChild(zoomCtrl);
+        }
+        window.grafZoom = function (f) { const c = document.getElementById('graf'); if (c.__zoom) c.__svg.transition().duration(300).call(c.__zoom.scaleBy, f); };
+        window.grafReset = function () { const c = document.getElementById('graf'); if (c.__zoom) c.__svg.transition().duration(400).call(c.__zoom.transform, d3.zoomIdentity); };
+        window.grafLayarPenuh = function () {
+            const el = document.getElementById('graf-wrap');
+            if (document.fullscreenElement) document.exitFullscreen(); else if (el.requestFullscreen) el.requestFullscreen();
+        };
+        document.addEventListener('fullscreenchange', () => setTimeout(renderGraf, 150));
+        let grafResize = null;
+        window.addEventListener('resize', () => { clearTimeout(grafResize); grafResize = setTimeout(renderGraf, 250); });
 
         function updateCharts(records) {
             const divisor = currentUnit === 'lot' ? 100 : 1;

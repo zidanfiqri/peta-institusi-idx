@@ -510,7 +510,7 @@ def git_push():
         log("Git tidak ditemukan atau folder ini bukan hasil git clone. Upload file yang berubah secara manual.")
         return
     jalur = [".gitignore", "data.json", "emiten_info.json", "hsc.json", "screener.json", "dana.json", "eido.json",
-             "foreign_flow.json", "harian_asing.json", "detail",
+             "foreign_flow.json", "harian_asing.json", "investor_1pct.json", "detail",
              HSC_CSV, HARGA_CSV, KURS_CSV, DIR_1PCT, DIR_KLAS, DIR_HARIAN, SAHAM_KSEI]
     jalur = [j for j in jalur if os.path.exists(j)]
     subprocess.run(["git", "add", *jalur], check=True)

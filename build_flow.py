@@ -424,6 +424,20 @@ def main():
         va = sum(fser[u][i] for u in TIPE) * (px[i] or 0)
         ringkas_saham[k] = {"n": nama.get(k, ""), "va": round(va), "pa": round(sum(fser[u][i] for u in TIPE) / scl[i] * 100, 2) if scl[i] else None,
                             "b": ms[i]}
+    # indeks investor -> saham (file 1% terbaru) untuk jaringan koneksi di Peta Institusi:
+    # hanya investor yang memegang >=2 saham (yang punya koneksi ke saham lain)
+    if p1:
+        ym_akhir = max(p1)
+        t_akhir, d_akhir = p1[ym_akhir]
+        inv = defaultdict(list)
+        for x in d_akhir.itertuples():
+            if x.nama:
+                inv[x.nama].append([x.kode, round(x.pct, 2)])
+        inv = {n: sorted(v, key=lambda z: -z[1]) for n, v in inv.items() if len({z[0] for z in v}) >= 2}
+        with open("investor_1pct.json", "w", encoding="utf-8") as f:
+            json.dump({"tgl": t_akhir, "sumber": "KSEI pemegang saham >=1% (dipublikasikan BEI)", "inv": inv},
+                      f, ensure_ascii=False, separators=(",", ":"))
+        print(f"investor_1pct.json: {len(inv)} investor dengan >=2 saham per {t_akhir}")
     print(f"detail/: {len(ringkas_saham)} saham; Sec. Num estimasi {stat['sec_est']}; "
           f"pemegang 1% dipindah tipe {stat['adj']}, tidak pasti {stat['ragu']}")
 
