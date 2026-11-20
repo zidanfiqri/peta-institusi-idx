@@ -464,7 +464,9 @@ def main():
     # --- ringkasan pasar & peringkat
     ff = {
         "meta": {"dibuat": datetime.now(WIB).strftime("%Y-%m-%d %H:%M WIB"), "bulan": bulan,
-                 "tanggal": {m: tanggal.get(m) for m in bulan}, "kurs": {m: kurs.get(m) for m in bulan},
+                 "tanggal": {m: (lambda t: f"{t[:4]}-{t[4:6]}-{t[6:8]}" if t.isdigit() and len(t) == 8 else t)(str(tanggal.get(m) or ""))
+                             for m in bulan},
+                 "kurs": {m: kurs.get(m) for m in bulan},
                  "tipe": TIPE, "bulan_1pct": sorted(p1), "bulan_kelas": sorted(klas),
                  "kelas_lokal_asing": sorted(ym for ym, x in klas.items() if any("F" in v for v in x["data"].values())),
                  "hari_terakhir": hari[-1] if hari else None},
