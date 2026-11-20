@@ -6,11 +6,12 @@ Dashboard statis komposisi kepemilikan saham Bursa Efek Indonesia per tipe inves
 
 | File | Isi |
 |---|---|
-| `index.html` | Peta Kepemilikan Institusi: komposisi 18 tipe investor lokal dan asing per emiten, radar net flow asing |
+| `index.html` | Peta Kepemilikan Institusi: komposisi 18 tipe investor lokal dan asing per emiten, radar net flow asing. Matriks bisa ditampilkan dalam lembar, % saham tanpa warkat, atau % total saham KSEI, dengan perubahan per bulan (poin persen). Klik satu tipe untuk melihat nama pemegang &ge;1% di tipe itu, persen per nama, dan sisanya (data sama dengan KSEI Ownership Dashboard) |
 | `smart_money_tracker.html` | Smart Money Tracker: inflow asing, pola distribusi, watchlist |
 | `screener.html` | Screener saham non HSC berdasarkan porsi asing: filter market cap, free float, sektor; breakdown tipe investor asing; daftar HSC; ekspor Excel |
 | `dana_pasar.html` | Dana di Pasar: nilai kepemilikan lokal dan asing dalam Rupiah dan USD per bulan dan per tipe investor, estimasi aliran dana (dipisah dari efek harga, aksi korporasi, reklasifikasi, dan perubahan pencatatan KSEI), per saham |
 | `msci.html` | ETF MSCI Indonesia: portofolio iShares MSCI Indonesia ETF (EIDO) dari laporan N-PORT SEC, nilai USD dan Rupiah, perubahan per kuartal, porsi EIDO dari dana asing KSEI |
+| `foreign_flow.html` | Foreign Flow: monitor arus asing saat rebalancing MSCI. Arus asing harian pasar reguler per peristiwa (pengumuman, hari efektif, sesudahnya), perubahan kepemilikan asing per tipe KSEI dan per kelas BEI (memisahkan ETF dari reksa dana), peringkat arus asing per tipe per bulan, dan detail asing per saham termasuk pemegang asing &ge;1% |
 
 ## Sumber data
 
@@ -23,6 +24,10 @@ Dashboard statis komposisi kepemilikan saham Bursa Efek Indonesia per tipe inves
 | Harga penutupan dan jumlah saham akhir bulan | BEI Ringkasan Saham (riwayat), lalu kolom Price/Sec. Num Balancepos | Bulanan | `data_src/harga_akhir_bulan.csv` |
 | Kurs USD/IDR akhir bulan | Kurs referensi ECB via api.frankfurter.app | Bulanan | `data_src/kurs_usdidr.csv` |
 | Portofolio EIDO | SEC EDGAR, formulir N-PORT iShares Trust seri S000028553 | Per kuartal | `data_src/eido_nport.csv`, `data_src/eido_isin_kode.json` |
+| Jumlah saham KSEI (Sec. Num) per bulan | Kolom Sec. Num file Balancepos | Bulanan | `data_src/saham_ksei.csv` |
+| Ringkasan saham harian: volume beli dan jual asing (pasar reguler), volume negosiasi | BEI Ringkasan Saham | Harian | `data_src/idx_harian/ringkasan_YYYY.csv.gz` |
+| Hasil review indeks MSCI untuk saham Indonesia | Pengumuman MSCI yang dikutip media, tautan di file | Setiap review (Feb, Mei, Agu, Nov) | `data_src/peristiwa_msci.json` (diisi manual) |
+| Pemegang &ge;1% Mei 2026 (file xlsx tidak tersimpan di repo ini) | Repo ksei-ownership-dashboard (sumber PDF KSEI) | Sekali | `data_src/1pct_riwayat.csv` |
 
 ## Update data
 
@@ -41,13 +46,15 @@ Semua sumber diperbarui oleh satu skrip, `update_data.py`. Skrip hanya mengambil
 ```
 py update_data.py              # semua sumber, lalu commit dan push
 py update_data.py --no-push    # tanpa git
-py update_data.py --only hsc   # hanya HSC (pilihan: ksei, idx, hsc)
+py update_data.py --only hsc   # hanya HSC (pilihan: ksei, idx, hsc, harian)
 py update_data.py --show       # tampilkan jendela Chrome kalau mode tersembunyi ditolak BEI
 ```
 
 Riwayat setiap update tersimpan di `update_log.txt` (hanya disimpan di komputer, tidak dikirim ke GitHub).
 
 **Portofolio EIDO (per kuartal, manual):** tambahkan baris laporan N-PORT terbaru ke `data_src/eido_nport.csv` (format kolom sama), lalu jalankan `py build_dana.py`. Saham baru yang belum ada di `data_src/eido_isin_kode.json` perlu dipetakan ISIN ke kode BEI.
+
+**Peristiwa MSCI (setiap review, manual):** tambahkan satu entri di `data_src/peristiwa_msci.json` (tanggal pengumuman WIB, tanggal penutupan efektif, daftar saham yang keluar/turun kelas, bulan Balancepos, tautan sumber), lalu jalankan `py build_flow.py`.
 
 **Kalau persen HSC tidak terbaca otomatis:** skrip menulis catatan di kolom `catatan` pada `data_src/bei_hsc_pengumuman.csv`. Isi kolom `persen` dari PDF BEI, lalu jalankan `py update_hsc.py`.
 
@@ -59,18 +66,27 @@ emiten_info.json               Sec. Num dan harga bulan terakhir (untuk % asing 
 hsc.json                       Daftar HSC aktif, yang sudah keluar, dan riwayatnya
 data_src/                      File mentah dari sumber resmi
   bei_hsc_pengumuman.csv
-  1pct/  klasifikasi/
+  1pct/  klasifikasi/  idx_harian/
+  saham_ksei.csv  peristiwa_msci.json  pemetaan_tipe.json  1pct_riwayat.csv
   balancepos/                  Disimpan di komputer saja (lihat .gitignore)
 update_data.py                 Update semua sumber
 update_hsc.py                  Membangun hsc.json dari CSV pengumuman
 build_screener.py              Membangun screener.json untuk screener.html
 build_dana.py                  Membangun dana.json (dana_pasar.html) dan eido.json (msci.html)
+build_flow.py                  Membangun foreign_flow.json, harian_asing.json (foreign_flow.html) dan
+                               detail/KODE.json (persentase, Sec. Num, pemegang >=1% per tipe untuk index.html)
 screener.json                  Data Screener (dibangun ulang otomatis setiap ada data baru)
 jalankan_update.bat            Jalankan update dengan klik dua kali
 pasang_jadwal.bat              Pasang jadwal update harian di Windows
 ```
 
 `update_ksei.py` masih bisa dipakai untuk memasukkan satu file Balancepos secara manual, tapi sudah digantikan `update_data.py`.
+
+## Catatan metode persentase dan rincian pemegang
+
+- **% saham tanpa warkat** = lembar tipe &divide; jumlah 18 tipe Balancepos. Selalu tersedia, tetapi bisa melonjak bila saham ditarik ke atau dari warkat (contoh BRPT Juli 2026).
+- **% total saham** = lembar tipe &divide; Sec. Num KSEI (penyebut yang sama dengan persen di file pemegang 1%). Pasti bila file Balancepos bulan itu tersimpan; bila tidak, diturunkan dari file 1% bulan yang sama (galat &le; 0,1%, ditandai &asymp;). `update_data.py` mengunduh Balancepos bulan lama sekali saja supaya Sec. Num semua bulan lengkap.
+- **Rincian pemegang &ge;1%**: tipe KSEI tiap nama dipetakan dari klasifikasi BEI memakai `data_src/pemetaan_tipe.json` (sama dengan ksei-ownership-dashboard). Bila lembar seorang pemegang melebihi total tipe hasil pemetaan di Balancepos, ia dipindah ke satu-satunya tipe yang muat (ditandai "tipe disesuaikan") atau ditandai "tipe tidak pasti". Bila jumlah nama di satu tipe melebihi total tipe, halaman menampilkan peringatan.
 
 ## Disclaimer
 

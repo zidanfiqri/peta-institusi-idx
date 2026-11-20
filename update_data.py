@@ -4,14 +4,16 @@ Satu perintah untuk memperbarui semua data peta-institusi-idx dari sumber resmi.
 
     python update_data.py              cek semua sumber, update yang baru, lalu commit dan push
     python update_data.py --no-push    sama, tapi tanpa git
-    python update_data.py --only hsc   hanya satu sumber: hsc, ksei, atau idx (boleh dipisah koma)
+    python update_data.py --only hsc   hanya satu sumber: hsc, ksei, idx, atau harian (boleh dipisah koma)
     python update_data.py --show       tampilkan jendela browser (pakai ini kalau mode tersembunyi diblokir)
 
 Sumber yang dicek:
-  1. KSEI  Balancepos bulanan (zip)           -> data.json, emiten_info.json
+  1. KSEI  Balancepos bulanan (zip)           -> data.json, emiten_info.json, data_src/saham_ksei.csv
   2. BEI   Pemegang saham di atas 1% (xlsx)    -> data_src/1pct/
            Klasifikasi investor 39 tipe (xlsx) -> data_src/klasifikasi/
   3. BEI   Pengumuman HSC beserta PDF          -> data_src/bei_hsc_pengumuman.csv, hsc.json
+  4. BEI   Ringkasan saham harian (beli/jual asing) -> data_src/idx_harian/ringkasan_YYYY.csv.gz
+Setelah itu dibangun ulang: screener.json, dana.json, eido.json, foreign_flow.json, harian_asing.json, detail/.
 
 Skrip ini aman dijalankan berulang kali: file yang sudah ada dilewati, jadi kalau tidak ada
 data baru skrip selesai dalam hitungan detik. Situs BEI dilindungi Cloudflare, sehingga skrip
@@ -32,6 +34,7 @@ import shutil
 import subprocess
 import sys
 import zipfile
+from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -52,6 +55,11 @@ HSC_FIELDS = ["jenis", "kode", "tanggal", "persen", "posisi_per", "catatan", "fi
 BP_DIR = "data_src/balancepos"
 DIR_1PCT = "data_src/1pct"
 DIR_KLAS = "data_src/klasifikasi"
+DIR_HARIAN = "data_src/idx_harian"
+SAHAM_KSEI = "data_src/saham_ksei.csv"
+IDX_RINGKAS = "/primary/TradingSummary/GetStockSummary?length=9999&start=0&date={}"
+KOLOM_HARIAN = ["tanggal", "kode", "close", "volume", "value", "foreign_buy", "foreign_sell",
+                "nonreg_volume", "nonreg_value", "listed_shares"]
 CACHE = ".cache"
 
 BP_COLS = ["Local IS", "Local CP", "Local PF", "Local IB", "Local ID", "Local MF", "Local SC", "Local FD", "Local OT",
@@ -245,6 +253,48 @@ def update_idx_bulanan(bei):
 
 
 # --------------------------------------------------------------------------------------------
+# 2b. Ringkasan saham harian BEI: volume beli/jual asing (pasar reguler)
+# --------------------------------------------------------------------------------------------
+def update_harian(bei, mulai="2026-04-01"):
+    """Ambil ringkasan saham harian untuk hari bursa yang belum tersimpan (dipakai halaman Foreign Flow)."""
+    import gzip
+    import time
+    os.makedirs(DIR_HARIAN, exist_ok=True)
+    ada = set()
+    for path in glob.glob(os.path.join(DIR_HARIAN, "ringkasan_*.csv.gz")):
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            ada |= {r["tanggal"] for r in csv.DictReader(f)}
+    d = date.fromisoformat(max(ada)) + timedelta(days=1) if ada else date.fromisoformat(mulai)
+    kini = datetime.now(WIB)
+    batas = kini.date() if kini.hour >= 18 else kini.date() - timedelta(days=1)   # data hari ini lengkap setelah sesi tutup
+    baru = defaultdict(list)
+    while d <= batas:
+        if d.weekday() < 5:
+            rows = bei.json(IDX_RINGKAS.format(d.strftime("%Y%m%d"))).get("data") or []
+            if rows and str(rows[0].get("Date", "")).startswith(d.isoformat()):
+                baru[d.year] += [[d.isoformat(), r.get("StockCode"), r.get("Close"), r.get("Volume"), r.get("Value"),
+                                  r.get("ForeignBuy"), r.get("ForeignSell"), r.get("NonRegularVolume", 0),
+                                  r.get("NonRegularValue", 0), r.get("ListedShares", 0)] for r in rows]
+            time.sleep(2.5)   # jeda agar tidak dibatasi BEI
+        d += timedelta(days=1)
+    if not baru:
+        log("BEI harian: ringkasan saham sudah terbaru.")
+        return False
+    for th, rows in baru.items():
+        path = os.path.join(DIR_HARIAN, f"ringkasan_{th}.csv.gz")
+        lama = []
+        if os.path.exists(path):
+            with gzip.open(path, "rt", encoding="utf-8") as f:
+                lama = list(csv.reader(f))[1:]
+        with gzip.open(path, "wt", encoding="utf-8", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(KOLOM_HARIAN)
+            w.writerows(lama + rows)
+    log(f"BEI harian: {len({r[0] for v in baru.values() for r in v})} hari bursa baru disimpan.")
+    return True
+
+
+# --------------------------------------------------------------------------------------------
 # 3. Balancepos KSEI
 # --------------------------------------------------------------------------------------------
 def _http_get(url, timeout=60):
@@ -391,7 +441,23 @@ def update_ksei():
             json.dump(db, f)
     terakhir = max(r["Date"] for v in db.values() for r in v)
     berubah |= tulis_emiten_info(terakhir, daftar)
+    berubah |= lengkapi_sec_num(sorted({r["Date"] for v in db.values() for r in v}), daftar)
     return berubah
+
+
+def lengkapi_sec_num(bulan_db, daftar, maks=36):
+    """Unduh Balancepos bulan lama (sekali saja, disimpan di cache data_src/balancepos) supaya jumlah saham
+    KSEI (Sec. Num) tiap bulan tersedia untuk persen 'total saham' di Peta Institusi. build_flow.py lalu
+    mencatatnya ke data_src/saham_ksei.csv. Bulan yang sudah tercatat dilewati."""
+    ada = set()
+    if os.path.exists(SAHAM_KSEI):
+        with open(SAHAM_KSEI, encoding="utf-8") as f:
+            ada = {r["bulan"] for r in csv.DictReader(f)}
+    perlu = [m for m in bulan_db if m not in ada][-maks:]
+    n = sum(1 for ym in perlu if cari_balancepos_bulan(ym, daftar))
+    if perlu:
+        log(f"KSEI: Sec. Num {n} dari {len(perlu)} bulan lama dilengkapi dari file Balancepos.")
+    return n > 0
 
 
 def tulis_emiten_info(ym, daftar):
@@ -444,7 +510,8 @@ def git_push():
         log("Git tidak ditemukan atau folder ini bukan hasil git clone. Upload file yang berubah secara manual.")
         return
     jalur = [".gitignore", "data.json", "emiten_info.json", "hsc.json", "screener.json", "dana.json", "eido.json",
-             HSC_CSV, HARGA_CSV, KURS_CSV, DIR_1PCT, DIR_KLAS]
+             "foreign_flow.json", "harian_asing.json", "detail",
+             HSC_CSV, HARGA_CSV, KURS_CSV, DIR_1PCT, DIR_KLAS, DIR_HARIAN, SAHAM_KSEI]
     jalur = [j for j in jalur if os.path.exists(j)]
     subprocess.run(["git", "add", *jalur], check=True)
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
@@ -462,7 +529,7 @@ def git_push():
 # --------------------------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--only", default="ksei,idx,hsc")
+    ap.add_argument("--only", default="ksei,idx,hsc,harian")
     ap.add_argument("--no-push", action="store_true")
     ap.add_argument("--show", action="store_true")
     a = ap.parse_args()
@@ -476,7 +543,7 @@ def main():
         except Exception as e:
             gagal.append("ksei")
             log(f"KSEI gagal: {e}")
-    if pilih & {"idx", "hsc"}:
+    if pilih & {"idx", "hsc", "harian"}:
         # mode tersembunyi dulu; kalau Cloudflare menolak, ulangi sekali dengan jendela Chrome terlihat
         for tampil in ([a.show] if a.show else [False, True]):
             try:
@@ -485,6 +552,8 @@ def main():
                         berubah |= update_idx_bulanan(bei)
                     if "hsc" in pilih:
                         berubah |= update_hsc(bei)
+                    if "harian" in pilih:
+                        berubah |= update_harian(bei)
                 break
             except Exception as e:
                 log(f"BEI gagal{' (jendela terlihat)' if tampil else ' (mode tersembunyi)'}: {e}")
@@ -506,6 +575,13 @@ def main():
         except Exception as e:
             gagal.append("dana")
             log(f"Dana di Pasar gagal dibangun: {e}")
+        try:
+            import build_flow
+            build_flow.main()
+            log("Foreign Flow: foreign_flow.json, harian_asing.json, dan detail/ dibangun ulang.")
+        except Exception as e:
+            gagal.append("flow")
+            log(f"Foreign Flow gagal dibangun: {e}")
     if berubah and not a.no_push:
         git_push()
     log("Selesai." + (f" Ada yang gagal: {', '.join(gagal)}." if gagal else ""))

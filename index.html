@@ -24,12 +24,12 @@
 
 <nav class="bg-indigo-900 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex flex-wrap items-center justify-between gap-3 py-3 min-h-16">
                 <div class="flex items-center">
                     <i class="fa-solid fa-chart-pie text-2xl mr-3 text-indigo-400"></i>
                     <span class="font-bold text-xl tracking-tight">Peta Kepemilikan Institusi IDX</span>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap items-center gap-2">
                     <a href="smart_money_tracker.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
                         <i class="fa-solid fa-radar mr-2"></i> Buka Smart Tracker
                     </a>
@@ -41,6 +41,9 @@
                     </a>
                     <a href="msci.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
                         <i class="fa-solid fa-globe mr-2"></i> ETF MSCI Indonesia
+                    </a>
+                    <a href="foreign_flow.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors shadow-sm border border-indigo-500">
+                        <i class="fa-solid fa-plane-departure mr-2"></i> Foreign Flow
                     </a>
                     <div class="text-sm text-indigo-200 font-medium hidden md:block">
                         <i class="fa-solid fa-clock mr-1"></i> Data KSEI (Update Terakhir: <span id="update-ksei">memuat...</span>)
@@ -152,7 +155,7 @@
                     <span class="self-start bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded border border-indigo-200" id="table-period">Periode: -</span>
                 </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
                     <div>
                         <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Filter Kategori:</label>
                         <select id="filter-origin" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData()">
@@ -170,7 +173,16 @@
                             <option value="size-desc">Kepemilikan Terbesar</option>
                         </select>
                     </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Tampilan Angka:</label>
+                        <select id="filter-mode" class="w-full bg-white border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-500" onchange="processTableData(); if (rincianKey) bukaRincian(rincianKey);">
+                            <option value="lembar">Jumlah lembar</option>
+                            <option value="pct-sl">% saham tanpa warkat</option>
+                            <option value="pct-tot">% total saham (KSEI)</option>
+                        </select>
+                    </div>
                 </div>
+                <p class="text-xs text-gray-500 mb-3" id="mode-note"><i class="fa-solid fa-hand-pointer mr-1 text-indigo-500"></i>Klik salah satu baris untuk melihat <b>nama pemegang saham &ge;1%</b> di tipe itu dan berapa persen per nama (data KSEI, sama dengan <a class="text-indigo-600 underline" href="https://ksei-ownership-dashboard.vercel.app/" target="_blank" rel="noopener">KSEI Ownership Dashboard</a>).</p>
                 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
@@ -180,6 +192,7 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="rincian-panel" class="hidden mt-5 border-t-2 border-indigo-100 pt-4"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -248,6 +261,19 @@
         
         let globalRawChanges = []; 
         let globalSelectedMonths = []; 
+        let globalScripless = [];      // total saham tanpa warkat per bulan (jumlah 18 tipe Balancepos)
+        const detailCache = {};        // detail/{KODE}.json: Sec. Num KSEI dan pemegang >=1% per bulan
+        let rincianKey = null, rincianBulan = null, rincianSemua = false;
+        const KSEI_DASH = 'https://ksei-ownership-dashboard.vercel.app/';
+
+        function muatDetail(kode) {
+            if (detailCache[kode]) return Promise.resolve(detailCache[kode]);
+            return fetch(`detail/${kode}.json`).then(r => r.ok ? r.json() : null).catch(() => null)
+                .then(d => { detailCache[kode] = d || { sec: {}, p1: {} }; return detailCache[kode]; });
+        }
+        const escHtml = (t) => String(t ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+        const fmtPct = (v, d = 2) => (v === null || v === undefined || !isFinite(v)) ? '–' : v.toFixed(d).replace('.', ',') + '%';
+        const fmtPP = (v) => (v === null || !isFinite(v)) ? '' : (Math.abs(v) < 0.005 ? '&asymp;0 pp' : `${v > 0 ? '+' : ''}${v.toFixed(2).replace('.', ',')} pp`);
 
         const formatNumber = (num) => {
             return new Intl.NumberFormat('id-ID').format(Math.round(num));
@@ -438,6 +464,7 @@
 
             const rangeRecords = records.slice(startIndex, endIndex + 1);
             globalSelectedMonths = rangeRecords.map(r => r.Date);
+            globalScripless = rangeRecords.map(r => LOCAL_KEYS.concat(FOREIGN_KEYS).reduce((a, k) => a + (r[k] || 0), 0));
 
             // Jika range kosong atau rusak
             if (globalSelectedMonths.length === 0) return;
@@ -477,6 +504,7 @@
                     name: INSTITUTION_MAP[key],
                     isLocal: LOCAL_KEYS.includes(key),
                     values: values,
+                    raw: rangeRecords.map(r => r[key] || 0),
                     last: lastVal, 
                     diff: diff
                 });
@@ -496,23 +524,57 @@
 
             processTableData();
             updateCharts(records);
+            muatDetail(emiten).then(() => {
+                if (currentEmitenGlobal !== emiten) return;
+                processTableData();
+                if (rincianKey) bukaRincian(rincianKey);
+            });
+        }
+
+        // Persen per bulan untuk satu baris: basis "tanpa warkat" (selalu ada) atau "total saham KSEI" (Sec. Num)
+        function basisBulan(i, mode) {
+            const m = globalSelectedMonths[i];
+            if (mode === 'pct-sl') return globalScripless[i] || null;
+            const det = detailCache[currentEmitenGlobal];
+            const s = det && det.sec && det.sec[m];
+            return s ? s[0] : null;
         }
 
         function processTableData() {
             const originFilter = $('#filter-origin').val();
             const sortFilter = $('#filter-sort').val();
             
+            const mode = $('#filter-mode').val() || 'lembar';
+            const isPct = mode !== 'lembar';
+            const det = detailCache[currentEmitenGlobal];
+            const basis = globalSelectedMonths.map((m, i) => isPct ? basisBulan(i, mode) : null);
             const thead = $('#tbl-head');
             let thHtml = `<tr>
                 <th scope="col" class="px-6 py-3 text-left tracking-wider rounded-l-md whitespace-nowrap">Kategori Institusi</th>`;
-            globalSelectedMonths.forEach(m => {
-                thHtml += `<th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">${m}</th>`;
+            globalSelectedMonths.forEach((m, i) => {
+                let tanda = '';
+                if (mode === 'pct-tot') {
+                    const s = det && det.sec && det.sec[m];
+                    tanda = !s ? ' <span class="text-gray-400 font-normal" title="Jumlah saham KSEI (Sec. Num) bulan ini belum tersedia">(n/a)</span>'
+                        : (s[1] === 'est' ? ' <span class="text-amber-600" title="Jumlah saham KSEI diturunkan dari file pemegang 1% bulan yang sama (galat &le; 0,1%)">&asymp;</span>' : '');
+                }
+                thHtml += `<th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">${m}${tanda}</th>`;
             });
             thHtml += `
-                <th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">Perubahan Mutasi</th>
+                <th scope="col" class="px-6 py-3 text-right tracking-wider whitespace-nowrap">${isPct ? 'Perubahan (poin persen)' : 'Perubahan Mutasi'}</th>
                 <th scope="col" class="px-6 py-3 text-center tracking-wider rounded-r-md whitespace-nowrap">Status</th>
             </tr>`;
             thead.html(thHtml);
+            if (mode === 'pct-tot' && !det) {
+                $('#flow-table-body').html(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-6 py-4 text-center text-gray-400">Memuat jumlah saham KSEI...</td></tr>`);
+                return;
+            }
+            // persen per bulan dan perubahan (poin persen) bulan pertama -> terakhir yang punya basis
+            globalRawChanges.forEach(c => {
+                c.pct = c.raw.map((v, i) => basis[i] ? v / basis[i] * 100 : null);
+                const ada = c.pct.map((v, i) => [v, i]).filter(x => x[0] !== null);
+                c.diffPct = ada.length >= 2 ? ada[ada.length - 1][0] - ada[0][0] : null;
+            });
 
             const tbody = $('#flow-table-body');
             tbody.empty();
@@ -529,6 +591,8 @@
                 workingData.sort((a, b) => b.name.localeCompare(a.name));
             } else if (sortFilter === 'size-desc') {
                 workingData.sort((a, b) => b.last - a.last);
+            } else if (isPct) {
+                workingData.sort((a, b) => Math.abs(b.diffPct || 0) - Math.abs(a.diffPct || 0));
             } else { 
                 workingData.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
             }
@@ -539,28 +603,175 @@
             }
 
             workingData.forEach(c => {
-                let diffClass = c.diff > 0 ? 'text-emerald-600' : (c.diff < 0 ? 'text-red-600' : 'text-gray-500');
-                let diffIcon = c.diff > 0 ? '<i class="fa-solid fa-square-plus mr-1"></i>' : (c.diff < 0 ? '<i class="fa-solid fa-square-minus mr-1"></i>' : '-');
-                let statusBadge = c.diff > 0 
+                const d = isPct ? (c.diffPct === null ? 0 : (Math.abs(c.diffPct) < 0.005 ? 0 : c.diffPct)) : c.diff;
+                let diffClass = d > 0 ? 'text-emerald-600' : (d < 0 ? 'text-red-600' : 'text-gray-500');
+                let diffIcon = d > 0 ? '<i class="fa-solid fa-square-plus mr-1"></i>' : (d < 0 ? '<i class="fa-solid fa-square-minus mr-1"></i>' : '');
+                let statusBadge = d > 0 
                     ? '<span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Masuk</span>' 
-                    : (c.diff < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Keluar</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Tetap</span>');
+                    : (d < 0 ? '<span class="bg-red-50 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Keluar</span>' : '<span class="bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-200">Tetap</span>');
                 
-                let sign = c.diff > 0 ? '+' : '';
+                let sign = d > 0 ? '+' : '';
+                const aktif = rincianKey === c.key ? ' bg-indigo-50' : '';
 
-                let trHtml = `<tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-3.5 font-semibold text-gray-900 whitespace-nowrap">${c.name}</td>`;
+                let trHtml = `<tr class="hover:bg-indigo-50 transition-colors cursor-pointer${aktif}" onclick="bukaRincian('${c.key}')" title="Klik untuk melihat pemegang saham &ge;1% di tipe ini">
+                        <td class="px-6 py-3.5 font-semibold text-gray-900 whitespace-nowrap"><i class="fa-solid fa-list-ul text-indigo-300 mr-2"></i>${c.name}</td>`;
                 
-                c.values.forEach(v => {
-                    trHtml += `<td class="px-6 py-3.5 text-right text-gray-500 font-mono whitespace-nowrap">${formatNumber(v)}</td>`;
-                });
-
-                trHtml += `
+                if (isPct) {
+                    c.pct.forEach((v, i) => {
+                        const prev = i > 0 ? c.pct[i - 1] : null;
+                        const dm = (v !== null && prev !== null) ? v - prev : null;
+                        const dmc = dm === null || Math.abs(dm) < 0.005 ? 'text-gray-400' : (dm > 0 ? 'text-emerald-600' : 'text-red-600');
+                        trHtml += `<td class="px-6 py-2.5 text-right font-mono whitespace-nowrap"><div class="text-gray-700">${fmtPct(v)}</div>${i > 0 ? `<div class="text-[11px] ${dmc}">${dm === null ? '' : fmtPP(dm)}</div>` : ''}</td>`;
+                    });
+                    trHtml += `
+                        <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono whitespace-nowrap">${c.diffPct === null ? '–' : diffIcon + fmtPP(c.diffPct)}</td>
+                        <td class="px-6 py-3.5 text-center whitespace-nowrap">${statusBadge}</td>
+                    </tr>`;
+                } else {
+                    c.values.forEach(v => {
+                        trHtml += `<td class="px-6 py-3.5 text-right text-gray-500 font-mono whitespace-nowrap">${formatNumber(v)}</td>`;
+                    });
+                    trHtml += `
                         <td class="px-6 py-3.5 text-right font-bold ${diffClass} font-mono whitespace-nowrap">${diffIcon}${sign}${formatNumber(c.diff)}</td>
                         <td class="px-6 py-3.5 text-center whitespace-nowrap">${statusBadge}</td>
                     </tr>`;
+                }
                 
                 tbody.append(trHtml);
             });
+            if (isPct) {
+                const tot = mode === 'pct-sl' ? 'total saham tanpa warkat (jumlah 18 tipe Balancepos)' : 'jumlah saham KSEI (Sec. Num Balancepos; &asymp; = diturunkan dari file pemegang 1%, galat &le; 0,1%)';
+                tbody.append(`<tr><td colspan="${globalSelectedMonths.length + 3}" class="px-6 py-2 text-xs text-gray-500 bg-gray-50">Persen = lembar tipe &divide; ${tot}. Angka kecil di bawah persen = perubahan dari bulan sebelumnya (poin persen). Bila total saham tanpa warkat berubah besar karena saham ditarik ke/dari warkat (mis. BRPT Jul 2026), pakai basis total saham.</td></tr>`);
+            }
+        }
+
+        // ---------- Rincian pemegang >=1% per tipe (data KSEI, sama dengan KSEI Ownership Dashboard) ----------
+        function pilihBulanRincian(m) { rincianBulan = m; bukaRincian(rincianKey); }
+        function toggleSemuaTipe() { rincianSemua = !rincianSemua; bukaRincian(rincianKey); }
+        function tutupRincian() { rincianKey = null; $('#rincian-panel').addClass('hidden').empty(); processTableData(); }
+
+        function bukaRincian(key) {
+            if (!key) return;
+            const gantiBaris = rincianKey !== key;
+            rincianKey = key;
+            const kode = currentEmitenGlobal;
+            const panel = $('#rincian-panel').removeClass('hidden');
+            const det = detailCache[kode];
+            if (!det) {
+                panel.html('<p class="text-sm text-gray-500">Memuat data pemegang saham...</p>');
+                muatDetail(kode).then(() => bukaRincian(key));
+                return;
+            }
+            if (gantiBaris) processTableData();
+            const mode = $('#filter-mode').val() || 'lembar';
+            const side = key.startsWith('Local') ? 'L' : 'F';
+            const tipe = key.split(' ')[1];
+            const sisiNama = side === 'L' ? 'Lokal' : 'Asing';
+            const bulanP1 = Object.keys(det.p1 || {}).sort();
+            const endM = globalSelectedMonths[globalSelectedMonths.length - 1];
+            if (!rincianBulan || !bulanP1.includes(rincianBulan)) {
+                const cand = bulanP1.filter(m => m <= endM);
+                rincianBulan = cand.length ? cand[cand.length - 1] : (bulanP1[bulanP1.length - 1] || null);
+            }
+            const link = `${KSEI_DASH}#tab=summary&q=${encodeURIComponent(kode)}`;
+            let html = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                <div>
+                    <h3 class="text-base font-bold text-gray-900"><i class="fa-solid fa-users-viewfinder text-indigo-500 mr-2"></i>Rincian ${escHtml(INSTITUTION_MAP[key])} (${tipe}) &mdash; ${escHtml(kode)}</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Nama pemegang saham &ge;1% dari file KSEI (dipublikasikan BEI), dikelompokkan ke tipe investor KSEI. Sisa = pemegang di bawah 1% dan yang tidak teridentifikasi.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 items-center">
+                    <a href="${link}" target="_blank" rel="noopener" class="text-xs font-semibold text-indigo-700 border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 rounded px-2 py-1"><i class="fa-solid fa-up-right-from-square mr-1"></i>Buka di KSEI Ownership Dashboard</a>
+                    <button onclick="tutupRincian()" class="text-xs font-semibold text-gray-600 border border-gray-200 hover:bg-gray-100 rounded px-2 py-1"><i class="fa-solid fa-xmark mr-1"></i>Tutup</button>
+                </div>
+            </div>`;
+            if (!rincianBulan) {
+                panel.html(html + '<p class="text-sm text-gray-500">Belum ada data pemegang saham &ge;1% untuk emiten ini. Data per nama tersedia mulai Mei 2026 (bulan yang tanggalnya sama dengan Balancepos).</p>');
+                return;
+            }
+            html += `<div class="flex flex-wrap items-center gap-2 mb-3 text-xs"><span class="font-semibold text-gray-500 uppercase">Posisi:</span>`;
+            bulanP1.forEach(m => {
+                const on = m === rincianBulan;
+                html += `<button onclick="pilihBulanRincian('${m}')" class="px-2 py-1 rounded border ${on ? 'bg-indigo-700 text-white border-indigo-700' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'}">${det.p1[m].tgl}</button>`;
+            });
+            html += `<label class="ml-auto inline-flex items-center gap-1 cursor-pointer text-gray-600"><input type="checkbox" ${rincianSemua ? 'checked' : ''} onchange="toggleSemuaTipe()"> Tampilkan semua pemegang ${sisiNama} (semua tipe)</label></div>`;
+
+            const m = rincianBulan;
+            const rec = (allData[kode] || []).find(r => r.Date === m);
+            const keysSisi = side === 'L' ? LOCAL_KEYS : FOREIGN_KEYS;
+            const cap = rec ? (rincianSemua ? keysSisi.reduce((a, k) => a + (rec[k] || 0), 0) : (rec[key] || 0)) : null;
+            const scl = rec ? LOCAL_KEYS.concat(FOREIGN_KEYS).reduce((a, k) => a + (rec[k] || 0), 0) : null;
+            const secArr = det.sec && det.sec[m];
+            const usePctSl = mode === 'pct-sl' || !secArr;
+            const base = usePctSl ? scl : secArr[0];
+            const baseLabel = usePctSl ? '% saham tanpa warkat' : ('% total saham' + (secArr[1] === 'est' ? ' &asymp;' : ''));
+            const iM = bulanP1.indexOf(m);
+            const mPrev = iM > 0 ? bulanP1[iM - 1] : null;
+            const recPrev = mPrev ? (allData[kode] || []).find(r => r.Date === mPrev) : null;
+            const sPrev = mPrev && det.sec[mPrev] && !usePctSl ? det.sec[mPrev][0] : (recPrev ? LOCAL_KEYS.concat(FOREIGN_KEYS).reduce((a, k) => a + (recPrev[k] || 0), 0) : null);
+            const toObj = h => ({ nama: h[0], la: h[1], t: h[2], klas: h[3], sl: h[4], sc: h[5], pct: h[6], adj: h[7], ragu: h[8], ctrl: h[9] || '' });
+            const semua = (det.p1[m].h || []).map(toObj).filter(h => h.la === side);
+            semua.forEach(h => h.tipe = h.adj || h.t);
+            const prevMap = {};
+            if (mPrev) (det.p1[mPrev].h || []).map(toObj).filter(h => h.la === side).forEach(h => { h.tipe = h.adj || h.t; prevMap[h.nama] = h; });
+            const rows = (rincianSemua ? semua : semua.filter(h => h.tipe === tipe)).sort((a, b) => (b.sl - a.sl) || (b.pct - a.pct));
+            const keluar = mPrev ? Object.values(prevMap).filter(h => !semua.find(x => x.nama === h.nama) && (rincianSemua || h.tipe === tipe)) : [];
+
+            let jml = 0;
+            let body = '';
+            rows.forEach(h => {
+                const p = base && h.sl ? h.sl / base * 100 : (h.sl ? null : 0);
+                if (h.sl > 0) jml += h.sl;
+                const pr = prevMap[h.nama];
+                let delta = '<span class="text-indigo-600 font-semibold">baru &ge;1%</span>';
+                if (pr) {
+                    const pp = (sPrev && base) ? (h.sl / base * 100 - pr.sl / sPrev * 100) : null;
+                    const dl = h.sl - pr.sl;
+                    const cls = Math.abs(dl) < 1 ? 'text-gray-400' : (dl > 0 ? 'text-emerald-600' : 'text-red-600');
+                    delta = Math.abs(dl) < 1 ? '<span class="text-gray-400">tetap</span>' : `<span class="${cls}">${dl > 0 ? '+' : ''}${formatNumber(dl)}${pp !== null ? ` <span class="text-[11px]">(${fmtPP(pp)})</span>` : ''}</span>`;
+                }
+                if (!mPrev) delta = '<span class="text-gray-400">&ndash;</span>';
+                const badge = [];
+                if (h.adj) badge.push(`<span class="text-[10px] bg-amber-50 text-amber-700 border border-amber-200 rounded px-1" title="Klasifikasi BEI '${escHtml(h.klas)}' biasanya tipe ${h.t || '?'}, tetapi lembarnya melebihi total tipe itu di Balancepos; satu-satunya tipe yang muat: ${h.adj}">tipe disesuaikan ${h.t || '?'}&rarr;${h.adj}</span>`);
+                if (h.ragu) badge.push(`<span class="text-[10px] bg-red-50 text-red-700 border border-red-200 rounded px-1" title="Lembarnya melebihi total tipe ${h.t} di Balancepos dan ada beberapa tipe lain yang mungkin; tipe sebenarnya tidak dapat dipastikan">tipe tidak pasti</span>`);
+                if (!h.sl && h.sc) badge.push('<span class="text-[10px] bg-gray-100 text-gray-600 border border-gray-200 rounded px-1" title="Seluruh sahamnya warkat (scrip), tidak tercatat di Balancepos">warkat</span>');
+                if (h.ctrl) badge.push(`<span class="text-[10px] bg-violet-50 text-violet-700 border border-violet-200 rounded px-1">${escHtml(h.ctrl.toLowerCase())}</span>`);
+                body += `<tr class="hover:bg-gray-50">
+                    <td class="px-3 py-2 whitespace-nowrap"><a class="text-indigo-700 hover:underline font-semibold" target="_blank" rel="noopener" href="${KSEI_DASH}#tab=investor&q=${encodeURIComponent(h.nama)}">${escHtml(h.nama)}</a> ${badge.join(' ')}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-gray-600">${escHtml(h.klas || '(tanpa klasifikasi)')}${rincianSemua ? ` <span class="text-gray-400">&middot; ${h.tipe || '?'}</span>` : ''}</td>
+                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap">${formatNumber(h.sl)}</td>
+                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap font-semibold">${p === null ? '–' : fmtPct(p)}</td>
+                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap text-gray-600">${fmtPct(h.pct)}</td>
+                    <td class="px-3 py-2 text-right font-mono whitespace-nowrap">${delta}</td>
+                </tr>`;
+            });
+            if (!rows.length) body = `<tr><td colspan="6" class="px-3 py-3 text-center text-gray-400">Tidak ada pemegang &ge;1% di tipe ini pada ${det.p1[m].tgl}.</td></tr>`;
+            const sisa = cap !== null ? cap - jml : null;
+            const pc = v => (base && v !== null) ? fmtPct(v / base * 100) : '–';
+            const judulTotal = rincianSemua ? `Total ${sisiNama} (Balancepos KSEI)` : `Total ${escHtml(INSTITUTION_MAP[key])} (Balancepos KSEI)`;
+            let foot = `<tr class="bg-gray-50 font-semibold"><td class="px-3 py-2" colspan="2">Jumlah pemegang &ge;1% di atas</td><td class="px-3 py-2 text-right font-mono">${formatNumber(jml)}</td><td class="px-3 py-2 text-right font-mono">${pc(jml)}</td><td colspan="2"></td></tr>`;
+            if (sisa !== null && sisa >= -1) foot += `<tr class="bg-gray-50"><td class="px-3 py-2 text-gray-600" colspan="2">Sisa: pemegang &lt;1% dan yang tidak teridentifikasi</td><td class="px-3 py-2 text-right font-mono">${formatNumber(Math.max(0, sisa))}</td><td class="px-3 py-2 text-right font-mono">${pc(Math.max(0, sisa))}</td><td colspan="2"></td></tr>`;
+            foot += `<tr class="bg-indigo-50 font-bold"><td class="px-3 py-2" colspan="2">${judulTotal}</td><td class="px-3 py-2 text-right font-mono">${cap === null ? '–' : formatNumber(cap)}</td><td class="px-3 py-2 text-right font-mono">${pc(cap)}</td><td class="px-3 py-2 text-right font-mono text-xs text-gray-500" colspan="2">${scl ? fmtPct(cap / scl * 100) + ' dari saham tanpa warkat' : ''}</td></tr>`;
+
+            html += `<div class="overflow-x-auto"><table class="min-w-full text-sm divide-y divide-gray-200">
+                <thead class="bg-gray-100 text-gray-700 text-xs uppercase"><tr>
+                    <th class="px-3 py-2 text-left">Nama pemegang</th>
+                    <th class="px-3 py-2 text-left">Klasifikasi BEI</th>
+                    <th class="px-3 py-2 text-right">Lembar tanpa warkat</th>
+                    <th class="px-3 py-2 text-right">${baseLabel}</th>
+                    <th class="px-3 py-2 text-right" title="Persen di file KSEI pemegang 1% (termasuk saham warkat); angka ini yang tampil di KSEI Ownership Dashboard">% file KSEI 1%</th>
+                    <th class="px-3 py-2 text-right">Perubahan vs ${mPrev ? det.p1[mPrev].tgl : '-'}</th>
+                </tr></thead><tbody class="divide-y divide-gray-100">${body}</tbody><tfoot>${foot}</tfoot></table></div>`;
+
+            const catatan = [];
+            if (sisa !== null && sisa < -1) catatan.push(`<li class="text-red-700"><b>Jumlah pemegang &ge;1% yang diklasifikasikan ke tipe ini melebihi total tipe di Balancepos sebesar ${formatNumber(-sisa)} lembar.</b> Artinya sebagian nama di atas sebenarnya tercatat di tipe investor lain di KSEI (klasifikasi BEI per nama tidak selalu sama dengan tipe rekening KSEI). Centang "semua pemegang ${sisiNama}" untuk membandingkan dengan total ${sisiNama}.</li>`);
+            const ragu = semua.filter(h => h.ragu && h.tipe !== tipe && !rincianSemua);
+            if (ragu.length) catatan.push(`<li>Ada ${ragu.length} pemegang ${sisiNama} lain yang tipenya tidak dapat dipastikan (lembarnya melebihi total tipe hasil pemetaan): ${ragu.map(h => escHtml(h.nama) + ' (' + escHtml(h.klas) + ')').join('; ')}.</li>`);
+            if (keluar.length) catatan.push(`<li>Tidak lagi tercatat &ge;1% dibanding ${det.p1[mPrev].tgl}: ${keluar.map(h => `${escHtml(h.nama)} (sebelumnya ${fmtPct(h.pct)})`).join('; ')}.</li>`);
+            if (!usePctSl && secArr[1] === 'est') catatan.push('<li>&asymp; Jumlah saham KSEI bulan ini diturunkan dari persen tiap pemegang di file 1% (galat &le; 0,1%), karena file Balancepos bulan itu tidak tersimpan di repo.</li>');
+            if (usePctSl && mode !== 'pct-sl') catatan.push('<li>Jumlah saham KSEI (Sec. Num) bulan ini tidak tersedia, jadi persen memakai basis saham tanpa warkat.</li>');
+            catatan.push('<li>Kolom persen ke-4 memakai lembar tanpa warkat agar bisa dijumlah dengan sisa menjadi total tipe. Kolom "% file KSEI 1%" adalah angka resmi KSEI (termasuk warkat), sama dengan yang tampil di KSEI Ownership Dashboard.</li>');
+            html += `<ul class="list-disc pl-5 mt-3 space-y-1 text-xs text-gray-600">${catatan.join('')}</ul>`;
+            panel.html(html);
         }
 
         function updateCharts(records) {

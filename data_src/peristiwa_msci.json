@@ -1,0 +1,49 @@
+{
+  "catatan": "Daftar hasil review indeks MSCI untuk saham Indonesia, dikutip dari pengumuman MSCI yang diberitakan media (tautan di 'sumber'). Tanggal pengumuman dalam WIB (MSCI mengumumkan malam hari waktu Jenewa/New York, diterima dini hari WIB). Perubahan dieksekusi dana pasif pada harga penutupan hari 'efektif_tutup'. Posisi KSEI (Balancepos) mencatat transaksi yang sudah selesai (T+2), sehingga transaksi pada hari efektif baru tercatat di Balancepos bulan berikutnya.",
+  "standard_sekarang": ["BBCA", "BBRI", "BMRI", "TLKM", "ASII", "BBNI", "UNTR"],
+  "peristiwa": [
+    {
+      "id": "2026-11",
+      "nama": "MSCI November 2026 Index Review",
+      "umumkan": "2026-11-12",
+      "efektif_tutup": "2026-11-30",
+      "efektif": "2026-12-01",
+      "hapus_standard": ["BRPT"],
+      "turun_small": ["BRMS"],
+      "hapus_small": ["AVIA", "CTRA", "MTEL", "EMTK", "JSMR", "RAJA", "WIFI"],
+      "bulan_ksei": {"sebelum": "2026-10", "pengumuman": "2026-11", "efektif": "2026-12"},
+      "keterangan": "BRPT keluar dari Global Standard; BRMS turun ke Small Cap; tujuh saham keluar dari Small Cap. Tidak ada penambahan.",
+      "sumber": ["https://www.bareksa.com/berita/saham/2026-11-12/daftar-lengkap-saham-ri-keluar-msci-november-2026-dan-dampaknya/amp",
+                 "https://www.bloombergtechnoz.com/detail-news/127500/rebalancing-msci-brpt-mtel-jsmr-dan-wifi-kompak-melemah/2"]
+    },
+    {
+      "id": "2026-08",
+      "nama": "MSCI August 2026 Index Review",
+      "umumkan": "2026-08-13",
+      "efektif_tutup": "2026-08-31",
+      "efektif": "2026-09-01",
+      "hapus_standard": ["GOTO"],
+      "turun_small": ["CPIN"],
+      "hapus_small": ["ARTO", "BUKA", "ESSA", "FILM", "HEAL", "KPIG", "RATU", "SMGR", "TCPI"],
+      "bulan_ksei": {"sebelum": "2026-07", "pengumuman": "2026-08", "efektif": "2026-09"},
+      "keterangan": "GOTO keluar dari Global Standard (dan tidak masuk Small Cap); CPIN turun ke Small Cap; sembilan saham keluar dari Small Cap.",
+      "sumber": ["https://market.bisnis.com/read/20260813/7/1995836/msci-rombak-indeks-10-saham-indonesia-terdepak",
+                 "https://finance.detik.com/bursa-dan-valas/d-8616092/cek-daftar-10-saham-ri-didepak-msci"]
+    },
+    {
+      "id": "2026-05",
+      "nama": "MSCI May 2026 Index Review",
+      "umumkan": "2026-05-13",
+      "efektif_tutup": "2026-05-29",
+      "efektif": "2026-06-01",
+      "pra": {"tanggal": "2026-04-21", "saham": ["BREN", "DSSA"], "keterangan": "20 Apr 2026 malam MSCI mengumumkan akan mengeluarkan saham dalam daftar HSC BEI; pasar bereaksi 21 Apr 2026."},
+      "hapus_standard": ["BREN", "TPIA", "CUAN", "AMMN", "DSSA"],
+      "turun_small": ["AMRT"],
+      "hapus_small": ["ANTM", "AALI", "BANK", "BSDE", "DSNG", "SIDO", "MIDI", "MIKA", "MSIN", "TKIM", "APIC", "SSMS", "TAPG"],
+      "bulan_ksei": {"sebelum": "2026-04", "pengumuman": "2026-05", "efektif": "2026-06"},
+      "keterangan": "Lima saham keluar dari Global Standard (BREN dan DSSA karena masuk daftar HSC); AMRT turun ke Small Cap; 13 saham keluar dari Small Cap.",
+      "sumber": ["https://katadata.co.id/finansial/bursa/6a03ae8ea784a/msci-depak-18-emiten-dari-indeks-3-saham-prajogo-bren-tpia-dan-cuan-tersingkir",
+                 "https://market.bisnis.com/read/20260421/7/1968239/ihsg-ditutup-turun-046-ke-7594-saham-dssa-dan-bren-jatuh-imbas-msci"]
+    }
+  ]
+}

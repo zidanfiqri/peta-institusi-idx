@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foreign Flow - Monitor Arus Asing dan Rebalancing MSCI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f3f4f6; }
+        .card { background: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .num { font-variant-numeric: tabular-nums; }
+        .pos { color: #047857; } .neg { color: #b91c1c; } .nol { color: #9ca3af; }
+        .tab-btn[aria-pressed="true"] { background: #312e81; color: #fff; border-color: #312e81; }
+        .chip { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 9999px; border: 1px solid; margin: 2px; }
+        .chip-std { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+        .chip-turun { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+        .chip-small { background: #f5f3ff; color: #5b21b6; border-color: #ddd6fe; }
+        table td, table th { white-space: nowrap; }
+        .hbar { height: 10px; border-radius: 3px; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<nav class="bg-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 py-3 min-h-16">
+            <div class="flex items-center">
+                <i class="fa-solid fa-plane-departure text-2xl mr-3 text-indigo-400"></i>
+                <span class="font-bold text-xl tracking-tight">Foreign Flow &amp; MSCI</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <a href="index.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-chart-pie mr-2"></i>Peta Institusi</a>
+                <a href="smart_money_tracker.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-satellite-dish mr-2"></i>Smart Tracker</a>
+                <a href="screener.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-filter-circle-dollar mr-2"></i>Screener</a>
+                <a href="dana_pasar.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-sack-dollar mr-2"></i>Dana di Pasar</a>
+                <a href="msci.html" class="bg-indigo-700 hover:bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-bold border border-indigo-500"><i class="fa-solid fa-globe mr-2"></i>ETF MSCI Indonesia</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
+
+    <section class="card p-4 text-sm bg-indigo-50 border border-indigo-200 text-indigo-900">
+        <b>Pertanyaan halaman ini:</b> saat MSCI mengeluarkan saham Indonesia dari indeksnya, investor asing jenis apa yang menjual &mdash; reksa dana aktif, ETF/indeks (pasif), dana pensiun, atau yang lain?
+        Halaman ini menggabungkan tiga sumber resmi: <b>Balancepos KSEI</b> (bulanan, 9 tipe investor asing), <b>klasifikasi investor BEI</b> (bulanan, 39 kelas: memisahkan ETF dari reksa dana), dan <b>ringkasan saham harian BEI</b> (beli/jual asing di pasar reguler).
+        <div class="mt-1 text-xs text-indigo-800" id="posisi">Memuat data...</div>
+    </section>
+
+    <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" id="kpi"></section>
+
+    <!-- ================= PERISTIWA MSCI ================= -->
+    <section class="card p-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+            <div>
+                <h2 class="font-bold text-lg"><i class="fa-solid fa-calendar-days text-indigo-500 mr-2"></i>Rebalancing MSCI: siapa yang menjual?</h2>
+                <p class="text-xs text-gray-500" id="ev-info"></p>
+            </div>
+            <div class="inline-flex rounded-md border overflow-hidden text-sm" id="ev-tabs" role="group" aria-label="Pilih peristiwa"></div>
+        </div>
+        <div id="ev-chips" class="mb-3"></div>
+
+        <div class="grid gap-5 lg:grid-cols-5">
+            <div class="lg:col-span-3">
+                <h3 class="font-semibold text-sm mb-1">Arus asing harian, kumulatif (pasar reguler BEI, Rp miliar)</h3>
+                <p class="text-[11px] text-gray-500 mb-2">Nilai = (volume beli asing &minus; volume jual asing) &times; harga rata-rata hari itu. Transaksi negosiasi tidak dirinci asing/lokal oleh BEI, jadi tidak masuk angka ini.</p>
+                <div class="relative h-72"><canvas id="ch-harian"></canvas></div>
+            </div>
+            <div class="lg:col-span-2">
+                <h3 class="font-semibold text-sm mb-1">Perubahan kepemilikan asing per tipe KSEI (Rp triliun)</h3>
+                <p class="text-[11px] text-gray-500 mb-2" id="ev-ksei-note"></p>
+                <div class="relative h-72"><canvas id="ch-tipe"></canvas></div>
+            </div>
+        </div>
+
+        <div class="grid gap-5 lg:grid-cols-2 mt-5">
+            <div>
+                <h3 class="font-semibold text-sm mb-1">Per kelas investor BEI (memisahkan ETF dari reksa dana)</h3>
+                <p class="text-[11px] text-gray-500 mb-2" id="ev-kelas-note"></p>
+                <div class="overflow-x-auto"><table class="min-w-full text-sm" id="tb-kelas"></table></div>
+            </div>
+            <div>
+                <h3 class="font-semibold text-sm mb-1">Temuan otomatis</h3>
+                <div id="ev-temuan" class="text-sm text-gray-700 space-y-2"></div>
+            </div>
+        </div>
+
+        <h3 class="font-semibold text-sm mt-5 mb-1">Per saham</h3>
+        <p class="text-[11px] text-gray-500 mb-2">Arus harian = pasar reguler (Rp miliar). Negosiasi = volume pasar negosiasi pada periode yang sama (juta lembar, semua pihak). Porsi = kepemilikan Balancepos bulan terakhir, % dari jumlah saham KSEI (<sup>†</sup> = % saham tanpa warkat karena jumlah saham KSEI bulan itu tidak tersedia). Klik kode untuk detail.</p>
+        <div class="overflow-x-auto"><table class="min-w-full text-sm" id="tb-ev"></table></div>
+    </section>
+
+    <!-- ================= PERINGKAT ================= -->
+    <section class="card p-4">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-3">
+            <div>
+                <h2 class="font-bold text-lg"><i class="fa-solid fa-ranking-star text-indigo-500 mr-2"></i>Peringkat arus asing per tipe investor (bulanan, KSEI)</h2>
+                <p class="text-xs text-gray-500">Estimasi beli/jual bersih = perubahan lembar &times; rata-rata harga dua akhir bulan, disesuaikan split. Baris bertanda bukan transaksi (split, penerbitan saham, reklasifikasi, pencatatan).</p>
+            </div>
+            <div class="flex flex-wrap gap-2 text-sm">
+                <label>Bulan <select id="rk-bulan" class="border rounded px-2 py-1"></select></label>
+                <label>Tipe asing <select id="rk-tipe" class="border rounded px-2 py-1"></select></label>
+            </div>
+        </div>
+        <div class="grid gap-5 lg:grid-cols-2">
+            <div><h3 class="font-semibold text-sm text-red-700 mb-1">Jual bersih terbesar</h3><div class="overflow-x-auto"><table class="min-w-full text-sm" id="tb-keluar"></table></div></div>
+            <div><h3 class="font-semibold text-sm text-emerald-700 mb-1">Beli bersih terbesar</h3><div class="overflow-x-auto"><table class="min-w-full text-sm" id="tb-masuk"></table></div></div>
+        </div>
+    </section>
+
+    <!-- ================= DETAIL SAHAM ================= -->
+    <section class="card p-4" id="detail">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+            <h2 class="font-bold text-lg"><i class="fa-solid fa-magnifying-glass-chart text-indigo-500 mr-2"></i>Detail asing per saham <span id="dt-judul" class="text-indigo-700"></span></h2>
+            <div class="flex gap-2 text-sm">
+                <input id="dt-kode" list="dt-list" placeholder="Kode saham, mis. BRPT" class="border rounded px-2 py-1 uppercase w-48">
+                <datalist id="dt-list"></datalist>
+                <button id="dt-btn" class="bg-indigo-700 text-white rounded px-3 py-1 font-semibold">Tampilkan</button>
+            </div>
+        </div>
+        <div id="dt-isi" class="text-sm text-gray-500">Pilih saham.</div>
+    </section>
+
+    <section class="card p-4 text-xs text-gray-600 space-y-1" id="metode">
+        <h2 class="font-bold text-sm text-gray-800 mb-1">Metode, batasan, dan sumber</h2>
+        <p><b>Tipe KSEI</b> (Balancepos) adalah tipe rekening investor: IS asuransi, CP korporat, PF dana pensiun, IB bank/lembaga keuangan (termasuk rekening kustodian/omnibus), ID individu, MF reksa dana, SC sekuritas, FD yayasan, OT lainnya. <b>MF asing mencakup reksa dana aktif, reksa dana indeks, dan ETF</b>; tipe KSEI tidak memisahkan aktif dan pasif.</p>
+        <p><b>Kelas BEI</b> (klasifikasi investor 39 kelas) memisahkan <i>Exchange Traded Funds</i>, <i>Mutual Funds</i>, <i>Hedge Fund</i>, <i>Investment Manager</i>, <i>Pension Funds</i>, <i>Sovereign Wealth Fund</i>, <i>Central Bank</i>, dan lain-lain. File Maret&ndash;Agustus 2026 belum memisahkan lokal/asing (angka gabungan); mulai September 2026 sudah dipisah. Sekitar 93% kelas ETF dan seluruh Hedge Fund adalah asing (posisi Sep&ndash;Okt 2026), jadi perubahan kelas ETF gabungan hampir seluruhnya ETF asing. Kelas <i>Mutual Funds</i> gabungan masih bercampur reksa dana lokal.</p>
+        <p><b>Waktu.</b> Dana indeks mengeksekusi rebalancing pada harga penutupan hari efektif. Balancepos mencatat transaksi yang sudah selesai (T+2), jadi transaksi hari efektif masuk ke Balancepos bulan berikutnya. Bulan efektif juga bisa memuat rebalancing indeks lain (mis. FTSE Juni 2026 mengeluarkan DSSA dan GOTO, efektif setelah penutupan 19 Jun 2026).</p>
+        <p><b>Cek silang.</b> Estimasi arus asing bulanan dari Balancepos dan jumlah arus asing harian pasar reguler BEI searah dan besarnya mirip (contoh Okt 2026: &minus;Rp21,7 T vs &minus;Rp19,2 T; Jun 2026: &minus;Rp26,0 T vs &minus;Rp23,1 T). Selisih berasal dari T+2, transaksi negosiasi, dan pendekatan harga rata-rata.</p>
+        <p><b>Batasan.</b> Data bulanan adalah posisi akhir bulan, bukan transaksi; nilai rupiah adalah estimasi. Penjualan lewat pasar negosiasi atau perpindahan saham ke rekening broker asing (tipe CP/SC) bisa membuat arus pasif tidak terlihat sebagai penjualan asing ke lokal. Satu dana dapat tercatat di rekening kustodian (IB) sehingga tipenya tersamar.</p>
+        <p><b>Sumber:</b> KSEI Balancepos; BEI pemegang saham &ge;1% dan klasifikasi investor; BEI ringkasan saham harian; pengumuman review MSCI yang dikutip media (tautan per peristiwa di <code>data_src/peristiwa_msci.json</code>). Diperbarui oleh <code>build_flow.py</code>.</p>
+    </section>
+
+    <p class="text-center text-sm text-gray-500 pb-6"><i class="fa-solid fa-chart-line text-indigo-500 mr-1"></i> Created by Zidan Fikri - Trimegah Sekuritas</p>
+</main>
+
+<script>
+const TIPE = ['IS', 'CP', 'PF', 'IB', 'ID', 'MF', 'SC', 'FD', 'OT'];
+const NAMA_TIPE = { IS: 'Asuransi', CP: 'Korporat', PF: 'Dana pensiun', IB: 'Bank/kustodian', ID: 'Individu', MF: 'Reksa dana (incl. ETF)', SC: 'Sekuritas', FD: 'Yayasan', OT: 'Lainnya' };
+const GRUP = { hapus_standard: ['Keluar Global Standard', 'chip-std', '#b91c1c'], turun_small: ['Turun ke Small Cap', 'chip-turun', '#d97706'], hapus_small: ['Keluar Small Cap', 'chip-small', '#6d28d9'] };
+let FF = null, HR = null, DANA = null;
+const DET = {};
+const charts = {};
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = (v, d = 1) => (v === null || v === undefined || !isFinite(v)) ? '–' : v.toLocaleString('id-ID', { minimumFractionDigits: d, maximumFractionDigits: d });
+const sg = (v, d = 1) => (v === null || !isFinite(v)) ? '–' : (v > 0 ? '+' : '') + fmt(v, d);
+const cls = v => (v === null || !isFinite(v) || Math.abs(v) < 1e-9) ? 'nol' : (v > 0 ? 'pos' : 'neg');
+const pct = (v, d = 2) => (v === null || !isFinite(v)) ? '–' : fmt(v, d) + '%';
+
+async function det(k) {
+    if (!(k in DET)) DET[k] = await fetch(`detail/${k}.json`).then(r => r.ok ? r.json() : null).catch(() => null);
+    return DET[k];
+}
+function basis(d, i) {   // jumlah saham KSEI (Sec. Num) bila ada; selain itu total tanpa warkat
+    const s = d.sec && d.sec[d.bulan[i]];
+    return s ? { v: s[0], cad: false, est: s[1] === 'est' } : { v: d.tanpa_warkat[i], cad: true, est: false };
+}
+function harianNet(row) {   // [t, close, vol, val, fb, fs, nvol, nval] -> Rp
+    const vw = row[2] ? row[3] / row[2] : row[1];
+    return (row[4] - row[5]) * vw;
+}
+function bendera(m, k) {
+    const r = (FF.peringkat[m] || []).find(x => x[0] === k);
+    return r ? r[10] : '';
+}
+
+async function init() {
+    [FF, HR, DANA] = await Promise.all([
+        fetch('foreign_flow.json').then(r => r.json()),
+        fetch('harian_asing.json').then(r => r.json()),
+        fetch('dana.json').then(r => r.json()).catch(() => null)]);
+    const bl = FF.meta.bulan;
+    document.getElementById('posisi').innerHTML = `KSEI Balancepos s/d <b>${FF.meta.tanggal[bl[bl.length - 1]]}</b> &middot; pemegang &ge;1% ${FF.meta.bulan_1pct.join(', ')} &middot; klasifikasi BEI ${FF.meta.bulan_kelas[0]} s/d ${FF.meta.bulan_kelas[FF.meta.bulan_kelas.length - 1]} &middot; ringkasan harian BEI s/d <b>${HR.meta.sampai}</b> &middot; dibangun ${FF.meta.dibuat}`;
+    renderKPI();
+    const tabs = document.getElementById('ev-tabs');
+    FF.peristiwa.peristiwa.forEach((e, i) => {
+        const b = document.createElement('button');
+        b.className = 'tab-btn px-3 py-1.5 border-l first:border-l-0';
+        b.textContent = e.nama.replace('MSCI ', '').replace(' Index Review', '');
+        b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+        b.onclick = () => { [...tabs.children].forEach(x => x.setAttribute('aria-pressed', 'false')); b.setAttribute('aria-pressed', 'true'); renderEvent(e); };
+        tabs.appendChild(b);
+    });
+    renderEvent(FF.peristiwa.peristiwa[0]);
+    // peringkat
+    const sb = document.getElementById('rk-bulan'), st = document.getElementById('rk-tipe');
+    Object.keys(FF.peringkat).sort().reverse().forEach(m => sb.add(new Option(m, m)));
+    st.add(new Option('Total asing', 'ALL'));
+    TIPE.forEach(t => st.add(new Option(`${t} - ${NAMA_TIPE[t]}`, t, false, t === 'MF')));
+    st.value = 'MF';
+    sb.onchange = st.onchange = renderPeringkat;
+    renderPeringkat();
+    // detail
+    const dl = document.getElementById('dt-list');
+    Object.keys(FF.saham).sort().forEach(k => { const o = document.createElement('option'); o.value = k; o.label = FF.saham[k].n; dl.appendChild(o); });
+    const go = () => { const k = document.getElementById('dt-kode').value.trim().toUpperCase(); if (k) renderDetail(k); };
+    document.getElementById('dt-btn').onclick = go;
+    document.getElementById('dt-kode').addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    const q = (new URLSearchParams(location.search).get('kode') || '').toUpperCase();
+    renderDetail(q && FF.saham[q] ? q : (FF.peristiwa.peristiwa[0].hapus_standard[0] || 'BBCA'));
+}
+
+function renderKPI() {
+    const el = document.getElementById('kpi');
+    let html = '';
+    if (DANA) {
+        const ms = Object.keys(DANA.aliran).sort(); const m = ms[ms.length - 1]; const a = DANA.aliran[m].aliran;
+        const tot = TIPE.reduce((s, t) => s + (a['Foreign ' + t] || 0), 0) / 1e12;
+        const card = (judul, v, ket) => `<div class="card p-4"><div class="text-xs text-gray-500">${judul}</div><div class="text-2xl font-bold num ${cls(v)}">${sg(v, 2)} T</div><div class="text-[11px] text-gray-500">${ket}</div></div>`;
+        html += card(`Arus asing ${m} (semua tipe)`, tot, 'estimasi beli/jual bersih, Balancepos');
+        html += card(`Reksa dana asing (MF) ${m}`, (a['Foreign MF'] || 0) / 1e12, 'termasuk ETF dan reksa dana indeks');
+        html += card(`Dana pensiun + lainnya (PF+OT) ${m}`, ((a['Foreign PF'] || 0) + (a['Foreign OT'] || 0)) / 1e12, 'OT memuat bank sentral, pemerintah, SWF');
+    }
+    const p = HR.pasar.slice(-5);
+    const v5 = p.reduce((s, r) => s + (r[1] - r[2]), 0) / 1e12;
+    html += `<div class="card p-4"><div class="text-xs text-gray-500">Asing pasar reguler, 5 hari bursa s/d ${HR.meta.sampai}</div><div class="text-2xl font-bold num ${cls(v5)}">${sg(v5, 2)} T</div><div class="text-[11px] text-gray-500">${p.map(r => `${r[0].slice(5)}: <span class="${cls(r[1] - r[2])}">${sg((r[1] - r[2]) / 1e9, 0)}</span>`).join(' &middot; ')} (Rp miliar)</div></div>`;
+    el.innerHTML = html;
+}
+
+// ---------------------------------------------------------------- peristiwa
+async function renderEvent(e) {
+    const saham = [];
+    Object.keys(GRUP).forEach(g => (e[g] || []).forEach(k => saham.push([k, g])));
+    document.getElementById('ev-info').innerHTML = `Diumumkan <b>${e.umumkan}</b> (WIB) &middot; dieksekusi pada penutupan <b>${e.efektif_tutup}</b> &middot; berlaku ${e.efektif}. ${esc(e.keterangan || '')} Sumber: ${(e.sumber || []).map((u, i) => `<a class="text-indigo-600 underline" href="${u}" target="_blank" rel="noopener">[${i + 1}]</a>`).join(' ')}`;
+    document.getElementById('ev-chips').innerHTML = Object.keys(GRUP).filter(g => (e[g] || []).length).map(g =>
+        `<span class="text-xs font-semibold text-gray-500 mr-1">${GRUP[g][0]}:</span>` + e[g].map(k => `<a href="#detail" onclick="renderDetail('${k}')" class="chip ${GRUP[g][1]}">${k}</a>`).join('')).join('<span class="mx-2"></span>') +
+        (e.pra ? `<div class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-circle-info mr-1"></i>${esc(e.pra.keterangan)}</div>` : '');
+
+    // ---- harian kumulatif per grup
+    const hari = HR.pasar.map(r => r[0]);
+    let i0 = hari.findIndex(t => t >= e.umumkan); if (i0 < 0) i0 = hari.length - 1;
+    let iE = hari.findIndex(t => t >= e.efektif_tutup); const adaEf = iE >= 0 && hari[iE] === e.efektif_tutup;
+    const a = Math.max(0, i0 - 10), b = Math.min(hari.length - 1, (iE >= 0 ? iE : hari.length - 1) + 15);
+    const labels = hari.slice(a, b + 1);
+    const ds = Object.keys(GRUP).filter(g => (e[g] || []).length).map(g => {
+        let cum = 0;
+        const data = labels.map(t => {
+            e[g].forEach(k => { const r = (HR.saham[k] || []).find(x => x[0] === t); if (r) cum += harianNet(r) / 1e9; });
+            return t >= hari[i0] ? +cum.toFixed(1) : null;
+        });
+        // mulai kumulatif dari hari pengumuman
+        return { label: GRUP[g][0], data, borderColor: GRUP[g][2], backgroundColor: GRUP[g][2], borderWidth: 2, pointRadius: 0, tension: 0.1 };
+    });
+    const garis = [{ i: labels.indexOf(hari[i0]), t: 'pengumuman', c: '#4338ca' }];
+    if (adaEf) garis.push({ i: labels.indexOf(e.efektif_tutup), t: 'penutupan efektif', c: '#b91c1c' });
+    if (e.pra) { const ip = labels.indexOf(e.pra.tanggal); if (ip >= 0) garis.push({ i: ip, t: 'HSC', c: '#6b7280' }); }
+    buatChart('ch-harian', {
+        type: 'line', data: { labels, datasets: ds },
+        options: {
+            maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+            plugins: { garis: { lines: garis }, legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${sg(c.parsed.y, 1)} M` } } },
+            scales: { x: { ticks: { maxTicksLimit: 10, callback: function (v) { return this.getLabelForValue(v).slice(5); } } }, y: { title: { display: true, text: 'Rp miliar (kumulatif sejak pengumuman)' } } }
+        }
+    });
+
+    // ---- KSEI bulanan per tipe
+    const bm = e.bulan_ksei, bl = FF.meta.bulan;
+    const langkah = [[bm.sebelum, bm.pengumuman, 'Pengumuman'], [bm.pengumuman, bm.efektif, 'Efektif']].filter(x => bl.includes(x[0]) && bl.includes(x[1]));
+    const dets = await Promise.all(saham.map(([k]) => det(k)));
+    const agTipe = {}, agKelas = {}, kelasSisi = {}, lewati = [];
+    langkah.forEach(([m0, m1, nm]) => {
+        agTipe[nm] = Object.fromEntries(TIPE.map(t => [t, 0]));
+        agKelas[nm] = {};
+        dets.forEach((d, j) => {
+            if (!d) return;
+            const i = d.bulan.indexOf(m1);
+            if (i < 1 || d.bulan[i - 1] !== m0 || !d.arus[i - 1]) return;
+            const f = bendera(m1, d.kode);
+            if (f === 'pencatatan' || f === 'reklasifikasi' || f === 'terbit') { lewati.push(`${d.kode} ${m1} (${f})`); return; }
+            TIPE.forEach((t, x) => agTipe[nm][t] += d.arus[i - 1][x] / 1e6);
+            // kelas BEI: sisi asing bila kedua bulan punya pemisahan lokal/asing, selain itu gabungan
+            const k0 = d.kelas[m0], k1 = d.kelas[m1];
+            if (!k0 || !k1) return;
+            const asing = k0.F && k1.F;
+            kelasSisi[nm] = asing ? 'asing' : 'gabungan lokal+asing';
+            const ambil = kk => asing ? (kk.F || {}) : gabung(kk);
+            const v0 = ambil(k0), v1 = ambil(k1);
+            const sp = d.split[i - 1] || 1, p0 = d.harga[i - 1], p1 = d.harga[i];
+            if (!p0 || !p1) return;
+            const pr = (p0 / sp + p1) / 2;
+            new Set([...Object.keys(v0), ...Object.keys(v1)]).forEach(n => {
+                agKelas[nm][n] = (agKelas[nm][n] || 0) + ((v1[n] || 0) - (v0[n] || 0) * sp) * pr / 1e12;
+            });
+        });
+    });
+    const nmL = langkah.map(x => x[2]);
+    document.getElementById('ev-ksei-note').innerHTML = langkah.length
+        ? langkah.map(([m0, m1, nm]) => `<b>${nm}</b>: ${m0} &rarr; ${m1}`).join(' &middot; ') + `. Seluruh saham peristiwa ini dijumlah.${lewati.length ? ' Dikecualikan (bukan transaksi): ' + lewati.join(', ') + '.' : ''}`
+        : `Balancepos bulan ${bm.pengumuman} belum tersedia (rilis awal bulan berikutnya). Transaksi hari efektif akan tercatat di Balancepos ${bm.efektif}.`;
+    if (!langkah.length) {
+        const mL = bl[bl.length - 1], pos = Object.fromEntries(TIPE.map(t => [t, 0]));
+        dets.forEach(d => { if (!d) return; const i = d.bulan.indexOf(mL); if (i < 0 || !d.harga[i]) return; TIPE.forEach(t => pos[t] += d.asing[t][i] * d.harga[i] / 1e12); });
+        document.getElementById('ev-ksei-note').innerHTML += ` Sementara itu grafik menampilkan <b>posisi asing per tipe ${mL}</b> (Rp triliun) untuk saham-saham ini: siapa yang memegang sebelum eksekusi.`;
+        buatChart('ch-tipe', { type: 'bar', data: { labels: TIPE.map(t => `${t} ${NAMA_TIPE[t]}`), datasets: [{ label: `Posisi asing ${mL}`, data: TIPE.map(t => +pos[t].toFixed(2)), backgroundColor: '#6366f1', borderRadius: 3 }] },
+            options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${fmt(c.parsed.x, 2)} T` } } }, scales: { x: { title: { display: true, text: 'Rp triliun' } } } } });
+    } else buatChart('ch-tipe', {
+        type: 'bar',
+        data: { labels: TIPE.map(t => `${t} ${NAMA_TIPE[t]}`), datasets: langkah.map((x, j) => ({ label: `${x[2]} (${x[0]}→${x[1]})`, data: TIPE.map(t => +agTipe[x[2]][t].toFixed(2)), backgroundColor: j ? '#b91c1c' : '#f59e0b', borderRadius: 3 })) },
+        options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${sg(c.parsed.x, 2)} T` } } }, scales: { x: { title: { display: true, text: 'Rp triliun' } } } }
+    });
+    if (!langkah.length) posisiAwal(e, dets);
+
+    // ---- tabel kelas
+    const tb = document.getElementById('tb-kelas');
+    if (langkah.length) {
+        const nama = new Set(); nmL.forEach(nm => Object.keys(agKelas[nm]).forEach(n => nama.add(n)));
+        const rows = [...nama].map(n => [n, ...nmL.map(nm => agKelas[nm][n] || 0)]).sort((x, y) => x.slice(1).reduce((s, v) => s + v, 0) - y.slice(1).reduce((s, v) => s + v, 0));
+        const maxAbs = Math.max(0.01, ...rows.flatMap(r => r.slice(1).map(Math.abs)));
+        tb.innerHTML = `<thead class="bg-gray-100 text-xs"><tr><th class="px-2 py-1 text-left">Kelas BEI</th>${nmL.map(nm => `<th class="px-2 py-1 text-right">${nm} (Rp T)</th>`).join('')}<th class="px-2 py-1"></th></tr></thead><tbody>` +
+            rows.filter(r => r.slice(1).some(v => Math.abs(v) >= 0.05)).map(r => `<tr class="border-b border-gray-100"><td class="px-2 py-1 ${/Exchange Traded/.test(r[0]) ? 'font-bold text-indigo-700' : ''}">${esc(r[0])}</td>${r.slice(1).map(v => `<td class="px-2 py-1 text-right num ${cls(v)}">${sg(v, 2)}</td>`).join('')}<td class="px-2 py-1 w-32"><div class="hbar" style="width:${Math.min(100, Math.abs(r.slice(1).reduce((s, v) => s + v, 0)) / maxAbs * 50)}%;background:${r.slice(1).reduce((s, v) => s + v, 0) < 0 ? '#ef4444' : '#10b981'}"></div></td></tr>`).join('') + '</tbody>';
+        document.getElementById('ev-kelas-note').innerHTML = nmL.map(nm => `${nm}: ${kelasSisi[nm] || '-'}`).join(' &middot; ') + '. Hanya kelas dengan perubahan &ge; Rp0,05 T.';
+    } else {
+        document.getElementById('ev-kelas-note').innerHTML = 'Belum ada data bulanan sesudah pengumuman. Di bawah: posisi asing per kelas (bulan terakhir) &mdash; siapa yang memegang saham ini sebelum eksekusi.';
+    }
+    // ---- temuan otomatis
+    temuan(e, langkah, agTipe, agKelas, kelasSisi, saham, hari, i0, iE, adaEf);
+    // ---- tabel per saham
+    tabelEvent(e, saham, dets, hari, i0, iE, adaEf);
+}
+
+function gabung(kk) {
+    const out = {};
+    Object.values(kk).forEach(o => Object.entries(o).forEach(([n, v]) => out[n] = (out[n] || 0) + v));
+    return out;
+}
+
+function posisiAwal(e, dets) {
+    const tb = document.getElementById('tb-kelas');
+    const ms = FF.meta.kelas_lokal_asing; const m = ms[ms.length - 1];
+    const tot = {}; let scl = 0;
+    dets.forEach(d => {
+        if (!d || !d.kelas[m] || !d.kelas[m].F) return;
+        const i = d.bulan.indexOf(m); const p = d.harga[i] || 0;
+        Object.entries(d.kelas[m].F).forEach(([n, v]) => tot[n] = (tot[n] || 0) + v * p / 1e12);
+    });
+    const rows = Object.entries(tot).sort((a, b) => b[1] - a[1]);
+    const s = rows.reduce((a, r) => a + r[1], 0);
+    tb.innerHTML = `<thead class="bg-gray-100 text-xs"><tr><th class="px-2 py-1 text-left">Kelas BEI (asing, ${m})</th><th class="px-2 py-1 text-right">Nilai (Rp T)</th><th class="px-2 py-1 text-right">Porsi dari asing</th></tr></thead><tbody>` +
+        rows.filter(r => r[1] >= 0.01).map(r => `<tr class="border-b border-gray-100"><td class="px-2 py-1 ${/Exchange Traded|Mutual Funds/.test(r[0]) ? 'font-bold text-indigo-700' : ''}">${esc(r[0])}</td><td class="px-2 py-1 text-right num">${fmt(r[1], 2)}</td><td class="px-2 py-1 text-right num">${pct(r[1] / s * 100, 1)}</td></tr>`).join('') + '</tbody>';
+}
+
+function temuan(e, langkah, agTipe, agKelas, kelasSisi, saham, hari, i0, iE, adaEf) {
+    const el = document.getElementById('ev-temuan');
+    const out = [];
+    // harian
+    const tot = (lo, hi) => saham.reduce((s, [k]) => s + (HR.saham[k] || []).filter(r => r[0] >= lo && r[0] <= hi).reduce((a, r) => a + harianNet(r), 0), 0) / 1e9;
+    const hEnd = hari[hari.length - 1];
+    if (adaEf) {
+        const sebelum = tot(hari[i0], hari[iE - 1]), hariH = tot(hari[iE], hari[iE]), sesudah = tot(hari[iE + 1] || '9999', hari[Math.min(hari.length - 1, iE + 10)]);
+        out.push(`<b>Harian (pasar reguler):</b> pengumuman s/d H-1 <span class="${cls(sebelum)}">${sg(sebelum, 0)} M</span>; hari efektif (${e.efektif_tutup}) <span class="${cls(hariH)}">${sg(hariH, 0)} M</span>; 10 hari sesudahnya <span class="${cls(sesudah)}">${sg(sesudah, 0)} M</span>. Penjualan yang menumpuk di penutupan hari efektif adalah ciri dana pasif (indeks).`);
+    } else {
+        const jalan = tot(hari[i0], hEnd);
+        const sisa = Math.max(0, Math.round((new Date(e.efektif_tutup) - new Date(hEnd)) / 864e5));
+        out.push(`<b>Berjalan:</b> sejak pengumuman (${hari[i0]}) s/d ${hEnd}, asing di pasar reguler untuk saham-saham ini <span class="${cls(jalan)}">${sg(jalan, 0)} M</span>. Eksekusi dana indeks dijadwalkan pada penutupan ${e.efektif_tutup} (${sisa} hari kalender lagi). Pantau volume negosiasi: eksekusi besar bisa lewat pasar negosiasi.`);
+    }
+    if (langkah.length) {
+        const nm = langkah.map(x => x[2]);
+        const s = t => nm.reduce((a, n) => a + agTipe[n][t], 0);
+        const asingTot = TIPE.reduce((a, t) => a + s(t), 0);
+        const urut = TIPE.map(t => [t, s(t)]).sort((x, y) => x[1] - y[1]);
+        out.push(`<b>KSEI (${langkah[0][0]} &rarr; ${langkah[langkah.length - 1][1]}):</b> total asing <span class="${cls(asingTot)}">${sg(asingTot, 2)} T</span>. Penurunan terbesar: ${urut.filter(x => x[1] < -0.05).slice(0, 3).map(x => `${x[0]} <span class="neg">${sg(x[1], 2)} T</span>`).join(', ') || '-'}; kenaikan: ${urut.filter(x => x[1] > 0.05).reverse().slice(0, 3).map(x => `${x[0]} <span class="pos">${sg(x[1], 2)} T</span>`).join(', ') || '-'}.`);
+        const kk = n => nm.reduce((a, x) => a + (agKelas[x][n] || 0), 0);
+        const etf = kk('Exchange Traded Funds'), mfk = kk('Mutual Funds (MF)'), hf = kk('Hedge Fund'), mf = s('MF');
+        const sisi = [...new Set(nm.map(x => kelasSisi[x]).filter(Boolean))].join(' / ');
+        out.push(`<b>Di dalam reksa dana asing (MF ${sg(mf, 2)} T):</b> kelas BEI <i>ETF</i> <span class="${cls(etf)}">${sg(etf, 2)} T</span>, <i>Mutual Funds</i> <span class="${cls(mfk)}">${sg(mfk, 2)} T</span>, <i>Hedge Fund</i> <span class="${cls(hf)}">${sg(hf, 2)} T</span> (${sisi}). ${mf < 0 && etf < 0 ? `Porsi ETF &asymp; ${fmt(Math.min(100, etf / mf * 100), 0)}% dari penurunan MF asing &rarr; ${etf / mf >= 0.5 ? '<b>mayoritas penjualan reksa dana asing berasal dari ETF (pasif)</b>, bukan reksa dana aktif.' : 'ETF bukan satu-satunya penjual; sisanya reksa dana (aktif atau indeks).'}` : ''}`);
+        const pf = kk('Pension Funds (PF)'), cb = kk('Central Bank'), swf = kk('Sovereign Wealth Fund');
+        if (pf < -0.05 || cb < -0.05) out.push(`<b>Di luar reksa dana:</b> <i>Pension Funds</i> <span class="${cls(pf)}">${sg(pf, 2)} T</span>, <i>Central Bank</i> <span class="${cls(cb)}">${sg(cb, 2)} T</span>, <i>SWF</i> <span class="${cls(swf)}">${sg(swf, 2)} T</span>. Dana pensiun dan bank sentral global umumnya memakai mandat indeks, jadi ikut menjual saat saham keluar dari indeks acuannya.`);
+        const naik = ['CP', 'SC', 'IB'].map(t => [t, s(t)]).filter(x => x[1] > 0.3);
+        if (naik.length) out.push(`<b>Penampung di sisi asing:</b> ${naik.map(x => `${x[0]} ${NAMA_TIPE[x[0]]} <span class="pos">${sg(x[1], 2)} T</span>`).join(', ')}. Saham yang dilepas dana indeks bisa lebih dulu pindah ke rekening broker atau kustodian asing (mis. entitas Morgan Stanley/UBS) sebelum dijual ke pasar, jadi total asing tidak langsung turun sebesar penjualan dana indeks. Cek nama &ge;1% di detail saham.`);
+    }
+    el.innerHTML = out.map(x => `<p>${x}</p>`).join('');
+}
+
+function tabelEvent(e, saham, dets, hari, i0, iE, adaEf) {
+    const hEnd = hari[hari.length - 1];
+    const lo = hari[i0], hiPre = adaEf ? hari[iE - 1] : hEnd;
+    const rows = saham.map(([k, g], j) => {
+        const r = HR.saham[k] || [];
+        const sum = (a, b) => r.filter(x => x[0] >= a && x[0] <= b).reduce((s, x) => s + harianNet(x), 0) / 1e9;
+        const nego = (a, b) => r.filter(x => x[0] >= a && x[0] <= b).reduce((s, x) => s + (x[6] || 0), 0);
+        const d = dets[j];
+        let fa = null, mf = null, cad = false;
+        if (d) { const i = d.bulan.length - 1; const bs = basis(d, i); cad = bs.cad; fa = TIPE.reduce((s, t) => s + d.asing[t][i], 0) / bs.v * 100; mf = d.asing.MF[i] / bs.v * 100; }
+        const h10 = adaEf ? hari[Math.min(hari.length - 1, iE + 10)] : null;
+        return { k, g, pre: sum(lo, hiPre), h: adaEf ? sum(hari[iE], hari[iE]) : null, post: adaEf ? sum(hari[iE + 1] || '9999', h10) : null, ng: nego(lo, adaEf ? h10 : hEnd), fa, mf, cad };
+    });
+    document.getElementById('tb-ev').innerHTML = `<thead class="bg-gray-100 text-xs"><tr>
+        <th class="px-2 py-1 text-left">Kode</th><th class="px-2 py-1 text-left">Status</th>
+        <th class="px-2 py-1 text-right">Pengumuman s/d ${adaEf ? 'H-1' : 'hari ini'}</th>
+        <th class="px-2 py-1 text-right">Hari efektif</th><th class="px-2 py-1 text-right">10 hari sesudah</th>
+        <th class="px-2 py-1 text-right">Negosiasi (juta lembar)</th>
+        <th class="px-2 py-1 text-right">Porsi asing</th><th class="px-2 py-1 text-right">MF asing</th></tr></thead><tbody>` +
+        rows.map(r => `<tr class="border-b border-gray-100 hover:bg-gray-50"><td class="px-2 py-1"><a href="#detail" onclick="renderDetail('${r.k}')" class="font-bold text-indigo-700 hover:underline">${r.k}</a></td>
+        <td class="px-2 py-1"><span class="chip ${GRUP[r.g][1]}">${GRUP[r.g][0]}</span></td>
+        <td class="px-2 py-1 text-right num ${cls(r.pre)}">${sg(r.pre, 0)}</td><td class="px-2 py-1 text-right num ${cls(r.h)}">${r.h === null ? '<span class="nol">belum</span>' : sg(r.h, 0)}</td>
+        <td class="px-2 py-1 text-right num ${cls(r.post)}">${r.post === null ? '<span class="nol">belum</span>' : sg(r.post, 0)}</td>
+        <td class="px-2 py-1 text-right num">${fmt(r.ng / 1e6, 0)}</td>
+        <td class="px-2 py-1 text-right num">${pct(r.fa, 1)}${r.cad ? '<sup>†</sup>' : ''}</td><td class="px-2 py-1 text-right num">${pct(r.mf, 1)}${r.cad ? '<sup>†</sup>' : ''}</td></tr>`).join('') + '</tbody>';
+}
+
+// ---------------------------------------------------------------- peringkat
+function renderPeringkat() {
+    const m = document.getElementById('rk-bulan').value, t = document.getElementById('rk-tipe').value;
+    const xi = t === 'ALL' ? null : TIPE.indexOf(t) + 1;
+    const val = r => xi ? r[xi] : r.slice(1, 10).reduce((s, v) => s + v, 0);
+    const rows = (FF.peringkat[m] || []).map(r => [r, val(r)]).filter(x => Math.abs(x[1]) >= 0.01);
+    const ev = {};
+    const PENDEK = { hapus_standard: 'keluar Std', turun_small: 'turun ke SC', hapus_small: 'keluar SC' };
+    FF.peristiwa.peristiwa.forEach(e => Object.keys(GRUP).forEach(g => (e[g] || []).forEach(k => ev[k] = ev[k] || `MSCI ${e.id}: ${PENDEK[g]}`)));
+    const tabel = (list) => `<thead class="bg-gray-100 text-xs"><tr><th class="px-2 py-1 text-left">Kode</th><th class="px-2 py-1 text-left">Nama</th><th class="px-2 py-1 text-right">${t === 'ALL' ? 'Total asing' : t} (Rp M)</th><th class="px-2 py-1 text-right">Total asing (Rp M)</th><th class="px-2 py-1 text-left">Catatan</th></tr></thead><tbody>` +
+        list.map(([r, v]) => `<tr class="border-b border-gray-100 hover:bg-gray-50"><td class="px-2 py-1"><a href="#detail" onclick="renderDetail('${r[0]}')" class="font-bold text-indigo-700 hover:underline">${r[0]}</a></td><td class="px-2 py-1 text-gray-600 max-w-[14rem] truncate">${esc((FF.saham[r[0]] || {}).n || '')}</td><td class="px-2 py-1 text-right num ${cls(v)}">${sg(v, 1)}</td><td class="px-2 py-1 text-right num ${cls(val2(r))}">${sg(val2(r), 1)}</td><td class="px-2 py-1 text-xs">${r[10] ? `<span class="text-amber-700">${r[10]}</span> ` : ''}${ev[r[0]] ? `<span class="text-red-700">${ev[r[0]]}</span>` : ''}</td></tr>`).join('') + '</tbody>';
+    const val2 = r => r.slice(1, 10).reduce((s, v) => s + v, 0);
+    const keluar = rows.filter(x => x[1] < 0).sort((a, b) => a[1] - b[1]).slice(0, 15);
+    const masuk = rows.filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 15);
+    document.getElementById('tb-keluar').innerHTML = tabel(keluar);
+    document.getElementById('tb-masuk').innerHTML = tabel(masuk);
+}
+
+// ---------------------------------------------------------------- detail saham
+async function renderDetail(k) {
+    k = (k || '').toUpperCase();
+    document.getElementById('dt-kode').value = k;
+    const el = document.getElementById('dt-isi');
+    const d = await det(k);
+    if (!d) { el.innerHTML = `<p class="text-red-600">Data ${esc(k)} tidak ditemukan.</p>`; return; }
+    document.getElementById('dt-judul').textContent = `${k} ${d.nama ? '· ' + d.nama : ''}`;
+    const n = d.bulan.length, ms = d.bulan.slice(-9);
+    const off = n - ms.length;
+    const sl = i => d.tanpa_warkat[i];
+    const fa = i => TIPE.reduce((s, t) => s + d.asing[t][i], 0);
+    let html = `<div class="flex flex-wrap gap-2 mb-3 text-xs"><a class="text-indigo-700 underline" href="index.html?kode=${k}">Buka di Peta Institusi</a><a class="text-indigo-700 underline" target="_blank" rel="noopener" href="https://ksei-ownership-dashboard.vercel.app/#tab=summary&q=${k}">KSEI Ownership Dashboard</a></div>`;
+    html += `<div class="grid gap-5 lg:grid-cols-2"><div><h3 class="font-semibold text-sm mb-1">Kepemilikan asing per tipe KSEI (miliar lembar)</h3><div class="relative h-64"><canvas id="ch-dt"></canvas></div></div>`;
+    html += `<div><h3 class="font-semibold text-sm mb-1">Arus asing harian, pasar reguler (Rp miliar)</h3><div class="relative h-64"><canvas id="ch-dt-h"></canvas></div><p class="text-[11px] text-gray-500" id="dt-h-note"></p></div></div>`;
+    // tabel bulanan
+    html += `<h3 class="font-semibold text-sm mt-4 mb-1">Bulanan: porsi asing dan arus per tipe (Rp miliar; + beli bersih, &minus; jual bersih)</h3><div class="overflow-x-auto"><table class="min-w-full text-sm"><thead class="bg-gray-100 text-xs"><tr><th class="px-2 py-1 text-left">Tipe</th>${ms.map(m => `<th class="px-2 py-1 text-right">${m}</th>`).join('')}</tr></thead><tbody>`;
+    const por = i => { const b = basis(d, i); return [fa(i) / b.v * 100, b]; };
+    html += `<tr class="border-b font-semibold"><td class="px-2 py-1">Porsi asing <span class="font-normal text-gray-400 text-xs">% saham KSEI</span></td>${ms.map((m, j) => { const [v, b] = por(off + j); return `<td class="px-2 py-1 text-right num">${pct(v, 2)}${b.cad ? '<sup>†</sup>' : (b.est ? '<sup>&asymp;</sup>' : '')}</td>`; }).join('')}</tr>`;
+    html += `<tr class="border-b"><td class="px-2 py-1">&Delta; porsi asing (pp)</td>${ms.map((m, j) => { const i = off + j; if (i < 1) return '<td></td>'; const [a, ba] = por(i), [b, bb] = por(i - 1); if (ba.cad !== bb.cad) return '<td class="px-2 py-1 text-right text-gray-400 text-xs">basis beda</td>'; const v = a - b; return `<td class="px-2 py-1 text-right num ${cls(v)}">${sg(v, 2)}</td>`; }).join('')}</tr>`;
+    TIPE.forEach((t, x) => {
+        if (d.asing[t].slice(-ms.length).every(v => !v)) return;
+        html += `<tr class="border-b border-gray-100"><td class="px-2 py-1">${t} <span class="text-gray-400">${NAMA_TIPE[t]}</span></td>${ms.map((m, j) => { const i = off + j; const a = i >= 1 ? d.arus[i - 1] : null; const v = a ? a[x] / 1e3 : null; return `<td class="px-2 py-1 text-right num ${cls(v)}">${a ? sg(v, 1) : ''}</td>`; }).join('')}</tr>`;
+    });
+    html += `<tr class="border-b font-semibold"><td class="px-2 py-1">Total asing</td>${ms.map((m, j) => { const i = off + j; const a = i >= 1 ? d.arus[i - 1] : null; const v = a ? a.slice(0, 9).reduce((s, z) => s + z, 0) / 1e3 : null; const f = bendera(m, k); return `<td class="px-2 py-1 text-right num ${cls(v)}">${a ? sg(v, 1) : ''}${f ? ` <span class="text-amber-700 text-[10px]">${f}</span>` : ''}</td>`; }).join('')}</tr>`;
+    html += `</tbody></table></div><p class="text-[11px] text-gray-500">Porsi = lembar asing &divide; jumlah saham KSEI (Sec. Num); &asymp; = jumlah saham diturunkan dari file pemegang 1%; <sup>†</sup> = jumlah saham KSEI belum tersedia untuk bulan itu, memakai total saham tanpa warkat (bisa melonjak bila saham ditarik ke/dari warkat, mis. BRPT Jul 2026).</p>`;
+    // kelas asing
+    const km = FF.meta.kelas_lokal_asing.filter(m => d.kelas[m] && d.kelas[m].F);
+    if (km.length) {
+        const m1 = km[km.length - 1], m0 = km.length > 1 ? km[km.length - 2] : null;
+        const F1 = d.kelas[m1].F, F0 = m0 ? d.kelas[m0].F : {};
+        const i1 = d.bulan.indexOf(m1);
+        const rows = Object.keys(Object.assign({}, F0, F1)).map(c => [c, (F1[c] || 0) / sl(i1) * 100, m0 ? ((F1[c] || 0) / sl(i1) - (F0[c] || 0) / sl(d.bulan.indexOf(m0))) * 100 : null]).sort((a, b) => b[1] - a[1]);
+        html += `<div class="grid gap-5 lg:grid-cols-2 mt-4"><div><h3 class="font-semibold text-sm mb-1">Asing per kelas BEI, ${m1} (% saham tanpa warkat)</h3><table class="min-w-full text-sm"><thead class="bg-gray-100 text-xs"><tr><th class="px-2 py-1 text-left">Kelas</th><th class="px-2 py-1 text-right">Porsi</th><th class="px-2 py-1 text-right">&Delta; vs ${m0 || '-'} (pp)</th></tr></thead><tbody>` +
+            rows.filter(r => r[1] >= 0.01 || Math.abs(r[2] || 0) >= 0.01).map(r => `<tr class="border-b border-gray-100"><td class="px-2 py-1 ${/Exchange Traded|Mutual Funds|Hedge/.test(r[0]) ? 'font-semibold text-indigo-700' : ''}">${esc(r[0])}</td><td class="px-2 py-1 text-right num">${pct(r[1])}</td><td class="px-2 py-1 text-right num ${cls(r[2])}">${r[2] === null ? '' : sg(r[2], 2)}</td></tr>`).join('') + '</tbody></table></div>';
+    } else html += '<div class="grid gap-5 lg:grid-cols-2 mt-4"><div class="text-gray-500">Klasifikasi BEI asing belum tersedia.</div>';
+    // pemegang asing >=1%
+    const pm = Object.keys(d.p1 || {}).sort();
+    if (pm.length) {
+        const m1 = pm[pm.length - 1], m0 = pm.length > 1 ? pm[pm.length - 2] : null;
+        const prev = {}; if (m0) d.p1[m0].h.filter(h => h[1] === 'F').forEach(h => prev[h[0]] = h);
+        const rows = d.p1[m1].h.filter(h => h[1] === 'F');
+        const hilang = m0 ? d.p1[m0].h.filter(h => h[1] === 'F' && !rows.find(x => x[0] === h[0])) : [];
+        html += `<div><h3 class="font-semibold text-sm mb-1">Pemegang asing &ge;1% (${d.p1[m1].tgl})</h3><table class="min-w-full text-sm"><thead class="bg-gray-100 text-xs"><tr><th class="px-2 py-1 text-left">Nama</th><th class="px-2 py-1 text-left">Kelas BEI</th><th class="px-2 py-1 text-right">% KSEI</th><th class="px-2 py-1 text-right">&Delta; vs ${m0 ? d.p1[m0].tgl : '-'}</th></tr></thead><tbody>` +
+            rows.map(h => { const p = prev[h[0]]; const dv = p ? h[6] - p[6] : null; return `<tr class="border-b border-gray-100"><td class="px-2 py-1 max-w-[16rem] truncate" title="${esc(h[0])}">${esc(h[0])}</td><td class="px-2 py-1 text-gray-600">${esc(h[3])}</td><td class="px-2 py-1 text-right num">${pct(h[6])}</td><td class="px-2 py-1 text-right num ${cls(dv)}">${p ? sg(dv, 2) + ' pp' : (m0 ? '<span class="text-indigo-600">baru</span>' : '')}</td></tr>`; }).join('') +
+            hilang.map(h => `<tr class="border-b border-gray-100 text-gray-400"><td class="px-2 py-1 max-w-[16rem] truncate">${esc(h[0])}</td><td class="px-2 py-1">${esc(h[3])}</td><td class="px-2 py-1 text-right">&lt;1%</td><td class="px-2 py-1 text-right">keluar dari daftar (sebelumnya ${pct(h[6])})</td></tr>`).join('') + '</tbody></table></div></div>';
+    } else html += '<div class="text-gray-500">Belum ada pemegang asing &ge;1%.</div></div>';
+    el.innerHTML = html;
+    // chart porsi per tipe
+    const pilih = TIPE.filter(t => d.asing[t].some(v => v / Math.max(1, d.tanpa_warkat[0]) > 0.005));
+    const warna = { IS: '#0ea5e9', CP: '#64748b', PF: '#16a34a', IB: '#2563eb', ID: '#a3a3a3', MF: '#dc2626', SC: '#f59e0b', FD: '#a855f7', OT: '#0f766e' };
+    buatChart('ch-dt', {
+        type: 'line', data: { labels: d.bulan, datasets: pilih.map(t => ({ label: t, data: d.asing[t].map(v => +(v / 1e9).toFixed(3)), borderColor: warna[t], backgroundColor: warna[t], borderWidth: t === 'MF' ? 3 : 1.5, pointRadius: 0, tension: 0.2 })) },
+        options: { maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label} ${NAMA_TIPE[c.dataset.label]}: ${fmt(c.parsed.y, 3)} miliar lembar` } } }, scales: { x: { ticks: { maxTicksLimit: 9 } }, y: { title: { display: true, text: 'miliar lembar' } } } }
+    });
+    const hr = HR.saham[k];
+    if (hr) {
+        const r = hr.slice(-80);
+        buatChart('ch-dt-h', {
+            type: 'bar', data: { labels: r.map(x => x[0]), datasets: [{ label: 'Asing bersih', data: r.map(x => +(harianNet(x) / 1e9).toFixed(2)), backgroundColor: r.map(x => harianNet(x) < 0 ? '#ef4444' : '#10b981') }] },
+            options: { maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: c => `negosiasi: ${fmt((r[c.dataIndex][6] || 0) / 1e6, 1)} juta lembar` } } }, scales: { x: { ticks: { maxTicksLimit: 8, callback: function (v) { return this.getLabelForValue(v).slice(5); } } } } }
+        });
+        document.getElementById('dt-h-note').textContent = `${r[0][0]} s/d ${r[r.length - 1][0]}. Tooltip menampilkan volume pasar negosiasi hari itu.`;
+    } else {
+        if (charts['ch-dt-h']) { charts['ch-dt-h'].destroy(); delete charts['ch-dt-h']; }
+        document.getElementById('dt-h-note').textContent = 'Arus harian hanya disimpan untuk saham pantauan (peristiwa MSCI dan portofolio ETF EIDO).';
+    }
+}
+
+const garisPlugin = {
+    id: 'garis',
+    afterDraw(ch, args, opt) {
+        const lines = (opt && opt.lines) || [];
+        if (!lines.length) return;
+        const { ctx, chartArea: { top, bottom }, scales: { x } } = ch;
+        lines.forEach(l => {
+            if (l.i < 0) return;
+            const xi = x.getPixelForValue(l.i);
+            ctx.save(); ctx.strokeStyle = l.c; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(xi, top); ctx.lineTo(xi, bottom); ctx.stroke();
+            ctx.fillStyle = l.c; ctx.font = '11px sans-serif'; ctx.fillText(l.t, xi + 4, top + 12); ctx.restore();
+        });
+    }
+};
+Chart.register(garisPlugin);
+function buatChart(id, cfg) {
+    if (charts[id]) charts[id].destroy();
+    const c = document.getElementById(id);
+    if (!c) return;
+    charts[id] = new Chart(c, cfg);
+}
+init().catch(err => { console.error(err); document.getElementById('posisi').textContent = 'Gagal memuat data: ' + err.message; });
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+{
+  "": {
+    "catatan": "rekening warkat khusus tanpa klasifikasi",
+    "dasar": "definisi",
+    "kode": ""
+  },
+  "Association/Social Organizations": {
+    "catatan": "keputusan manual: disamakan dgn entitas sosial/non-standar lain (sama pola dgn Diocese, Cooperatives, International Organization)",
+    "dasar": "manual",
+    "kode": "OT"
+  },
+  "Association/social organizations": {
+    "catatan": "varian penulisan dari 'Association/Social Organizations'",
+    "dasar": "sama dengan label lama",
+    "kode": "OT"
+  },
+  "Bank": {
+    "akurasi": 0.9906,
+    "dasar": "empiris",
+    "kode": "IB",
+    "rincian": {
+      "IB": 105,
+      "SC": 1
+    },
+    "sampel": 106
+  },
+  "Brokerage Firms": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 3
+    },
+    "sampel": 3
+  },
+  "Capital Market Supporting Institutions And Professions": {
+    "akurasi": 0.6154,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 8,
+      "IB": 5
+    },
+    "sampel": 13
+  },
+  "Capital Market Supporting Institutions and Professions": {
+    "catatan": "varian penulisan dari 'Capital Market Supporting Institutions And Professions'",
+    "dasar": "sama dengan label lama",
+    "kode": "CP"
+  },
+  "Commanditaire Vennootschap (CV) Or Limited Partnership": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 9
+    },
+    "sampel": 9
+  },
+  "Commanditaire Vennootschap (CV) or Limited partnership": {
+    "catatan": "varian penulisan dari 'Commanditaire Vennootschap (CV) Or Limited Partnership'",
+    "dasar": "sama dengan label lama",
+    "kode": "CP"
+  },
+  "Cooperatives": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "OT",
+    "rincian": {
+      "OT": 10
+    },
+    "sampel": 10
+  },
+  "Corporate": {
+    "akurasi": 0.9742,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "": 5,
+      "CP": 1885,
+      "IB": 8,
+      "MF": 1,
+      "OT": 36
+    },
+    "sampel": 1935
+  },
+  "Diocese": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "OT",
+    "rincian": {
+      "OT": 1
+    },
+    "sampel": 1
+  },
+  "Educational Institution": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "FD",
+    "rincian": {
+      "FD": 1
+    },
+    "sampel": 1
+  },
+  "Exchange Traded Funds": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "MF",
+    "rincian": {
+      "MF": 12
+    },
+    "sampel": 12
+  },
+  "Financial Institutional": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "IB",
+    "rincian": {
+      "IB": 18
+    },
+    "sampel": 18
+  },
+  "Firm": {
+    "akurasi": 0.9915,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 117,
+      "PF": 1
+    },
+    "sampel": 118
+  },
+  "Foundation": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "FD",
+    "rincian": {
+      "FD": 6
+    },
+    "sampel": 6
+  },
+  "Government": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "OT",
+    "rincian": {
+      "OT": 20
+    },
+    "sampel": 20
+  },
+  "Hedge Fund": {
+    "akurasi": 0.7,
+    "dasar": "empiris",
+    "kode": "MF",
+    "rincian": {
+      "IB": 2,
+      "MF": 7,
+      "OT": 1
+    },
+    "sampel": 10
+  },
+  "Individual": {
+    "akurasi": 0.9978,
+    "dasar": "empiris",
+    "kode": "ID",
+    "rincian": {
+      "": 5,
+      "ID": 2314
+    },
+    "sampel": 2319
+  },
+  "Insurance": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "IS",
+    "rincian": {
+      "IS": 74
+    },
+    "sampel": 74
+  },
+  "International Organization": {
+    "akurasi": 0.6667,
+    "dasar": "empiris",
+    "kode": "OT",
+    "rincian": {
+      "IB": 1,
+      "OT": 2
+    },
+    "sampel": 3
+  },
+  "International organization": {
+    "catatan": "varian penulisan dari 'International Organization'",
+    "dasar": "sama dengan label lama",
+    "kode": "OT"
+  },
+  "Investment Advisors": {
+    "akurasi": 0.7037,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 133,
+      "IB": 51,
+      "OT": 2,
+      "SC": 3
+    },
+    "sampel": 189
+  },
+  "Investment Fund Selling Agent": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 8
+    },
+    "sampel": 8
+  },
+  "Investment Manager": {
+    "akurasi": 0.9508,
+    "dasar": "empiris",
+    "kode": "SC",
+    "rincian": {
+      "IB": 3,
+      "SC": 58
+    },
+    "sampel": 61
+  },
+  "Mutual Funds": {
+    "akurasi": 0.9644,
+    "dasar": "empiris",
+    "kode": "MF",
+    "rincian": {
+      "CP": 6,
+      "MF": 271,
+      "OT": 4
+    },
+    "sampel": 281
+  },
+  "Partnership": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "OT",
+    "rincian": {
+      "OT": 35
+    },
+    "sampel": 35
+  },
+  "Peer To Peer Lending": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 2
+    },
+    "sampel": 2
+  },
+  "Peer to peer lending": {
+    "catatan": "varian penulisan dari 'Peer To Peer Lending'",
+    "dasar": "sama dengan label lama",
+    "kode": "CP"
+  },
+  "Pension Funds": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "PF",
+    "rincian": {
+      "PF": 44
+    },
+    "sampel": 44
+  },
+  "Permanent establishment": {
+    "catatan": "varian penulisan dari 'PermanentEstablishment'",
+    "dasar": "sama dengan label lama",
+    "kode": "CP"
+  },
+  "PermanentEstablishment": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 14
+    },
+    "sampel": 14
+  },
+  "Private Bank": {
+    "akurasi": 0.754,
+    "dasar": "empiris",
+    "kode": "IB",
+    "rincian": {
+      "CP": 35,
+      "IB": 141,
+      "OT": 11
+    },
+    "sampel": 187
+  },
+  "Private Equity": {
+    "akurasi": 0.7233,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "": 1,
+      "CP": 149,
+      "IB": 3,
+      "OT": 53
+    },
+    "sampel": 206
+  },
+  "Securities Company": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "SC",
+    "rincian": {
+      "SC": 149
+    },
+    "sampel": 149
+  },
+  "Sole Proprietorship": {
+    "akurasi": 0.9545,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 21,
+      "IB": 1
+    },
+    "sampel": 22
+  },
+  "Sole proprietorship": {
+    "catatan": "varian penulisan dari 'Sole Proprietorship'",
+    "dasar": "sama dengan label lama",
+    "kode": "CP"
+  },
+  "Sovereign Wealth Fund": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "OT",
+    "rincian": {
+      "OT": 26
+    },
+    "sampel": 26
+  },
+  "State Owned Company": {
+    "akurasi": 1.0,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 2
+    },
+    "sampel": 2
+  },
+  "State Owned Enterprises": {
+    "akurasi": 0.8614,
+    "dasar": "empiris",
+    "kode": "IS",
+    "rincian": {
+      "CP": 12,
+      "IB": 2,
+      "IS": 87
+    },
+    "sampel": 101
+  },
+  "Trustee Bank": {
+    "akurasi": 0.6538,
+    "dasar": "empiris",
+    "kode": "IB",
+    "rincian": {
+      "CP": 8,
+      "IB": 17,
+      "OT": 1
+    },
+    "sampel": 26
+  },
+  "Venture Capital": {
+    "akurasi": 0.7609,
+    "dasar": "empiris",
+    "kode": "CP",
+    "rincian": {
+      "CP": 35,
+      "IB": 1,
+      "MF": 5,
+      "OT": 5
+    },
+    "sampel": 46
+  }
+}
